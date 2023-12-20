@@ -1,0 +1,47 @@
+body{
+    background:#eee;
+    }
+    .card {
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+
+    .table-nowrap .table td, .table-nowrap .table th {
+        white-space: nowrap;
+    }
+    .table>:not(caption)>*>* {
+        padding: 0.75rem 1.25rem;
+        border-bottom-width: 1px;
+    }
+    table th {
+    font-weight: 500;
+        background-color: #E9EDF2 !important;
+        font-size: 14px;
+        color: black;
+    }
+    .container{
+       
+align-items: center;
+    }
+    #back-to-admin-order{
+        background-color: #DE2429;
+     
+        font-size: 18px;
+        padding: 4px 24px;
+        color: #ffffff;
+        border: none;
+      
+    }
+    table td{
+        cursor: pointer;
+    }
+
+@media(max-width:768px){
+    #logo-history{
+        width: 16%;
+        }   
+}
+@media(max-width:480px){
+ #logo-history{
+width: 24%;
+}   
+}
