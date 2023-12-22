@@ -74,6 +74,11 @@ class Product extends Connection {
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
+    public function selectProductsById($id) {
+        $query = "SELECT * FROM product WHERE id = $id";
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result);
+    }
 }
 
 
