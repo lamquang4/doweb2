@@ -1,3 +1,11 @@
+<?php
+
+if (basename($_SERVER['PHP_SELF']) === 'footer.php') {
+  
+    header('Location: index.php');
+    exit();
+}
+?>
 <footer>
 <div id="all-footer">
 <div id="fo-text">

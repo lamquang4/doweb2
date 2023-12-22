@@ -1,3 +1,11 @@
+<?php
+
+if (basename($_SERVER['PHP_SELF']) === 'header.php') {
+   
+    header('Location: index.php');
+    exit();
+}
+?>
 <section id="header">
     <a href="index.php">
   <img src="assets/images/pic/logo.png" class="logo" alt="" >
@@ -247,3 +255,20 @@
   
 
    </section>
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current page URL
+    var currentPage = window.location.href;
+
+    // Get all links with the class "choose"
+    var links = document.querySelectorAll('.choose');
+
+    // Loop through each link and check if its href matches the current page URL
+    links.forEach(function(link) {
+        if (link.href === currentPage) {
+            // If there is a match, add the "act-on" class
+            link.classList.add('act-on');
+        }
+    });
+});
+</script>
