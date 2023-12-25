@@ -216,7 +216,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
             <hr>
             <a href="user.php" class="sub-menu-index-link">
                 <img src="assets/images/pic/profile.png">
-                <p>Edit Profile</p>
+                <p>Profile</p>
                 <span> <i class="fa-solid fa-chevron-right"></i> </span>
             </a>
             <a href="history.php" class="sub-menu-index-link">
@@ -251,24 +251,135 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
   <i id="bar" class="fa-solid fa-bars" style="color: #000000;"></i>
   
   </div>
-
-  
-
    </section>
+
+
+   <div class="cart">
+    <h2 class="cart-title">Your Cart</h2>
+
+
+    <div class="cart-content" style="display: none;">
+    <div class="cart-box">
+        <img src="" alt="" class="cart-img">
+        <div class="detail-box">
+            <div class="cart-product-title"></div>
+            <div class="cart-price"></div>
+            <input type="number" value="1" class="cart-quantity">
+        </div>
+        <!-- REMOVE CART  -->
+        <i class='bx bx-trash cart-remove' id="remove-counter"></i>
+    </div>
+
+    </div>
+
+    <div class="total">
+        <div class="total-title">Total</div>
+        <div class="total-price">$0</div>
+    </div>
+
+    <button type="button" class="btn-buy" onclick="checkloginyet()">Buy Now</button>
+
+    <i class="fa-solid fa-x" id="cart-close"></i>
+</div>
+
+
+
    <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Get the current page URL
     var currentPage = window.location.href;
 
-    // Get all links with the class "choose"
     var links = document.querySelectorAll('.choose');
 
-    // Loop through each link and check if its href matches the current page URL
     links.forEach(function(link) {
         if (link.href === currentPage) {
-            // If there is a match, add the "act-on" class
+          
             link.classList.add('act-on');
         }
     });
 });
 </script>
+
+<script>
+  const cartIcon=document.querySelector("#cart-icon");
+const carts=document.querySelector(".cart");
+const closeCart=document.querySelector("#cart-close");
+const cartIcon1=document.querySelector("#cart-icon1");
+
+cartIcon.addEventListener('click',()=>{
+  carts.classList.add("act");
+});
+cartIcon1.addEventListener('click',()=>{
+  carts.classList.add("act");
+});
+closeCart.addEventListener('click',()=>{
+  carts.classList.remove("act");
+});
+
+
+
+</script>
+
+
+
+<script>
+function checkloginyet() {
+
+    var isLoggedIn = <?php echo isset($_SESSION["login"]) && $_SESSION["login"] === true ? 'true' : 'false'; ?>;
+
+    if (isLoggedIn) {
+      
+    
+    } else {
+     
+        alert("You must be a registered customer to make a purchase.");
+        window.location.href = "register.php";
+    }
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButton = document.querySelector('.normal');
+        const cartContent = document.querySelector('.cart-content');
+        const cartBox = document.querySelector('.cart-box');
+        const cartImg = document.querySelector('.cart-img');
+        const cartProductTitle = document.querySelector('.cart-product-title');
+        const cartPrice = document.querySelector('.cart-price');
+        const cartQuantity = document.querySelector('.cart-quantity');
+        const totalPrice = document.querySelector('.total-price');
+
+        addToCartButton.addEventListener('click', function () {
+     
+            const productName = '<?php echo $productName; ?>';
+            const productImage = '<?php echo $productImage; ?>';
+            const productPrice = <?php echo $productPrice; ?>;
+
+            cartImg.src = productImage;
+            cartProductTitle.textContent = productName;
+            cartPrice.textContent = '$' + productPrice.toFixed(2);
+            cartQuantity.value = 1;
+
+            cartContent.style.display = 'block';
+
+
+            updateTotalPrice(productPrice);
+        });
+
+
+        function updateTotalPrice(productPrice) {
+            const currentTotalPrice = parseFloat(totalPrice.textContent.slice(1));
+
+            const newTotalPrice = currentTotalPrice + productPrice;
+
+            totalPrice.textContent = '$' + newTotalPrice.toFixed(2);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+

@@ -37,25 +37,6 @@ include_once 'header.php'
   ?>
 
 
-   <div class="cart">
-    <h2 class="cart-title">Your Cart</h2>
-
-
-    <div class="cart-content">
-
-
-    </div>
-
-
-    <div class="total">
-        <div class="total-title">Total</div>
-        <div class="total-price">$0</div>
-    </div>
-
-    <button type="button" class="btn-buy" onclick="checkloginyet()">Buy Now</button>
-
-    <i class="fa-solid fa-x" id="cart-close"></i>
-</div>
 
 <section id="slidersss-section">
   <div class="slidersss">
@@ -138,7 +119,7 @@ include_once 'header.php'
 
             <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
 
-            <button class="btn_shop add-cart" id="cart-plus">ADD TO CART</button>
+            <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>
         </div>
     <?php } ?>
 </div>
@@ -231,199 +212,7 @@ closeCart.addEventListener('click',()=>{
   cart.classList.remove("act");
 });
 
-if (document.readyState == "loading") {
-  document.addEventListener("DOMContentLoaded", start);
-} else {
-  start();
-}
 
-// =============== START ====================
-function start() {
-  addEvents();
-}
-
-// ============= UPDATE & RERENDER ===========
-function update() {
-  addEvents();
-  updateTotal();
-}
-
-
-function addEvents() {
-  // Remove items from cart
-  let cartRemove_btns = document.querySelectorAll(".cart-remove");
-  console.log(cartRemove_btns);
-
-
-  cartRemove_btns.forEach((btn) => {
-    btn.addEventListener("click", handle_removeCartItem);
-
-  });
-
-
-
-  // Change item quantity
-  let cartQuantity_inputs = document.querySelectorAll(".cart-quantity");
-  cartQuantity_inputs.forEach((input) => {
-  
-
-    input.addEventListener("change", handle_changeItemQuantity);
-  });
-
-  // Add item to cart
-  let addCart_btns = document.querySelectorAll(".add-cart");
-  addCart_btns.forEach((btn) => {
-    btn.addEventListener("click", handle_addCartItem);
-  });
-
-  // Buy Order
-  const buy_btn = document.querySelector(".btn-buy");
-  buy_btn.addEventListener("click", handle_buyOrder);
-
-}
-
-
-
-// ============= HANDLE EVENTS FUNCTIONS =============
-let itemsAdded = [];
-
-function handle_addCartItem() {
-  let product = this.parentElement;
-  let title = product.querySelector(".product-title").innerHTML;
-  let price = product.querySelector(".product-price").innerHTML;
-  let imgSrc = product.querySelector(".product-img").src;
-  console.log(title, price, imgSrc);
-
-  let newToAdd = {
-    title,
-    price,
-    imgSrc,
-  };
-
-
-  // handle item is already exist
-  if (itemsAdded.find((el) => el.title == newToAdd.title)) {
-    alert("This Item Is Already Exist!");
-    return;
-  } else  {
-    countCartAdd1.innerHTML="!";
-  
-      countCartAdd.innerHTML="!";
-    itemsAdded.push(newToAdd);
-  }
-
-
-  // Add product to cart
-  let cartBoxElement = CartBoxComponent(title, price, imgSrc);
-  let newNode = document.createElement("div");
-  newNode.innerHTML = cartBoxElement;
-  const cartContent = cart.querySelector(".cart-content");
-  cartContent.appendChild(newNode);
-
-  update();
-}
-
-function handle_removeCartItem() {
-
-  const countCartAdd1 = document.querySelector("#count-cart-add1");
-  const countCartAdd = document.querySelector("#count-cart-add");
-
-  if (itemsAdded.length === 0) {
-    countCartAdd1.innerHTML = "0";
-    countCartAdd.innerHTML = "0";
-    return;
-  }
- 
-  this.parentElement.remove();
-
-  // Update the cart
-  itemsAdded = itemsAdded.filter(
-    (el) =>
-      el.title != this.parentElement.querySelector(".cart-product-title")
-        .innerHTML
-  );
-  updateCartCount();
-  update();
-}
-
-function handle_changeItemQuantity() {
-  if (isNaN(this.value) || this.value < 1) {
-    this.value = 1;
-  }
-  this.value = Math.floor(this.value); // to keep it integer
-
-  update();
-}
-
-function updateCartCount() {
- 
-  const countCartAdd1 = document.querySelector("#count-cart-add1");
-  const countCartAdd = document.querySelector("#count-cart-add");
-
-  if (itemsAdded.length > 0) {
-    countCartAdd1.innerHTML = "!";
-    countCartAdd.innerHTML = "!";
-  } else {
-    countCartAdd1.innerHTML = "0";
-    countCartAdd.innerHTML = "0";
-  }
-}
-
-function handle_buyOrder() {
-  if (itemsAdded.length <= 0) {
-    alert("There is No Order to Place Yet! \nPlease Make an Order first.");
-  
-    return;
-  }
- 
-  
-  const payment=document.querySelector('.containers');
-  const cartContent = cart.querySelector(".cart-content");
-const buybutton=document.querySelector('.btn-buy');
-
-window.location.href="pay.php";
-   itemsAdded = [];
- update();
-  }
-  const buybutton=document.querySelector('.btn-buy');
-buybutton.addEventListener("click", () => {
- 
-  window.scrollTo(0, bBanner1.offsetTop);
-});
- 
-// =========== UPDATE & RERENDER FUNCTIONS =========
-function updateTotal() {
-  let cartBoxes = document.querySelectorAll(".cart-box");
-  const totalElement = cart.querySelector(".total-price");
-  let total = 0;
-  cartBoxes.forEach((cartBox) => {
-    let priceElement = cartBox.querySelector(".cart-price");
-    let price = parseFloat(priceElement.innerHTML.replace("$", ""));
-    let quantity = cartBox.querySelector(".cart-quantity").value;
-    total += price * quantity;
-  });
-
-
-  total = total.toFixed(2);
-
-
-  totalElement.innerHTML = "$" + total;
-}
-
-// ============= HTML COMPONENTS =============
-function CartBoxComponent(title, price, imgSrc) {
-  return `
-    <div class="cart-box">
-        <img src=${imgSrc} alt="" class="cart-img">
-        <div class="detail-box">
-            <div class="cart-product-title">${title}</div>
-            <div class="cart-price">${price}</div>
-            <input type="number" value="1" class="cart-quantity">
-        </div>
-        <!-- REMOVE CART  -->
-        <i class='bx bx-trash cart-remove' id="remove-counter"></i>
-    </div>`;
-}
 
 </script>
 
@@ -431,25 +220,7 @@ function CartBoxComponent(title, price, imgSrc) {
 
 
 
-<script>
- const countCartAdd1 = document.getElementById("count-cart-add1");
-countCartAdd1.textContent = 0;
-const countCartAdd = document.getElementById("count-cart-add");
-countCartAdd.textContent = 0;
-let quantity = cartBox.querySelector(".cart-quantity").value;
-// Thêm sự kiện click vào icon "+"
-const cartadds = document.querySelectorAll("#cart-plus");
-cartadds.forEach((cartadd)=> {
-  let isClicked = false;
-  cartadd.addEventListener("click", (event) => {
-    if (!isClicked) {
-      isClicked = true;
-   
-    }
-  });
-});
 
-</script>
 
 
 <script>
@@ -525,21 +296,7 @@ function toggleMenu(){
 
   </script>
 
-<script>
-function checkloginyet() {
 
-    var isLoggedIn = <?php echo isset($_SESSION["login"]) && $_SESSION["login"] === true ? 'true' : 'false'; ?>;
-
-    if (isLoggedIn) {
-      
-    
-    } else {
-     
-        alert("You must be a registered customer to make a purchase.");
-        window.location.href = "register.php";
-    }
-}
-</script>
 
 
 

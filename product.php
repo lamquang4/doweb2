@@ -11,6 +11,7 @@ if(isset($_GET['id'])) {
         $productName = $productDetails['name'];
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
+        $productImage1 = $productDetails['thungimg'];
     } else {
         // Handle the case when the product is not found
         echo "Product not found";
@@ -27,7 +28,11 @@ $select = new Select();
 if(isset($_SESSION["id"])){
     $user = $select->selectUserById($_SESSION["id"]);
 }
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 
@@ -55,7 +60,9 @@ include_once 'header.php'
   <div class="small-img-col">
   <img src="<?php echo $productImage; ?>" width="100%" class="small-img" alt="">
   </div>
- 
+  <div class="small-img-col">
+      <img src="<?php echo $productImage1; ?>" width="100%" class="small-img" alt="">
+      </div>
    
   </div>
   </div>
@@ -64,6 +71,8 @@ include_once 'header.php'
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
 
+<input class="in-put" type="number" value="1" min="1" max="5">
+<button class="normal" onclick="addToCart()">Add to Cart</button>
   
  <div id="infor-nutri">
   <h3>Nutriton</h3>
@@ -252,6 +261,8 @@ function toggleMenu(){
 }
 
   </script>
+
+
 
 
 

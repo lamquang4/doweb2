@@ -1,27 +1,34 @@
 <?php
 require 'config.php';
-session_start();
+
 if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
   header("location: index.php");
   exit;
 }
 
 $register  = new Register();
-if(isset($_POST["submit"])){
- $result = $register->registration($_POST["username"],$_POST["email"],$_POST["password"],$_POST["password2"]);
-if($result ==1){
-  echo
-  "<script> alert('Registration Successful'); </script>";
-  header("location: login.php");
-}
-elseif($result ==10){
-  echo
-  "<script> alert('Username or Email has already taken'); </script>";
-}
-elseif($result ==100){
-  echo
-  "<script> alert('Password does not match'); </script>";
-}
+if (isset($_POST["submit"])) {
+  $result = $register->registration(
+      $_POST["username"],
+      $_POST["email"],
+      $_POST["password"],
+      $_POST["password2"],
+      $_POST["address"],
+      $_POST["fullname"],
+      $_POST["phone"],
+      $_POST["birthday"],
+      $_POST["sex"],
+      $_POST["role"]
+  );
+
+  if ($result == 1) {
+      echo "<script> alert('Registration Successful'); </script>";
+      header("location: login.php");
+  } elseif ($result == 10) {
+      echo "<script> alert('Username or Email has already taken'); </script>";
+  } elseif ($result == 100) {
+      echo "<script> alert('Password does not match'); </script>";
+  }
 }
 
 ?>
@@ -31,6 +38,7 @@ elseif($result ==100){
 <link rel="icon" type="image/png" href="assets/images/pic/logo.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/register.css">
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <html>
 <head>

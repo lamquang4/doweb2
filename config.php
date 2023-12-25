@@ -12,24 +12,27 @@ class Connection{
     public function __construct()
     {
         $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db_name);
+        
     }
-}
 
-class Register extends Connection{
-    public function registration($username,$email,$password,$password2){
-        $duplicate = mysqli_query($this->conn,"SELECT * FROM tb_user WHERE username ='$username'");
-   if(mysqli_num_rows($duplicate)>0){
-    return 10;
-   }else{
-    if($password == $password2){
-       $query = "INSERT INTO tb_user VALUE('','$username','$email','$password')"; 
-   mysqli_query($this->conn,$query);
-   return 1;
-   
-    }else{
-        return 100;
-    }
-   }
+    
+}
+class Register extends Connection {
+    public function registration($username, $email, $password, $password2, $address, $fullname, $phone, $role) {
+        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username'");
+        
+        if (mysqli_num_rows($duplicate) > 0) {
+            return 10;
+        } else {
+            if ($password == $password2) {
+                $query = "INSERT INTO tb_user (username, email, password, address, fullname, phone, role) 
+                          VALUES ('$username', '$email', '$password', '$address', '$fullname', '$phone', '$role')";
+                mysqli_query($this->conn, $query);
+                return 1;
+            } else {
+                return 100;
+            }
+        }
     }
 }
 class Login extends Connection{

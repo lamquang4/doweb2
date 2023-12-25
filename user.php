@@ -60,22 +60,20 @@ if(isset($_SESSION["id"])){
                                 <div class="media-body ml-4">
                                     <label class="btn btn-outline-primary">
                                         Select photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                   
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                        <input type="file" class="account-settings-fileinput" id="imageInput" accept="image/jpeg, image/png, image/gif">
+                                    </label> &nbsp;       
                                 </div>
                             </div>
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label">Username</label>
-                                    <input type="text" id="usernameInput" class="form-control mb-1" value="<?php echo $user['username']; ?>">
+                                    <input type="text" id="usernameInput" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
                                 </div>
                          
                                 <div class="form-group">
                                     <label class="form-label">Full Name</label>
-                                    <input type="text" id="fullnameInput" class="form-control" value="">
+                                    <input type="text" id="fullnameInput" class="form-control" value="<?php echo $user['fullname']; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Email</label>
@@ -83,27 +81,21 @@ if(isset($_SESSION["id"])){
                                 
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Sex</label>
-                               
-                                 
-                                <input style="margin-left: 10px;" type="radio" name="gender" value="male" > Male
-                                <input style="margin-left: 10px;" type="radio" name="gender" value="female"> Female
-                                   
-                   
-                                       
-                                  
-                                </div>
+    <label class="form-label">Sex</label>
+    <input id="male" style="margin-left: 10px;" type="radio" name="gender" value="male" <?php echo ($user['gender'] == 'male') ? 'checked' : ''; ?>> Male
+    <input id="female" style="margin-left: 10px;" type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>> Female
+</div>
                                 <div class="form-group">
                                     <label class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" value="" id="dateInput">
+                                    <input type="date" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 35px;">
                                     <label class="form-label">Phone</label>
-                                    <input type="number" class="form-control" value="" id="phoneInput">
+                                    <input type="number" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Adress</label>
-                                    <input type="text" class="form-control" value="" id="addressInput">
+                                    <input type="text" class="form-control" value="<?php echo $user['diachi']; ?>" id="addressInput">
                                 </div>
                                
                                
@@ -155,13 +147,17 @@ document.getElementById('saveChangesBtn').addEventListener('click', function() {
     var newUsername = document.getElementById('usernameInput').value;
     var newEmail = document.getElementById('emailInput').value;
     var newFullname = document.getElementById('fullnameInput').value;
-    var newDate = document.getElementById('dateInput').value;
+    var newBirthday = document.getElementById('dateInput').value;
     var newPhone = document.getElementById('phoneInput').value;
     var newAddress = document.getElementById('addressInput').value;
+    var genderMale = document.getElementById('male').checked;
+    var genderFemale = document.getElementById('female').checked;
+    var selectedGender = genderMale ? 'male' : (genderFemale ? 'female' : '');
 
-    window.location.href = 'updateuser.php?id=<?php echo $_SESSION["id"]; ?>&username=' + newUsername + '&email=' + newEmail;
+    window.location.href = 'updateuser.php?id=<?php echo $_SESSION["id"]; ?>&username=' + newUsername + '&email=' + newEmail + '&fullname=' + newFullname + '&birthday=' + newBirthday + '&phone=' + newPhone + '&diachi=' + newAddress + '&gender=' + selectedGender;
 });
 </script>
+
 
 
 
