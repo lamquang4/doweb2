@@ -55,12 +55,12 @@ if(isset($_SESSION["id"])){
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="account-general">
                             <div class="card-body media align-items-center">
-                                <img src="assets/images/pic/custome1.png" alt
-                                    class="d-block ui-w-80">
+                                <img src="<?php echo $user['imguser']; ?>" alt
+                                    class="d-block ui-w-80" id="userImage">
                                 <div class="media-body ml-4">
                                     <label class="btn btn-outline-primary">
                                         Select photo
-                                        <input type="file" class="account-settings-fileinput" id="imageInput" accept="image/jpeg, image/png, image/gif">
+                                        <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/jpeg, image/png, image/gif">
                                     </label> &nbsp;       
                                 </div>
                             </div>
@@ -144,6 +144,30 @@ if(isset($_SESSION["id"])){
 
 <script>
 document.getElementById('saveChangesBtn').addEventListener('click', function() {
+
+    var imageInput = document.getElementById('imageInput');
+    var selectedImage = imageInput.files[0];
+
+    if (selectedImage) {
+        var formData = new FormData();
+        formData.append('id', <?php echo $_SESSION["id"]; ?>);
+        formData.append('image', selectedImage);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updateuser.php', true);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            } else {
+                console.error('Error uploading image:', xhr.statusText);
+            }
+        };
+        xhr.send(formData);
+    }
+
+});
+
+document.getElementById('saveChangesBtn').addEventListener('click', function() {
     var newUsername = document.getElementById('usernameInput').value;
     var newEmail = document.getElementById('emailInput').value;
     var newFullname = document.getElementById('fullnameInput').value;
@@ -156,6 +180,23 @@ document.getElementById('saveChangesBtn').addEventListener('click', function() {
 
     window.location.href = 'updateuser.php?id=<?php echo $_SESSION["id"]; ?>&username=' + newUsername + '&email=' + newEmail + '&fullname=' + newFullname + '&birthday=' + newBirthday + '&phone=' + newPhone + '&diachi=' + newAddress + '&gender=' + selectedGender;
 });
+</script>
+
+<script>
+function previewImage() {
+    var input = document.getElementById('imageInput');
+    var image = document.getElementById('userImage');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            image.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 
 

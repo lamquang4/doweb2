@@ -13,11 +13,12 @@ if (isset($_POST["submit"])) {
       $_POST["email"],
       $_POST["password"],
       $_POST["password2"],
-      $_POST["address"],
+      $_POST["diachi"],
       $_POST["fullname"],
       $_POST["phone"],
       $_POST["birthday"],
-      $_POST["sex"],
+      $_POST["gender"],
+      $_POST["imguser"],
       $_POST["role"]
   );
 

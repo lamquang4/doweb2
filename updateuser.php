@@ -1,4 +1,4 @@
-<?php
+/<?php
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     require 'config.php';
 
@@ -19,5 +19,31 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     header("Location: user.php");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require 'config.php';
+
+    $select = new Select();
+    $id = $_POST["id"];
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+
+        $currentUser = $select->selectUserById($id);
+        if (!empty($currentUser['imguser'])) {
+            unlink($currentUser['imguser']);
+        }
+
+        $imageTmpName = $_FILES['image']['tmp_name'];
+        $imageFileName = 'imguser/' . $_FILES['image']['name'];
+        move_uploaded_file($imageTmpName, $imageFileName);
+
+        $updateImageQuery = "UPDATE tb_user SET imguser='$imageFileName' WHERE id=$id";
+        $result = mysqli_query($select->conn, $updateImageQuery);
+
+        if (!$result) {
+            die('Error updating user image: ' . mysqli_error($select->conn));
+        }
+    }
 }
 ?>

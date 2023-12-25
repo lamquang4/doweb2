@@ -18,15 +18,16 @@ class Connection{
     
 }
 class Register extends Connection {
-    public function registration($username, $email, $password, $password2, $address, $fullname, $phone, $role) {
+    public function registration($username, $email, $password, $password2, $diachi, $fullname, $phone, $role, $imguser, $gender, $birthday) {
         $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username'");
         
         if (mysqli_num_rows($duplicate) > 0) {
             return 10;
         } else {
             if ($password == $password2) {
-                $query = "INSERT INTO tb_user (username, email, password, address, fullname, phone, role) 
-                          VALUES ('$username', '$email', '$password', '$address', '$fullname', '$phone', '$role')";
+                // Update the query to include the default value for imguser
+                $query = "INSERT INTO tb_user (username, email, password, diachi, fullname, phone, gender, imguser, birthday, role) 
+                          VALUES ('$username', '$email', '$password', '$diachi', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday', '$role')";
                 mysqli_query($this->conn, $query);
                 return 1;
             } else {

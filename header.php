@@ -210,7 +210,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
   <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
             <div class="user-info">
-                <img src="assets/images/pic/custome1.png">
+                <img src="<?php echo $user["imguser"]; ?>">
                 <h2><?php echo $user["username"]; ?></h2>
             </div>
             <hr>
@@ -277,7 +277,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
         <div class="total-price">$0</div>
     </div>
 
-    <button type="button" class="btn-buy" onclick="checkloginyet()">Buy Now</button>
+    <button type="button" class="btn-buy" onclick="checkloginyet()">CHECKOUT</button>
 
     <i class="fa-solid fa-x" id="cart-close"></i>
 </div>
