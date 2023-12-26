@@ -12,7 +12,7 @@
 <body>
    
 <div style="display: flex; justify-content: center; margin-top: 20px;margin-bottom: 10px;">
-    <img src="assets/images/pic/logo.png" width="8%" style="cursor: pointer;" onclick="window.location.href='index-user.html' " id="logo-history">
+    <img src="assets/images/pic/logo.png" width="8%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
 </div>
 <div class="container">
     <div class="row">
@@ -136,7 +136,7 @@
             </div>
             <div style="display: flex; justify-content: right; margin-top: 40px;">
           
-                <button  id="back-to-admin-order" onclick="window.location.href='shop-user.html'">Back</button> 
+                <button  id="back-to-admin-order" onclick="window.location.href='shop.php'">Back</button> 
               
         </div>
         </div>

@@ -8,18 +8,31 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
 
 $register  = new Register();
 if (isset($_POST["submit"])) {
+  // Check if the required keys are set in the $_POST array
+  $username = isset($_POST["username"]) ? $_POST["username"] : "";
+  $email = isset($_POST["email"]) ? $_POST["email"] : "";
+  $password = isset($_POST["password"]) ? $_POST["password"] : "";
+  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $diachi = isset($_POST["diachi"]) ? $_POST["diachi"] : "";
+  $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
+  $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
+  $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
+  $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+  $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
+  $role = isset($_POST["role"]) ? $_POST["role"] : "";
+
   $result = $register->registration(
-      $_POST["username"],
-      $_POST["email"],
-      $_POST["password"],
-      $_POST["password2"],
-      $_POST["diachi"],
-      $_POST["fullname"],
-      $_POST["phone"],
-      $_POST["birthday"],
-      $_POST["gender"],
-      $_POST["imguser"],
-      $_POST["role"]
+      $username,
+      $email,
+      $password,
+      $password2,
+      $diachi,
+      $fullname,
+      $phone,
+      $birthday,
+      $gender,
+      $imguser,
+      $role
   );
 
   if ($result == 1) {

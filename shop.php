@@ -50,7 +50,9 @@ include_once 'header.php'
       <div class="itemsss">
           <img src="assets/images/pic/banner-pep1.png" alt="">
       </div>
-   
+      <div class="itemsss">
+          <img src="assets/images/pic/banner-sprite.png" alt="">
+      </div>
   </div>
   <div class="buttonsss">
       <button id="prevsss"><i class="fa-solid fa-arrow-left"></i></button>
@@ -60,7 +62,7 @@ include_once 'header.php'
       <li class="activesss"></li>
       <li></li>
       <li></li>
-  
+      <li></li>
   </ul>
 </div>
 </section>
