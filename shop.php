@@ -41,14 +41,16 @@ include_once 'header.php'
 <section id="slidersss-section">
   <div class="slidersss">
   <div class="listsss">
-
+  <div class="itemsss">
+          <img src="assets/images/pic/banner-pep.png" alt="">
+      </div>
       <div class="itemsss">
           <img src="assets/images/pic/coca-banner4.png" alt="">
       </div>
       <div class="itemsss">
-          <img src="assets/images/pic/pepsi-banner2.png" alt="">
+          <img src="assets/images/pic/banner-pep1.png" alt="">
       </div>
-  
+   
   </div>
   <div class="buttonsss">
       <button id="prevsss"><i class="fa-solid fa-arrow-left"></i></button>
@@ -57,7 +59,7 @@ include_once 'header.php'
   <ul class="dotsss">
       <li class="activesss"></li>
       <li></li>
-   
+      <li></li>
   
   </ul>
 </div>
