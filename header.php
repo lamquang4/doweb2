@@ -6,6 +6,8 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
     exit();
 }
 ?>
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+ <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <section id="header">
     <a href="index.php">
   <img src="assets/images/pic/logo.png" class="logo" alt="" >
@@ -175,10 +177,11 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
           <li id="menu"><a href="contact.php" class="choose"><span>Contact</span></a></li>
     
       <div class="group" id="search">
-      <input id="search-item" type="text" placeholder="Search" name="text" class="input" onkeyup="search()"  tabindex="1">
-    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+      <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
       <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
   </svg>
+      <input id="search-item" type="text" placeholder="Search" name="text" class="input" onkeyup="search()"  tabindex="1">
+
   </div> 
       <li id="menu" ><a id="cart-icon">
         <div class="cart-follow-icon">
@@ -189,14 +192,14 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
       </li>
      
       <?php if(isset($_SESSION["id"])) { ?>
-            <!-- Display this when the user is logged in -->
+           
             <li id="menu" id="lg-user">
                 <a id="userlogin" onclick="toggleMenu()">
                     <i class="fa-solid fa-circle-user"></i>
                 </a>
             </li>
         <?php } else { ?>
-            <!-- Display this when the user is not logged in -->
+           
             <li id="menu" id="lg-user">
                 <a href="register.php" id="userlogin">
                     <i class="fa-regular fa-circle-user fa-lg"></i>
@@ -264,9 +267,9 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
         <div class="detail-box">
             <div class="cart-product-title"></div>
             <div class="cart-price"></div>
-            <input type="number" value="1" class="cart-quantity">
+            <input type="number" value="1" min="1" max="20" class="cart-quantity">
         </div>
-        <!-- REMOVE CART  -->
+     
         <i class='bx bx-trash cart-remove' id="remove-counter"></i>
     </div>
 
