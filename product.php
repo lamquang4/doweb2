@@ -12,13 +12,23 @@ if(isset($_GET['id'])) {
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
         $productImage1 = $productDetails['thungimg'];
+        $productDec1 = $productDetails['ml'];
+        $productDec2 = $productDetails['calo'];
+        $productDec3 = $productDetails['fat(g)'];
+        $productDec4 = $productDetails['fat(%)'];
+        $productDec5 = $productDetails['sodium(mg)'];
+        $productDec6 = $productDetails['sodium(%)'];
+        $productDec7 = $productDetails['carbon(g)'];
+        $productDec8 = $productDetails['carbon(%)'];
+        $productDec9 = $productDetails['sugar(g)'];
+        $productDec10 = $productDetails['protein(g)'];
     } else {
-        // Handle the case when the product is not found
+       
         echo "Product not found";
         exit;
     }
 } else {
-    // Handle the case when the 'id' parameter is not set
+   
     echo "Invalid product ID";
     exit;
 }
@@ -85,12 +95,12 @@ include_once 'header.php'
 
 <div class="daily-value small-text">
    
-    <p><span><span class="bold">Serving Size 12 fl oz (355 mL)</span> </p>
+    <p><span><span class="bold">Serving Size 12 fl oz (<?php echo $productDec1; ?>ml)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> 150g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <?php echo $productDec2; ?>g</span> </p>
   
   </div>
   
@@ -98,11 +108,11 @@ include_once 'header.php'
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> 0g</span> <span >0%</span></p>
-      <p><span><span class="bold">Sodium</span> 30mg</span> <span >1%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> 41g</span> <span >14%</span></p>
-      <p><span><span class="bold">Sugars</span> 41g</span> </p>
-      <p style="border: none;"><span><span class="bold">Protein</span> 0g</span> </p>
+      <p><span><span class="bold">Total Fat</span> <?php echo $productDec3; ?>g</span> <span ><?php echo $productDec4; ?>%</span></p>
+      <p><span><span class="bold">Sodium</span> <?php echo $productDec5; ?>mg</span> <span ><?php echo $productDec6; ?>%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <?php echo $productDec7; ?>g</span> <span ><?php echo $productDec8; ?>%</span></p>
+      <p><span><span class="bold">Sugars</span> <?php echo $productDec9; ?>g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <?php echo $productDec10; ?>g</span> </p>
     
     </div>
 

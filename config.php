@@ -25,7 +25,7 @@ class Register extends Connection {
             return 10;
         } else {
             if ($password == $password2) {
-                // Update the query to include the default value for imguser
+              
                 $query = "INSERT INTO tb_user (username, email, password, diachi, fullname, phone, gender, imguser, birthday, role) 
                           VALUES ('$username', '$email', '$password', '$diachi', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday', '$role')";
                 mysqli_query($this->conn, $query);
