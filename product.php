@@ -61,7 +61,7 @@ include_once 'header.php'
   <img src="<?php echo $productImage; ?>" width="100%" class="small-img" alt="">
   </div>
   <div class="small-img-col">
-      <img src="<?php echo $productImage1; ?>" width="100%" class="small-img" alt="">
+      <img src="<?php echo $productImage1; ?>" width="100%" class="small-img" alt="" >
       </div>
    
   </div>
@@ -71,7 +71,7 @@ include_once 'header.php'
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
 
-<input class="in-put" type="number" value="1" min="1" max="5">
+<input class="in-put" type="number" value="1" min="1" max="6">
 <button class="normal" onclick="addToCart()">Add to Cart</button>
   
  <div id="infor-nutri">

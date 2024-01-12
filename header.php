@@ -267,7 +267,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
         <div class="detail-box">
             <div class="cart-product-title"></div>
             <div class="cart-price"></div>
-            <input type="number" value="1" min="1" max="20" class="cart-quantity">
+            <input type="number" value="1" min="1" max="6" class="cart-quantity">
         </div>
      
         <i class='bx bx-trash cart-remove' id="remove-counter"></i>
