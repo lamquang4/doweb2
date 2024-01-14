@@ -243,7 +243,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
         <span id="count-cart-add1" style="  font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
       </div>
     </a>
-    <a href="shop.php"><i class="fa-solid fa-magnifying-glass"></i></a> 
+    <a><i class="fa-solid fa-magnifying-glass"></i></a> 
     <?php if(isset($_SESSION["id"])) { ?>
           
           <a  id="userlogin" onclick="toggleMenu()"><i class="fa-solid fa-circle-user"></i></a>
