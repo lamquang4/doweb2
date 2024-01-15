@@ -243,7 +243,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
         <span id="count-cart-add1" style="  font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
       </div>
     </a>
-    <a><i class="fa-solid fa-magnifying-glass"></i></a> 
+    <a id="glass-search" onclick="showbar()" ><i class="fa-solid fa-magnifying-glass"></i> </a>
     <?php if(isset($_SESSION["id"])) { ?>
           
           <a  id="userlogin" onclick="toggleMenu()"><i class="fa-solid fa-circle-user"></i></a>
@@ -253,7 +253,13 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
   
  <i id="bar" class="fa-solid fa-bars" style="color: #000000;"></i>
   
+
   </div>
+
+  <div id="search-bars">
+<input type="text" placeholder="SEARCH...">
+<i class="fa-solid fa-xmark" id="xmark" onclick="closebar()"></i>
+</div>
    </section>
 
 
@@ -286,7 +292,6 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 </div>
 
 
-
    <script>
 document.addEventListener("DOMContentLoaded", function() {
     var currentPage = window.location.href;
@@ -303,6 +308,42 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script>
+    const bar = document.getElementById('bar');
+    const icon = document.getElementById('icons');
+   
+    if(bar){
+      bar.addEventListener('click',() =>{
+    icon.classList.add('active');
+      })}
+   
+    const icons = document.getElementById("icons");
+const dong = document.getElementById("close");
+const barmenu = document.getElementById('bar');
+dong.addEventListener("click", function() {
+ 
+  icons.style.right = "-300px";
+});
+barmenu.addEventListener("click", function() {
+  icons.style.right = "0";
+
+});
+
+
+window.addEventListener("resize", function() {
+
+    if (window.innerWidth >= 1138) {
+        searchbars.style.display="none";
+      icons.classList.remove('active');
+      htmlElement.style.overflowY = "scroll";
+    }
+   else{
+    icons.style.right="-300px";
+   }
+    }
+);
+     </script>
+
+<script>
   const cartIcon=document.querySelector("#cart-icon");
 const carts=document.querySelector(".cart");
 const closeCart=document.querySelector("#cart-close");
@@ -310,19 +351,18 @@ const cartIcon1=document.querySelector("#cart-icon1");
 
 cartIcon.addEventListener('click',()=>{
   carts.classList.add("act");
+
 });
 cartIcon1.addEventListener('click',()=>{
   carts.classList.add("act");
+  searchbars.style.display="none";
+ 
 });
 closeCart.addEventListener('click',()=>{
   carts.classList.remove("act");
+ 
 });
-
-
-
 </script>
-
-
 
 <script>
 function checkloginyet() {
@@ -377,10 +417,66 @@ function checkloginyet() {
             totalPrice.textContent = '$' + newTotalPrice.toFixed(2);
         }
     });
+
 </script>
 
+<script>
+    var htmlElement = document.querySelector('html');
+const searchbars=document.getElementById("search-bars");
+    const glasssearch=document.getElementById("glass-search");
+function showbar(){
+        searchbars.style.display="flex";
+     
+        htmlElement.style.overflow = 'hidden';
+      
+    }
+    function closebar(){
+        searchbars.style.display="none";
+        htmlElement.style.overflowY = 'scroll';
+    }
+    </script>
+    
+<style>
+    #xmark{
+        cursor: pointer;
+    }
+#search-bars{
 
+    position: absolute;
+    left: 0;
+    bottom: -40%;
+    width: 100%;
+    height: 25%;
+    display:none;
+    align-items: center;
+  padding: 20px 0;
+    transition: 0.8s ease-in-out;
+    z-index: 98;
+    background-color: #fff;
 
+}
+
+#search-bars input{
+    border-bottom: 1px solid #E6E6E6;
+    border-top: 1px solid #E6E6E6;
+    border-right: none;
+    border-left: none;
+    padding: 0px 35px;
+    width: 100%;
+   font-size: 17px;
+    height: 70px;
+ 
+    outline: none;
+    color: #333;
+    background-color: #fff;
+   
+}
+#search-bars i{
+  position: absolute;
+  right:8%;
+  font-size: 27px;
+}
+    </style>
 
 
 

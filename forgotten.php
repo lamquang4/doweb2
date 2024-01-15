@@ -49,43 +49,7 @@ include_once 'header.php'
  <?php
 include_once 'footer.php'
   ?>
- <script>
-  const bar = document.getElementById('bar');
-  const icon = document.getElementById('icons');
-  
-  if(bar){
-    bar.addEventListener('click',() =>{
-  icon.classList.add('active');
-    })}
- 
-  
-  const icons = document.getElementById("icons");
-const dong = document.getElementById("close");
-const barmenu = document.getElementById('bar');
-dong.addEventListener("click", function() {
- 
-  icons.style.right = "-300px";
-});
-barmenu.addEventListener("click", function() {
-  icons.style.right = "0px";
-});
-const popup=document.getElementById("popup");
-function closePopup(){
-  popup.classList.remove("open-popup");
 
-}
-window.addEventListener("resize", function() {
-
-if (window.innerWidth >= 1138) {
-  icons.classList.remove('active');
-}
-else{
-    icons.style.right="-300px";
-   }
-}
-);
-
-   </script>
   
 
    <style>

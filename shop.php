@@ -161,69 +161,7 @@ include_once 'footer.php'
   ?>
 </body>
 </html>
- <script>
-  const bar = document.getElementById('bar');
-  const icon = document.getElementById('icons');
  
-  if(bar){
-    bar.addEventListener('click',() =>{
-  icon.classList.add('active');
-    })}
-   
-  
-  
-   </script>
-
-<script>
-   
-const icons = document.getElementById("icons");
-const dong = document.getElementById("close");
-const barmenu = document.getElementById('bar');
-dong.addEventListener("click", function() {
- 
-  icons.style.right = "-300px";
-});
-barmenu.addEventListener("click", function() {
-  icons.style.right = "0px";
-});
-window.addEventListener("resize", function() {
-
-if (window.innerWidth >= 1138) {
-  icons.classList.remove('active');
-}
-else{
-    icons.style.right="-300px";
-   }
-}
-);
-</script>
-
-
-
-<script>
-  const cartIcon=document.querySelector("#cart-icon");
-const cart=document.querySelector(".cart");
-const closeCart=document.querySelector("#cart-close");
-const cartIcon1=document.querySelector("#cart-icon1");
-
-cartIcon.addEventListener('click',()=>{
-  cart.classList.add("act");
-});
-cartIcon1.addEventListener('click',()=>{
-  cart.classList.add("act");
-});
-closeCart.addEventListener('click',()=>{
-  cart.classList.remove("act");
-});
-
-
-
-</script>
-
-
-
-
-
 
 
 

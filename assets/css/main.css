@@ -37,8 +37,12 @@ text-decoration: none;
 li{
 list-style: none;
 }
-
+html{
+  overflow-x: hidden;
+ 
+}
 * {
+
 margin: 0;
 padding: 0;
 box-sizing: border-box;
@@ -3408,6 +3412,12 @@ display: none;
 }
 
 }
+@media(max-width:768px){
+  .slidersss{
+    height: 400px;
+   
+}
+}
 @media (max-width:700px){
   .slidersss{
     height: 350px;
@@ -3493,6 +3503,7 @@ display: none;
   .group{
     display: none;
   }
+ 
 }
 
 

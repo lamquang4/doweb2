@@ -183,26 +183,7 @@ include_once 'header.php'
      
      </footer>
 
- <script>
-  const bar = document.getElementById('bar');
-  const icon = document.getElementById('icons');
  
-  if(bar){
-    bar.addEventListener('click',() =>{
-  icon.classList.add('active');
-    })}
-   
-  window.addEventListener("resize", function() {
-
-if (window.innerWidth >= 1138) {
-  icons.classList.remove('active');
-}
-else{
-    icons.style.right="-300px";
-   }
-}
-);
-   </script>
 
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
@@ -217,16 +198,7 @@ else{
           }
       });
   });
-  const icons = document.getElementById("icons");
-const dong = document.getElementById("close");
-const barmenu = document.getElementById('bar');
-dong.addEventListener("click", function() {
- 
-  icons.style.right = "-300px";
-});
-barmenu.addEventListener("click", function() {
-  icons.style.right = "0px";
-});
+
 </script>
 
 
