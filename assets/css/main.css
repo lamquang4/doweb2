@@ -440,7 +440,7 @@ position: relative;
 .input {
 
 width: 150px;
-padding: 6px 0px 6px 15px;
+padding: 6px 12px 6px 38px;
 border-radius: 18px;
 border: 1.2px solid black;
 
@@ -452,7 +452,7 @@ opacity: 1;
 .group svg {
 position: absolute;
 top: 50%;
-left: 78%;
+left: 10px;
 
 transform: translate(0, -50%);
 }

@@ -256,7 +256,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 
   </div>
 
-  <div id="search-bars">
+  <div class="search-bars">
 <input type="text" placeholder="SEARCH...">
 <i class="fa-solid fa-xmark" id="xmark" onclick="closebar()"></i>
 </div>
@@ -325,14 +325,19 @@ dong.addEventListener("click", function() {
 });
 barmenu.addEventListener("click", function() {
   icons.style.right = "0";
-
+  htmlElement.style.overflowY = 'scroll';
+  searchbars.classList.remove("active25");
+        searchbars.style.opacity="0";
+        searchbars.style.pointerEvents = 'none';
 });
 
 
 window.addEventListener("resize", function() {
 
-    if (window.innerWidth >= 1138) {
-        searchbars.style.display="none";
+    if (window.innerWidth >= 1136) {
+        searchbars.classList.remove("active25");
+        searchbars.style.opacity="0";
+        searchbars.style.pointerEvents = 'none';
       icons.classList.remove('active');
       htmlElement.style.overflowY = "scroll";
     }
@@ -355,8 +360,11 @@ cartIcon.addEventListener('click',()=>{
 });
 cartIcon1.addEventListener('click',()=>{
   carts.classList.add("act");
-  searchbars.style.display="none";
- 
+  searchbars.classList.remove("active25");
+  searchbars.style.opacity="0";
+        searchbars.style.pointerEvents = 'none';
+        icons.style.right = "-300px";
+        htmlElement.style.overflowY = 'scroll';
 });
 closeCart.addEventListener('click',()=>{
   carts.classList.remove("act");
@@ -422,17 +430,20 @@ function checkloginyet() {
 
 <script>
     var htmlElement = document.querySelector('html');
-const searchbars=document.getElementById("search-bars");
+const searchbars=document.querySelector(".search-bars");
     const glasssearch=document.getElementById("glass-search");
 function showbar(){
-        searchbars.style.display="flex";
-     
+        searchbars.classList.add('active25');
+        searchbars.style.pointerEvents = 'all';
         htmlElement.style.overflow = 'hidden';
-      
+        searchbars.style.opacity="1";
     }
     function closebar(){
-        searchbars.style.display="none";
+ 
+        searchbars.classList.remove('active25');
         htmlElement.style.overflowY = 'scroll';
+        searchbars.style.opacity="0";
+        searchbars.style.pointerEvents = 'none';
     }
     </script>
     
@@ -440,41 +451,75 @@ function showbar(){
     #xmark{
         cursor: pointer;
     }
-#search-bars{
+.search-bars{
 
     position: absolute;
     left: 0;
-    bottom: -40%;
+bottom: -35%;
     width: 100%;
     height: 25%;
-    display:none;
+opacity: 0;
+display:flex;
+
     align-items: center;
   padding: 20px 0;
-    transition: 0.8s ease-in-out;
-    z-index: 98;
+    transition: 0.4s ease-in-out;
+    pointer-events: none;
     background-color: #fff;
 
 }
-
-#search-bars input{
-    border-bottom: 1px solid #E6E6E6;
-    border-top: 1px solid #E6E6E6;
+.search-bars.active25{
+    bottom: -52%;
+}
+.search-bars input{
+    border-bottom: 1.2px solid #E6E6E6;
+    border-top: 1.2px solid #E6E6E6;
     border-right: none;
     border-left: none;
     padding: 0px 35px;
     width: 100%;
-   font-size: 17px;
-    height: 70px;
- 
+   font-size: 18px;
+    height: 90px;
+ letter-spacing: .2em;
+
     outline: none;
-    color: #333;
+    color: #000000;
     background-color: #fff;
    
 }
-#search-bars i{
+.search-bars i{
   position: absolute;
   right:8%;
   font-size: 27px;
+}
+@media (max-width:480px){
+    .search-bars input{
+   font-size: 18px;
+    height: 60px;
+
+   
+} 
+.search-bars.active25{
+    bottom: -50%;
+}
+.search-bars i{
+
+font-size: 22px;
+}
+}
+@media (max-width:400px){
+    .search-bars input{
+
+   font-size: 16px;
+    height: 60px;  
+} 
+.search-bars.active25{
+    bottom: -47%;
+}
+.search-bars i{
+
+  font-size: 22px;
+}
 }
     </style>
 
