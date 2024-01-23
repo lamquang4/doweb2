@@ -57,6 +57,7 @@ return 1;
    public function idUser(){
     return $this->id;
    }
+
 }
 
 class Select extends Connection{
@@ -64,7 +65,18 @@ class Select extends Connection{
         $result = mysqli_query($this->conn,"SELECT * FROM tb_user WHERE id=$id");
         return mysqli_fetch_assoc($result);
     }
+    public function selectUsers() {
+        $query = "SELECT * FROM tb_user";
+        $result = mysqli_query($this->conn, $query);
+        $users = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $users[] = $row;
+        }
+        return $users;
+    }
 }
+
+
 class Product extends Connection {
     public function selectProducts($start, $limit) {
         $query = "SELECT * FROM product LIMIT $start, $limit";

@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $select = new Select();
     $id = $_POST["id"];
 
-    // Check if the user has an existing custom image
     $currentUser = $select->selectUserById($id);
     $existingImage = $currentUser['imguser'];
 
@@ -37,12 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newImageFileName = 'imguser/' . $id . '_' . $_FILES['image']['name'];
         move_uploaded_file($imageTmpName, $newImageFileName);
 
-        // Check if the user has an existing custom image and delete it
+
         if ($existingImage != 'assets/images/pic/usernew.png' && file_exists($existingImage)) {
             unlink($existingImage);
         }
 
-        // Update the database with the new image path
         $updateImageQuery = "UPDATE tb_user SET imguser='$newImageFileName' WHERE id=$id";
         $result = mysqli_query($select->conn, $updateImageQuery);
 

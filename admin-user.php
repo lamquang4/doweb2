@@ -1,3 +1,10 @@
+<?php
+require 'config.php';
+$select = new Select();
+$tb_users = $select->selectUsers();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,119 +181,25 @@ Full Name:<input type="text" name="fname" id="fname">
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-<td>#USER125</td>
-<td>Andrew Bruno</td>
-<td>bruno@crossover.org</td>
-
-<td>1999-05-19</td>
-<td>45 Beaver St</td>
-
-                                <td>
-Normal                          
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-                       
-                            <tr>
-<td>#USER508</td>
-<td>Exty Bruno</td>
-<td>exty@crossover.org</td>
-
-<td>2002-09-10</td>
-<td>95 Starrs Rd</td>
-
-                                <td>
-Normal                                  
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-                            <tr>
-<td>#USER781</td>
-<td>Marilyn N. Relyea</td>
-<td>Majk@gmail.com</td>
-
-<td>2004-05-01</td>
-<td>16 Dietmar-Hopp-Allee </td>
-
-                                <td>
-Normal                       
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                     
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-                            <tr>
-<td>#USER150</td>
-<td>Christine K. Waddle</td>
-<td>Christine45@crossover.org</td>
-
-<td>1992-11-15</td>
-<td>257 Avenue</td>                      
-                                <td>
-Normal                              
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-                            <tr>
-<td>#USER259</td>
-<td>Clarence A. Morgan</td>  
-<td>ClarMor1990@crossover.org</td>                                 
-
-<td>2001-12-05</td>                                    
-<td>370 Memorial</td>                                        
-                                                                                                    
-                                <td>
-Normal                            
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-
-                            <tr>
-<td>#USER121</td>
-<td>Michael L. Williams</td>
-<td>michael152004@crossover.org</td>
-                                   
-<td>1998-01-12</td>                                        
-<td>37 Royal Terrace</td>                                   
- 
-                                <td>
-Normal
-                                </td>
-                                <td>
-                                    <div class="actions">
-                                        <span class="las la-edit"></span>
-                                        <span class="las la-lock"></span>
-                                    </div>
-                                  </td>
-                            </tr>
-                       
-                     
-                            
+                        <?php foreach ($tb_users as $product) { ?>
+    <tr>
+        <td>#USER<?php echo $product['id']; ?></td>
+        <td><?php echo $product['fullname']; ?></td>
+        <td><?php echo $product['email']; ?></td>
+        <td><?php echo $product['birthday']; ?></td>
+        <td><?php echo $product['diachi']; ?></td> <!-- Assuming 'address' is stored in 'diachi' column -->
+        <td>
+            Normal
+        </td>
+        <td>
+            <div class="actions">
+                <span class="las la-edit"></span>
+                <span class="las la-lock"></span>
+            </div>
+        </td>
+    </tr>
+<?php } ?>
+       
                         </tbody>
                     </table>
 

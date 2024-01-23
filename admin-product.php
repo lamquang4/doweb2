@@ -1,3 +1,14 @@
+<?php
+
+require 'config.php';
+
+$start = 0;
+$limit = 10; 
+
+$productObj = new Product();
+
+$products = $productObj->selectProducts($start, $limit);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +107,7 @@
         
     <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products</h1>
     <div class="user-tab">
-
+<form>
         <div class="user-input">
              ID:<input type="text" name="id-product" id="id-product" >         
         </div>
@@ -106,9 +117,6 @@
         
                 </div>
 
-            
-
-                 
                   <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
               
 
@@ -123,19 +131,19 @@
                   </select>
                        </div>
         <div class="user-input">
-Product Name:<input type="text" name="fproduct" id="fproduct">
+Product Name:<input type="text" name="name" id="name">
      </div>
 
   <div class="user-input">
-       Price:<input type="text" name="quantity" id="quantity">     
+       Price:<input type="number" name="price" id="price">     
   </div>
 
   <div class="user-input">
-    Quantity:<input type="number" name="dateadd" id="dateadd" min="1" >
+    Quantity:<input type="number" name="soluong" id="soluong" min="1" >
 </div>
 
 <div class="user-input">
-        Date Add:<input type="date" name="price" id="price">
+        Date Add:<input type="date" name="date_add" id="date_add">
        </div>
        <div class="user-input">
         Description:<input type="text" name="descrip" id="descrip" >
@@ -145,10 +153,11 @@ Product Name:<input type="text" name="fproduct" id="fproduct">
        </div>
        <div>
 
-        <button onclick="addHtmlTableRow1();">Add +</button>
+        <button type="submit" id="addproduct">Add +</button>
         
                 <button id="editButton" onclick="editHtmlTbleSelectedRow1();" style="visibility: hidden;" disabled>Edit <span class="las la-edit"></span></button>
                 <button id="deleteButton" onclick="removeSelectedRow1();" style="visibility: hidden;" disabled>Delete <span class="las la-trash"></span></button>
+</form>
 </div>
 
     </div>
@@ -188,13 +197,16 @@ Product Name:<input type="text" name="fproduct" id="fproduct">
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>#SP01</td>
+
+
+<?php while ($product = mysqli_fetch_assoc($products)) { ?>
+  <tr>
+  <td>#SP<?php echo $product['id']; ?></td>
 <td>
 
    <div class="image-product-admin">
     <div>
-   <img src="assets/images/sp/coca1.png" id="productImage">
+   <img src="<?php echo $product['image']; ?>" id="productImage">
     </div>
     
         
@@ -203,373 +215,25 @@ Product Name:<input type="text" name="fproduct" id="fproduct">
 </td>
 <td>
 
-Coca Zero Sugar
+<?php echo $product['name']; ?>
 
 </td>
-<td>$10.00</td>
-<td>120</td>
-<td>2023-05-20</td>
+<td>$<?php echo $product['price']; ?>.00</td>
+<td><?php echo $product['soluong']; ?></td>
+<td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
      
       <span class="las la-edit"></span>
       <span class="las la-trash"></span>
   </div>
-</td>
-</tr>
-
-<tr>
-<td>#SP02</td>
-<td>
-
-    <div class="image-product-admin">
-     <div>
-    <img src="assets/images/sp/sprite1.png" id="productImage">
-     </div>
- 
-         
-    </div>
-  
- </td>
-<td>
+</td>   
+</tr> 
+    <?php } ?>
 
 
-Sprite
-
-</td>
-<td>$10.00</td>
-<td>100</td>
-<td>2023-08-12</td>
-<td>
-  <div class="actions">
-  
-    <span class="las la-edit"></span>
-    <span class="las la-trash"></span>
-</div>
-</td>
-</tr>
-<tr>
-<td>#SP03</td>
-<td>
-
-    <div class="image-product-admin">
-     <div>
-    <img src="assets/images/sp/pepsi.png" id="productImage">
-     </div>
-
-         
-    </div>
-  
- </td>
-<td>
-Pepsi Original
-</td>
-<td>$12.00</td>
-<td>80</td>
-<td>2023-06-01</td>
-<td>
-  <div class="actions">
-
-    <span class="las la-edit"></span>
-    <span class="las la-trash"></span>
-</div>
-</td>      
-
-</tr>
 
 
-<tr>
-<td>#SP04</td>
-<td>
-
-    <div class="image-product-admin">
-     <div>
-    <img src="assets/images/sp/aquariusgas.png" id="productImage">
-     </div>
-
-         
-    </div>
-  
- </td>
-<td>
-Aquarius Gas
-</td>
-<td>$10.00</td>
-<td>50</td>
-<td>2023-10-19</td>
-<td>
-  <div class="actions">
-
-    <span class="las la-edit"></span>
-    <span class="las la-trash"></span>
-</div>
-</td>
-      
- 
-</tr>
-
-<tr>
-<td>#SP05</td>
-<td>
-
-    <div class="image-product-admin">
-     <div>
-    <img src="assets/images/sp/cocaori.png" id="productImage">
-     </div>
-
-    </div>
-  
- </td>
-<td>
-
-Coca Original
-
-</td>
-<td>$13.00</td>
-<td>50</td>
-<td>2023-01-10</td>
-<td>
-  <div class="actions">
-  
-    <span class="las la-edit"></span>
-    <span class="las la-trash"></span>
-</div>
-</td>
-
-</tr>
-
-<tr>
-  <td>#SP01</td>
-  <td>
-  
-     <div class="image-product-admin">
-      <div>
-     <img src="assets/images/sp/coca1.png" id="productImage">
-      </div>
-      
-          
-     </div>
-   
-  </td>
-  <td>
-  
-  Coca Zero Sugar
-  
-  </td>
-  <td>$10.00</td>
-  <td>120</td>
-  <td>2023-05-20</td>
-  <td>
-    <div class="actions">
-       
-        <span class="las la-edit"></span>
-        <span class="las la-trash"></span>
-    </div>
-  </td>
-  </tr>
-  <tr>
-    <td>#SP01</td>
-    <td>
-    
-       <div class="image-product-admin">
-        <div>
-       <img src="assets/images/sp/coca1.png" id="productImage">
-        </div>
-        
-            
-       </div>
-     
-    </td>
-    <td>
-    
-    Coca Zero Sugar
-    
-    </td>
-    <td>$10.00</td>
-    <td>120</td>
-    <td>2023-05-20</td>
-    <td>
-      <div class="actions">
-         
-          <span class="las la-edit"></span>
-          <span class="las la-trash"></span>
-      </div>
-    </td>
-    </tr>
-    <tr>
-      <td>#SP01</td>
-      <td>
-      
-         <div class="image-product-admin">
-          <div>
-         <img src="assets/images/sp/coca1.png" id="productImage">
-          </div>
-          
-              
-         </div>
-       
-      </td>
-      <td>
-      
-      Coca Zero Sugar
-      
-      </td>
-      <td>$10.00</td>
-      <td>120</td>
-      <td>2023-05-20</td>
-      <td>
-        <div class="actions">
-           
-            <span class="las la-edit"></span>
-            <span class="las la-trash"></span>
-        </div>
-      </td>
-      </tr>
-      <tr>
-        <td>#SP01</td>
-        <td>
-        
-           <div class="image-product-admin">
-            <div>
-           <img src="assets/images/sp/coca1.png" id="productImage">
-            </div>
-            
-                
-           </div>
-         
-        </td>
-        <td>
-        
-        Coca Zero Sugar
-        
-        </td>
-        <td>$10.00</td>
-        <td>120</td>
-        <td>2023-05-20</td>
-        <td>
-          <div class="actions">
-             
-              <span class="las la-edit"></span>
-              <span class="las la-trash"></span>
-          </div>
-        </td>
-        </tr>
-        <tr>
-          <td>#SP01</td>
-          <td>
-          
-             <div class="image-product-admin">
-              <div>
-             <img src="assets/images/sp/coca1.png" id="productImage">
-              </div>
-              
-                  
-             </div>
-           
-          </td>
-          <td>
-          
-          Coca Zero Sugar
-          
-          </td>
-          <td>$10.00</td>
-          <td>120</td>
-          <td>2023-05-20</td>
-          <td>
-            <div class="actions">
-               
-                <span class="las la-edit"></span>
-                <span class="las la-trash"></span>
-            </div>
-          </td>
-          </tr>
-          <tr>
-            <td>#SP01</td>
-            <td>
-            
-               <div class="image-product-admin">
-                <div>
-               <img src="assets/images/sp/coca1.png" id="productImage">
-                </div>
-                
-                    
-               </div>
-             
-            </td>
-            <td>
-            
-            Coca Zero Sugar
-            
-            </td>
-            <td>$10.00</td>
-            <td>120</td>
-            <td>2023-05-20</td>
-            <td>
-              <div class="actions">
-                 
-                  <span class="las la-edit"></span>
-                  <span class="las la-trash"></span>
-              </div>
-            </td>
-            </tr>
-            <tr>
-              <td>#SP01</td>
-              <td>
-              
-                 <div class="image-product-admin">
-                  <div>
-                 <img src="assets/images/sp/coca1.png" id="productImage">
-                  </div>
-                  
-                      
-                 </div>
-               
-              </td>
-              <td>
-              
-              Coca Zero Sugar
-              
-              </td>
-              <td>$10.00</td>
-              <td>120</td>
-              <td>2023-05-20</td>
-              <td>
-                <div class="actions">
-                   
-                    <span class="las la-edit"></span>
-                    <span class="las la-trash"></span>
-                </div>
-              </td>
-              </tr>
-              <tr>
-                <td>#SP01</td>
-                <td>
-                
-                   <div class="image-product-admin">
-                    <div>
-                   <img src="assets/images/sp/coca1.png" id="productImage">
-                    </div>
-                    
-                        
-                   </div>
-                 
-                </td>
-                <td>
-                
-                Coca Zero Sugar
-                
-                </td>
-                <td>$10.00</td>
-                <td>120</td>
-                <td>2023-05-20</td>
-                <td>
-                  <div class="actions">
-                     
-                      <span class="las la-edit"></span>
-                      <span class="las la-trash"></span>
-                  </div>
-                </td>
-                </tr>
 </tbody>
 </table>
 
@@ -589,243 +253,12 @@ Coca Original
 
 var predefinedContent = '<div class="actions"><span class="lab la-telegram-plane"></span><span class="las la-edit"></span><span class="las la-trash"></span></div>';
   document.getElementById("action").value = predefinedContent;
-
-window.addEventListener("DOMContentLoaded", function() {
-  var predefinedContent = '<div class="image-product-admin"><div><img src="assets/images/sp/cocaori.png" id="productImage"></div></div>';
+  var predefinedContent = '<div class="image-product-admin"><div><img src="assets/images/sp/" id="productImage"></div></div>';
   document.getElementById("fimage").value = predefinedContent;
-
-  const fileInput = document.getElementById('fimage1');
-  fileInput.addEventListener('change', (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
- 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataURL = event.target.result;
-  
-        document.getElementById('fimage').value = '<div class="image-product-admin"><div><img src="' + dataURL + '" id="productImage"></div></div>';
-      };
-      reader.readAsDataURL(selectedFile);
-    }
-  });
-});
-
-      
-    var rIndex,
-        table1 = document.getElementById("table-product");
-    
-
-    function checkEmptyInput1()
-    {
-        var isEmpty = false,
-        idproduct = document.getElementById("id-product").value,
-        fproduct = document.getElementById("fproduct").value,
-            quantity = document.getElementById("quantity").value,
-          dateadd = document.getElementById("dateadd").value,
-         descrip = document.getElementById("descrip").value,
-            price= document.getElementById("price").value;
-          
-            if(idproduct === ""){
-            alert("Please fill in");
-            isEmpty = true;
-        }
-        else if(fproduct === ""){
-            alert("Please fill in");
-            isEmpty = true;
-        }
-        else if(quantity === ""){
-            alert("Please fill in");
-            isEmpty = true;
-        }
-        else if(dateadd === ""){
-            alert("Please fill in");
-            isEmpty = true;
-        }
-        else if(price === ""){
-            alert("Please fill in");
-            isEmpty = true;
-        }
-      
-        return isEmpty;
-    }
-  
-    function addHtmlTableRow1()
-    {
-   
-        if(!checkEmptyInput1()){
-        var newRow = table1.insertRow(table1.length),
-            cell1 = newRow.insertCell(0),
-            cell2 = newRow.insertCell(1),
-            cell3 = newRow.insertCell(2),
-            cell4 = newRow.insertCell(3),
-            cell5 = newRow.insertCell(4),
-            cell6 = newRow.insertCell(5),
-          cell7 = newRow.insertCell(6),
-            idproduct = document.getElementById("id-product").value,
-            fimage=document.getElementById("fimage").value,
-            fproduct = document.getElementById("fproduct").value,
-            quantity = document.getElementById("quantity").value,
-           dateadd = document.getElementById("dateadd").value,
-           action = document.getElementById("action").value,
-            price = document.getElementById("price").value;
-           
-            cell1.innerHTML = idproduct;
-            cell2.innerHTML = fimage;
-            cell3.innerHTML = fproduct;
-        cell4.innerHTML = quantity;
-        cell5.innerHTML = dateadd;
-        cell6.innerHTML = price;
-       cell7.innerHTML = action;
-
-        selectedRowToInput1();
-    }
-    resetForm();
-    }
-    
-
-    function selectedRowToInput1()
-    {
-        
-        for(var i = 1; i < table1.rows.length; i++)
-        {
-            
-            table1.rows[i].onclick = function()
-            {
-              resetImage();
-              rIndex = this.rowIndex;
-              
-              document.getElementById("id-product").value = this.cells[0].innerHTML;
-              document.getElementById("fimage").value = this.cells[1].innerHTML;
-              document.getElementById("fproduct").value = this.cells[2].innerHTML;
-              document.getElementById("quantity").value = this.cells[3].innerHTML;
-              document.getElementById("dateadd").value = this.cells[4].innerHTML;
-              document.getElementById("price").value = this.cells[5].innerHTML;
-              document.getElementById("action").value = this.cells[6].innerHTML;
-              
-              const addButton = document.querySelector('button[onclick="addHtmlTableRow1();"]');
-      if (!addButton.disabled) {
-        addButton.disabled = true;
-                };
-                const deleteButton = document.getElementById('deleteButton');
-                const editButton = document.getElementById('editButton');
-                editButton.disabled = false;
-                deleteButton.disabled = false;
-                addButton.style.visibility = 'hidden';
-                editButton.style.visibility = 'visible';
-                deleteButton.style.visibility = 'visible';
-      editButton.innerHTML = 'Update <span class="las la-check"></span>';    
-            };
-            
-        }
-        
-        
-    }
-    selectedRowToInput1();
-    
-    function editHtmlTbleSelectedRow1()
-    {
-        var     idproduct = document.getElementById("id-product").value,
-        fimage = document.getElementById("fimage").value,
-            fproduct = document.getElementById("fproduct").value,
-            quantity = document.getElementById("quantity").value,
-           dateadd = document.getElementById("dateadd").value,
-            price = document.getElementById("price").value;
-            
-       if(!checkEmptyInput1()){
-        table1.rows[rIndex].cells[0].innerHTML = idproduct;
-        table1.rows[rIndex].cells[1].innerHTML = fimage;
-        table1.rows[rIndex].cells[2].innerHTML = fproduct;
-        table1.rows[rIndex].cells[3].innerHTML = quantity;
-        table1.rows[rIndex].cells[4].innerHTML = dateadd;
-        table1.rows[rIndex].cells[5].innerHTML = price;
-      
-      }
-      resetForm();
-          const addButton = document.querySelector('button[onclick="addHtmlTableRow1();"]');
-      if (addButton.disabled) {
-        addButton.disabled = false;
-                };
-                       const editButton = document.getElementById('editButton');
-                       addButton.style.visibility = 'visible';
-                editButton.style.visibility = 'hidden';
-                deleteButton.style.visibility = 'hidden';
-                       editButton.disabled = true; 
-                       deleteButton.disabled = true;
-      editButton.innerHTML = 'Edit <span class="las la-edit"></span>';    
-            
-    }
-    
-    function removeSelectedRow1() {
-
-  if (rIndex > 0) {
- 
-    var result = confirm("Are you sure you want to delete?");
-
-  
-    if (result == true) {
-      table1.deleteRow(rIndex);
-    } else {
-
-      event.preventDefault();
-    }
-  }
-
-  document.getElementById("id-product").value = "";
-  document.getElementById("fimage1").value = "";
-  document.getElementById("fproduct").value = "";
-  document.getElementById("quantity").value = "";
-  document.getElementById("dateadd").value = "";
-  document.getElementById("price").value = "";
- 
-  resetImage();
-  deleteButton.disabled = true;
-  editButton.disabled = true; 
-  editButton.innerHTML = 'Edit <span class="las la-edit"></span>';  
-  const addButton = document.querySelector('button[onclick="addHtmlTableRow1();"]');
-      if (addButton.disabled) {
-        addButton.disabled = false;
-                };
-                addButton.style.visibility = 'visible';
-                editButton.style.visibility = 'hidden';
-                deleteButton.style.visibility = 'hidden';
-}
-
-function resetForm() {
-  document.getElementById("id-product").value = "";
-  document.getElementById("fimage1").value = "";
-  document.getElementById("fproduct").value = "";
-  document.getElementById("quantity").value = "";
-  document.getElementById("dateadd").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("descrip").value = "";
-  resetImage();
-}
 
 </script>
 
-<script>
 
- const imageProductAdminDivs = document.querySelectorAll('.image-product-admin');
-
-for (const imageProductAdminDiv of imageProductAdminDivs) {
-  const imageInput = imageProductAdminDiv.querySelector('#imageInput');
-  const image = imageProductAdminDiv.querySelector('#productImage');
-
-  imageInput.addEventListener('change', function() {
-    const file = this.files[0];
-
-    const reader = new FileReader();
-
-    reader.onload = function() {
-
-      image.src = reader.result;
-    };
-
-
-    reader.readAsDataURL(file);
-  });
-}
-   </script>
 
 
 <script>
@@ -850,16 +283,12 @@ for (const imageProductAdminDiv of imageProductAdminDivs) {
       preview.style.display = 'none';
     }
   }
-  function resetImage() {
-    var input = document.getElementById('fimage1');
-    var preview = document.getElementById('preview-image');
 
-  
-    input.value = '';
-
- 
-    preview.style.display = 'none';
-  }
 
 </script>
+
+
+
+
+
 
