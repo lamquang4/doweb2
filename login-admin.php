@@ -1,3 +1,25 @@
+<?php
+require 'config.php';
+
+$loginad = new Loginad();
+if (isset($_SESSION["loginad"]) && $_SESSION["loginad"] === true) {
+    header("location: admin-strator.php");
+    exit;
+  
+  }
+  
+if (isset($_POST["submit"])) {
+    $result = $loginad->loginad($_POST["username"], $_POST["password"]);
+
+    if ($result == 1) {
+        $_SESSION["loginad"] = true;
+        $_SESSION["id"] = $loginad->idUserad();
+        header("location: admin-strator.php");
+    } elseif ($result == 10) {
+        echo "<script> alert('Wrong username or password'); </script>";
+    }
+}
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,13 +42,13 @@
             <div class="form login">
                 <span class="title">Login For Admin</span>
 
-                <form action="#">
+                <form action="login-admin.php" method="POST">
                     <div class="input-field">
-                        <input id="username" type="text" placeholder="Enter your username" required>
+                        <input  name="username"  id="username" type="text" placeholder="Enter your username" required>
                         <i class="uil uil-user icon"></i>
                     </div>
                     <div class="input-field">
-                        <input id="password" type="password" class="password" placeholder="Enter your password" required>
+                        <input name="password" id="password" type="password" class="password" placeholder="Enter your password" required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -41,7 +63,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="submit" value="Login" onclick="checkLogin()">
+                        <input name="submit" type="submit" value="Login">
                     </div>
                 </form>
 
@@ -56,19 +78,7 @@
 </body>
 </html>
 
-<script>
-      function checkLogin() {
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
 
-      if (username === 'admin456' && password === '456789') {
-        window.location.href = 'admin-strator.php';
-        alert('Welcome back admin');
-      } else {
-        alert('Incorrect username or password. Please try again.');
-      }
-    }
-</script>
 
 <script>
   const container = document.querySelector(".container"),

@@ -1,9 +1,14 @@
 <?php
 
 require 'config.php';
+session_start();
 
+if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+    header("Location: login-admin.php");
+    exit();
+}
 $start = 0;
-$limit = 10; 
+$limit = 100; 
 
 $productObj = new Product();
 
@@ -239,7 +244,7 @@ Product Name:<input type="text" name="name" id="name">
 
 <ul class="pagination" id="pagination">
   <li onclick="prevPage()">Prev</li>
- 
+  <li class="active">1</li>
   <li onclick="nextPage()">Next</li>
 </ul>
 </div>

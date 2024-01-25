@@ -1,5 +1,12 @@
 <?php
 require 'config.php';
+session_start();
+
+if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+    header("Location: login-admin.php");
+    exit();
+}
+
 $select = new Select();
 $tb_users = $select->selectUsers();
 
