@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
 
     if ($result == 1) {
         $_SESSION["loginad"] = true;
-        $_SESSION["id"] = $loginad->idUserad();
+        $_SESSION["idad"] = $loginad->idUserad();
         header("location: admin-strator.php");
     } elseif ($result == 10) {
         echo "<script> alert('Wrong username or password'); </script>";

@@ -8,7 +8,7 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
 
 $register  = new Register();
 if (isset($_POST["submit"])) {
-  // Check if the required keys are set in the $_POST array
+ 
   $username = isset($_POST["username"]) ? $_POST["username"] : "";
   $email = isset($_POST["email"]) ? $_POST["email"] : "";
   $password = isset($_POST["password"]) ? $_POST["password"] : "";
@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
-  $role = isset($_POST["role"]) ? $_POST["role"] : "";
+  $status = isset($_POST["status"]) ? $_POST["status"] : "";
 
   $result = $register->registration(
       $username,
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
       $birthday,
       $gender,
       $imguser,
-      $role
+      $status
   );
 
   if ($result == 1) {

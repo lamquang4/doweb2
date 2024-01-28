@@ -1,11 +1,14 @@
 <?php
+require 'config.php';
 
-session_start();
 
 if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
+$adinad = new Adinad();
+
+$ads = $adinad->selectAds();
 
 ?>
 <!DOCTYPE html>
@@ -176,14 +179,15 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             </tr>
                         </thead>
                         <tbody>
+                        <?php while ($ad = mysqli_fetch_assoc($ads)) { ?>
                             <tr>
                                 
                              
 <td>
-exbigi@arrivalsib.com
+<?php echo $ad['email']; ?>
 </td>
 <td>
-VeItorim
+<?php echo $ad['username']; ?>
 </td>
                                 <td>
                                     <select>
@@ -199,123 +203,8 @@ VeItorim
                                     <button id="btn-reset">Rest Password</button>
                                 </td>
                             </tr>
-                       
-                            <tr>
-                               
-                              
-<td>
-ratatyu@gpaemail.xyz
-</td>
-<td>
-ToWELANE
-</td>
-                                <td>
-                                    <select>
-                                        <option selected>Customer management</option>
-                                        <option > Order management</option> 
-                                        <option > Product management</option>
-                                      </select>
-                                </td>
-                                <td>
-                                    Normal
-                                </td>
-                                <td>
-                                    <button id="btn-reset">Rest Password</button>
-                                </td>
-                            </tr>
-                            <tr>
-                               
-                               
-<td>
-exeterr@greendike.com
-</td>
-<td>
-Mark5Tony8
-</td>
-                                <td>
-                                    <select>
-                                        <option >Customer management</option>
-                                        <option > Order management</option> 
-                                        <option selected> Product management</option>
-                                      </select>
-                                </td>
-                                <td>
-                                    Normal
-                                </td>
-                                <td>
-                                    <button id="btn-reset">Rest Password</button>
-                                </td>
-                            </tr>
-                            <tr>
-                              
-                              
-<td>
-zeziuckov@mailfix.xyz
-</td>
-<td>
-KK586H
-</td>
-                                <td>
-                                    <select>
-                                        <option >Customer management</option>
-                                        <option > Order management</option> 
-                                        <option selected> Product management</option>
-                                      </select>
-                                </td>
-                                <td>
-                                    Normal
-                                </td>
-                                <td>
-                                    <button id="btn-reset">Rest Password</button>
-                                </td>
-                            </tr>
-                            <tr>
-                             
-                                
-<td>
-jrdean@pbtower.com
-</td>
-<td>
-OIP483KL
-</td>
-                                <td>
-                                    <select>
-                                        <option >Customer management</option>
-                                        <option selected> Order management</option> 
-                                        <option > Product management</option>
-                                      </select>
-                                </td>
-                                <td>
-                                    Normal
-                                </td>
-                                <td>
-                                    <button id="btn-reset">Rest Password</button>
-                                </td>
-                            </tr>
-                            <tr>
-                            
-                              
-<td>
-jekiga4989@undewp.com
-</td>
-<td>
-QWERT48
-</td>
-                                <td>
-                                    <select>
-                                        <option >Customer management</option>
-                                        <option selected> Order management</option> 
-                                        <option > Product management</option>
-                                      </select>
-                                </td>
-                                <td>
-                                    Normal
-                                </td>
-                                <td>
-                                    <button id="btn-reset">Rest Password</button>
-                                </td>
-                            </tr>
-                       
+                            <?php } ?>
+                           
                      
                             
                         </tbody>

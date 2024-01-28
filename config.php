@@ -2,6 +2,7 @@
 session_start();
 
 
+
 class Connection{
     public $host = "localhost";
     public $user = "root";
@@ -17,34 +18,15 @@ class Connection{
 
     
 }
-class Register extends Connection {
-    public function registration($username, $email, $password, $password2, $diachi, $fullname, $phone, $role, $imguser, $gender, $birthday) {
-        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username'");
-        
-        if (mysqli_num_rows($duplicate) > 0) {
-            return 10;
-        } else {
-            if ($password == $password2) {
-              
-                $query = "INSERT INTO tb_user (username, email, password, diachi, fullname, phone, gender, imguser, birthday, role) 
-                          VALUES ('$username', '$email', '$password', '$diachi', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday', '$role')";
-                mysqli_query($this->conn, $query);
-                return 1;
-            } else {
-                return 100;
-            }
-        }
-    }
-}
 
 class Loginad extends Connection{
-    public $id;
+    public $idad;
     public function loginad($username,$password){
         $result = mysqli_query($this->conn, "SELECT * FROM tb_ad WHERE username='$username'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
             if($password == $row["password"]){
-$this->id = $row["id"];
+$this->idad = $row["idad"];
 return 1;
             }
             else{
@@ -54,10 +36,58 @@ return 1;
      
     }
    public function idUserad(){
-    return $this->id;
+    return $this->idad;
    }
 
 }
+
+class Userinad extends Connection{
+    public function selectUsers() {
+        $query = "SELECT * FROM tb_user";
+        $result1 = mysqli_query($this->conn, $query);
+        return $result1;
+    }
+
+    public function selectUserById($id) {
+        $query = "SELECT * FROM tb_user WHERE id = $id";
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result);
+    }
+}
+class Adinad extends Connection{
+    public function selectAds() {
+        $query = "SELECT * FROM tb_ad";
+        $result1 = mysqli_query($this->conn, $query);
+        return $result1;
+    }
+
+    public function selectAdById($idad) {
+        $query = "SELECT * FROM tb_ad WHERE idad = $idad";
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result);
+    }
+}
+class Register extends Connection {
+    public function registration($username, $email, $password, $password2, $diachi, $fullname, $phone, $imguser, $gender, $birthday,$status) {
+        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username'");
+        
+        if (mysqli_num_rows($duplicate) > 0) {
+            return 10;
+        } else {
+            if ($password == $password2) {
+              
+                $query = "INSERT INTO tb_user (username, email, password, diachi, fullname, phone, gender, imguser, birthday, status) 
+                          VALUES ('$username', '$email', '$password', '$diachi', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','Normal')";
+                mysqli_query($this->conn, $query);
+                return 1;
+            } else {
+                return 100;
+            }
+        }
+    }
+}
+
+
 class Login extends Connection{
     public $id;
     public function login($usernamelogin,$password){
@@ -87,15 +117,7 @@ class Select extends Connection{
         $result = mysqli_query($this->conn,"SELECT * FROM tb_user WHERE id=$id");
         return mysqli_fetch_assoc($result);
     }
-    public function selectUsers() {
-        $query = "SELECT * FROM tb_user";
-        $result = mysqli_query($this->conn, $query);
-        $users = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $users[] = $row;
-        }
-        return $users;
-    }
+ 
 }
 
 

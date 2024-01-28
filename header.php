@@ -437,6 +437,7 @@ function showbar(){
         searchbars.style.pointerEvents = 'all';
         htmlElement.style.overflow = 'hidden';
         searchbars.style.opacity="1";
+        searchbars.style.transition = "0.35s ease-in-out";
     }
     function closebar(){
  
@@ -444,6 +445,7 @@ function showbar(){
         htmlElement.style.overflowY = 'scroll';
         searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
+        searchbars.style.transition = "0.35s ease-in-out";
     }
     </script>
     
@@ -463,13 +465,14 @@ display:flex;
 
     align-items: center;
   padding: 20px 0;
-    transition: 0.4s ease-in-out;
+ 
     pointer-events: none;
     background-color: #fff;
 
 }
 .search-bars.active25{
     bottom: -52%;
+  
 }
 .search-bars input{
     border-bottom: 1.2px solid #E6E6E6;

@@ -1,14 +1,15 @@
 <?php
 require 'config.php';
-session_start();
+
 
 if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
 
-$select = new Select();
-$tb_users = $select->selectUsers();
+$userinad = new Userinad();
+
+$users = $userinad->selectUsers();
 
 
 ?>
@@ -188,15 +189,15 @@ Full Name:<input type="text" name="fname" id="fname">
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($tb_users as $product) { ?>
+                        <?php while ($user = mysqli_fetch_assoc($users)) { ?>
     <tr>
-        <td>#USER<?php echo $product['id']; ?></td>
-        <td><?php echo $product['fullname']; ?></td>
-        <td><?php echo $product['email']; ?></td>
-        <td><?php echo $product['birthday']; ?></td>
-        <td><?php echo $product['diachi']; ?></td> <!-- Assuming 'address' is stored in 'diachi' column -->
+        <td>#USER<?php echo $user['id']; ?></td>
+        <td><?php echo $user['fullname']; ?></td>
+        <td><?php echo $user['email']; ?></td>
+        <td><?php echo $user['birthday']; ?></td>
+        <td><?php echo $user['diachi']; ?></td>
         <td>
-            Normal
+        <?php echo $user['status']; ?>
         </td>
         <td>
             <div class="actions">
@@ -211,14 +212,13 @@ Full Name:<input type="text" name="fname" id="fname">
                     </table>
 
                     <ul class="pagination" id="pagination">
-                        <li onclick="prevPage()">Prev</li>
+                        <li >Prev</li>
                        <li class="active">1</li>
-                        <li onclick="nextPage()">Next</li>
+                        <li >Next</li>
                       </ul>
-                </div>
-
+                        </div>
             </div>
-        
+          
     
 
 </main>
