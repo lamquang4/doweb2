@@ -133,31 +133,7 @@
         color: #899DC1;
     }
     
-    #menu-toggle:checked ~ .sidebar {
-        width: 60px;
-    }
-    
-    #menu-toggle:checked ~ .sidebar .side-header span {
-        display: none;
-    }
-    
-    #menu-toggle:checked ~ .main-content {
-        margin-left: 60px;
-        width: calc(100% - 60px);
-    }
-    
-    #menu-toggle:checked ~ .main-content header {
-        left: 60px;
-    }
-    
-    #menu-toggle:checked ~ .sidebar .profile,
-    #menu-toggle:checked ~ .sidebar .side-menu a small {
-        display: none;
-    }
-    
-    #menu-toggle:checked ~ .sidebar .side-menu a span {
-        font-size: 1.3rem;
-    }
+ 
     
     
     .main-content {
