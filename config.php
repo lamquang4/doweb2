@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 class Connection{
     public $host = "localhost";
     public $user = "root";
@@ -42,12 +40,17 @@ return 1;
 }
 
 class Userinad extends Connection{
-    public function selectUsers() {
-        $query = "SELECT * FROM tb_user";
+    public function selectUsers($start,$limit) {
+        $query = "SELECT * FROM tb_user LIMIT $start, $limit";
         $result1 = mysqli_query($this->conn, $query);
         return $result1;
     }
-
+    public function getUserCount() {
+        $query = "SELECT COUNT(*) as total FROM tb_user";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
     public function selectUserById($id) {
         $query = "SELECT * FROM tb_user WHERE id = $id";
         $result = mysqli_query($this->conn, $query);
@@ -55,18 +58,24 @@ class Userinad extends Connection{
     }
 }
 class Adinad extends Connection{
-    public function selectAds() {
-        $query = "SELECT * FROM tb_ad";
+    public function selectAds($start,$limit) {
+        $query = "SELECT * FROM tb_ad LIMIT $start, $limit";
         $result1 = mysqli_query($this->conn, $query);
         return $result1;
     }
-
+    public function getAdCount() {
+        $query = "SELECT COUNT(*) as total FROM tb_ad";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
     public function selectAdById($idad) {
         $query = "SELECT * FROM tb_ad WHERE idad = $idad";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
 }
+
 class Register extends Connection {
     public function registration($username, $email, $password, $password2, $diachi, $fullname, $phone, $imguser, $gender, $birthday,$status) {
         $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username'");

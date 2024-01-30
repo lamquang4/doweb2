@@ -8,12 +8,14 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 }
 
 
-$start = 0;
-$limit = 100; 
-
 $productObj = new Product();
-
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$start = ($page - 1) * $limit;
 $products = $productObj->selectProducts($start, $limit);
+$totalProducts = $productObj ->getProductCount();
+$totalPages = ceil($totalProducts / $limit);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -244,9 +246,24 @@ Product Name:<input type="text" name="name" id="name">
 </table>
 
 <ul class="pagination" id="pagination">
-  <li onclick="prevPage()">Prev</li>
-  <li class="active">1</li>
-  <li onclick="nextPage()">Next</li>
+<?php
+        
+        if ($page > 1) {
+            echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+        } else {
+            echo '<li class="disabled">Prev</li>';
+        }
+
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+
+        if ($page < $totalPages) {
+            echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
+        } else {
+            echo '<li class="disabled">Next</li>';
+        }
+        ?>
 </ul>
 </div>
 

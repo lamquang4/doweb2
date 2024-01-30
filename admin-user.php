@@ -8,8 +8,13 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 }
 
 $userinad = new Userinad();
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$start = ($page - 1) * $limit;
+$users = $userinad->selectUsers($start,$limit);
+$totalUsers = $userinad->getUserCount();
+$totalPages = ceil($totalUsers / $limit);
 
-$users = $userinad->selectUsers();
 
 
 ?>
@@ -212,13 +217,28 @@ Full Name:<input type="text" name="fname" id="fname">
                     </table>
 
                     <ul class="pagination" id="pagination">
-                        <li >Prev</li>
-                       <li class="active">1</li>
-                        <li >Next</li>
+                    <?php
+        
+            if ($page > 1) {
+                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            } else {
+                echo '<li class="disabled">Prev</li>';
+            }
+
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+
+            if ($page < $totalPages) {
+                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
+            } else {
+                echo '<li class="disabled">Next</li>';
+            }
+            ?>
                       </ul>
                         </div>
             </div>
-          
+           
     
 
 </main>
@@ -236,232 +256,7 @@ Full Name:<input type="text" name="fname" id="fname">
         document.getElementById("action").value = predefinedContent;
       });
     
-        var rIndex,
-            table = document.getElementById("table-user");
-
-        function checkEmptyInput()
-        {
-            var isEmpty = false,
-            iduser = document.getElementById("id-user").value,
-            fname = document.getElementById("fname").value,
-            email = document.getElementById("email").value,
-               
-               birth = document.getElementById("birth").value,
-                address = document.getElementById("address").value, 
-                status = document.getElementById("status").value,          
-                action= document.getElementById("action").value;
-                if(iduser === ""){
-                    alert("Please fill in");
-                isEmpty = true;
-            }
-            else if(fname === ""){
-                alert("Please fill in");
-                isEmpty = true;
-            }
-            else if(email === ""){
-                alert("Please fill in");
-                isEmpty = true;
-            }
-         
-            else if(birth === ""){
-                alert("Please fill in");
-                isEmpty = true;
-            }
-            else if(address === ""){
-                alert("Please fill in");
-                isEmpty = true;
-            }
-         
-            return isEmpty;
-        }
-
-        function addHtmlTableRow()
-        {
-          
-            if(!checkEmptyInput()){
-            var newRow = table.insertRow(table.length),
-                cell1 = newRow.insertCell(0),
-                cell2 = newRow.insertCell(1),
-                cell3 = newRow.insertCell(2),
-                cell4 = newRow.insertCell(3),
-                cell5 = newRow.insertCell(4),
-                cell6 = newRow.insertCell(5),
-                cell7 = newRow.insertCell(6),
-                iduser = document.getElementById("id-user").value,
-                fname = document.getElementById("fname").value,
-                email = document.getElementById("email").value,
-               birth = document.getElementById("birth").value,
-                address = document.getElementById("address").value,
-                status = document.getElementById("status").value,
-                action = document.getElementById("action").value;
-                cell1.innerHTML = iduser;
-                cell2.innerHTML = fname;
-                cell3.innerHTML = email;
-            cell4.innerHTML =  birth;
-            cell5.innerHTML =address;
-            cell6.innerHTML = status;
-            cell7.innerHTML = action;
-    
-            selectedRowToInput();
-        }
-        resetForm();
-        }
-
-
-        function blockUser() {
-  var currentRow = table.rows[rIndex];
-  var confirmation = confirm("Are you sure you want to block this user?");
-  if (confirmation) {
-    currentRow.cells[5].innerHTML = "Blocked";
-    currentRow.cells[5].style.color = "red";
-    editButton.innerHTML = 'Edit <span class="las la-edit"></span>'; 
-    const addButton = document.querySelector('button[onclick="addHtmlTableRow();"]');
-      if (addButton.disabled) {
-        addButton.disabled = false;
-                };
-                editButton.disabled = true; 
-                document.getElementById("blockButton").disabled=true;
-                document.getElementById("blockButton1").disabled=true;
-                addButton.style.visibility = 'visible';
-              editButton.style.visibility = 'hidden';
-              document.getElementById("blockButton").style.visibility= 'hidden';
-              document.getElementById("blockButton1").style.visibility= 'hidden';
-    resetForm();
-  }
-  else {
-         event.preventDefault();
        
-       }
-}
-
-document.getElementById("blockButton").addEventListener("click", blockUser);
-
-function unblockUser() {
-  var currentRow = table.rows[rIndex];
-  var confirmation = confirm("Are you sure you want to unblock this user?");
-  if (confirmation) {
-    currentRow.cells[5].innerHTML = "Normal";
-    currentRow.cells[5].style.color = "black";
-
-    const addButton = document.querySelector('button[onclick="addHtmlTableRow();"]');
-      if (addButton.disabled) {
-        addButton.disabled = false;
-                };
-                editButton.disabled = true; 
-                document.getElementById("blockButton").disabled=true;
-                document.getElementById("blockButton1").disabled=true;
-                addButton.style.visibility = 'visible';
-              editButton.style.visibility = 'hidden';
-              document.getElementById("blockButton").style.visibility= 'hidden';
-              document.getElementById("blockButton1").style.visibility= 'hidden';
-    resetForm();
-  }
-  else { 
-         event.preventDefault();     
-       }
-}
-document.getElementById("blockButton1").addEventListener("click", unblockUser);
- 
-
-
-
-function selectedRowToInput()
-        {
-            
-            for(var i = 1; i < table.rows.length; i++)
-            {
-                table.rows[i].onclick = function()
-                {
-            
-                  rIndex = this.rowIndex;
-                  document.getElementById("id-user").value = this.cells[0].innerHTML;
-                  document.getElementById("fname").value = this.cells[1].innerHTML;
-                  document.getElementById("email").value = this.cells[2].innerHTML;
-                 
-                  document.getElementById("birth").value = this.cells[3].innerHTML;
-                  document.getElementById("address").value = this.cells[4].innerHTML;
-              
-                  const addButton = document.querySelector('button[onclick="addHtmlTableRow();"]');
-      if (!addButton.disabled) {
-        addButton.disabled = true;
-                };
-                const editButton = document.getElementById('editButton');
-                addButton.style.visibility= 'hidden';
-              editButton.style.visibility = 'visible';
-              document.getElementById("blockButton").style.visibility= 'visible';
-              document.getElementById("blockButton1").style.visibility= 'visible';
-                editButton.disabled = false; 
-                document.getElementById("blockButton").disabled=false;
-                document.getElementById("blockButton1").disabled=false;
-              editButton.innerHTML = 'Update <span class="las la-check"></span>'; 
-            }
-        }
-    }
-        selectedRowToInput();
-        
-        function editHtmlTbleSelectedRow()
-        {
-            var   iduser = document.getElementById("id-user").value,
-            fname = document.getElementById("fname").value,
-            email = document.getElementById("email").value,
-               birth = document.getElementById("birth").value,
-                address = document.getElementById("address").value,
-               status = document.getElementById("status").value,
-               action = document.getElementById("action").value;
-           if(!checkEmptyInput()){
-            table.rows[rIndex].cells[0].innerHTML = iduser;
-            table.rows[rIndex].cells[1].innerHTML = fname;
-            table.rows[rIndex].cells[2].innerHTML = email;
-            table.rows[rIndex].cells[3].innerHTML = birth;
-            table.rows[rIndex].cells[4].innerHTML = address;
-            
-          }
-          resetForm();
-          const addButton = document.querySelector('button[onclick="addHtmlTableRow();"]');
-      if (addButton.disabled) {
-        addButton.disabled = false;
-                };
-                const editButton = document.getElementById('editButton');
-              
-              addButton.style.visibility = 'visible';
-              editButton.style.visibility = 'hidden';
-              document.getElementById("blockButton").style.visibility= 'hidden';
-              document.getElementById("blockButton1").style.visibility= 'hidden';
-              editButton.disabled = true; 
-                document.getElementById("blockButton").disabled=true;
-                document.getElementById("blockButton1").disabled=true;
-        }
-        
-        function removeSelectedRow()
-        {
-            if (rIndex > 0) {
-        var result = confirm("Are you sure you want to delete?");
-        if (result == true) {
-          table.deleteRow(rIndex);
-        } else {
-         
-          event.preventDefault();
-        }
-      }
-        
-            document.getElementById("id-user").value = "";
-            document.getElementById("fname").value = "";
-            document.getElementById("email").value = "";
-           
-            document.getElementById("birth").value = "";
-            document.getElementById("address").value = "";
-       
-        }
-        function resetForm() {
-            document.getElementById("id-user").value = "";
-            document.getElementById("fname").value = "";
-            document.getElementById("email").value = "";
-         
-            document.getElementById("birth").value = "";
-            document.getElementById("address").value = "";
-     
-  
-}
         
     </script>
 
