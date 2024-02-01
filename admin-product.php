@@ -122,7 +122,7 @@ $totalPages = ceil($totalProducts / $limit);
         </div>
 
         <div class="user-input" >
-          Product's Image:<input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
+           Image:<input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
         
                 </div>
 
@@ -130,17 +130,17 @@ $totalPages = ceil($totalProducts / $limit);
               
 
         <div class="user-input" style="display: none;">
-           Product's Url:<input type="text" name="fimage" id="fimage" >
+            Url:<input type="text" name="fimage" id="fimage" >
                  </div>
                  <div class="user-input">
-                  Product Type:<select style="padding: 2px 50px;">
+                  Type:<select style="padding: 2px 50px;">
                     <option>Select Type</option>
                     <option>Carbonated</option>
                     <option>Non-carbonated</option>
                   </select>
                        </div>
         <div class="user-input">
-Product Name:<input type="text" name="name" id="name">
+ Name:<input type="text" name="name" id="name">
      </div>
 
   <div class="user-input">
