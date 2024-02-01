@@ -282,12 +282,12 @@ Product Name:<input type="text" name="name" id="name">
 
     <h1 class="bold">Nutrition Facts</h1> 
     <i class="fa-solid fa-xmark" id="close-ic" onclick="hidePopup()"></i>
-   
+  
 </div>
      
 <div class="divider medium"></div>
-
-<div class="daily-value small-text">
+<form>
+  <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" placeholder="?"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
@@ -304,7 +304,7 @@ Product Name:<input type="text" name="name" id="name">
       <div class="divider"></div>
       <p><span><span class="bold">Total Fat</span> <input min="0" placeholder="?">g</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
       <p><span><span class="bold">Sodium</span> <input min="0" placeholder="?">mg</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" type="number" placeholder="?">g</span> <span ><input min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" placeholder="?">g</span> <span ><input min="0" placeholder="?">%</span></p>
       <p><span><span class="bold">Sugars</span> <input min="0" placeholder="?">g</span> </p>
       <p style="border: none;"><span><span class="bold">Protein</span> <input min="0" placeholder="?">g</span> </p>
     
@@ -313,6 +313,10 @@ Product Name:<input type="text" name="name" id="name">
 
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
+<i type="submit" class="fa-solid fa-check" id="submit-ic"></i>
+
+</form>
+
   </div>
 
 
@@ -321,7 +325,7 @@ Product Name:<input type="text" name="name" id="name">
 
 <script>
  const popup = document.querySelector('.popup');
-
+const submitic = document.querySelector('#submit-ic');
 
   var htmlElement = document.querySelector('html');
   const inputFields = document.querySelectorAll('.popup input');
@@ -332,12 +336,25 @@ Product Name:<input type="text" name="name" id="name">
   }
 
   function hidePopup() {
+    submitic.style.visibility="hidden";
     popup.style.display = 'none';
     htmlElement.style.overflow = 'auto';
     inputFields.forEach(input => (input.value = ''));
   }
+  submitic.onclick=function(){
+    submitic.style.visibility="hidden";
+    popup.style.display = 'none';
+    htmlElement.style.overflow = 'auto';
+    inputFields.forEach(input => (input.value = ''));
+  }
+  function checkInputsNotEmpty() {
 
+  const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
 
+  submitic.style.visibility = allFilled ? 'visible' : 'hidden';
+}
+inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
+checkInputsNotEmpty();
 </script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

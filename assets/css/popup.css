@@ -20,15 +20,33 @@ display: none;
 
   font-size: 22px;
 }
-#nutrifact i{
+#nutrifact #close-ic{
 position: absolute;
-right:3%;
+right:2%;
 top:2%;
 font-size: 30px;
 cursor: pointer;
 
 
 }
+ #submit-ic{
+  position: absolute;
+  right:3%;
+  top:90%;
+  font-size: 55px;
+  cursor: pointer;
+  color:#69CB45;
+  animation: moveUpDown 1.1s ease-in-out infinite;
+ visibility: hidden;
+  }
+  @keyframes moveUpDown {
+    0%, 100% {
+      top: 90%;
+    }
+    50% {
+      top: 89%;
+    }
+  }
 .popup input{
     width: 31px;
  height: 25px;
