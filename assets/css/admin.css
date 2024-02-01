@@ -18,7 +18,9 @@
         scroll-behavior: smooth;
     }
   
-    
+    html{
+        overflow: auto;
+    }
     a{
         color:black;
         cursor: pointer;

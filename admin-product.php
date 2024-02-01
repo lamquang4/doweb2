@@ -23,9 +23,10 @@ $totalPages = ceil($totalProducts / $limit);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>Admin Product</title>
+    <link rel="stylesheet" href="assets/css/popup.css">
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="icon" type="image/png" href="assets/images/pic/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
@@ -154,7 +155,7 @@ Product Name:<input type="text" name="name" id="name">
         Date Add:<input type="date" name="date_add" id="date_add">
        </div>
        <div class="user-input">
-        Description:<input type="text" name="descrip" id="descrip" >
+        Description:<input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
        </div>
        <div class="user-input" style="display: none;">
         Action:<input type="text" name="action" id="action" >
@@ -170,7 +171,12 @@ Product Name:<input type="text" name="name" id="name">
 
     </div>
 </div>
-          
+   
+
+
+
+
+
 <div class="records table-responsive" >
 
 <div class="record-header">
@@ -269,15 +275,75 @@ Product Name:<input type="text" name="name" id="name">
 
 </div>
 </main>
+
+
+   <div class="popup"  >
+<div id="nutrifact">
+
+    <h1 class="bold">Nutrition Facts</h1> 
+    <i class="fa-solid fa-xmark" id="close-ic" onclick="hidePopup()"></i>
+   
+</div>
+     
+<div class="divider medium"></div>
+
+<div class="daily-value small-text">
+   
+    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" placeholder="?"> mL)</span> </p>
+    <p ><span><span class="bold">Serving Per Container 1</span></p>
+  
+    <p><span><span class="bold">Amount Per Serving</span> </span> </p>
+
+    <p style="border: none;"><span><span class="bold">Calories</span> <input min="0" placeholder="?">g</span> </p>
+  
+  </div>
+  
+    <div class="divider large"></div>
+    <div class="daily-value small-text">
+      <p class="bold right no-divider">% Daily Value *</p>
+      <div class="divider"></div>
+      <p><span><span class="bold">Total Fat</span> <input min="0" placeholder="?">g</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Sodium</span> <input min="0" placeholder="?">mg</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" type="number" placeholder="?">g</span> <span ><input min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Sugars</span> <input min="0" placeholder="?">g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <input min="0" placeholder="?">g</span> </p>
+    
+    </div>
+
+
+<div class="divider medium"></div>
+<p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
+  </div>
+
+
+
+
+
+<script>
+ const popup = document.querySelector('.popup');
+
+
+  var htmlElement = document.querySelector('html');
+  const inputFields = document.querySelectorAll('.popup input');
+  function showPopup() {
+    popup.style.display = 'block';
+    window.scrollTo(0,0);
+    htmlElement.style.overflow = 'hidden';
+  }
+
+  function hidePopup() {
+    popup.style.display = 'none';
+    htmlElement.style.overflow = 'auto';
+    inputFields.forEach(input => (input.value = ''));
+  }
+
+
+</script>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
-
-var predefinedContent = '<div class="actions"><span class="lab la-telegram-plane"></span><span class="las la-edit"></span><span class="las la-trash"></span></div>';
-  document.getElementById("action").value = predefinedContent;
-  var predefinedContent = '<div class="image-product-admin"><div><img src="assets/images/sp/" id="productImage"></div></div>';
-  document.getElementById("fimage").value = predefinedContent;
 
 </script>
 

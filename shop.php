@@ -132,19 +132,19 @@ include_once 'header.php'
     <div class="pages">
         <ul class="listPage">
             <?php
-            // Previous page button
+          
             if ($page > 1) {
                 echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '"><i class="fa fa-chevron-left"></i></a></li>';
             } else {
                 echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
             }
 
-            // Pagination links
+      
             for ($i = 1; $i <= $totalPages; $i++) {
                 echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
             }
 
-            // Next page button
+    
             if ($page < $totalPages) {
                 echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '"><i class="fa fa-chevron-right"></i></a></li>';
             } else {
