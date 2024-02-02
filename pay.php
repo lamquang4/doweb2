@@ -44,8 +44,8 @@ if(isset($_SESSION["id"])){
                             
                               <div class="avatar checkout-icon p-1">
                                   <div class="avatar-title rounded-circle bg-primary">
-                                      <i class="bx bxs-receipt text-white font-size-20"></i>
-                                      
+                                  
+                                      <i class="fa-regular fa-id-card text-white font-size-20"></i>
                                   </div>
                                   
                               </div>
@@ -149,7 +149,8 @@ if(isset($_SESSION["id"])){
                           <li class="checkout-item">
                               <div class="avatar checkout-icon p-1">
                                   <div class="avatar-title rounded-circle bg-primary">
-                                      <i class="bx bxs-wallet-alt text-white font-size-20"></i>
+                                    <i class="fa-regular fa-credit-card text-white font-size-20"></i>
+                                   
                                   </div>
                               </div>
                               <div class="feed-item-list">
@@ -167,7 +168,8 @@ if(isset($_SESSION["id"])){
                                                       <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
   
                                                       <span class="card-radio py-3 text-center text-truncate">
-                                                          <i class="bx bx-money d-block h2 mb-3"></i>
+                                                         
+                                                          <i class="fa-regular fa-money-bill-1 d-block h2 mb-3"></i>
                                                           <span>Cash On Delivery</span>
                                                       </span>
                                                   </label>
@@ -179,8 +181,9 @@ if(isset($_SESSION["id"])){
                                                   <label class="card-radio-label">
                                                       <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" >
                                                       <span class="card-radio py-3 text-center text-truncate">
-                                                          <i class="bx bx-credit-card d-block h2 mb-3"></i>
-                                                          Credit Card
+                                                        <i class="fa-solid fa-building-columns d-block h2 mb-3"></i>
+                                                          
+                                                          Bank Payment
                                                       </span>
                                                   </label>
                                               </div>
@@ -230,24 +233,7 @@ if(isset($_SESSION["id"])){
                   </div>
               </div>
   
-              <div class="row my-4">
-                  <div class="col">
-                      <a href="shop.php" class="btn btn-link text-muted">
-                          <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
-                  </div> <!-- end col -->
-                  <div class="col">
-                      <div class="text-end mt-2 mt-sm-0">
-                   <button id="btn-pay-buy" style="border: none; background-color: #ffffff;">
-                       <a  class="btn btn-success">
-                              <i class="mdi mdi-cart-outline me-1"></i> Procced 
-                            </a>
-                   </button>
-                         
-                   
-                        
-                      </div>
-                  </div> <!-- end col -->
-              </div> <!-- end row-->
+         
           </div>
           <div class="col-xl-4">
               <div class="card checkout-order-summary">
@@ -337,7 +323,26 @@ if(isset($_SESSION["id"])){
                       </div>
                   </div>
               </div>
+              <div class="row my-4">
+                <div class="col">
+                    <a href="shop-user.html" class="btn btn-link text-muted">
+                        <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
+                </div> <!-- end col -->
+                <div class="col">
+                    <div class="text-end mt-2 mt-sm-0">
+                 <button id="btn-pay-buy" style="border: none; background-color: #ffffff;">
+                     <a  class="btn btn-success">
+                            <i class="mdi mdi-cart-outline me-1"></i> Procced 
+                          </a>
+                 </button>
+                       
+                 
+                      
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row-->
           </div>
+          
       </div>
       <!-- end row -->
       
