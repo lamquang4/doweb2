@@ -276,7 +276,7 @@ $totalPages = ceil($totalProducts / $limit);
 </div>
 </main>
 
-
+<div class="container-popup">
    <div class="popup"  >
 <div id="nutrifact">
 
@@ -313,49 +313,52 @@ $totalPages = ceil($totalProducts / $limit);
 
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
-<i type="submit" class="fa-solid fa-check" id="submit-ic"></i>
+<i  class="fa-solid fa-check" id="submit-ic"></i>
 
 </form>
 
   </div>
+  </div>
 
 
-
-
-
-<script>
- const popup = document.querySelector('.popup');
-const submitic = document.querySelector('#submit-ic');
-
-  var htmlElement = document.querySelector('html');
+  <script>
+  const popup = document.querySelector('.popup');
+  const overlay = document.querySelector('.container-popup');
+  const submitic = document.querySelector('#submit-ic');
+  const htmlElement = document.querySelector('html');
   const inputFields = document.querySelectorAll('.popup input');
+
   function showPopup() {
     popup.style.display = 'block';
-    window.scrollTo(0,0);
+    overlay.style.display = 'block'; 
+    window.scrollTo(0, 0);
     htmlElement.style.overflow = 'hidden';
   }
 
   function hidePopup() {
-    submitic.style.visibility="hidden";
+    submitic.style.visibility = "hidden";
     popup.style.display = 'none';
+    overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
     inputFields.forEach(input => (input.value = ''));
   }
-  submitic.onclick=function(){
-    submitic.style.visibility="hidden";
+
+  submitic.onclick = function () {
+    submitic.style.visibility = "hidden";
     popup.style.display = 'none';
+    overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
     inputFields.forEach(input => (input.value = ''));
   }
-  function checkInputsNotEmpty() {
-
-  const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
-
-  submitic.style.visibility = allFilled ? 'visible' : 'hidden';
-}
-inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
-checkInputsNotEmpty();
-</script>
+   function checkInputsNotEmpty() {
+ 
+   const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
+ 
+   submitic.style.visibility = allFilled ? 'visible' : 'hidden';
+ }
+ inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
+ checkInputsNotEmpty();
+ </script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
