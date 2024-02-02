@@ -28,7 +28,7 @@ if(isset($_SESSION["id"])){
 </head>
 <body>
 <div style="display: flex; justify-content: center; margin: 15px 0;" >
-    <img class="logo-img" src="assets/images/pic/logo.png" width="8%" onclick="window.location.href='index-user.html'">
+    <img class="logo-img" src="assets/images/pic/logo.png" width="8%" onclick="window.location.href='index.php'">
 </div>
   <div class="container">
 
@@ -325,7 +325,7 @@ if(isset($_SESSION["id"])){
               </div>
               <div class="row my-4">
                 <div class="col">
-                    <a href="shop-user.html" class="btn btn-link text-muted">
+                    <a href="shop.php" class="btn btn-link text-muted">
                         <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
                 </div> <!-- end col -->
                 <div class="col">
