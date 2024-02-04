@@ -191,7 +191,9 @@ $totalPages = ceil($totalProducts / $limit);
 
   <span>Entries</span>
   <select name="" id="">
-      <option value="">ID</option>
+  <option value="">10</option>
+    <option value="">16</option>
+    <option value="">20</option>
   </select>
   </div>
 </div>
@@ -199,13 +201,29 @@ $totalPages = ceil($totalProducts / $limit);
 <div>
 <table width="100%" id="table-product">
 <thead>
-<tr>
+<tr id="select-filter">
     <th>ID PRODUCT</th>
-    <th><span class="las la-sort"></span> IMAGE</th>
-    <th><span class="las la-sort"></span> PRODUCT</th>
-    <th><span class="las la-sort"></span> PRICE</th>
-    <th ><span class="las la-sort"></span> QUANTITY</th>
-    <th><span class="las la-sort"></span> DATE ADD</th>
+    <th><span class="las la-sort"></span> IMAGE </th>
+    <th><span class="las la-sort"></span> PRODUCT <select>
+      <option></option>
+      <option>A-Z</option>
+      <option>Z-A</option>
+    </select></th>
+    <th><span class="las la-sort"></span> PRICE <select>
+      <option></option>
+      <option>Low-High</option>
+      <option>High-Low</option>
+    </select></th>
+    <th ><span class="las la-sort"></span> QUANTITY <select>
+      <option></option>
+      <option>Low-High</option>
+      <option>High-Low</option>
+    </select></th>
+    <th><span class="las la-sort"></span> DATE ADD <select>
+      <option></option>
+      <option>Newest</option>
+      <option>Latest</option>
+    </select></th>
     <th><span class="las la-sort"></span> ACTION</th>
    
 </tr>

@@ -172,7 +172,9 @@ Full Name:<input type="text" name="fname" id="fname">
                     <div class="add">
                         <span>Entries</span>
                     <select name="" id="">
-                        <option value="">ID</option>
+                    <option value="">10</option>
+                        <option value="">16</option>
+                        <option value="">20</option>
                     </select> 
                     </div>
 
@@ -180,8 +182,8 @@ Full Name:<input type="text" name="fname" id="fname">
 
                 <div>
                     <table width="100%" id="table-user">
-                        <thead>
-                            <tr>
+                    <thead>
+                            <tr id="select-filter">
                                 <th>ID USER</th>
                                 <th><span class="las la-sort"></span> FULL NAME</th>
                                 <th><span class="las la-sort"></span> EMAIL</th>
@@ -189,7 +191,11 @@ Full Name:<input type="text" name="fname" id="fname">
                                 <th><span class="las la-sort"></span> BIRTHDAY</th>
                                 <th><span class="las la-sort"></span> ADDRESS</th>
                                
-                                <th><span class="las la-sort"></span> STATUS</th>
+                                <th><span class="las la-sort"></span> STATUS <select>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>Block</option>
+                                </select></th>
                                 <th><span class="las la-sort"></span> ACTION</th>
                             </tr>
                         </thead>

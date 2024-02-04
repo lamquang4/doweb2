@@ -119,7 +119,9 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                 <div class="add">
                     <span>Entries</span>
                     <select name="" id="">
-                        <option value="">ID</option>
+                    <option value="">10</option>
+                        <option value="">16</option>
+                        <option value="">20</option>
                     </select>
                     
                 </div>
@@ -129,15 +131,26 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
         
             <div>
                 <table width="100%" id="table-order">
-                    <thead>
-                        <tr>
+                <thead>
+                        <tr id="select-filter">
                             <th>ID ORDER</th>                          
                            
                             <th><span class="las la-sort"></span>DELIVERY ADDRESS</th>
-                            <th><span class="las la-sort"></span> ORDER DATE</th>
-                            <th><span class="las la-sort"></span> DELIVERY DATE</th>
-                            <th><span class="las la-sort"></span>TOTAL</th>
-                            <th><span class="las la-sort"></span> ORDER STATUS</th>
+                            <th><span class="las la-sort"></span> ORDER DATE <select><option></option>
+                              <option>Newest</option>
+                              <option>Latest</option>
+                            </select></th>
+                            <th><span class="las la-sort"></span> DELIVERY DATE <select>
+                              <option></option>
+                              <option>Newest</option>
+                              <option>Latest</option>
+                            </select></th>
+                            
+                            <th><span class="las la-sort"></span> ORDER STATUS <select>
+                              <option></option>
+                              <option>Processed</option>
+                              <option >Unprocessed</option>
+                            </select></th>
                             <th><span class="las la-sort"></span> ACTION</th>
                           
                         </tr>
@@ -158,9 +171,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 <td>
 2023/05/22                        
 </td>
-<td>
-  $50.00
-</td>
+
                             <td>
                             <select>
                               <option selected>Processed</option>
@@ -189,9 +200,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             <td>
                               2023/01/15
                             </td>
-                            <td>
-                              $64.00
-                            </td>
+                        
                             <td>
                               <select>
                                 <option >Processed</option>
@@ -219,9 +228,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             <td>
                               2023/02/10
                             </td>
-                            <td>
-                              $42.00
-                            </td>
+                            
                             <td>
                               <select>
                                 <option selected>Processed</option>
@@ -250,9 +257,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             <td>
                               2023/04/21
                             </td>
-                            <td>
-                              $32.00
-                            </td>
+                          
                             <td>
                               <select>
                                 <option selected>Processed</option>
@@ -281,9 +286,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             <td>
                               2023/02/26
                             </td>
-                            <td>
-                              $60.00
-                            </td>
+                           
                             <td>
                               <select>
                                 <option selected>Processed</option>

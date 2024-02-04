@@ -161,7 +161,9 @@ $totalPages = ceil($totalAds / $limit);
                     <div class="add">
                         <span>Entries</span>
                     <select name="" id="">
-                        <option value="">ID</option>
+                    <option value="">10</option>
+                        <option value="">16</option>
+                        <option value="">20</option>
                     </select>
                    
                         
@@ -171,13 +173,22 @@ $totalPages = ceil($totalAds / $limit);
 
                 <div>
                     <table width="100%" id="table-adminstrator">
-                        <thead>
-                            <tr>
+                    <thead>
+                            <tr id="select-filter">
                                                          
                                 <th><span class="las la-sort"></span> EMAIL</th>
                                 <th><span class="las la-sort"></span> USERNAME</th>
-                                <th><span class="las la-sort"></span> ROLE</th>
-                                <th><span class="las la-sort"></span> STATUS</th>
+                                <th><span class="las la-sort"></span> ROLE <select>
+                                    <option></option>
+                                    <option>Customer</option>
+                                    <option>Order</option>
+                                    <option>Product</option>
+                                </select></th>
+                                <th><span class="las la-sort"></span> STATUS <select>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>Block</option>
+                                </select></th>
                                 <th><span class="las la-sort"></span> ACTION</th>
                             </tr>
                         </thead>

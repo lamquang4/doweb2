@@ -498,6 +498,7 @@
         }
     
     }
+ 
     @media(max-width:768px){
         #table-user{
             width:200%;
@@ -515,10 +516,10 @@
     @media(max-width:480px){
      
      #table-adminstrator{
-        width: 220%;
+        width: 285%;
     }
         #table-user{
-            width: 320%;
+            width: 330%;
         }
         #table-order{
             width:320%;
@@ -527,6 +528,21 @@
             width: 320%;
         }
     }
+    @media(max-width:400px){
+     
+        #table-adminstrator{
+           width: 310%;
+       }
+           #table-user{
+               width: 340%;
+           }
+           #table-order{
+               width:370%;
+           }
+           #table-product{
+               width: 360%;
+           }
+       }
     @media(width>768px){
         #bar-admin{
             visibility: hidden;
@@ -546,32 +562,30 @@
         background: #F1F4F9;
           }
           #table-user th:nth-child(1){
-            width: 11%;
+            width: 10%;
         }
           #table-user td:nth-child(2) {
            
-      width: 15%;
+      width: 14%;
         }
         #table-user td:nth-child(3) {
           
-      width: 20%;
+      width: 22%;
         }
-        #table-user th:nth-child(4), #table-user th:nth-child(5){
-          width: 15%;   
+        #table-user th:nth-child(4){
+          width: 12%;   
+        }
+        #table-user th:nth-child(5){
+            width: 17%; 
         }
         #table-user th:nth-child(6){
-            width: 12%;
+            width: 15%;
         } 
         #table-user th:nth-child(7) {
-    width:12%;
+    width:10%;
         }
         
-       
-    
-        #table-user td{
-          
-        }
-    
+
         .user-tab{
        float: left;
        margin-bottom: 15px;
@@ -600,19 +614,19 @@
         }
      
        #table-adminstrator td:nth-child(1){
-        width: 25%;
+        width: 23%;
        }
        #table-adminstrator td:nth-child(2){
-        width: 20%;
+        width: 19%;
        }
        #table-adminstrator td:nth-child(3){
-        width: 24%;
+        width: 25%;
        }
        #table-adminstrator td:nth-child(4){
-        width: 15%;
+        width: 18%;
        }
        #table-adminstrator td:nth-child(5){
-        width: 16%;
+        width: 15%;
        }
            .image-product-admin{
     
@@ -622,10 +636,10 @@
     }
     
     #table-product td:nth-child(1){
-        width: 14%;
+        width: 13%;
     }
     #table-product td:nth-child(2){
-        width:14%;
+        width:13%;
       }
     #table-product td:nth-child(3){
         width: 16%;
@@ -637,41 +651,37 @@
       
     }
     #table-product td:nth-child(5){
-        width: 15%;
+        width: 17%;
     }
 
       #table-product td:nth-child(6){
-    width: 15%;
+    width: 16%;
       }
       #table-product td:nth-child(7){
-        width: 11%;
+        width: 10%;
           }
-      #table-product td{
-    
-      }
+     
       
     
       #table-order th:nth-child(1){
         width: 12%;
            } 
             #table-order th:nth-child(2){
-            width: 16%;
+            width: 21%;
                }
                #table-order th:nth-child(3){
-                width: 17%;
+                width: 18%;
                }
                #table-order th:nth-child(4){
-                width: 17%;
+                width: 18%;
                }
                #table-order th:nth-child(5){
-                width:12%;
+                width:21%;
                }
                #table-order th:nth-child(6){
-                width: 15%;
+                width: 10%;
                }
-               #table-order th:nth-child(7){
-                width: 11%;
-               }
+           
    
 
       #btn-reset{
@@ -720,4 +730,10 @@ padding: 3px 0;
         background-color: #076FFE;
     }
  
-  
+  #select-filter select{
+   padding: 1.2px 1.4px;
+    background-color: #E9EDF2;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 2.2px;
+  }
