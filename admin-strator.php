@@ -176,20 +176,20 @@ $totalPages = ceil($totalAds / $limit);
                     <thead>
                             <tr id="select-filter">
                                                          
-                                <th><span class="las la-sort"></span> EMAIL</th>
-                                <th><span class="las la-sort"></span> USERNAME</th>
-                                <th><span class="las la-sort"></span> ROLE <select>
+                                <th> EMAIL</th>
+                                <th> USERNAME</th>
+                                <th> ROLE <select>
                                     <option></option>
                                     <option>Customer</option>
                                     <option>Order</option>
                                     <option>Product</option>
                                 </select></th>
-                                <th><span class="las la-sort"></span> STATUS <select>
+                                <th>STATUS <select>
                                     <option></option>
                                     <option>Normal</option>
                                     <option>Block</option>
                                 </select></th>
-                                <th><span class="las la-sort"></span> ACTION</th>
+                                <th> ACTION</th>
                             </tr>
                         </thead>
                         <tbody>

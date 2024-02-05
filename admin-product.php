@@ -203,28 +203,28 @@ $totalPages = ceil($totalProducts / $limit);
 <thead>
 <tr id="select-filter">
     <th>ID PRODUCT</th>
-    <th><span class="las la-sort"></span> IMAGE </th>
-    <th><span class="las la-sort"></span> PRODUCT <select>
+    <th> IMAGE </th>
+    <th> PRODUCT <select>
       <option></option>
       <option>A-Z</option>
       <option>Z-A</option>
     </select></th>
-    <th><span class="las la-sort"></span> PRICE <select>
+    <th> PRICE <select>
       <option></option>
       <option>Low-High</option>
       <option>High-Low</option>
     </select></th>
-    <th ><span class="las la-sort"></span> QUANTITY <select>
+    <th > QUANTITY <select>
       <option></option>
       <option>Low-High</option>
       <option>High-Low</option>
     </select></th>
-    <th><span class="las la-sort"></span> DATE ADD <select>
+    <th> DATE ADD <select>
       <option></option>
       <option>Newest</option>
       <option>Latest</option>
     </select></th>
-    <th><span class="las la-sort"></span> ACTION</th>
+    <th>ACTION</th>
    
 </tr>
 </thead>

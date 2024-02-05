@@ -185,18 +185,18 @@ Full Name:<input type="text" name="fname" id="fname">
                     <thead>
                             <tr id="select-filter">
                                 <th>ID USER</th>
-                                <th><span class="las la-sort"></span> FULL NAME</th>
-                                <th><span class="las la-sort"></span> EMAIL</th>
+                                <th> FULL NAME</th>
+                                <th> EMAIL</th>
                            
-                                <th><span class="las la-sort"></span> BIRTHDAY</th>
-                                <th><span class="las la-sort"></span> ADDRESS</th>
+                                <th> BIRTHDAY</th>
+                                <th> ADDRESS</th>
                                
-                                <th><span class="las la-sort"></span> STATUS <select>
+                                <th> STATUS <select>
                                     <option></option>
                                     <option>Normal</option>
                                     <option>Block</option>
                                 </select></th>
-                                <th><span class="las la-sort"></span> ACTION</th>
+                                <th> ACTION</th>
                             </tr>
                         </thead>
                         <tbody>

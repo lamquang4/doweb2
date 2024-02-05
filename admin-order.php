@@ -135,23 +135,23 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                         <tr id="select-filter">
                             <th>ID ORDER</th>                          
                            
-                            <th><span class="las la-sort"></span>DELIVERY ADDRESS</th>
-                            <th><span class="las la-sort"></span> ORDER DATE <select><option></option>
+                            <th>DELIVERY ADDRESS</th>
+                            <th> ORDER DATE <select><option></option>
                               <option>Newest</option>
                               <option>Latest</option>
                             </select></th>
-                            <th><span class="las la-sort"></span> DELIVERY DATE <select>
+                            <th> DELIVERY DATE <select>
                               <option></option>
                               <option>Newest</option>
                               <option>Latest</option>
                             </select></th>
                             
-                            <th><span class="las la-sort"></span> ORDER STATUS <select>
+                            <th> ORDER STATUS <select>
                               <option></option>
                               <option>Processed</option>
                               <option >Unprocessed</option>
                             </select></th>
-                            <th><span class="las la-sort"></span> ACTION</th>
+                            <th> ACTION</th>
                           
                         </tr>
                     </thead>
