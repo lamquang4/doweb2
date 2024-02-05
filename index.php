@@ -27,9 +27,9 @@ include_once 'header.php'
  <section class="commercial-index">
   <div class="content-index">
   <div class="textBox-index">
-      <h2>Welcome To<br><span>Our Shop</span></h2>
-      <p>Water is essential for life.</p>
-        <p>Stay hydrated with our refreshing water.</p>
+  <h2>Explore<br><span>Our Drinks</span></h2>
+      <p> A World Of Delightful Drink</p>
+        <p>Stay Hydrated And Refreshing</p>
      <div id="text-link-index">
         <a href="shop.html">Shop Now</a>
      </div>

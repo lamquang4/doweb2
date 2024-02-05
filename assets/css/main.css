@@ -11,24 +11,7 @@
   --gl-color-grey-100: #eceff1;
   --gl-color-grey-400: #d3d7da;
 }
-:root {
---header-height: 3.5rem;
 
---first-color: hsl(220, 68%, 54%);
---first-color-lighten: hsl(220, 68%, 97%);
---title-color: hsl(220, 48%, 28%);
---text-color: hsl(220, 12%, 45%);
---body-color: hsl(220, 100%, 99%);
-
---body-font: "Poppins", sans-serif;
---normal-font-size: .938rem;
---small-font-size: .813rem;
---smaller-font-size: .75rem;
---font-medium: 500;
---font-semi-bold: 600;
---z-tooltip: 10;
---z-fixed: 100;
-}
 
 a{
 cursor: pointer;
@@ -164,151 +147,7 @@ font-size: 16px;
 
 /*head*/
 
-@media screen and (min-width: 1024px) {
-:root {
---normal-font-size: 1rem;
---small-font-size: .875rem;
---smaller-font-size: .813rem;
-}
-}
 
-
-
-.dropdown__title{
-margin-top: 15px;
-font-size: 17px;
-font-weight: 500;
-}
-.dropdown__button {
-cursor: pointer;
-}
-.dropdown__arrow {
-font-size: 1.5rem;
-font-weight: initial;
-transition: transform 0.4s;
-}
-.dropdown__content, .dropdown__group, .dropdown__list {
-display: grid;
-}
-.dropdown__container {
-background-color: var(--first-color-lighten);
-height: 0;
-overflow: hidden;
-transition: height 0.4s;
-}
-.dropdown__content {
-row-gap: 0rem;
-}
-.dropdown__group {
-padding-left: 2.5rem;
-row-gap: 0.5rem;
-}
-.dropdown__group:first-child {
-margin-top: 1.25rem;
-}
-.dropdown__group:last-child {
-margin-bottom: 1.25rem;
-}
-
-.dropdown__title {
-font-size: var(--small-font-size);
-font-weight: var(--font-semi-bold);
-color: var(--title-color);
-}
-.dropdown__list {
-row-gap: 0.25rem;
-}
-.dropdown__link {
-font-size: var(--smaller-font-size);
-font-weight: var(--font-medium);
-color: var(--text-color);
-transition: color 0.3s;
-}
-.dropdown__link:hover {
-color: var(--title-color);
-}
-
-.show-dropdown .dropdown__arrow {
-transform: rotate(180deg);
-}
-
-
-@media screen and (min-width: 1118px) {
-.dropdown__button {
-column-gap: 0.25rem;
-pointer-events: none;
-}
-.dropdown__container {
-z-index: 999;
-display: flex;
-justify-content: center;
-height: max-content;
-position: absolute;
-left: 0;
-right: 0;
-top: 5.7rem;
-background-color: var(--body-color);
-box-shadow: 0 6px 8px hsla(220, 68%, 12%, 0.05);
-pointer-events: none;
-opacity: 0;
-transition: top 0.4s, opacity 0.3s;
-}
-.dropdown__content {
-grid-template-columns: repeat(4, max-content);
-column-gap: 6rem;
-max-width: 1120px;
-margin-inline: auto;
-}
-.dropdown__group {
-padding: 3rem 0 4rem 0;
-align-content: baseline;
-row-gap: 0.5rem;
-}
-.dropdown__group:first-child, .dropdown__group:last-child {
-margin: 0;
-}
-.dropdown__list {
-row-gap: 0.75rem;
-}
-.dropdown__icon {
-width: 60px;
-height: 60px;
-background-color: var(--first-color-lighten);
-border-radius: 50%;
-display: grid;
-place-items: center;
-margin-bottom: 1.1rem;
-}
-.dropdown__icon i {
-font-size: 2rem;
-}
-.dropdown__title {
-font-size: var(--normal-font-size);
-}
-.dropdown__link {
-font-size: var(--small-font-size);
-}
-.dropdown__link:hover {
-color:black;
-}
-.dropdown__item {
-cursor: pointer;
-}
-.dropdown__item:hover .dropdown__arrow {
-transform: rotate(180deg);
-}
-.dropdown__item:hover > .dropdown__container {
-top: 5.5rem;
-opacity: 1;
-pointer-events: initial;
-cursor: initial;
-}
-}
-@media screen and (min-width: 1152px) {
-.container {
-margin-inline: auto;
-}
-}
 #header{
 width:100%;
 display: flex;
@@ -462,7 +301,7 @@ transform: translate(0, -50%);
 
 .commercial-index{
   margin-top: 126px;
-  position: relative;
+
   width: 100%;
 background-color: #FDF2E9;
   padding: 15px 200px 0px 200px;
@@ -471,7 +310,7 @@ background-color: #FDF2E9;
 
 }
 .content-index{
-  position: relative;
+
   width: 100%;
   align-items: center;
 display: flex;
@@ -486,8 +325,8 @@ width: 80%;
 margin-bottom: 55px;
 }
 .textBox-index h2{
-font-size: 62px;
-font-family: 'Spartan', sans-serif;
+font-size: 60px;
+
 letter-spacing: 1.2px;
 color: #e1961d;
 }
@@ -497,10 +336,10 @@ color:#18a186;
 }
 .textBox-index p{
 margin-top: 5px;
-font-size: 22px;
+font-size: 21px;
 margin-bottom: 6px;
-font-weight: 550;
-font-family:'Spartan', sans-serif;
+font-weight: 500;
+font-family: Poppins;
 letter-spacing: 1px;
 }
 
@@ -555,7 +394,7 @@ padding: 20px 20px 0px 20px;
 
 }
 .content-index {
-  position: relative;
+
 display: block;
  
 }
