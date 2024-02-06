@@ -392,7 +392,7 @@ width: 85%;
 @media(max-width:480px){
 .commercial-index{
 margin-top: 99px;
-padding: 20px 20px 0px 20px;
+padding: 20px 0px 0px 0px;
 
 }
 .content-index {
@@ -533,7 +533,7 @@ width: 88%;
 @media(481px<= width <=580px){
 .commercial-index{
 margin-top: 120px;
-padding: 50px 0px 0px 20px;
+padding: 50px 0px 0px 0px;
 
 }
 .content-index {
@@ -546,7 +546,7 @@ margin-top: 35px;
 }
 
 .textBox-index h2{
-font-size: 37px;
+font-size: 38px;
 text-align: center;
 font-weight: 600;
 }
@@ -556,7 +556,9 @@ margin-top: 7px;
 font-size: 16px;
 text-align: center;
 }
-
+.textBox-index{
+  margin-bottom: 0;
+}
 .imgBox-index img{
 width: 75%;
 margin: 0;
@@ -2481,8 +2483,6 @@ padding-top: 10px;
 
 
 
-
-
 @media (max-width: 480px){
 
   #product1 {
@@ -2521,7 +2521,7 @@ transition: 0.3s ease;
   position: relative;
   right:69%;
 
-  height: 72px;
+  height: 75px;
   width: 99px;
 }
 
@@ -2635,8 +2635,6 @@ font-weight: 700;
 color: green;
 padding-bottom: 5px;
 }
-
-
 
 
 #product11 h2 {
