@@ -318,7 +318,9 @@ justify-content: space-between;
 
 }
 .imgBox-index img{
-width: 80%;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 50px;
 
 }
 .textBox-index{
@@ -370,7 +372,7 @@ transition: 0.5s ease;
 
 .commercial-index{
 
-  padding: 40px 20px 0px 60px;
+  padding: 40px 0px 0px 60px;
 
 }
 .textBox-index h2{
@@ -379,10 +381,10 @@ font-size: 45px;
 
 .textBox-index p{
 
-font-size: 20px;
+font-size: 17px;
 }
 .imgBox-index img{
-width: 80%;
+width: 85%;
 
 }
 }
@@ -421,7 +423,7 @@ justify-content: center;
 }
 .imgBox-index img{
 width: 80%;
-
+margin: 0;
 } 
 #text-link-index {
 text-align: center;
@@ -505,19 +507,19 @@ width: 80%;
 
 .commercial-index{
 
- padding: 40px 30px 0px 40px;
+ padding: 40px 0px 0px 40px;
 
 }
 .textBox-index h2{
-font-size: 35px;
+font-size: 37px;
 }
 
 .textBox-index p{
 margin-top: 8px;
-font-size: 18px;
+font-size: 16px;
 }
 .imgBox-index img{
-width: 80%;
+width: 88%;
 
 }
 
@@ -531,11 +533,11 @@ width: 80%;
 @media(481px<= width <=580px){
 .commercial-index{
 margin-top: 120px;
-padding: 50px 20px 0px 20px;
+padding: 50px 0px 0px 20px;
 
 }
 .content-index {
-  position: relative;
+
 display: block;
  
 }
@@ -544,19 +546,20 @@ margin-top: 35px;
 }
 
 .textBox-index h2{
-font-size: 35px;
+font-size: 37px;
 text-align: center;
+font-weight: 600;
 }
 
 .textBox-index p{
 margin-top: 7px;
-font-size: 17px;
+font-size: 16px;
 text-align: center;
 }
 
 .imgBox-index img{
 width: 75%;
-
+margin: 0;
 } 
 #text-link-index {
 text-align: center;

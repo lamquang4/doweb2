@@ -27,8 +27,8 @@ include_once 'header.php'
  <section class="commercial-index">
   <div class="content-index">
   <div class="textBox-index">
-  <h2>Explore<br><span>Our Drinks</span></h2>
-      <p> A World Of Delightful Drink</p>
+  <h2>Explore<br><span>Our Shop</span></h2>
+      <p> A World Of Delightful Drinks</p>
         <p>Stay Hydrated And Refreshing</p>
      <div id="text-link-index">
         <a href="shop.html">Shop Now</a>
@@ -36,7 +36,7 @@ include_once 'header.php'
        
   </div>
   <div class="imgBox-index">
-      <img src="assets/images/sp/cocaopen10.png" class="pepsi">
+      <img src="assets/images/sp/drinkss1.png" class="pepsi">
   </div>
   </div>
 
