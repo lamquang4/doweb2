@@ -435,6 +435,19 @@ text-align: center;
 
 }
 }
+@media(max-width:400px){
+  .textBox-index p{
+    margin-top: 7px;
+    font-size: 15px;
+    text-align: center;
+    }
+    .textBox-index a {
+      font-size: 17px;
+      margin-top: 15px;
+    
+    
+    }
+}
 @media(1001px <= width <=1176px){
 
 .commercial-index{
