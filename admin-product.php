@@ -115,61 +115,14 @@ $totalPages = ceil($totalProducts / $limit);
 <div class="page-content">
         
     <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products</h1>
-    <div class="user-tab">
-<form>
-        <div class="user-input">
-             ID:<input type="text" name="id-product" id="id-product" >         
-        </div>
-
-        <div class="user-input" >
-           Image:<input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
-        
-                </div>
-
-                  <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
-              
-
-        <div class="user-input" style="display: none;">
-            Url:<input type="text" name="fimage" id="fimage" >
-                 </div>
-                 <div class="user-input">
-                  Type:<select style="padding: 2px 50px;">
-                    <option>Select Type</option>
-                    <option>Carbonated</option>
-                    <option>Non-carbonated</option>
-                  </select>
-                       </div>
-        <div class="user-input">
- Name:<input type="text" name="name" id="name">
-     </div>
-
-  <div class="user-input">
-       Price:<input type="number" name="price" id="price">     
-  </div>
-
-  <div class="user-input">
-    Quantity:<input type="number" name="soluong" id="soluong" min="1" >
+   
+<div>
+  <button id="showadd">Add New</button>
 </div>
-
-<div class="user-input">
-        Date Add:<input type="date" name="date_add" id="date_add">
-       </div>
-       <div class="user-input">
-        Description:<input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
-       </div>
-       <div class="user-input" style="display: none;">
-        Action:<input type="text" name="action" id="action" >
-       </div>
-       <div>
-
-        <button type="submit" id="addproduct">Add +</button>
         
-                <button id="editButton" onclick="editHtmlTbleSelectedRow1();" style="visibility: hidden;" disabled>Edit <span class="las la-edit"></span></button>
-                <button id="deleteButton" onclick="removeSelectedRow1();" style="visibility: hidden;" disabled>Delete <span class="las la-trash"></span></button>
-</form>
-</div>
+        
+                
 
-    </div>
 </div>
    
 
@@ -204,26 +157,10 @@ $totalPages = ceil($totalProducts / $limit);
 <tr id="select-filter">
     <th>ID PRODUCT</th>
     <th> IMAGE </th>
-    <th> PRODUCT <select>
-      <option></option>
-      <option>A-Z</option>
-      <option>Z-A</option>
-    </select></th>
-    <th> PRICE <select>
-      <option></option>
-      <option>Low-High</option>
-      <option>High-Low</option>
-    </select></th>
-    <th > QUANTITY <select>
-      <option></option>
-      <option>Low-High</option>
-      <option>High-Low</option>
-    </select></th>
-    <th> DATE ADD <select>
-      <option></option>
-      <option>Newest</option>
-      <option>Latest</option>
-    </select></th>
+    <th> NAME </th>
+    <th> PRICE </th>
+    <th > QUANTITY </th>
+    <th> DATE ADD </th>
     <th>ACTION</th>
    
 </tr>
@@ -339,6 +276,74 @@ $totalPages = ceil($totalProducts / $limit);
   </div>
 
 
+<div id="container-inputs">
+
+  <div class="user-tab">
+    <h1>ADD PRODUCT</h1>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+  
+<div class="user-input" style="margin-top: 32px;">
+<label> ID:</label>
+    <input type="text" name="id-product" id="id-product" >         
+</div>
+
+<div class="user-input" >
+  <label>Image:</label>
+ <input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
+
+        </div>
+
+          <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
+      
+
+<div class="user-input" style="display: none;">
+    Url:<input type="text" name="fimage" id="fimage" >
+         </div>
+
+         <div class="user-input">
+          <label> Type:</label>
+         <select style="padding: 2px 50px;">
+            <option>Select Type</option>
+            <option>Carbonated</option>
+            <option>Non-carbonated</option>
+          </select>
+               </div>
+<div class="user-input">
+  <label>Name:</label>
+<input type="text" name="name" id="name">
+</div>
+
+<div class="user-input">
+  <label>Price:</label>
+<input type="number" name="price" id="price">     
+</div>
+
+<div class="user-input">
+  <label>Quantity:</label>
+<input type="number" name="soluong" id="soluong" min="1" >
+</div>
+
+<div class="user-input">
+  <label>Date Add:</label>
+<input type="date" name="date_add" id="date_add">
+</div>
+<div class="user-input">
+  <label>Description:</label>
+<input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
+</div>
+<div class="user-input" style="display: none;">
+Action:<input type="text" name="action" id="action" >
+</div>
+
+<div style="text-align: center;">
+  <button>Add +</button>
+  <button id="editButton" style="display: none;"   disabled>Edit <span class="las la-edit"></span></button>
+                <button id="deleteButton" style="display: none;"   disabled>Delete <span class="las la-trash"></span></button>
+</div>
+
+
+</div>
+
   <script>
   const popup = document.querySelector('.popup');
   const overlay = document.querySelector('.container-popup');
@@ -382,7 +387,17 @@ $totalPages = ceil($totalProducts / $limit);
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
-
+const showadd= document.getElementById('showadd');
+const containerinputs=document.querySelector('#container-inputs');
+const usertab = document.querySelector('.usertab');
+showadd.onclick=function(){
+  containerinputs.style.display="block";
+  usertab.style.display="block";
+}
+function hideadd(){
+  containerinputs.style.display="none";
+  usertab.style.display="none";
+}
 </script>
 
 

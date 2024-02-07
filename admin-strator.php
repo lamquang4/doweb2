@@ -114,40 +114,13 @@ $totalPages = ceil($totalAds / $limit);
             <div class="page-content" >
     
                 <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Administrators</h1>
-                <div class="user-tab">
-                 
-               
-                 <div class="user-input">
-                    Email:<input type="text" name="email" id="email"> 
-    
-            </div>
-       
-              <div class="user-input">
-               Username:<input type="text" name="username" id="username">
-    
-         </div>
-                   <div class="user-input" style="display: none;">
-                          Role:<input type="text" name="role" id="role">
-    
-                   </div>
-              
-             <div class="user-input" style="display: none;">
-                Status:<input type="text" name="status" id="status" ></input>
-              </div>
-               
-              <div class="user-input" style="display: none;">
-                Action:<input type="text" name="action" id="action" ></input>
-              </div>
+                
     <div >
-            <button style="margin-bottom: 8px;" onclick="addHtmlTableRow();">Add +</button>
-                    <button id="editButton" style="margin-bottom: 8px; visibility: hidden;" onclick="editHtmlTbleSelectedRow();"  disabled >Edit <span class="las la-edit"></span></button>
+            <button style="margin-bottom: 8px;" id="showadd">Add New</button>
                    
-                    <button style="margin-bottom: 8px; visibility: hidden;" id="blockButton" onclick="blockRow();" disabled>Block <span class="las la-lock"></span></button>
-                    <button style="margin-bottom: 8px; visibility: hidden;" id="blockButton1" onclick="unblockRow();" disabled>Unblock <span class="las la-unlock"></span></button>
     </div>
-    
-                </div>
-            </div>
+    </div>
+             
             
             <div class="records table-responsive" >
                
@@ -178,17 +151,8 @@ $totalPages = ceil($totalAds / $limit);
                                                          
                                 <th> EMAIL</th>
                                 <th> USERNAME</th>
-                                <th> ROLE <select>
-                                    <option></option>
-                                    <option>Customer</option>
-                                    <option>Order</option>
-                                    <option>Product</option>
-                                </select></th>
-                                <th>STATUS <select>
-                                    <option></option>
-                                    <option>Normal</option>
-                                    <option>Block</option>
-                                </select></th>
+                                <th> ROLE </th>
+                                <th>STATUS </th>
                                 <th> ACTION</th>
                             </tr>
                         </thead>
@@ -255,6 +219,50 @@ $totalPages = ceil($totalAds / $limit);
     </div>
 </body>
 </html>
+
+<div id="container-inputs">
+
+  <div class="user-tab">
+    <h1>ADD ADMIN</h1>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+
+    
+                 <div class="user-input" style="margin-top: 32px;">
+                 <label>Email:</label>
+                    <input type="text" name="email" id="email"> 
+    
+            </div>
+       
+              <div class="user-input">
+                <label>Username:</label>
+               <input type="text" name="username" id="username">
+    
+         </div>
+                   <div class="user-input" style="display: none;">
+                          Role:<input type="text" name="role" id="role">
+    
+                   </div>
+              
+             <div class="user-input" style="display: none;">
+                Status:<input type="text" name="status" id="status" ></input>
+              </div>
+               
+              <div class="user-input" style="display: none;">
+                Action:<input type="text" name="action" id="action" ></input>
+              </div>
+
+<div style="text-align: center;">
+  <button>Add +</button>
+  <button id="editButton" style="display: none;" >Edit <span class="las la-edit"></span></button>
+                   
+                   <button style="display: none;"  id="blockButton" onclick="blockRow();" >Block <span class="las la-lock"></span></button>
+                   <button style="display: none;"  id="blockButton1" onclick="unblockRow();">Unblock <span class="las la-unlock"></span></button>
+
+</div>
+
+</div>
+</div>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -276,6 +284,18 @@ $totalPages = ceil($totalAds / $limit);
   </script>
 
 
-
+<script>
+const showadd= document.getElementById('showadd');
+const containerinputs=document.querySelector('#container-inputs');
+const usertab = document.querySelector('.usertab');
+showadd.onclick=function(){
+  containerinputs.style.display="block";
+  usertab.style.display="block";
+}
+function hideadd(){
+  containerinputs.style.display="none";
+  usertab.style.display="none";
+}
+</script>
 
 

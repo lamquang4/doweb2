@@ -118,46 +118,14 @@ $totalPages = ceil($totalUsers / $limit);
         <div class="page-content" style="margin-top: 50px;">
             <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="customer">Customers</h1>
 
-            <div class="user-tab">
-                <div class="user-input">
-                     ID USER:<input type="text" name="id-user" id="id-user" > 
-                     
-                </div>
-                <div class="user-input">  
-Full Name:<input type="text" name="fname" id="fname">
-             </div>
-             <div class="user-input">
-                Email:<input type="text" name="email" id="email"> 
-
-        </div>
-    
-          <div class="user-input">
-           Birthday:<input type="date" name="birth" id="birth">
-
-     </div>
-               <div class="user-input">
-                      Address:<input type="text" name="address" id="address">
-
-               </div>
-          
-         <div class="user-input" style="display: none;">
-            Status:<input type="text" name="status" id="status" ></input>
-          </div>
-          <div class="user-input" style="display: none;">
-            Action:<input type="text" name="action" id="action">
-           
-      </div>
-           
+       
 
 <div >
-        <button style="margin-bottom: 8px;" onclick="addHtmlTableRow();">Add +</button>
-                <button id="editButton" style="margin-bottom: 8px; visibility: hidden;" onclick="editHtmlTbleSelectedRow();" disabled >Edit <span class="las la-edit"></span></button>
+        <button id="showadd" style="margin-bottom: 8px;">Add New</button>
                
-                <button style="margin-bottom: 8px; visibility: hidden;" id="blockButton" onclick="blockRow();" disabled>Block <span class="las la-lock"></span></button>
-                <button style="margin-bottom: 8px; visibility: hidden;" id="blockButton1" onclick="unblockRow();" disabled>Unblock <span class="las la-unlock"></span></button>
 </div>
 
-            </div>
+      
         </div>
 
             <div class="records table-responsive" >
@@ -191,11 +159,7 @@ Full Name:<input type="text" name="fname" id="fname">
                                 <th> BIRTHDAY</th>
                                 <th> ADDRESS</th>
                                
-                                <th> STATUS <select>
-                                    <option></option>
-                                    <option>Normal</option>
-                                    <option>Block</option>
-                                </select></th>
+                                <th> STATUS </th>
                                 <th> ACTION</th>
                             </tr>
                         </thead>
@@ -248,6 +212,59 @@ Full Name:<input type="text" name="fname" id="fname">
     
 
 </main>
+
+<div id="container-inputs">
+
+  <div class="user-tab">
+    <h1>ADD USER</h1>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+
+                <div class="user-input" style="margin-top: 32px;">
+                <label> ID USER:</label>
+                    <input type="text" name="id-user" id="id-user" > 
+                     
+                </div>
+
+                <div class="user-input">  
+                    <label>Full Name:</label>
+<input type="text" name="fname" id="fname">
+             </div>
+
+             <div class="user-input">
+                <label>Email:</label>
+                <input type="text" name="email" id="email"> 
+        </div>
+    
+          <div class="user-input">
+            <label>Birthday:</label>
+          <input type="date" name="birth" id="birth">
+
+     </div>
+               <div class="user-input">
+                <label>Address:</label>
+                   <input type="text" name="address" id="address">
+
+               </div>
+          
+         <div class="user-input" style="display: none;">
+            Status:<input type="text" name="status" id="status" ></input>
+          </div>
+
+          <div class="user-input" style="display: none;">
+            Action:<input type="text" name="action" id="action">    
+      </div>
+
+<div style="text-align: center;">
+  <button>Add +</button>
+  <button id="editButton" style="display: none;">Edit <span class="las la-edit"></span></button>
+  <button style="display: none;"  id="blockButton" onclick="blockRow();" >Block <span class="las la-lock"></span></button>
+                   <button style="display: none;"  id="blockButton1" onclick="unblockRow();">Unblock <span class="las la-unlock"></span></button> 
+</div>
+
+</div>
+</div>
+
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -266,7 +283,19 @@ Full Name:<input type="text" name="fname" id="fname">
         
     </script>
 
-
+<script>
+const showadd= document.getElementById('showadd');
+const containerinputs=document.querySelector('#container-inputs');
+const usertab = document.querySelector('.usertab');
+showadd.onclick=function(){
+  containerinputs.style.display="block";
+  usertab.style.display="block";
+}
+function hideadd(){
+  containerinputs.style.display="none";
+  usertab.style.display="none";
+}
+</script>
 
 
 

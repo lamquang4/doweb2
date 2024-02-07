@@ -148,6 +148,9 @@ class Product extends Connection {
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
+    public function addProduct(){
+        $query="INSERT INTO product ";
+    }
 }
 
 

@@ -136,21 +136,10 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                             <th>ID ORDER</th>                          
                            
                             <th>DELIVERY ADDRESS</th>
-                            <th> ORDER DATE <select><option></option>
-                              <option>Newest</option>
-                              <option>Latest</option>
-                            </select></th>
-                            <th> DELIVERY DATE <select>
-                              <option></option>
-                              <option>Newest</option>
-                              <option>Latest</option>
-                            </select></th>
+                            <th> ORDER DATE </th>
+                            <th> DELIVERY DATE </th>
                             
-                            <th> ORDER STATUS <select>
-                              <option></option>
-                              <option>Processed</option>
-                              <option >Unprocessed</option>
-                            </select></th>
+                            <th> ORDER STATUS </th>
                             <th> ACTION</th>
                           
                         </tr>
@@ -317,6 +306,10 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     
 
 </main>
+
+
+
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
