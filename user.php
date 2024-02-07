@@ -29,7 +29,7 @@ if(isset($_SESSION["id"])){
     <div class="container light-style flex-grow-1 container-p-y">
         <div style="margin-bottom: 5px; margin-top: 20px;">
             <h4 class="font-weight-bold py-3 mb-4"style="display: inline;">
-           Customer Profile
+            My Account
         </h4>  
         <img id="user-logo-shop" src="assets/images/pic/logo.png" width="10%" onclick="window.location.href='index.php';" style="cursor: pointer;">
         </div>
@@ -39,12 +39,8 @@ if(isset($_SESSION["id"])){
                 <div class="col-md-3 pt-0">
                     <div class="list-group list-group-flush account-settings-links">
                         <a style="margin-top: 35px;" class="list-group-item list-group-item-action active" data-toggle="list"
-                            href="#account-general">My profile</a>
-                        
-                   
-                        
-                        
-                       
+                            href="#account-general">Profile</a>
+
                         <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-change-password">Change password</a>
 
@@ -80,19 +76,32 @@ if(isset($_SESSION["id"])){
                                     <input type="text" class="form-control mb-1" id="emailInput" value="<?php echo $user['email']; ?>">
                                 
                                 </div>
+                           
                                 <div class="form-group">
     <label class="form-label">Sex</label>
     <input id="male" style="margin-left: 10px;" type="radio" name="gender" value="male" <?php echo ($user['gender'] == 'male') ? 'checked' : ''; ?>> Male
     <input id="female" style="margin-left: 10px;" type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>> Female
 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Birthday</label>
+             
+                              
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-lg-4">
+                                        <div class="mb-4 mb-lg-0">
+                                        <label class="form-label">Birthday</label>
                                     <input type="date" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 35px;">
-                                    <label class="form-label">Phone</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="mb-4 mb-lg-0">
+                                        <label class="form-label">Phone</label>
                                     <input type="number" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
+                                        </div>
+                                    </div>
+
+                                    
                                 </div>
+
                                 <div class="form-group">
                                     <label class="form-label">Adress</label>
                                     <input type="text" class="form-control" value="<?php echo $user['diachi']; ?>" id="addressInput">

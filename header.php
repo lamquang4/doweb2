@@ -64,7 +64,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
             <hr>
             <a href="user.php" class="sub-menu-index-link">
                 <img src="assets/images/pic/profile.png">
-                <p>Profile</p>
+                <p>My Account</p>
                 <span> <i class="fa-solid fa-chevron-right"></i> </span>
             </a>
             <a href="history.php" class="sub-menu-index-link">
