@@ -796,9 +796,19 @@ display: none;
         text-align: center;
         font-size: 28px;
     }
+    .user-input input{
+   
+        width: 188px;
+ 
+     }
 }
 @media(max-width:400px){
     .user-tab{
         width: 340px;
     }
+    .user-input input{
+        width: 178px;
+       
+     
+     }
 }

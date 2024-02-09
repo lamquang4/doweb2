@@ -292,8 +292,17 @@ showadd.onclick=function(){
   usertab.style.display="block";
 }
 function hideadd(){
+    var container = document.getElementById('container-inputs');
+    var inputs = container.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(function (input) {
+        if (input.type !== 'button') {
+            input.value = '';
+        }
+    });
   containerinputs.style.display="none";
   usertab.style.display="none";
+
 }
 </script>
 

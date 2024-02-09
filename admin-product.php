@@ -302,7 +302,7 @@ $totalPages = ceil($totalProducts / $limit);
 
          <div class="user-input">
           <label> Type:</label>
-         <select style="padding: 2px 50px;">
+         <select style="padding: 2px 0px;">
             <option>Select Type</option>
             <option>Carbonated</option>
             <option>Non-carbonated</option>
@@ -343,6 +343,7 @@ Action:<input type="text" name="action" id="action" >
 
 
 </div>
+</html>
 
   <script>
   const popup = document.querySelector('.popup');
@@ -353,6 +354,7 @@ Action:<input type="text" name="action" id="action" >
 
   function showPopup() {
     popup.style.display = 'block';
+    containerinputs.style.display="none";
     overlay.style.display = 'block'; 
     window.scrollTo(0, 0);
     htmlElement.style.overflow = 'hidden';
@@ -360,6 +362,7 @@ Action:<input type="text" name="action" id="action" >
 
   function hidePopup() {
     submitic.style.visibility = "hidden";
+    containerinputs.style.display="block";
     popup.style.display = 'none';
     overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
@@ -395,8 +398,17 @@ showadd.onclick=function(){
   usertab.style.display="block";
 }
 function hideadd(){
+  var container = document.getElementById('container-inputs');
+    var inputs = container.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(function (input) {
+        if (input.type !== 'button') {
+            input.value = '';
+        }
+    });
   containerinputs.style.display="none";
   usertab.style.display="none";
+
 }
 </script>
 

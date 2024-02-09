@@ -262,6 +262,7 @@ $totalPages = ceil($totalAds / $limit);
 
 </div>
 </div>
+</html>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -293,8 +294,17 @@ showadd.onclick=function(){
   usertab.style.display="block";
 }
 function hideadd(){
+    var container = document.getElementById('container-inputs');
+    var inputs = container.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(function (input) {
+        if (input.type !== 'button') {
+            input.value = '';
+        }
+    });
   containerinputs.style.display="none";
   usertab.style.display="none";
+ 
 }
 </script>
 
