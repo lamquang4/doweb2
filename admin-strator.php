@@ -178,7 +178,11 @@ $totalPages = ceil($totalAds / $limit);
                                     Normal
                                 </td>
                                 <td>
-                                    <button id="btn-reset">Rest Password</button>
+                                <div class="actions">
+                                        <span class="las la-edit"></span>
+                                        <span class="las la-lock"></span>
+                                        <span class="las la-undo-alt"></span>
+                                    </div>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -277,7 +281,7 @@ $totalPages = ceil($totalAds / $limit);
       document.getElementById("role").value = predefinedContent;
     });
     window.addEventListener("DOMContentLoaded", function() {
-      var predefinedContent = '<button id="btn-reset">Rest Password</button>';
+      var predefinedContent = '<select><option selected>Customer management</option><option > Order management</option> <option > Product management</option></select>';
       document.getElementById("action").value = predefinedContent;
     });
    

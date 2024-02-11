@@ -657,14 +657,7 @@
                 width: 10%;
                }
            
-   
 
-      #btn-reset{
-        background-color: white;
-        cursor: pointer;
-        padding: 5px 12px;
-        font-weight: 600;
-      }
       .user-input input{
     padding: 2px 0px;
       }
