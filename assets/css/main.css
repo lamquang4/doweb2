@@ -680,7 +680,7 @@ background-color: #ffffff;
 width:480px;
 height: 590px;
 margin: 10px;
-box-shadow:45px 45px 45px 45px rgba(0,0,0,0.06);
+box-shadow: 0 13px 40px 0 rgba(0,0,0,.08);
 border-radius: 20px;
 }
 

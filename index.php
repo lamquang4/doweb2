@@ -19,7 +19,7 @@ if(isset($_SESSION["id"])){
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <title>Home</title>
 </head>
-<body style="background-color: #fff;">
+<body style="background-color: #F8F8F8;">
 <?php
 include_once 'header.php'
   ?>
