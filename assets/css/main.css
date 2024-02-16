@@ -659,12 +659,55 @@ width: calc(100% / 2);
 }
 
 @media screen and (max-width: 550px) {
-.carousel img{
-width: 100%;
+  #all{
+    padding: 0 15px;
+  }
+  .carousel img{
+  width: calc(100% / 2);
 
 }
+.wrapper i:first-child{
+  visibility: hidden;
+ 
+    }
+    .wrapper i:last-child{
+      visibility: hidden;
+    }
 }
-
+@media (max-width:480px){
+  #all{
+    padding: 0 12px;
+  }
+  .carousel img{
+    width: calc(100% / 2);
+   
+    
+    } 
+    .wrapper i:first-child{
+    visibility: hidden;
+   
+      }
+      .wrapper i:last-child{
+        visibility: hidden;
+      }
+}
+@media (max-width:400px){
+  #all{
+    padding: 0 12px;
+  }
+  .carousel img{
+    width: calc(100% / 2);
+   
+    
+    } 
+    .wrapper i:first-child{
+    visibility: hidden;
+   
+      }
+      .wrapper i:last-child{
+        visibility: hidden;
+      }
+}
 
 .postcard{
 
