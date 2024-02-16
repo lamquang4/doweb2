@@ -829,13 +829,16 @@ margin-left: 25px;
 }
 #bet h5{
 
-text-align: center;
 font-size: 28px;
 
 }
 }
 @media(max-width:400px){
+  #bet h5{
 
+    font-size: 26px;
+    
+    }
 .postcard{
 margin: 25px 0px  50px 0px;
 height: auto;
@@ -2503,7 +2506,7 @@ left:15px;
  
 }
 #product1 h6{
- font-size: 20px;
+ font-size: 26px;
  text-wrap: balance;
 }
 /*--------*/
@@ -2802,6 +2805,10 @@ padding-left:8px;
 height: 130px;
 width: 130px;
 }
+#product1 h6{
+  font-size: 24px;
+  text-wrap: balance;
+ }
 /*--------*/
 
 #product11 .pro-container1 {
