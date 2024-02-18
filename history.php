@@ -55,13 +55,15 @@
                                     
                                     <div class="media-body">
                                        
-                                        <h6 class="mb-2">
+                                        <h6 class="mb-2" style="font-size: 18px;">
                                          
                                             Coca Original
                                         </h6>
-                                        <p class="text-gray mb-1">x2</p>
-                                        <p class="text-gray mb-3">$13.00</p>
-                                        
+                                        <div class="flex-container">
+                                            <p class="mb-3"> $13.00</p>
+                                            <p class="text-gray mb-1">x2</p>
+                                            
+                                          </div>
                                         <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
                                     
                                         <hr>
@@ -75,13 +77,15 @@
                                     
                                     <div class="media-body">
                                        
-                                        <h6 class="mb-2">
+                                        <h6 class="mb-2" style="font-size: 18px;">
                                          
                                            Lemon Tea
                                         </h6>
-                                        <p class="text-gray mb-1">x2</p>
-                                        <p class="text-gray mb-3">$16.00</p>
-                                        
+                                        <div class="flex-container">
+                                            <p class="mb-3">$16.00</p>
+                                            <p class="text-gray mb-1">x2</p>
+                                           
+                                          </div>
                                         <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
                                       
                                         <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total:</span> $60.00
@@ -108,11 +112,14 @@
                                     </a>
                                     <div class="media-body">
                                        
-                                        <h6 class="mb-2">
+                                        <h6 class="mb-2" style="font-size: 18px;">
                                             Fanta Sassafras
                                         </h6>
-                                        <p class="text-gray mb-1">x6</p>
-                                        <p class="text-gray mb-3">$10.00</p>
+                                        <div class="flex-container">
+                                           
+                                           <p class="mb-3">$10.00</p>
+                                           <p class="text-gray mb-1">x6</p>
+                                         </div>
                                         <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
                                     
                                         <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total:</span> $60.00

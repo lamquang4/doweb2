@@ -136,3 +136,16 @@ width: 35%;
     margin: 0px; 
 }  
 }
+.flex-container p{
+    display: inline;
+   }
+   .flex-container p:nth-child(1){
+     margin-right: 20px;
+    color: #ee4d2d;
+    font-size: 18px;
+    font-weight: 600;
+   }
+   #total-money{
+     font-size: 20px;
+   }
+ 
