@@ -55,30 +55,34 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
    </ul>
   </div>
 
-  <div class="sub-menu-wrap" id="subMenu">
-        <div class="sub-menu">
-            <div class="user-info">
-                <img src="<?php echo $user["imguser"]; ?>">
-                <h2><?php echo $user["username"]; ?></h2>
-            </div>
-            <hr>
-            <a href="user.php" class="sub-menu-index-link">
-                <img src="assets/images/pic/profile.png">
-                <p>My Account</p>
-                <span> <i class="fa-solid fa-chevron-right"></i> </span>
-            </a>
-            <a href="history.php" class="sub-menu-index-link">
-                <img src="assets/images/pic/history.png">
-                <p>Purchase Order</p>
-                <span> <i class="fa-solid fa-chevron-right"></i> </span>
-            </a>
-            <a href="logout.php" class="sub-menu-index-link">
-                <img src="assets/images/pic/logout.png">
-                <p>Logout</p>
-                <span> <i class="fa-solid fa-chevron-right"></i> </span>
-            </a>
-        </div>
-    </div>
+ 
+    <div class="sub-menu-wrap" id="subMenu">
+  <div class="sub-menu">
+<div class="user-info">
+
+<h2>Hello <?php echo $user["username"]; ?>!</h2>
+</div>
+<hr>
+<a href="user.php" class="sub-menu-index-link">
+  <i class="fa-solid fa-circle-user"></i>
+  <p>My Account</p>
+
+</a>
+
+<a href="history.php" class="sub-menu-index-link">
+  <i class="fa-solid fa-clock-rotate-left"></i>
+  <p>Purchase Order</p>
+
+</a>
+
+<a href="logout.php" class="sub-menu-index-link">
+  <i class="fa-solid fa-door-open"></i>
+  <p>Logout</p>
+
+</a>
+
+  </div>
+</div>
 
   <div id="mobile"> 
   

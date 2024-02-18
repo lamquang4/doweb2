@@ -39,11 +39,11 @@ button{
 
 /*profile menu dropdown*/
 .sub-menu-wrap{
-  
+ 
   position: absolute;
-  top:68%;
+  top:67%;
   right:5%;
-  width: 320px;
+  width: 210px;
   max-height: 0px;
   overflow: hidden;
   transition: max-height 0.5s;
@@ -53,23 +53,23 @@ button{
 max-height: 400px;
 }
 .sub-menu{
-  border: 1px solid black;
+  border-radius: 6px;
+
   background-color: #fff;
-  padding: 20px;
+  padding: 18px;
   margin: 10px;
+  box-shadow: 0 5px 10px rgba(30,32,37,.12);
 }
 .user-info{
-  display: flex;
-  align-items: center;
+
 }
 .user-info h2{
 font-weight: 500;
+font-size: 17px;
+text-align: center;
+color: #878a99;
 }
-.user-info img{
-  width:18%;
-  border-radius: 50%;
-  margin-right: 15px;
-}
+
 .sub-menu hr{
   border: 0;
   height: 1px;
@@ -81,68 +81,41 @@ font-weight: 500;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color:#525252;
-  margin: 12px 0;;
+  color:#878a99;
+  margin: 22px 0;
 }
 .sub-menu-index-link p{
   width: 100%;
+  font-size: 15px;
 }
-.sub-menu-index-link img{
-  width: 40px;
-  background-color: #e5e5e5;
-  border-radius: 50%;
-  padding: 8px;
+.sub-menu-index-link i{
+font-size: 18px;
   margin-right: 15px;
 
 }
-.sub-menu-index-link span{
-  font-size: 20px;
 
-}
+
 @media(max-width:480px){
-  .user-info img{
-    width: 25%;
-    margin-right: 10px;
-  }
+
   .sub-menu-wrap{
   
     position: absolute;
     top:68%;
-    right:5%;
+    right:6%;
     width: 200px;
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 0.5s;
-    z-index: 20;
+
   }
   
   .sub-menu{
-    border: 1px solid black;
-    background-color: #fff;
+
     padding: 16px;
     margin: 10px;
   }
-  .sub-menu-index-link img{
-    width: 32px;
-    background-color: #e5e5e5;
-    border-radius: 50%;
-    padding: 8px;
-    margin-right: 15px;
-  
-  }
-  .sub-menu-index-link span{
-    font-size: 15px;
-  
-  }
-  .user-info h2 {
-    font-size: 16px;
+
+
 }
-.sub-menu-index-link p {
-font-size: 15px;
-}
-.user-info {
- margin-left: 4px;
-}
+@media(max-width:400px){
+
 }
 /*----------*/
 
