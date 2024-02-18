@@ -100,6 +100,10 @@ font-weight: 500;
 
 }
 @media(max-width:480px){
+  .user-info img{
+    width: 25%;
+    margin-right: 10px;
+  }
   .sub-menu-wrap{
   
     position: absolute;
@@ -131,10 +135,10 @@ font-weight: 500;
   
   }
   .user-info h2 {
-    font-size: 18px;
+    font-size: 16px;
 }
 .sub-menu-index-link p {
-font-size: 16px;
+font-size: 15px;
 }
 .user-info {
  margin-left: 4px;

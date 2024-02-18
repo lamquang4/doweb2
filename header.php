@@ -69,7 +69,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
             </a>
             <a href="history.php" class="sub-menu-index-link">
                 <img src="assets/images/pic/history.png">
-                <p>Purchase History</p>
+                <p>Purchase Order</p>
                 <span> <i class="fa-solid fa-chevron-right"></i> </span>
             </a>
             <a href="logout.php" class="sub-menu-index-link">
