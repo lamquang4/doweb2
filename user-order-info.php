@@ -87,7 +87,7 @@
                       <tr>
                         <td>
                           
-                        <button id="back-to-admin-order" onclick="window.location.href='history.html'">Back</button> 
+                        <button id="back-to-admin-order" onclick="window.location.href='history.php'">Back</button> 
                         </td>
                         
                       </tr>
