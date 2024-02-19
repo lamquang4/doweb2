@@ -116,7 +116,7 @@ $totalPages = ceil($totalProducts / $limit);
     <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products</h1>
    
 <div>
-  <button id="showadd">Add New</button>
+<button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add Product</button>
 </div>
         
         
@@ -335,9 +335,8 @@ Action:<input type="text" name="action" id="action" >
 </div>
 
 <div style="text-align: center;">
-  <button>Add +</button>
-  <button id="editButton" style="display: none;"   disabled>Edit <span class="las la-edit"></span></button>
-                <button id="deleteButton" style="display: none;"   disabled>Delete <span class="las la-trash"></span></button>
+  <button>Submit</button>
+
 </div>
 
 

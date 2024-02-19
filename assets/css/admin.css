@@ -733,7 +733,7 @@ display: none;
     left: 50%;
     float: left;
     background-color: white;
-    border: 2px solid black;
+ 
     padding: 12px 12px;
     transform: translate(-50%,-50%);
     
@@ -753,8 +753,8 @@ display: none;
 }
 .user-tab button{
     padding: 5px 12px;
-    border: 1px solid black;
-    font-size: 17px;
+
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     margin-right: 4px;
@@ -762,11 +762,16 @@ display: none;
   
 }
 #showadd{
-    padding: 6px 12px;
-    border: 1px solid black;
-    font-size: 17px;
-    font-weight: 500;
+    padding: 11px 15px;
+background-color: #daf4f0;
+color: #0ab39c;
+border: none;
     cursor: pointer;
+    font-size: 16px;
+}
+#showadd:hover{
+    color:white;
+    background-color: #0ab39c;
 }
 #closeadd{
     font-size: 30px;

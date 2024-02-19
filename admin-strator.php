@@ -116,7 +116,7 @@ $totalPages = ceil($totalAds / $limit);
                 <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Administrators</h1>
                 
     <div >
-            <button style="margin-bottom: 8px;" id="showadd">Add New</button>
+    <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>
                    
     </div>
     </div>
@@ -256,12 +256,8 @@ $totalPages = ceil($totalAds / $limit);
               </div>
 
 <div style="text-align: center;">
-  <button>Add +</button>
-  <button id="editButton" style="display: none;" >Edit <span class="las la-edit"></span></button>
-                   
-                   <button style="display: none;"  id="blockButton" onclick="blockRow();" >Block <span class="las la-lock"></span></button>
-                   <button style="display: none;"  id="blockButton1" onclick="unblockRow();">Unblock <span class="las la-unlock"></span></button>
-
+  <button>Submit</button>
+  
 </div>
 
 </div>

@@ -121,7 +121,7 @@ $totalPages = ceil($totalUsers / $limit);
        
 
 <div >
-        <button id="showadd" style="margin-bottom: 8px;">Add New</button>
+<button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>
                
 </div>
 
@@ -255,10 +255,8 @@ $totalPages = ceil($totalUsers / $limit);
       </div>
 
 <div style="text-align: center;">
-  <button>Add +</button>
-  <button id="editButton" style="display: none;">Edit <span class="las la-edit"></span></button>
-  <button style="display: none;"  id="blockButton" onclick="blockRow();" >Block <span class="las la-lock"></span></button>
-                   <button style="display: none;"  id="blockButton1" onclick="unblockRow();">Unblock <span class="las la-unlock"></span></button> 
+  <button>Submit</button>
+ 
 </div>
 
 </div>
