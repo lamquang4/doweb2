@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/user-order.css">
    
     <meta name="viewport" content="width=device-width,  initial-scale=0.9,maximum-scale=1">
-    <title>Order Details</title>
+    <title>Order Detail</title>
 </head>
 <body>
   <div class="container">

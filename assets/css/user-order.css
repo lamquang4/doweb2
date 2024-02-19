@@ -4,6 +4,9 @@ body{font-family: 'Open Sans',serif}
     margin-top:50px;
     margin-bottom: 50px;
 }
+.card-body{
+    z-index: 0;
+}
 .card{
     position: relative;
     display: -webkit-box;
@@ -228,7 +231,12 @@ ul.row, ul.row-sm{list-style: none;padding: 0}
 a:hover{
     text-decoration:none;
 }
-@media (min-width: 1200px){
+@media (width>1200px){
+    .container{
+        max-width: 1400px;
+    }  
+}
+@media (769px<= width<= 1200px){
 .container{
     max-width: 1400px;
 }
@@ -238,7 +246,7 @@ a:hover{
         width: 25%;
         }
         .container{
-            max-width: 700px;
+            max-width: 720px;
         }   
 }
 @media(max-width:480px){
@@ -248,9 +256,12 @@ width: 35%;
 .container{
     margin: 12px 0 12px 0;
 }  
-.track .text{
-    display: none;
+
 }
+@media(width<=600px){
+    .track .text{
+        display: none;
+    }
 }
 .flex-container p{
    display: inline;
