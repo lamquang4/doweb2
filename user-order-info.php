@@ -3,124 +3,129 @@
 <head>
     <link rel="icon" type="image/png" href="assets/images/pic/logo.png">
     <meta charset="UTF-8">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/user-order.css">
+   
     <meta name="viewport" content="width=device-width,  initial-scale=0.9,maximum-scale=1">
-    <title>Purchase History Details</title>
+    <title>Order Details</title>
 </head>
 <body>
-  
-    <div class="container-fluid">
-
-        <div class="container">
-          <!-- Title -->
-          <div class="d-flex justify-content-between align-items-center py-3">
-            <h2 class="h5 mb-0" style="font-size: 36px;"><a href="#" class="text-muted"></a> Order #2023 </h2>
-            <img src="assets/images/pic/logo.png" id="h2o-logo" width="12%">
-          </div>
-        
-          <!-- Main content -->
-          <div class="row">
-            <div class="col-lg-8">
-              <!-- Details -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="mb-3 d-flex justify-content-between">
-                    <div>
-                      <span class="me-3">21-4-2022</span>
-                      <span class="me-3">#2023</span>
-                      <span class="me-3">COD</span>
-                     
-                    </div>
-                
-                  </div>
-                  <table class="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="d-flex mb-2">
-                            <div class="flex-shrink-0">
-                              <img src="assets/images/sp/cocaori.png" alt="" width="50" class="img-fluid">
-                            </div>
-                            <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Coca Original x2</a></h6>
-                              <span class="small">Price: $13.00</span>
-                            
-                            </div>
-                          </div>
-                        </td>
-                        <td>x2</td>
-                        <td class="text-end">$26.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex mb-2">
-                            <div class="flex-shrink-0">
-                              <img src="assets/images/sp/lemon.png" alt="" width="50" class="img-fluid">
-                            </div>
-                            <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Lemon Tea x2</a></h6>
-                              <span class="small">Price: $16.00</span>
-                            
-                            </div>
-                          </div>
-                        </td>
-                        <td>x2</td>
-                        <td class="text-end">$32.00</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="2"><span style="font-weight: 600;">Subtotal:</span></td>
-                        <td class="text-end">$58.00</td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><span style="font-weight: 600;">Shipping:</span></td>
-                        <td class="text-end">$2.00</td>
-                      </tr>
+  <div class="container">
+    <article class="card">
+        <header class="card-header"> My Orders</header>
+        <div class="card-body">
+            <h6>Order ID: OD45345345435</h6>
+            <article class="card">
+                <div class="card-body row">
+                  <div class="col"> <strong>Date Order:</strong> 21-4-2021</div>
+                    <div class="col"> <strong>Delivery Date:</strong> 23-4-2021</div>
                   
-                      <tr class="fw-bold">
-                        <td colspan="2" style="font-size: 20px; font-weight: 600;">TOTAL:</td>
-                        <td class="text-end" style="font-size: 20px; font-weight: 600;">$60.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          
-                        <button id="back-to-admin-order" onclick="window.location.href='history.php'">Back</button> 
-                        </td>
-                        
-                      </tr>
-                    </tfoot>
-                  </table>
+                   
+                   
                 </div>
-              </div>
-              <!-- Payment -->
-             
-            </div>
-            <div class="col-lg-4">
-              <!-- Customer Notes -->
             
-              <div class="card mb-4">
-                <!-- Shipping information -->
-                <div class="card-body">
-                  <h3 class="h6" style="font-size: 20px;">Order Information</h3>
-                  
-                  
-                  <hr>
-                  <h3 class="h6">Address: <span style="font-weight: 400;">45 Beaver St</span> </h3>
-                  <h3 class="h6">Payment Method: <span style="font-weight: 400;">COD</span></h3>
-                  <h3 class="h6">Date Order: <span style="font-weight: 400;">21-4-2021</span></h3>
-                  <h3 class="h6">Delivery Date: <span style="font-weight: 400;">23-4-2021</span></h3>
-                  <h3 class="h6">Your Note: <span style="font-weight: 400;">I love your website</span></h3>
-                 
-              
-                </div>
-              </div>
+            </article>
+            <div class="track">
+                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
             </div>
+            <hr>
+            <div class="osahan-account-page-right  bg-white p-2 h-100">
+              <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane  fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                  
+
+                      <div class="bg-white card mb-4 order-list shadow-sm">
+                          <div class="gold-members p-4">
+                              <a href="#">
+                              </a>
+                              <div class="media">
+                                  <a href="#">
+                                      <img class="mr-4" src="assets/images/sp/cocaori.png" alt="Generic placeholder image">
+                                  </a>
+                                  
+                                  <div class="media-body">
+                                     
+                                      <h6 class="mb-2" style="font-size: 18px;">
+                                       
+                                          Coca Original
+                                      </h6>
+                                      <div class="flex-container">
+                                          <p class="mb-3"> $13.00</p>
+                                          <p class="text-gray mb-1">x2</p>
+                                          
+                                        </div>
+                                      
+                                      <p  style="color: #26aa99;"><i class="fa-solid fa-truck"></i> Delivery successful</p>
+                                  
+                                      <hr>
+                                    
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <a href="#">
+                                      <img class="mr-4" src="assets/images/sp/lemon.png" alt="Generic placeholder image">
+                                  </a>
+                                  
+                                  <div class="media-body">
+                                     
+                                      <h6 class="mb-2" style="font-size: 18px;">
+                                       
+                                         Lemon Tea
+                                      </h6>
+                                      <div class="flex-container">
+                                          <p class="mb-3">$16.00</p>
+                                          <p class="text-gray mb-1">x2</p>
+                                         
+                                        </div>
+                              
+                                      
+                                      <p  style="color: #26aa99;"><i class="fa-solid fa-truck"></i> Delivery successful </p>
+
+                                      <p class="mb-0 text-black pt-2" id="total-money" style="font-size: 16px;"><span class="text-black font-weight-bold"> Subtotal:</span> $58.00</p>
+                                      <p class="mb-0 text-black pt-2" id="total-money" style="font-size: 16px;"><span class="text-black font-weight-bold"> Shipping:</span> $2.00</p>
+                                      <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00</p>
+                                     
+                              
+                                  </div>
+                              </div>
+                            
+                          
+                          </div>
+                      </div>
+                   
+                 
+
+                  </div>
+              </div>
           </div>
+          <h6>Delivery Address</h6>
+          <article class="card">
+            <div class="card-body row"  style="padding-bottom: 0;">
+              <div class="col"> <strong>Lam Dieu Quang </strong><br> (+17) 637745710</div>
+              <div class="col"> <strong>Address:</strong> 45 Beaver St KLOIW wewrw rwrwr</div>
+             
+         
+  
+            </div>
+         
+            <div class="card-body row">
+              <div class="col"> <strong>Your note:</strong> I love your web!!</div>
+        
+         
+               
+               
+            </div>
+        
+        </article>
+            <hr>
+            <a href="history.php" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
         </div>
-          </div>
+    </article>
+</div>
 </body>
 </html>
 
