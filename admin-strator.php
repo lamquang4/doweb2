@@ -255,7 +255,7 @@ $totalPages = ceil($totalAds / $limit);
                 Action:<input type="text" name="action" id="action" ></input>
               </div>
 
-<div style="text-align: center;">
+<div style="text-align: center;" id="button-submit">
   <button>Submit</button>
   
 </div>

@@ -254,7 +254,7 @@ $totalPages = ceil($totalUsers / $limit);
             Action:<input type="text" name="action" id="action">    
       </div>
 
-<div style="text-align: center;">
+<div style="text-align: center;" id="button-submit">
   <button>Submit</button>
  
 </div>

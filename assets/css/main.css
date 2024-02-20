@@ -1046,80 +1046,6 @@ margin-top: 30px;
 
 /*shop.html*/
 
-#show-advan-searh-h1{
-  font-size: 22px;
-  display: inline;
-  } 
-  #toggle-icon{
-    cursor: pointer;
-    font-size: 22px;
-  }
-  @media (max-width:480px){
-    #show-advan-searh-h1{
-   font-size: 16px;
-   } 
-   #toggle-icon{
-     font-size: 16px;
-   }
-   }
-.search-container{
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-#search-advan-input:nth-child(1){
-  margin-bottom: 20px;
-}
-#search-advan-input input{
-  margin-right: 12px;
-  width:130px;
-  padding: 2px 0px;
-  margin-left: 0;
-}
-#search-advan-input select{
-  margin-right: 10px;
-  width:140px;
-  padding: 2px 0px;
-  font-size: 14px;
- 
-}
-#search-advan-input button{
-  padding: 6px 15px;
-  font-size: 14px;
-  font-weight: 500;
-  color:white;
-  background-color:black;
-  
-}
-
-#search-advan-input label{
-font-size: 17px;
- font-weight: 600;
-}
-@media (width <= 715px){
-  #search-advan-input input{
-    margin-right: 10px;
-    width:65px;
-    padding: 2px 0px;
-  }
-  #search-advan-input select{
-    margin-right: 10px;
-    width:65px;
-    padding: 2px 0px;
-    font-size: 13px;
-   
-  }
-  #search-advan-input button{
-    margin-top: 15px;
-    padding: 6px 14px;
-    font-size: 14px;
-margin-bottom: 15px;
-
-    
-  }
-  #search-advan-input label{
-    font-size: 15px;
-  }
-}
 #containerpage{
 
   display: flex;
@@ -1219,41 +1145,7 @@ padding-left: 1px;
 }
 }
 
-.cartegory{
-  padding:20px  0 0 0;
-display: flex;
-justify-content: center;
-color:black;
 
-}
-
-.filter-sort select{
-  width:200px;  
-  font-size: 18px;
-background-color: #ffffff;
-  height:44px;
-  text-align: center;
-  border: 1.2px solid black;
-}
-
-@media(max-width:480px){
-  .filter-sort select{
-  width:170px;  
-  font-size: 15px;
-  height:40px;
-  border: 1.2px solid black;
-}
-
-}
-@media (max-width:400px){
-  .filter-sort select{
-  width:170px;  
-  font-size: 15px;
-  height:40px;
-  border: 1.2px solid black;
-}
-
-}
 .cart{
   position: fixed;
   top:0;
@@ -1357,46 +1249,36 @@ margin-left: 10px;
   color:red;
 cursor: pointer;
 }
-#filter-buttons button {
+
+#filter-buttons .btn {
   border-radius: 25px;
-  padding: 12px 28px 12px 28px;
+  padding: 6px 25px;
   background: #fff;
-  color:black;
+  color:#767677;
   font-size: 20px;
-  font-weight: 600;
-  margin: 20px 10px;
-border: 1.2px solid black;
+
+  margin: 20px 8px;
+border: none;
+}
+#btn-ad-search{
+  border: 1px solid black;
+  background: white;
+  padding: 8px 20px;
+  font-size: 16px;
+}
+#btn-ad-search i{
+
+  font-size: 17px;
 }
 
-#filter-buttons button:hover {
-  background: #ddd;
-}
-
-#filter-buttons button.on {
-  color: #fff;
-  background: #FF474A;
-  border:#FF474A;
-}
-
-#filterable-cards .card {
-  width: 15rem;
-  border: 2px solid transparent;
-}
-
-#filterable-cards .card.hide {
-  display: none;
-}
 @media(max-width:480px){
-  #filter-buttons button {
-    border-radius: 3px;
-    padding: 10px 20px 10px 20px;
+  #filter-buttons .btn  {
+    padding: 10px 12px;
     background: #fff;
     color: black;
     font-size: 16px;
-    font-weight: 600;
-    margin: 2px 18px;
 
-    border-color: transparent;
+    margin: 2px 15px;
 }
 #filter-buttons{
   margin-top: 10px;
@@ -1408,16 +1290,12 @@ border: 1.2px solid black;
 }
 }
 @media(max-width:400px){
-  #filter-buttons button {
+  #filter-buttons .btn {
     border-radius: 3px;
-    padding: 7px 18px 7px 18px;
-    background: #fff;
-    color: black;
+    padding: 7px 18px;
+ 
     font-size: 16px;
-    font-weight: 600;
     margin: 2px 12px;
-
-    border-color: transparent;
 }
 #filter-buttons{
   margin-top: 10px;

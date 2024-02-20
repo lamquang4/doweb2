@@ -285,7 +285,10 @@ $totalPages = ceil($totalProducts / $limit);
 <label> ID:</label>
     <input type="text" name="id-product" id="id-product" >         
 </div>
-
+<div class="user-input">
+  <label>Name:</label>
+<input type="text" name="name" id="name">
+</div>
 <div class="user-input" >
   <label>Image:</label>
  <input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
@@ -295,10 +298,6 @@ $totalPages = ceil($totalProducts / $limit);
           <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
       
 
-<div class="user-input" style="display: none;">
-    Url:<input type="text" name="fimage" id="fimage" >
-         </div>
-
          <div class="user-input">
           <label> Type:</label>
          <select style="padding: 2px 0px;">
@@ -307,18 +306,12 @@ $totalPages = ceil($totalProducts / $limit);
             <option>Non-carbonated</option>
           </select>
                </div>
-<div class="user-input">
-  <label>Name:</label>
-<input type="text" name="name" id="name">
-</div>
 
-<div class="user-input">
+
+               <div class="user-input">
   <label>Price:</label>
 <input type="number" name="price" id="price">     
-</div>
-
-<div class="user-input">
-  <label>Quantity:</label>
+<label>Quantity:</label>
 <input type="number" name="soluong" id="soluong" min="1" >
 </div>
 
@@ -334,7 +327,7 @@ $totalPages = ceil($totalProducts / $limit);
 Action:<input type="text" name="action" id="action" >
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center;" id="button-submit">
   <button>Submit</button>
 
 </div>

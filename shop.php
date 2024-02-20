@@ -71,40 +71,17 @@ include_once 'header.php'
   
  <section id="product11" class="section-p11" class="shop container" >
   <h2>FEATURED PRODUCTS</h2> 
-<div style="margin-top: 20px; margin-bottom: 15px;"> 
-  <h1 id="show-advan-searh-h1" >Advanced Search </h1>
-  <i id="toggle-icon" class="fa-solid fa-chevron-up fa-rotate-180" ></i>
-</div>
-<div class="search-container" style="display: none;">
-  <div id="search-advan-input">
-  <label for="min-price">Min Price:</label>
-  <input type="number" id="min-price" min="10" max="20" >
 
-  <label for="max-price">Max Price:</label>
-  <input type="number" id="max-price" min="10" max="20" >
-</div>
-<div id="search-advan-input">
-    <label for="product-name"> Name:</label>
-  <input  type="text" id="product-name">
-  
-  <label for="product-type">Product Type:</label>
-  <select id="product-type"> 
-        <option value="all">All</option>
-    <option value="carbonated">Carbonated</option>
-    <option value="non-carbonated">Non-Carbonated</option>
-  </select>
-  <button class="learn-more" onclick="searchProducts()"> Search <i class="fa-solid fa-magnifying-glass"></i></button>
 
-</div>
 
-</div>
-
-  <div  id="filter-buttons">
+  <div  id="filter-buttons" style="margin-top: 12px;">
        
-    <button class="btn" id="backnormal" >Show all</button>
-    <button class="btn" id="btnfil" >Coca-cola</button>
-    <button class="btn" id="btnfil" >Pepsi</button>
-    <button class="btn" id="btnfil" >Fanta</button>
+  
+    <button class="btn" id="btnfil" id="back1" onclick="filterObjects('coca')">Coca-cola</button>
+    <button class="btn" id="btnfil" id="back2" onclick="filterObjects('pepsi')">Pepsi</button>
+    <button class="btn" id="btnfil" id="back3" onclick="filterObjects('fanta')">Fanta</button>
+
+  <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
 
 </div>
 
