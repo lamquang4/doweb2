@@ -86,7 +86,47 @@ include_once 'header.php'
 </div>
 
 
+<div id="advan-search-container">
+  <h1>Advanced Search</h1>
+  <i class="fa-solid fa-x" id="x-icon-close"></i>
+  <hr style="margin: 20px 0;">
+<form >
+<div>
+  <label>NAME:</label>
+  <input>
+</div>
 
+<div>
+  <label>PRICE:</label>
+  <input>
+<label>TO</label>
+  <input>
+</div>
+
+<hr style="margin: 20px 0;  border: 1px solid #ccc;">
+
+<div>
+  <label>TYPE:</label>
+<select>
+  <option>Select Type</option>
+  <option>Carbonated</option>
+  <option>Non-carbonated</option>
+</select>
+</div>
+
+<div>
+  <label>BRAND:</label>
+<select>
+  <option>Select Brand</option>
+  <option>Coca-cola</option>
+  <option>Pepsi</option>
+  <option>Fanta</option>
+  <option>Sprite</option>
+</select>
+</div>
+
+</form>
+</div>
 
 
 <div class="pro-container1" id="product-list">
@@ -140,6 +180,43 @@ include_once 'footer.php'
 </html>
  
 
+<script>
+  document.getElementById('btn-ad-search').addEventListener('click', function() {
+    toggleSearchBox();
+  });
+  
+  document.getElementById('overlay').addEventListener('click', function() {
+    hideOverlayAndSearchBox();
+  });
+  document.getElementById('x-icon-close').addEventListener('click', function() {
+    hideOverlayAndSearchBox();
+  });
+  function toggleSearchBox() {
+    var overlay = document.getElementById('overlay');
+    var searchBox = document.getElementById('advan-search-container');
+    var currentTransform = window.getComputedStyle(searchBox).getPropertyValue('transform');
+  
+    if (currentTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+      searchBox.style.transform = 'translateX(-320px)';
+      overlay.style.display = 'none';
+      htmlElement.style.overflowY = 'scroll';
+    } else {
+      searchBox.style.transform = 'translateX(0)';
+      overlay.style.display = 'block';
+      htmlElement.style.overflow = 'hidden';
+    }
+  }
+  
+  function hideOverlayAndSearchBox() {
+    var overlay = document.getElementById('overlay');
+    var searchBox = document.getElementById('advan-search-container');
+    carts.classList.remove("act");
+    searchBox.style.transform = 'translateX(-320px)';
+    overlay.style.display = 'none';
+    htmlElement.style.overflowY = 'scroll';
+  }
+  
+  </script>
 
 
 <script>
@@ -214,6 +291,8 @@ function toggleMenu(){
 }
 
   </script>
+
+
 
 
 

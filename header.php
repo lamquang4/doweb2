@@ -112,7 +112,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
    </section>
 
 
-   <div class="cart">
+   <div class="cart"  style="z-index: 999;">
     <h2 class="cart-title">Your Cart</h2>
 
 
@@ -140,6 +140,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
     <i class="fa-solid fa-x" id="cart-close"></i>
 </div>
 
+<div id="overlay"></div>
 
    <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -198,6 +199,20 @@ window.addEventListener("resize", function() {
      </script>
 
 <script>
+   
+       document.getElementById('overlay').addEventListener('click', function() {
+    hideOverlayAndSearchBox();
+  });
+  function hideOverlayAndSearchBox() {
+    var overlay = document.getElementById('overlay');
+   
+    carts.classList.remove("act");
+    overlay.style.display = 'none';
+    htmlElement.style.overflowY = 'scroll';
+  }
+  </script>
+
+<script>
   const cartIcon=document.querySelector("#cart-icon");
 const carts=document.querySelector(".cart");
 const closeCart=document.querySelector("#cart-close");
@@ -205,7 +220,8 @@ const cartIcon1=document.querySelector("#cart-icon1");
 
 cartIcon.addEventListener('click',()=>{
   carts.classList.add("act");
-
+  htmlElement.style.overflow = 'hidden';
+  overlay.style.display = 'block';
 });
 cartIcon1.addEventListener('click',()=>{
   carts.classList.add("act");
@@ -213,12 +229,17 @@ cartIcon1.addEventListener('click',()=>{
   searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
         icons.style.right = "-300px";
-        htmlElement.style.overflowY = 'scroll';
+      
+        htmlElement.style.overflow = 'hidden';
+  overlay.style.display = 'block';
 });
 closeCart.addEventListener('click',()=>{
   carts.classList.remove("act");
+  htmlElement.style.overflowY = 'scroll';
+  overlay.style.display = 'none';
  
 });
+
 </script>
 
 <script>
@@ -297,6 +318,9 @@ function showbar(){
         searchbars.style.transition = "0.35s ease-in-out";
     }
     </script>
+    
+
+
     
 <style>
     #xmark{

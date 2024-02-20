@@ -1046,6 +1046,75 @@ margin-top: 30px;
 
 /*shop.html*/
 
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 998; 
+
+}
+#advan-search-container{
+transform: translateX(-320px);
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100%;
+ background-color: #fff;
+  z-index: 999;
+  padding: 25px 20px;
+}
+#advan-search-container h1{
+  text-align: left;
+
+  font-weight: bold;
+}
+#x-icon-close{
+  position: absolute;
+  top:25px;
+  right: 21px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+#advan-search-container form {
+  margin-top: 20px;
+}
+
+#advan-search-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+  font-size: 17px;
+}
+
+#advan-search-container input {
+width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: left;
+}
+#advan-search-container select {
+  display: flex;
+  justify-content: left;
+  padding: 8px;
+  font-size: 17px;
+  margin-bottom: 20px;
+  width: 200px;
+}
+#advan-search-container span {
+  margin: 0 5px;
+  text-align: left;
+}
+
 #containerpage{
 
   display: flex;
