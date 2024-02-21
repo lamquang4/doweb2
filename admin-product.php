@@ -6,7 +6,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     exit();
 }
 
-
+$connection = new Connection();
 $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -15,6 +15,26 @@ $products = $productObj->selectProducts($start, $limit);
 $totalProducts = $productObj ->getProductCount();
 $totalPages = ceil($totalProducts / $limit);
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $price = $_POST['price'];
+  $image = $_POST['image'];
+  $soluong = $_POST['soluong'];
+  $date_add = $_POST['date_add'];
+  if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add)) {
+    echo "<script> alert('Please fill in'); </script>";
+} else {
+   
+    $query = "INSERT INTO product (name, price, image, soluong, date_add) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add')";
+
+    if (mysqli_query($connection->conn, $query)) {
+        echo "<script> alert('Success'); </script>";
+    } else {
+        echo "<script> alert('Fail'); </script>";
+    }
+}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -280,12 +300,9 @@ $totalPages = ceil($totalProducts / $limit);
   <div class="user-tab">
     <h1>ADD PRODUCT</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
-  
+  <form method="post" >
+
 <div class="user-input" style="margin-top: 32px;">
-<label> ID:</label>
-    <input type="text" name="id-product" id="id-product" >         
-</div>
-<div class="user-input">
   <label>Name:</label>
 <input type="text" name="name" id="name">
 </div>
@@ -296,7 +313,12 @@ $totalPages = ceil($totalProducts / $limit);
         </div>
 
           <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
-      
+
+          <div class="user-input" style="display: none;">
+  <label>URL:</label>
+ <input type="text" id="image" name="image">
+
+        </div>
 
          <div class="user-input">
           <label> Type:</label>
@@ -328,10 +350,10 @@ Action:<input type="text" name="action" id="action" >
 </div>
 
 <div style="text-align: center;" id="button-submit">
-  <button>Submit</button>
+  <button type="submit" id="btn-submit" >Submit</button>
 
 </div>
-
+</form>
 
 </div>
 </html>
@@ -407,28 +429,29 @@ function hideadd(){
 
 
 <script>
- function previewImage() {
+  function previewImage() {
     var input = document.getElementById('fimage1');
     var preview = document.getElementById('preview-image');
+    var imageNameInput = document.getElementById('image');
 
-    
     if (input.files && input.files[0]) {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-       
         preview.src = e.target.result;
-        
         preview.style.display = 'block';
       };
 
-      reader.readAsDataURL(input.files[0]); 
-    } else {
-  
-      preview.style.display = 'none';
+      reader.readAsDataURL(input.files[0]);
+
+      // Set the image name to the input field
+      imageNameInput.value = input.files[0].name;
+
+      // Display the URL input field
+      var urlInput = document.querySelector('.user-input');
+      urlInput.style.display = 'block';
     }
   }
-
 
 </script>
 

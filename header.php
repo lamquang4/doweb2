@@ -25,8 +25,10 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
       <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
       <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
   </svg>
-      <input id="search-item" type="text" placeholder="Search" name="text" class="input" onkeyup="search()"  tabindex="1">
-
+  <form method="GET" action="">
+    <input id="search-item" type="text" placeholder="Search" name="text" class="input" tabindex="1">
+   
+</form>
   </div> 
       <li id="menu" ><a id="cart-icon">
         <div class="cart-follow-icon">
@@ -105,10 +107,13 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 
   </div>
 
-  <div class="search-bars">
-<input type="text" placeholder="SEARCH...">
+    <div class="search-bars">
+      
+  <input type="text" placeholder="SEARCH..."  id="searchInput">
 <i class="fa-solid fa-xmark" id="xmark" onclick="closebar()"></i>
 </div>
+
+
    </section>
 
 
@@ -319,8 +324,18 @@ function showbar(){
     }
     </script>
     
+<script>
+ document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          
+            var searchText = this.value.trim();
 
-
+        
+            window.location.href = '?text=' + encodeURIComponent(searchText);
+        }
+    });
+    </script>
+    
     
 <style>
     #xmark{

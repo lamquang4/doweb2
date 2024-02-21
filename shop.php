@@ -7,9 +7,9 @@ $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 12;
 $start = ($page - 1) * $limit;
-
-$products = $productObj->selectProducts($start, $limit);
-$totalProducts = $productObj->getProductCount();
+$searchText = isset($_GET['text']) ? $_GET['text'] : null;
+$products = $productObj->selectProducts($start, $limit, $searchText);
+$totalProducts = $productObj->getProductCount($searchText);
 $totalPages = ceil($totalProducts / $limit);
 
 $select = new Select();
@@ -76,10 +76,10 @@ include_once 'header.php'
 
   <div  id="filter-buttons" style="margin-top: 12px;">
        
-  
-    <button class="btn" id="btnfil" id="back1" onclick="filterObjects('coca')">Coca-cola</button>
-    <button class="btn" id="btnfil" id="back2" onclick="filterObjects('pepsi')">Pepsi</button>
-    <button class="btn" id="btnfil" id="back3" onclick="filterObjects('fanta')">Fanta</button>
+  <button class="btn" id="btnfil" id="back1" >Show All</button>
+    <button class="btn" id="btnfil" id="back1" >Coca-cola</button>
+    <button class="btn" id="btnfil" id="back2">Pepsi</button>
+    <button class="btn" id="btnfil" id="back3">Fanta</button>
 
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
 
@@ -164,8 +164,8 @@ include_once 'header.php'
 
       
             for ($i = 1; $i <= $totalPages; $i++) {
-                echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
-            }
+              echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&text=' . urlencode($searchText) . '">' . $i . '</a></li>';
+          }
 
     
             if ($page < $totalPages) {
@@ -297,6 +297,7 @@ function toggleMenu(){
 }
 
   </script>
+  
 
 
 

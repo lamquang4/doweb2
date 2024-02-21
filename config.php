@@ -131,14 +131,27 @@ class Select extends Connection{
 
 
 class Product extends Connection {
-    public function selectProducts($start, $limit) {
-        $query = "SELECT * FROM product LIMIT $start, $limit";
+    
+    public function selectProducts($start, $limit, $searchText = null) {
+        $query = "SELECT * FROM product";
+
+        if (!empty($searchText)) {
+            $query .= " WHERE name LIKE '%$searchText%'";
+        }
+
+        $query .= " LIMIT $start, $limit";
+
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
 
-    public function getProductCount() {
+    public function getProductCount($searchText = null) {
         $query = "SELECT COUNT(*) as total FROM product";
+
+        if (!empty($searchText)) {
+            $query .= " WHERE name LIKE '%$searchText%'";
+        }
+
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
@@ -148,9 +161,8 @@ class Product extends Connection {
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
-    public function addProduct(){
-        $query="INSERT INTO product ";
-    }
+
+  
 }
 
 
