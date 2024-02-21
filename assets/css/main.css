@@ -1114,6 +1114,13 @@ width: 100%;
   margin: 0 5px;
   text-align: left;
 }
+#btn-apply-ad-search{
+  background-color: black;
+  color: white;
+  padding: 12px 25px;
+  font-size: 17px;
+  margin: 10px 0 0 0;
+}
 
 #containerpage{
 

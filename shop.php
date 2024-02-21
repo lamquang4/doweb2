@@ -125,6 +125,12 @@ include_once 'header.php'
 </select>
 </div>
 
+<hr style="margin: 20px 0;  border: 1px solid #ccc;">
+
+<div>
+  <button id="btn-apply-ad-search">APPLY <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i></button>
+</div>
+
 </form>
 </div>
 
