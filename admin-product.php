@@ -22,11 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $image = $_POST['image'];
   $soluong = $_POST['soluong'];
   $date_add = $_POST['date_add'];
+  $ml = $_POST['ml'];
+  $calo = $_POST['calo'];
+  $fatg = $_POST['fatg'];
+  $fat = $_POST['fat'];
+  $sodiummg = $_POST['sodiummg'];
+  $sodium = $_POST['sodium'];
+  $carbong = $_POST['carbong'];
+  $carbon = $_POST['carbon'];
+  $sugarg = $_POST['sugarg'];
+  $proteing = $_POST['proteing'];
+  
+
   if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add)) {
     echo "<script> alert('Please fill in'); </script>";
 } else {
    
-    $query = "INSERT INTO product (name, price, image, soluong, date_add) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add')";
+    $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing')";
 
     if (mysqli_query($connection->conn, $query)) {
         echo "<script> alert('Success'); </script>";
@@ -260,15 +272,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
      
 <div class="divider medium"></div>
-<form>
+<form method="post">
   <div class="daily-value small-text">
    
-    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" placeholder="?"> mL)</span> </p>
+    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input min="0" placeholder="?">g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?">g</span> </p>
   
   </div>
   
@@ -276,19 +288,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input min="0" placeholder="?">g</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input min="0" placeholder="?">mg</span> <span ><input min="0" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" placeholder="?">g</span> <span ><input min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sugars</span> <input min="0" placeholder="?">g</span> </p>
-      <p style="border: none;"><span><span class="bold">Protein</span> <input min="0" placeholder="?">g</span> </p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?">g</span> <span ><input name="fat" id="fat" min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?">g</span> <span ><input id="carbon" name="carbon" min="0" placeholder="?">%</span></p>
+      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" placeholder="?">g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" placeholder="?">g</span> </p>
     
     </div>
 
 
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
-<i  class="fa-solid fa-check" id="submit-ic"></i>
 
+<i  class="fa-solid fa-check" id="submit-ic" onclick="backPopup()"></i>
 </form>
 
   </div>
@@ -311,9 +323,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
 
         </div>
+<div style="display: flex; justify-content:center; margin-bottom: 5px;">
+   <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none;align-items:center;">
 
-          <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none; margin-bottom: 5px;">
-
+</div>
+         
           <div class="user-input" style="display: none;">
   <label>URL:</label>
  <input type="text" id="image" name="image">
@@ -381,14 +395,15 @@ Action:<input type="text" name="action" id="action" >
     htmlElement.style.overflow = 'auto';
     inputFields.forEach(input => (input.value = ''));
   }
-
-  submitic.onclick = function () {
+  function backPopup() {
     submitic.style.visibility = "hidden";
+    containerinputs.style.display="block";
     popup.style.display = 'none';
     overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
-    inputFields.forEach(input => (input.value = ''));
+    
   }
+
    function checkInputsNotEmpty() {
  
    const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
@@ -397,10 +412,13 @@ Action:<input type="text" name="action" id="action" >
  }
  inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
  checkInputsNotEmpty();
+
  </script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
 
 <script>
 const showadd= document.getElementById('showadd');
@@ -454,6 +472,7 @@ function hideadd(){
   }
 
 </script>
+
 
 
 

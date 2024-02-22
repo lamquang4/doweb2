@@ -168,11 +168,7 @@ $totalPages = ceil($totalAds / $limit);
 <?php echo $ad['username']; ?>
 </td>
                                 <td>
-                                    <select>
-                                        <option selected>Customer management</option>
-                                        <option > Order management</option> 
-                                        <option > Product management</option>
-                                      </select>
+                                 Customer
                                 </td>
                                 <td>
                                     Normal
@@ -182,6 +178,7 @@ $totalPages = ceil($totalAds / $limit);
                                         <span class="las la-edit"></span>
                                         <span class="las la-lock"></span>
                                         <span class="las la-undo-alt"></span>
+                                        <span class="las la-trash"></span>
                                     </div>
                                 </td>
                             </tr>
@@ -242,9 +239,13 @@ $totalPages = ceil($totalAds / $limit);
                <input type="text" name="username" id="username">
     
          </div>
-                   <div class="user-input" style="display: none;">
-                          Role:<input type="text" name="role" id="role">
-    
+                   <div class="user-input" >
+                          <label>Role:</label>
+    <select>
+        <option>Customer</option>
+        <option>Adminstrator</option>
+        <option>Product</option>
+    </select>
                    </div>
               
              <div class="user-input" style="display: none;">

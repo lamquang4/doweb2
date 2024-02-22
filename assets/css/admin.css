@@ -580,10 +580,10 @@
             width: 17%; 
         }
         #table-user th:nth-child(6){
-            width: 15%;
+            width: 12%;
         } 
         #table-user th:nth-child(7) {
-    width:10%;
+    width:13%;
         }
         
 
@@ -599,10 +599,10 @@
         width: 25%;
        }
        #table-adminstrator td:nth-child(4){
-        width: 18%;
+        width: 15%;
        }
        #table-adminstrator td:nth-child(5){
-        width: 15%;
+        width: 18%;
        }
            .image-product-admin{
     
@@ -744,7 +744,7 @@ display: none;
     width: 26%;
 }
  .user-input{
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 

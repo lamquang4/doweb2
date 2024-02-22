@@ -178,6 +178,7 @@ $totalPages = ceil($totalUsers / $limit);
             <div class="actions">
                 <span class="las la-edit"></span>
                 <span class="las la-lock"></span>
+                <span class="las la-trash"></span>
             </div>
         </td>
     </tr>
@@ -219,13 +220,8 @@ $totalPages = ceil($totalUsers / $limit);
     <h1>ADD USER</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
-                <div class="user-input" style="margin-top: 32px;">
-                <label> ID USER:</label>
-                    <input type="text" name="id-user" id="id-user" > 
-                     
-                </div>
 
-                <div class="user-input">  
+                <div class="user-input" style="margin-top: 32px;">  
                     <label>Full Name:</label>
 <input type="text" name="fname" id="fname">
              </div>

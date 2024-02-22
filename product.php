@@ -14,14 +14,14 @@ if(isset($_GET['id'])) {
         $productImage1 = $productDetails['thungimg'];
         $productDec1 = $productDetails['ml'];
         $productDec2 = $productDetails['calo'];
-        $productDec3 = $productDetails['fat(g)'];
-        $productDec4 = $productDetails['fat(%)'];
-        $productDec5 = $productDetails['sodium(mg)'];
-        $productDec6 = $productDetails['sodium(%)'];
-        $productDec7 = $productDetails['carbon(g)'];
-        $productDec8 = $productDetails['carbon(%)'];
-        $productDec9 = $productDetails['sugar(g)'];
-        $productDec10 = $productDetails['protein(g)'];
+        $productDec3 = $productDetails['fatg'];
+        $productDec4 = $productDetails['fat'];
+        $productDec5 = $productDetails['sodiummg'];
+        $productDec6 = $productDetails['sodium'];
+        $productDec7 = $productDetails['carbong'];
+        $productDec8 = $productDetails['carbon'];
+        $productDec9 = $productDetails['sugarg'];
+        $productDec10 = $productDetails['proteing'];
     } else {
        
         echo "Product not found";
