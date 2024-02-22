@@ -33,15 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $sugarg = $_POST['sugarg'];
   $proteing = $_POST['proteing'];
   
-
-  if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add)) {
+ 
+  if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add) || empty($ml) || empty($calo) || empty($fatg) || empty($fat) || empty($sodiummg) || empty($sodium) || empty($carbong) || empty($carbon) || empty($sugarg) || empty($proteing)) {
     echo "<script> alert('Please fill in'); </script>";
+
 } else {
    
     $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing')";
 
     if (mysqli_query($connection->conn, $query)) {
         echo "<script> alert('Success'); </script>";
+        header('Location: admin-product.php');
+        exit;
     } else {
         echo "<script> alert('Fail'); </script>";
     }
@@ -272,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
      
 <div class="divider medium"></div>
-<form method="post">
+<form method="post" action="">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
@@ -301,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
 
 <i  class="fa-solid fa-check" id="submit-ic" onclick="backPopup()"></i>
-</form>
+
 
   </div>
   </div>
@@ -312,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="user-tab">
     <h1>ADD PRODUCT</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
-  <form method="post" >
+  
 
 <div class="user-input" style="margin-top: 32px;">
   <label>Name:</label>
@@ -336,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
          <div class="user-input">
           <label> Type:</label>
-         <select style="padding: 2px 0px;">
+         <select >
             <option>Select Type</option>
             <option>Carbonated</option>
             <option>Non-carbonated</option>
@@ -393,7 +396,7 @@ Action:<input type="text" name="action" id="action" >
     popup.style.display = 'none';
     overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
-    inputFields.forEach(input => (input.value = ''));
+
   }
   function backPopup() {
     submitic.style.visibility = "hidden";
@@ -437,6 +440,7 @@ function hideadd(){
             input.value = '';
         }
     });
+    inputFields.forEach(input => (input.value = ''));
   containerinputs.style.display="none";
   usertab.style.display="none";
 

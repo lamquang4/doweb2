@@ -758,6 +758,7 @@ display: none;
 .user-input select{
     border: 0.5px solid black;
     width: 160px;
+    padding: 2px 0;
 }
 .user-tab button{
     padding: 5px 12px;
