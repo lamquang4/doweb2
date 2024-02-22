@@ -1,12 +1,17 @@
 <?php
 require 'config.php';
+$connection = new Connection();
+$id = $_GET['pid'];
 
+$edit_sql = "SELECT * FROM product WHERE id=$id";
+$result = mysqli_query($connection->conn, $edit_sql);
+$row = mysqli_fetch_assoc($result);
 if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
 
-$connection = new Connection();
+
 $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -16,41 +21,9 @@ $totalProducts = $productObj ->getProductCount();
 $totalPages = ceil($totalProducts / $limit);
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $name = $_POST['name'];
-  $price = $_POST['price'];
-  $image = $_POST['image'];
-  $soluong = $_POST['soluong'];
-  $date_add = $_POST['date_add'];
-  $ml = $_POST['ml'];
-  $calo = $_POST['calo'];
-  $fatg = $_POST['fatg'];
-  $fat = $_POST['fat'];
-  $sodiummg = $_POST['sodiummg'];
-  $sodium = $_POST['sodium'];
-  $carbong = $_POST['carbong'];
-  $carbon = $_POST['carbon'];
-  $sugarg = $_POST['sugarg'];
-  $proteing = $_POST['proteing'];
-  
- 
-  if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add) || empty($ml) || empty($calo) || empty($fatg) || empty($fat) || empty($sodiummg) || empty($sodium) || empty($carbong) || empty($carbon) || empty($sugarg) || empty($proteing)) {
-    echo "<script> alert('Please fill in'); </script>";
-
-} else {
-   
-    $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing')";
-
-    if (mysqli_query($connection->conn, $query)) {
-        echo "<script> alert('Success'); </script>";
-        header('Location: admin-product.php');
-        exit;
-    } else {
-        echo "<script> alert('Fail'); </script>";
-    }
-}
-}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,9 +182,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    <div class="image-product-admin">
     <div>
-   <img src="<?php echo $product['image']; ?>" id="productImage">
+   <img src="<?php echo $product['image']; ?>">
     </div>
-    
+    <div>
+   <img src="" id="productImage">
+    </div>
         
    </div>
  
@@ -226,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
-     <a href="edit-product.php?pid=<?php echo $product['id'];?>"><span class="las la-edit" ></span></a>
+     <a onclick="showadd1(event)" href="edit-product.php?pid=<?php echo $product['id'];?>" ><span class="las la-edit" ></span></a>
     <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: red;"></span></a>
    
   </div>
@@ -275,15 +250,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="">
+<form method="post" action="update-product.php">
   <div class="daily-value small-text">
    
-    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
+    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?">g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>">g</span> </p>
   
   </div>
   
@@ -291,11 +266,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?">g</span> <span ><input name="fat" id="fat" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?">g</span> <span ><input id="carbon" name="carbon" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" placeholder="?">g</span> </p>
-      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" placeholder="?">g</span> </p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" value="<?php echo $row['fatg']?>">g</span> <span ><input name="fat" id="fat" min="0" value="<?php echo $row['fat']?>">%</span></p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" value="<?php echo $row['sodiummg']?>">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" value="<?php echo $row['sodium']?>">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" value="<?php echo $row['carbong']?>">g</span> <span ><input id="carbon" name="carbon" min="0" value="<?php echo $row['carbon']?>">%</span></p>
+      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" value="<?php echo $row['sugarg']?>">g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" value="<?php echo $row['proteing']?>">g</span> </p>
     
     </div>
 
@@ -310,31 +285,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
 
-<div id="container-inputs">
+<div id="container-inputs" style="display: block;">
 
   <div class="user-tab">
-    <h1>ADD PRODUCT</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+    <h1>EDIT PRODUCT</h1>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php'"></i>
   
+<input type="hidden" name="pid" value="<?php echo $row['id']?>">
 
 <div class="user-input" style="margin-top: 32px;">
   <label>Name:</label>
-<input type="text" name="name" id="name">
+<input type="text" name="name" id="name" value="<?php echo $row['name']?>">
 </div>
+
 <div class="user-input" >
   <label>Image:</label>
- <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" >
-
+ <input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
         </div>
+
+<div style="display: flex; justify-content:center; margin-bottom: 5px;">
+   <img  src="<?php echo $row['image']?>"  width="30%" style="align-items:center;" id="show-image">
+</div>
+
 <div style="display: flex; justify-content:center; margin-bottom: 5px;">
    <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none;align-items:center;">
+</div>   
 
-</div>
-         
           <div class="user-input" style="display: none;">
   <label>URL:</label>
- <input type="text" id="image" name="image">
-
+ <input type="text" id="image" name="image" >
         </div>
 
          <div class="user-input">
@@ -349,14 +328,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                <div class="user-input">
   <label>Price:</label>
-<input type="number" name="price" id="price">     
+<input type="number" name="price" id="price" value="<?php echo $row['price']?>">     
 <label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="1" >
+<input type="number" name="soluong" id="soluong" min="1" value="<?php echo $row['soluong']?>">
 </div>
 
 <div class="user-input">
   <label>Date Add:</label>
-<input type="date" name="date_add" id="date_add">
+<input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">
 </div>
 <div class="user-input">
   <label>Description:</label>
@@ -371,7 +350,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 
 </div>
-
 
 </html>
 
@@ -427,24 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
-showadd.onclick=function(){
-  containerinputs.style.display="block";
-  usertab.style.display="block";
-}
-function hideadd(){
-  var container = document.getElementById('container-inputs');
-    var inputs = container.querySelectorAll('input, select, textarea');
 
-    inputs.forEach(function (input) {
-        if (input.type !== 'button') {
-            input.value = '';
-        }
-    });
-    inputFields.forEach(input => (input.value = ''));
-  containerinputs.style.display="none";
-  usertab.style.display="none";
-
-}
 </script>
 
 
@@ -454,6 +415,7 @@ function hideadd(){
   function previewImage() {
     var input = document.getElementById('fimage1');
     var preview = document.getElementById('preview-image');
+    var showimage = document.getElementById('show-image');
     var imageNameInput = document.getElementById('image');
 
     if (input.files && input.files[0]) {
@@ -462,22 +424,18 @@ function hideadd(){
       reader.onload = function (e) {
         preview.src = e.target.result;
         preview.style.display = 'block';
+        showimage.style.display = 'none';
       };
 
       reader.readAsDataURL(input.files[0]);
 
-    
+
       imageNameInput.value = input.files[0].name;
 
     
+     
     }
   }
 
 </script>
-
-
-
-
-
-
 
