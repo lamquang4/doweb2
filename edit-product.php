@@ -1,15 +1,17 @@
 <?php
 require 'config.php';
+if (!isset($_GET['pid'])) {
+  header('Location: admin-product.php');
+  exit(); 
+}
+
 $connection = new Connection();
 $id = $_GET['pid'];
 
 $edit_sql = "SELECT * FROM product WHERE id=$id";
 $result = mysqli_query($connection->conn, $edit_sql);
 $row = mysqli_fetch_assoc($result);
-if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
-    header("Location: login-admin.php");
-    exit();
-}
+
 
 
 $productObj = new Product();
@@ -311,9 +313,9 @@ $totalPages = ceil($totalProducts / $limit);
    <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none;align-items:center;">
 </div>   
 
-          <div class="user-input" style="display: none;">
+          <div class="user-input" style="display: none;" >
   <label>URL:</label>
- <input type="text" id="image" name="image" >
+ <input type="text" id="image" name="image" value="<?php echo $row['image']?>" >
         </div>
 
          <div class="user-input">
@@ -412,12 +414,11 @@ const usertab = document.querySelector('.usertab');
 
 
 <script>
-  function previewImage() {
+    function previewImage() {
     var input = document.getElementById('fimage1');
     var preview = document.getElementById('preview-image');
-    var showimage = document.getElementById('show-image');
     var imageNameInput = document.getElementById('image');
-
+    var showimage = document.getElementById('show-image');
     if (input.files && input.files[0]) {
       var reader = new FileReader();
 
@@ -430,10 +431,7 @@ const usertab = document.querySelector('.usertab');
       reader.readAsDataURL(input.files[0]);
 
 
-      imageNameInput.value = input.files[0].name;
-
-    
-     
+      imageNameInput.value = 'assets/images/sp/' + input.files[0].name;
     }
   }
 
