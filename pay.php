@@ -30,7 +30,7 @@ if(isset($_SESSION["id"])){
 <div style="display: flex; justify-content: center; margin: 15px 0;" >
     <img class="logo-img" src="assets/images/pic/logo.png" width="8%" onclick="window.location.href='index.php'">
 </div>
-  <div class="container">
+  <div class="containerx">
 
       <div class="row">
           <div class="col-xl-8">
