@@ -246,3 +246,8 @@ body{margin-top:20px;
             width: 28%;
         }
     }
+    @media(max-width:400px){
+        #continue-shopping-btn{
+            font-size: 14px;
+        }
+    }

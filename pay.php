@@ -325,7 +325,7 @@ if(isset($_SESSION["id"])){
               </div>
               <div class="row my-4">
                 <div class="col">
-                    <a href="shop.php" class="btn btn-link text-muted">
+                    <a href="shop.php" class="btn btn-link text-muted" id="continue-shopping-btn">
                         <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
                 </div> <!-- end col -->
                 <div class="col">
