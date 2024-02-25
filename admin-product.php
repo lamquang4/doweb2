@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <td>
   <div class="actions">
      <a href="edit-product.php?pid=<?php echo $product['id'];?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: red;"></span></a>
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
    
   </div>
 </td>   

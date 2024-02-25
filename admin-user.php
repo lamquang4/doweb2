@@ -178,7 +178,7 @@ $totalPages = ceil($totalUsers / $limit);
             <div class="actions">
                 <span class="las la-edit" style="color:#076FFE;"></span>
                 <span class="las la-lock" style="color: #FFAD27;"></span>
-                <span class="las la-trash" style="color: red;"></span>
+                <span class="las la-trash" style="color: #d9534f;"></span>
             </div>
         </td>
     </tr>
