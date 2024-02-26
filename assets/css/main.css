@@ -3087,6 +3087,7 @@ display: none;
  width: 100%;
 }
 }
+
 @media (max-width:700px){
   .slidersss{
     height: 350px;
