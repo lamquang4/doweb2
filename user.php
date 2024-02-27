@@ -99,7 +99,7 @@ if(isset($_SESSION["id"])){
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="number" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
+                                                    <input type="text" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
                                                 </div>
                                             </div>
                 
