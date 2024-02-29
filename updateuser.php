@@ -4,19 +4,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     $select = new Select(); 
     $id = $_GET["id"];
-    $newUsername = $_GET["username"];
-    $newEmail = $_GET["email"];
-    $newFullname = $_GET["fullname"];
-    $newPhone = $_GET["phone"];
-    $newAddress = $_GET["diachi"];
+    $newUsername = trim($_GET["username"]);
+    $newEmail = trim($_GET["email"]);
+    $newFullname = trim($_GET["fullname"]);
+    $newPhone = trim($_GET["phone"]);
+    $newAddress = trim($_GET["diachi"]);
     $newBirthday = $_GET["birthday"];
     $newGender = isset($_GET["gender"]) ? $_GET["gender"] : ''; 
     $phonePattern = '/^0[1-9]\d{8,9}$/';
-    if (!preg_match($phonePattern, $newPhone)) {
-      echo "<script>alert('Invalid phone number.')</script>";
-      echo "<script>setTimeout(function(){ window.location='user.php'; }, 500);</script>";
+    $fullnamePattern = '/^[a-zA-Z\s]+$/'; 
+    $addressPattern = '/^[a-zA-Z0-9\s]+$/';
+    $emailPattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+  
+    if (!preg_match($fullnamePattern, $newFullname) || !preg_match($emailPattern, $newEmail) || !preg_match($phonePattern, $newPhone) || !preg_match($addressPattern, $newAddress)) {
+        echo "<script>alert('Update failed. You have entered invalid information !')</script>";
+        echo "<script>setTimeout(function(){ window.location='user.php'; }, 500);</script>";
         exit;
     }
+
     $updateQuery = "UPDATE tb_user SET username='$newUsername', email='$newEmail', fullname='$newFullname', diachi='$newAddress', phone='$newPhone', birthday='$newBirthday', gender='$newGender' WHERE id=$id";
     $result = mysqli_query($select->conn, $updateQuery);
 

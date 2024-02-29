@@ -20,7 +20,12 @@ if (isset($_POST["submit"])) {
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
-
+  $emailPattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+  if (!preg_match( $emailPattern, $email)) {
+    echo "<script> alert('Invalid Email.'); </script>";
+    echo "<script>setTimeout(function(){ window.location='register.php'; }, 500);</script>";
+    exit;
+  }
   $result = $register->registration(
       $username,
       $email,
