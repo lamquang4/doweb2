@@ -1,9 +1,9 @@
 <?php
 require 'config.php';
-if (isset($_GET['pid']) || !isset($_GET['pid'])) {
-    header('Location: admin-product.php');
-    exit(); 
-  }
+if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+    header("Location: login-admin.php");
+    exit();
+}
 $connection = new Connection();
 $name = $_POST['name'];
 $price = $_POST['price'];
@@ -20,14 +20,15 @@ $carbong = $_POST['carbong'];
 $carbon = $_POST['carbon'];
 $sugarg = $_POST['sugarg'];
 $proteing = $_POST['proteing'];
+$type = $_POST['type'];
 $id = $_POST['pid'];
-
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
    
-    $updatequery = "UPDATE product SET name='$name', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing' WHERE id=$id";
+    $updatequery = "UPDATE product SET name='$name', type='$type', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing' WHERE id=$id";
 
     if (mysqli_query($connection->conn, $updatequery)) {
         echo "<script> alert('Success'); </script>";
-        header('Location: admin-product.php');
+        header("Location: admin-product.php?page={$page}");
         exit;
     } else {
         echo "<script> alert('Fail'); </script>";

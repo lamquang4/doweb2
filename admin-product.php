@@ -32,14 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $carbon = $_POST['carbon'];
   $sugarg = $_POST['sugarg'];
   $proteing = $_POST['proteing'];
-  
+  $type = $_POST['type'];
  
-  if (empty($name) || empty($price) || empty($image) || empty($soluong) || empty($date_add) || empty($ml) || empty($calo) || empty($fatg) || empty($fat) || empty($sodiummg) || empty($sodium) || empty($carbong) || empty($carbon) || empty($sugarg) || empty($proteing)) {
-    echo "<script> alert('Please fill in'); </script>";
 
-} else {
    
-    $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing')";
+    $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
 
     if (mysqli_query($connection->conn, $query)) {
         echo "<script> alert('Success'); </script>";
@@ -49,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script> alert('Fail'); </script>";
     }
 }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -275,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="">
+<form method="post" action="" onsubmit="return ktrong()">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
@@ -339,10 +336,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
          <div class="user-input">
           <label> Type:</label>
-         <select >
-            <option>Select Type</option>
-            <option>Carbonated</option>
-            <option>Non-carbonated</option>
+         <select name="type">
+            <option value="0">Select Type</option>
+            <option value="carbonated">Carbonated</option>
+            <option value="noncarbonated">Non-carbonated</option>
           </select>
                </div>
 
@@ -447,8 +444,32 @@ function hideadd(){
 }
 </script>
 
+<script>
+   function ktrong() {
+        
+    var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
+    
+    for (var i = 0; i < inputsToCheck.length; i++) {
+        var inputId = inputsToCheck[i];
+        var inputValue = document.getElementById(inputId).value.trim();
 
+        if (inputValue === "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+    }
 
+    var typeSelect = document.getElementById("type");
+    var selectedValue = typeSelect.value;
+
+    if (selectedValue === "0") {
+        alert("Please choose product type");
+        return false;
+    }
+
+    return true;
+    }
+</script>
 
 <script>
   function previewImage() {

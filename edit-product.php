@@ -8,10 +8,9 @@ if (!isset($_GET['pid'])) {
 $connection = new Connection();
 $id = $_GET['pid'];
 
-$edit_sql = "SELECT * FROM product WHERE id=$id";
+ $edit_sql = "SELECT * FROM product WHERE id=$id";
 $result = mysqli_query($connection->conn, $edit_sql);
-$row = mysqli_fetch_assoc($result);
-
+$row = mysqli_fetch_assoc($result); 
 
 
 $productObj = new Product();
@@ -203,8 +202,8 @@ $totalPages = ceil($totalProducts / $limit);
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
-     <a onclick="showadd1(event)" href="edit-product.php?pid=<?php echo $product['id'];?>" ><span class="las la-edit" ></span></a>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: red;"></span></a>
+     <a onclick="showadd1(event)" href="edit-product.php?pid=<?php echo $product['id'];?>" ><span class="las la-edit" style="color:#076FFE;"></span></a>
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
    
   </div>
 </td>   
@@ -252,7 +251,7 @@ $totalPages = ceil($totalProducts / $limit);
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php">
+<form method="post" action="update-product.php" onsubmit="return ktrong()">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>"> mL)</span> </p>
@@ -320,10 +319,10 @@ $totalPages = ceil($totalProducts / $limit);
 
          <div class="user-input">
           <label> Type:</label>
-         <select >
-            <option>Select Type</option>
-            <option>Carbonated</option>
-            <option>Non-carbonated</option>
+         <select name="type" id="type">
+            <option value="0">Select Type</option>
+            <option value="carbonated" <?php echo ($row['type'] == 'carbonated') ? 'selected' : ''; ?> >Carbonated</option>
+            <option value="noncarbonated" <?php echo ($row['type'] == 'noncarbonated') ? 'selected' : ''; ?>>Non-carbonated</option>
           </select>
                </div>
 
@@ -396,6 +395,31 @@ $totalPages = ceil($totalProducts / $limit);
  inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
  checkInputsNotEmpty();
 
+
+ function ktrong() {
+        
+  var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
+    
+    for (var i = 0; i < inputsToCheck.length; i++) {
+        var inputId = inputsToCheck[i];
+        var inputValue = document.getElementById(inputId).value.trim();
+
+        if (inputValue === "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+    }
+
+    var typeSelect = document.getElementById("type");
+    var selectedValue = typeSelect.value;
+
+    if (selectedValue === "0") {
+        alert("Please choose product type");
+        return false;
+    }
+
+    return true;
+        }
  </script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
