@@ -76,10 +76,10 @@ include_once 'header.php'
 
   <div  id="filter-buttons" style="margin-top: 12px;">
        
-  <button class="btn" id="btnfil" id="back1" >Show All</button>
-    <button class="btn" id="btnfil" id="back1" >Coca-cola</button>
-    <button class="btn" id="btnfil" id="back2">Pepsi</button>
-    <button class="btn" id="btnfil" id="back3">Fanta</button>
+  <button class="btn" id="btnfil" id="back1"  onclick="window.location.href='shop.php'">Show All</button>
+    <button class="btn" id="btnfil" id="back1" onclick="window.location.href='shop.php?text=coca'">Coca-cola</button>
+    <button class="btn" id="btnfil" id="back2"  onclick="window.location.href='shop.php?text=pepsi'">Pepsi</button>
+    <button class="btn" id="btnfil" id="back3" onclick="window.location.href='shop.php?text=fanta'">Fanta</button>
 
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
 

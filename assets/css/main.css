@@ -3005,9 +3005,30 @@ display: none;
 .slidersss .dotsss li.activesss{
   width: 30px;
 }
+@media (max-width:1300px){
+  .slidersss{
+    height: 520px;
+    width: 100%;
+}
+.slidersss .buttonsss button{
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+}
+.slidersss .buttonsss{
+  position: absolute;
+  top: 42%;
+  left: 4%;
+  width: 90%;
+
+
+}
+
+}
 @media (max-width:1200px){
   .slidersss{
     height: 520px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 50px;
@@ -3027,6 +3048,7 @@ display: none;
 @media (max-width:1000px){
   .slidersss{
     height: 460px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 50px;
@@ -3046,6 +3068,7 @@ display: none;
 @media (max-width:900px){
   .slidersss{
     height: 420px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 50px;
@@ -3065,6 +3088,7 @@ display: none;
 @media (max-width:800px){
   .slidersss{
     height: 400px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 50px;
@@ -3091,6 +3115,7 @@ display: none;
 @media (max-width:700px){
   .slidersss{
     height: 350px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 50px;
@@ -3111,6 +3136,7 @@ display: none;
 @media (max-width:600px){
   .slidersss{
     height: 300px;
+    width: 100%;
 }
 .slidersss .buttonsss button{
   width: 40px;
