@@ -16,7 +16,7 @@ $totalProducts = $productObj ->getProductCount();
 $totalPages = ceil($totalProducts / $limit);
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $name = $_POST['name'];
   $price = $_POST['price'];
   $image = $_POST['image'];
@@ -33,10 +33,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $sugarg = $_POST['sugarg'];
   $proteing = $_POST['proteing'];
   $type = $_POST['type'];
- 
+ $brand = $_POST['brand'];
 
-   
-    $query = "INSERT INTO product (name, price, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
+  $targetDir = "assets/images/sp/";
+  $fileName = basename($_FILES["fimage1"]["name"]);
+  $targetFilePath = $targetDir . $fileName;
+  $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+  $allowTypes = array('jpg','png','jpeg');
+  if(in_array($fileType, $allowTypes)){
+
+      if(move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)){
+       
+          $name = $_POST['name'];
+        
+          $image = $fileName; 
+      
+      } else{
+          $error_msg = "Sorry, there was an error uploading your file.";
+      }
+  } else{
+      $error_msg = "Sorry, only JPG, JPEG, PNG files are allowed to upload.";
+  } 
+
+
+    $query = "INSERT INTO product (name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
 
     if (mysqli_query($connection->conn, $query)) {
         echo "<script> alert('Success'); </script>";
@@ -272,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="" onsubmit="return ktrong()">
+<form method="post" action="" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
@@ -340,6 +360,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="0">Select Type</option>
             <option value="carbonated">Carbonated</option>
             <option value="noncarbonated">Non-carbonated</option>
+          </select>
+          <label> Brand:</label>
+         <select name="brand" id="brand">
+            <option value="0">Select Brand</option>
+            <option value="cocacola">Coca-cola</option>
+            <option value="pepsi">Pepsi</option>
+            <option value="fanta">Fanta</option>
+            <option value="sprite">Sprite</option>
+            <option value="aquarius">Aquarius</option>
+            <option value="thumbsup">Thumbs Up</option>
+            <option value="nutri">Nutriboost</option>
+            <option value="fuzetea">Fuzetea</option>
+            <option value="dasani">Dasani</option>
           </select>
                </div>
 
@@ -460,8 +493,9 @@ function hideadd(){
     }
 
     var typeSelect = document.getElementById("type");
+    var brandSelect = document.getElementById("brand");
     var selectedValue = typeSelect.value;
-
+    var selectedValue = brandSelect.value;
     if (selectedValue === "0") {
         alert("Please choose product type");
         return false;

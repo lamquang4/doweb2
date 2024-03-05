@@ -251,7 +251,7 @@ $totalPages = ceil($totalProducts / $limit);
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php" onsubmit="return ktrong()">
+<form method="post" action="update-product.php" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>"> mL)</span> </p>
@@ -323,6 +323,19 @@ $totalPages = ceil($totalProducts / $limit);
             <option value="0">Select Type</option>
             <option value="carbonated" <?php echo ($row['type'] == 'carbonated') ? 'selected' : ''; ?> >Carbonated</option>
             <option value="noncarbonated" <?php echo ($row['type'] == 'noncarbonated') ? 'selected' : ''; ?>>Non-carbonated</option>
+          </select>
+          <label> Brand:</label>
+         <select name="brand" id="brand">
+            <option value="0">Select Brand</option>
+            <option value="cocacola" <?php echo ($row['brand'] == 'cocacola') ? 'selected' : ''; ?>>Coca-cola</option>
+            <option value="pepsi" <?php echo ($row['brand'] == 'pepsi') ? 'selected' : ''; ?>>Pepsi</option>
+            <option value="fanta" <?php echo ($row['brand'] == 'fanta') ? 'selected' : ''; ?>>Fanta</option>
+            <option value="sprite" <?php echo ($row['brand'] == 'sprite') ? 'selected' : ''; ?>>Sprite</option>
+            <option value="aquarius" <?php echo ($row['brand'] == 'aquarius') ? 'selected' : ''; ?>>Aquarius</option>
+            <option value="thumbsup" <?php echo ($row['brand'] == 'thumbsup') ? 'selected' : ''; ?>>Thumbs Up</option>
+            <option value="nutri" <?php echo ($row['brand'] == 'nutri') ? 'selected' : ''; ?>>Nutriboost</option>
+            <option value="fuzetea" <?php echo ($row['brand'] == 'fuzetea') ? 'selected' : ''; ?>>Fuzetea</option>
+            <option value="dasani" <?php echo ($row['brand'] == 'dasani') ? 'selected' : ''; ?>>Dasani</option>
           </select>
                </div>
 
@@ -411,10 +424,11 @@ $totalPages = ceil($totalProducts / $limit);
     }
 
     var typeSelect = document.getElementById("type");
+    var brandSelect = document.getElementById("brand");
     var selectedValue = typeSelect.value;
-
+    var selectedValue = brandSelect.value;
     if (selectedValue === "0") {
-        alert("Please choose product type");
+        alert("Please choose product type or product brand");
         return false;
     }
 

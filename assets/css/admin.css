@@ -757,8 +757,8 @@ display: none;
 }
 .user-input select{
     border: 0.5px solid black;
-    width: 160px;
-    padding: 2px 0;
+    width: 125px;
+    padding: 3px 0;
 }
 .user-tab button{
     padding: 5px 12px;
@@ -813,6 +813,11 @@ border: none;
         width: 188px;
  
      }
+     .user-input select{
+    
+        width: 100px;
+    
+    }
 }
 @media(max-width:400px){
     .user-tab{
@@ -823,4 +828,9 @@ border: none;
        
      
      }
+     .user-input select{
+    
+        width: 90px;
+    
+    }
 }
