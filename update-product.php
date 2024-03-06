@@ -44,7 +44,7 @@ $proteing = $_POST['proteing'];
 $type = $_POST['type'];
 $brand = $_POST['brand'];
 $id = $_POST['pid'];
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = isset($_POST['page']) ? $_POST['page'] : 1;
    
     $updatequery = "UPDATE product SET name='$name', brand='$brand', type='$type', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing' WHERE id=$id";
 

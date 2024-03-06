@@ -141,7 +141,7 @@ include_once 'header.php'
             <a href="product.php?id=<?php echo $product['id']; ?>">
                 <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
             </a>
-            <h5 class="product-title" style="display: none;"><?php echo $product['brand']; ?></h5>
+            <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
             <h5 class="product-title"><?php echo $product['name']; ?></h5>
 
             <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>

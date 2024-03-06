@@ -202,8 +202,9 @@ $totalPages = ceil($totalProducts / $limit);
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
-     <a onclick="showadd1(event)" href="edit-product.php?pid=<?php echo $product['id'];?>" ><span class="las la-edit" style="color:#076FFE;"></span></a>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
+  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+
+     <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
    
   </div>
 </td>   
@@ -220,13 +221,13 @@ $totalPages = ceil($totalProducts / $limit);
 <?php
         
         if ($page > 1) {
-            echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            echo '<li href="?page=' . ($page - 1) . '"><a href="?page=' . ($page - 1) . '">Prev</a></li>';
         } else {
             echo '<li class="disabled">Prev</li>';
         }
 
         for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . ' href="?page=' . $i . '">' . $i . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
         }
 
         if ($page < $totalPages) {
@@ -290,10 +291,10 @@ $totalPages = ceil($totalProducts / $limit);
 
   <div class="user-tab">
     <h1>EDIT PRODUCT</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php'"></i>
+    <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php?page=<?php echo $page; ?>';"></i>
   
 <input type="hidden" name="pid" value="<?php echo $row['id']?>">
-
+<input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 <div class="user-input" style="margin-top: 32px;">
   <label>Name:</label>
 <input type="text" name="name" id="name" value="<?php echo $row['name']?>">
@@ -378,7 +379,7 @@ $totalPages = ceil($totalProducts / $limit);
     popup.style.display = 'block';
     containerinputs.style.display="none";
     overlay.style.display = 'block'; 
-    window.scrollTo(0, 0);
+
     htmlElement.style.overflow = 'hidden';
   }
 

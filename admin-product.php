@@ -57,16 +57,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
 
 
     $query = "INSERT INTO product (name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
-
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
-        echo "<script> alert('Success'); </script>";
-        header('Location: admin-product.php');
+      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
+       
+    
         exit;
     } else {
         echo "<script> alert('Fail'); </script>";
     }
 }
 
+if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
+  $pid = $_GET['pid'];
+  $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+  $delete_sql = "DELETE FROM product WHERE id=$pid";
+  if (mysqli_query($connection->conn, $delete_sql)) {
+      echo "<script>alert('Delete Successful');</script>";
+      header("Location: admin-product.php?page=$currentPage"); 
+  } else {
+      echo "<script>alert('Delete Fail');</script>";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -243,8 +255,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
-     <a href="edit-product.php?pid=<?php echo $product['id'];?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="delete-product.php?pid=<?php echo $product['id'];?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
+  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+
+     <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
    
   </div>
 </td>   
@@ -401,6 +414,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
 </form>
 
 </div>
+
+
 
 
 </html>
