@@ -255,6 +255,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
+
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
      <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
