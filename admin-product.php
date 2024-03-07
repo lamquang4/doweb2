@@ -348,7 +348,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
   
 
-<div class="user-input" style="margin-top: 32px;">
+<div class="user-input" style="margin-top: 30px;">
   <label>Name:</label>
 <input type="text" name="name" id="name">
 </div>

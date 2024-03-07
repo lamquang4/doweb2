@@ -221,7 +221,7 @@ $totalPages = ceil($totalUsers / $limit);
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
 
-                <div class="user-input" style="margin-top: 32px;">  
+                <div class="user-input" style="margin-top: 30px;">  
                     <label>Full Name:</label>
 <input type="text" name="fname" id="fname">
              </div>

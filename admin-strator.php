@@ -228,7 +228,7 @@ $totalPages = ceil($totalAds / $limit);
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
     
-                 <div class="user-input" style="margin-top: 32px;">
+                 <div class="user-input" style="margin-top: 30px;">
                  <label>Email:</label>
                     <input type="text" name="email" id="email"> 
     

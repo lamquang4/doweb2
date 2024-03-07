@@ -8,9 +8,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 12;
 $start = ($page - 1) * $limit;
 $searchText = isset($_GET['text']) ? $_GET['text'] : null;
+$minPrice = isset($_GET['min_price']) ? $_GET['min_price'] : null;
+$maxPrice = isset($_GET['max_price']) ? $_GET['max_price'] : null;
 $searchType = isset($_GET['type']) ? $_GET['type'] : null;
-$products = $productObj->selectProducts($start, $limit, $searchText, $searchType); 
-$totalProducts = $productObj->getProductCount($searchText, $searchType);
+$searchBrand = isset($_GET['brand']) ? $_GET['brand'] : null;
+
+$products = $productObj->selectProducts($start, $limit, $searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
+$totalProducts = $productObj->getProductCount($searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
 $totalPages = ceil($totalProducts / $limit);
 
 $select = new Select();
@@ -91,45 +95,50 @@ include_once 'header.php'
   <h1>Advanced Search</h1>
   <i class="fa-solid fa-x" id="x-icon-close"></i>
   <hr style="margin: 20px 0;">
-<form >
+<form method="GET" action="shop.php">
 <div>
   <label>NAME:</label>
-  <input>
+  <input type="text" name="text" id="productName" placeholder="Product Name">
 </div>
 
 <div>
   <label>PRICE:</label>
-  <input>
+  <input name="min_price" id="minPrice" placeholder="Min Price">
 <label>TO</label>
-  <input>
+  <input name="max_price" id="maxPrice" placeholder="Max Price">
 </div>
 
 <hr style="margin: 20px 0;  border: 1px solid #ccc;">
 
 <div>
   <label>TYPE:</label>
-<select>
-  <option>Select Type</option>
-  <option>Carbonated</option>
-  <option>Non-carbonated</option>
+<select name="type" id="productType">
+  <option value="0">Select Type</option>
+  <option value="carbonated">Carbonated</option>
+  <option value="nogas">Non-carbonated</option>
 </select>
 </div>
 
 <div>
   <label>BRAND:</label>
-<select>
-  <option>Select Brand</option>
-  <option>Coca-cola</option>
-  <option>Pepsi</option>
-  <option>Fanta</option>
-  <option>Sprite</option>
+<select name="brand" id="productBrand">
+  <option value="0">Select Brand</option>
+  <option value="cocacola">Coca-cola</option>
+  <option value="pepsi">Pepsi</option>
+  <option value="fanta">Fanta</option>
+  <option value="sprite">Sprite</option>
+  <option value="aquarius">Aquarius</option>
+  <option value="dasani">Dasani</option>
+  <option value="thumbsup">ThumbsUp</option>
+  <option value="nutri">Nutriboost</option>
+  <option value="fuzetea">Fuzetea</option>
 </select>
 </div>
 
 <hr style="margin: 20px 0;  border: 1px solid #ccc;">
 
 <div>
-  <button id="btn-apply-ad-search">APPLY <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i></button>
+  <button type="submit" id="btn-apply-ad-search">APPLY <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i></button>
 </div>
 
 </form>
@@ -156,29 +165,41 @@ include_once 'header.php'
     <div class="pages">
         <ul class="listPage">
         <?php
-$searchType = ''; 
-$searchValue = '';
+$searchParams = array();
 
 if (isset($_GET['text'])) {
-    $searchType = 'text';
-    $searchValue = $_GET['text'];
-} elseif (isset($_GET['type'])) {
-    $searchType = 'type';
-    $searchValue = $_GET['type'];
+    $searchParams['text'] = $_GET['text'];
 }
 
+if (isset($_GET['min_price'])) {
+    $searchParams['min_price'] = $_GET['min_price'];
+}
+
+if (isset($_GET['max_price'])) {
+    $searchParams['max_price'] = $_GET['max_price'];
+}
+
+if (isset($_GET['type'])) {
+    $searchParams['type'] = $_GET['type'];
+}
+
+if (isset($_GET['brand'])) {
+    $searchParams['brand'] = $_GET['brand'];
+}
+
+
 if ($page > 1) {
-    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . $searchType . '=' . urlencode($searchValue) . '"><i class="fa fa-chevron-left"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '"><i class="fa fa-chevron-left"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
 }
 
 for ($i = 1; $i <= $totalPages; $i++) {
-    echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&' . $searchType . '=' . urlencode($searchValue) . '">' . $i . '</a></li>';
+    echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&' . http_build_query($searchParams) . '">' . $i . '</a></li>';
 }
 
 if ($page < $totalPages) {
-    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . $searchType . '=' . urlencode($searchValue) . '"><i class="fa fa-chevron-right"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) . '"><i class="fa fa-chevron-right"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-right"></i></li>';
 }
