@@ -31,7 +31,7 @@ include_once 'header.php'
       <p> A World Of Delightful Drinks</p>
         <p>Stay Hydrated And Refreshing</p>
      <div id="text-link-index">
-        <a href="shop.html">Shop Now</a>
+        <a href="shop.php">Shop Now</a>
      </div>
        
   </div>

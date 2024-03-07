@@ -3,13 +3,14 @@ require 'config.php';
 
 $productObj = new Product();
 
-// Pagination
+
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 12;
 $start = ($page - 1) * $limit;
 $searchText = isset($_GET['text']) ? $_GET['text'] : null;
-$products = $productObj->selectProducts($start, $limit, $searchText);
-$totalProducts = $productObj->getProductCount($searchText);
+$searchType = isset($_GET['type']) ? $_GET['type'] : null;
+$products = $productObj->selectProducts($start, $limit, $searchText, $searchType); 
+$totalProducts = $productObj->getProductCount($searchText, $searchType);
 $totalPages = ceil($totalProducts / $limit);
 
 $select = new Select();
@@ -79,7 +80,7 @@ include_once 'header.php'
   <button class="btn" id="btnfil" id="back1"  onclick="window.location.href='shop.php'">Show All</button>
     <button class="btn" id="btnfil" id="back1" onclick="window.location.href='shop.php?text=coca'">Coca-cola</button>
     <button class="btn" id="btnfil" id="back2"  onclick="window.location.href='shop.php?text=pepsi'">Pepsi</button>
-    <button class="btn" id="btnfil" id="back3" onclick="window.location.href='shop.php?text=fanta'">Fanta</button>
+    <button class="btn" id="btnfil" id="back3" onclick="window.location.href='shop.php?type=carbonated'" >Carbonated</button>
 
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
 
@@ -154,26 +155,34 @@ include_once 'header.php'
 <div id="containerpage">
     <div class="pages">
         <ul class="listPage">
-            <?php
-          
-            if ($page > 1) {
-                echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '"><i class="fa fa-chevron-left"></i></a></li>';
-            } else {
-                echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
-            }
+        <?php
+$searchType = ''; 
+$searchValue = '';
 
-      
-            for ($i = 1; $i <= $totalPages; $i++) {
-              echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&text=' . urlencode($searchText) . '">' . $i . '</a></li>';
-          }
+if (isset($_GET['text'])) {
+    $searchType = 'text';
+    $searchValue = $_GET['text'];
+} elseif (isset($_GET['type'])) {
+    $searchType = 'type';
+    $searchValue = $_GET['type'];
+}
 
-    
-            if ($page < $totalPages) {
-                echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '"><i class="fa fa-chevron-right"></i></a></li>';
-            } else {
-                echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-right"></i></li>';
-            }
-            ?>
+if ($page > 1) {
+    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . $searchType . '=' . urlencode($searchValue) . '"><i class="fa fa-chevron-left"></i></a></li>';
+} else {
+    echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
+}
+
+for ($i = 1; $i <= $totalPages; $i++) {
+    echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&' . $searchType . '=' . urlencode($searchValue) . '">' . $i . '</a></li>';
+}
+
+if ($page < $totalPages) {
+    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . $searchType . '=' . urlencode($searchValue) . '"><i class="fa fa-chevron-right"></i></a></li>';
+} else {
+    echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-right"></i></li>';
+}
+?>
         </ul>
     </div>
 </div>
@@ -221,7 +230,7 @@ include_once 'footer.php'
     overlay.style.display = 'none';
     htmlElement.style.overflowY = 'scroll';
   }
-  
+ 
   </script>
 
 
@@ -264,7 +273,7 @@ prev.onclick = function(){
 
 function reloadSlider(){
     slider.style.left = -items[active].offsetLeft + 'px';
-    // 
+  
     let last_active_dot = document.querySelector('.slidersss .dotsss li.activesss');
     last_active_dot.classList.remove('activesss');
     dots[active].classList.add('activesss');

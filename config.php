@@ -132,11 +132,15 @@ class Select extends Connection{
 
 class Product extends Connection {
     
-    public function selectProducts($start, $limit, $searchText = null) {
-        $query = "SELECT * FROM product";
+    public function selectProducts($start, $limit, $searchText = null, $searchType = null) {
+        $query = "SELECT * FROM product WHERE 1=1";
 
         if (!empty($searchText)) {
-            $query .= " WHERE name LIKE '%$searchText%'";
+            $query .= " AND name LIKE '%$searchText%'";
+        }
+
+        if (!empty($searchType)) {
+            $query .= " AND type LIKE '%$searchType%'";
         }
 
         $query .= " LIMIT $start, $limit";
@@ -145,11 +149,15 @@ class Product extends Connection {
         return $result;
     }
 
-    public function getProductCount($searchText = null) {
-        $query = "SELECT COUNT(*) as total FROM product";
+    public function getProductCount($searchText = null, $searchType = null) {
+        $query = "SELECT COUNT(*) as total FROM product WHERE 1=1";
 
         if (!empty($searchText)) {
-            $query .= " WHERE name LIKE '%$searchText%'";
+            $query .= " AND name LIKE '%$searchText%'";
+        }
+
+        if (!empty($searchType)) {
+            $query .= " AND type LIKE '%$searchType%'";
         }
 
         $result = mysqli_query($this->conn, $query);

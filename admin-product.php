@@ -372,7 +372,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
          <select name="type">
             <option value="0">Select Type</option>
             <option value="carbonated">Carbonated</option>
-            <option value="noncarbonated">Non-carbonated</option>
+            <option value="nogas">Non-carbonated</option>
           </select>
           <label> Brand:</label>
          <select name="brand" id="brand">

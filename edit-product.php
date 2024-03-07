@@ -323,7 +323,7 @@ $totalPages = ceil($totalProducts / $limit);
          <select name="type" id="type">
             <option value="0">Select Type</option>
             <option value="carbonated" <?php echo ($row['type'] == 'carbonated') ? 'selected' : ''; ?> >Carbonated</option>
-            <option value="noncarbonated" <?php echo ($row['type'] == 'noncarbonated') ? 'selected' : ''; ?>>Non-carbonated</option>
+            <option value="nogas" <?php echo ($row['type'] == 'nogas') ? 'selected' : ''; ?>>Non-carbonated</option>
           </select>
           <label> Brand:</label>
          <select name="brand" id="brand">
