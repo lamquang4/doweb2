@@ -271,7 +271,7 @@ transform: translate(0, -50%);
 /*index.html*/
 
 .commercial-index{
-  margin-top: 126px;
+  margin-top: 118px;
 
   width: 100%;
 background-color: #FDF2E9;
@@ -329,12 +329,14 @@ background-color: black;
 font-weight: 600;
 word-spacing: 1px;
 letter-spacing: 1px;
+border-radius: 6px;
+border:2px solid black;
 }
 
 .textBox-index a:hover {
 color: black;
 background: transparent;
-border:1.5px solid black;
+
 transition: 0.5s ease;
 }
 
