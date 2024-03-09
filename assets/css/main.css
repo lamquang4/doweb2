@@ -750,14 +750,14 @@ flex-direction: column;
 .box{
 
 width:560px;
-height: 580px;
+height: 620px;
 border-radius: 20px;
 margin-bottom: 25px;
 }
 .box img{
 
 width:560px;
-height: 320px;
+height: 360px;
 border-top-left-radius: 20px;
 border-top-right-radius: 20px;
 }
@@ -774,14 +774,14 @@ flex-direction: column;
 }
 .box{
 width:350px;
-height: 426px;
+height: 440px;
 
 border-radius: 20px;
 }
 .box img{
 
 width:350px;
-height: 200px;
+height: 230px;
 border-top-left-radius: 20px;
 border-top-right-radius: 20px;
 }
@@ -799,6 +799,7 @@ word-spacing: 1.2px;
 }
 .box #btn-blog{
 margin-left: 25px;
+font-size: 16px;
 }
 #bet h5{
 
@@ -822,7 +823,7 @@ flex-direction: column;
 }
 .box{
 width:300px;
-height: 420px;
+height: 430px;
 
 
 border-radius: 20px;
@@ -830,7 +831,7 @@ border-radius: 20px;
 .box img{
 
 width:300px;
-height: 200px;
+height: 205px;
 border-top-left-radius: 20px;
 border-top-right-radius: 20px;
 }
@@ -848,6 +849,7 @@ word-spacing: 1.2px;
 }
 .box #btn-blog{
 margin-left: 25px;
+font-size: 15px;
 }
 }
 @media (982px>= width >=769px){
@@ -910,7 +912,7 @@ flex-direction: column;
 }
 .box{
 width:490px;
-height: 560px;
+height: 580px;
 
 box-shadow: 0 10px 15px rgba(0,0,0,0.06);
 border-radius: 20px;
@@ -918,7 +920,7 @@ border-radius: 20px;
 .box img{
 
 width:490px;
-height: 320px;
+height: 330px;
 border-top-left-radius: 20px;
 border-top-right-radius: 20px;
 }
