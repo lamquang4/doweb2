@@ -2118,7 +2118,8 @@ margin-top: 120px;
       border: 1.5px solid black;
     }   
     #MainImg{
-      margin: 0 15%;
+     display: flex;
+     margin: 0 auto;
     width:60%;
     }
     #prodetails .single-pro-details {
@@ -2305,7 +2306,8 @@ font-size: 25px;
   border: 1.5px solid black;
 }   
 #MainImg{
-  margin: 0 15%;
+  display: flex;
+  margin: 0 auto;
 width:60%;
 }
 #prodetails .single-pro-details {
