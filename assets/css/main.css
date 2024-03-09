@@ -1325,34 +1325,46 @@ cursor: pointer;
 }
 
 #filter-buttons .btn {
-  border-radius: 25px;
-  padding: 6px 25px;
   background: #fff;
-  color:#767677;
-  font-size: 20px;
-
-  margin: 20px 8px;
+width: 64px;
+height: 64px;
 border: none;
+margin: 20px 24px;
+}
+.btn img{
+  width: 100%; 
+
+  display: flex;
+  justify-content: center;
+
 }
 #btn-ad-search{
+
   border: 1px solid black;
   background: white;
-  padding: 8px 20px;
+  padding: 10px 19px;
   font-size: 16px;
+margin-top: 20px;
 }
 #btn-ad-search i{
 
   font-size: 17px;
 }
+@media(481px <= width <= 680px){
+  #filter-buttons .btn {
+ 
+    width: 48px;
+    height: 48px;
+    margin: 6px 14px;
 
+}
+}
 @media(max-width:480px){
   #filter-buttons .btn  {
-    padding: 10px 12px;
-    background: #fff;
-    color: black;
-    font-size: 16px;
+    width: 46px;
+    height: 46px;
+    margin: 4px 12px;
 
-    margin: 2px 15px;
 }
 #filter-buttons{
   margin-top: 10px;
@@ -1365,11 +1377,10 @@ border: none;
 }
 @media(max-width:400px){
   #filter-buttons .btn {
-    border-radius: 3px;
-    padding: 7px 18px;
- 
-    font-size: 16px;
-    margin: 2px 12px;
+    width: 42px;
+    height: 42px;
+      margin: 4px 10px;
+  
 }
 #filter-buttons{
   margin-top: 10px;

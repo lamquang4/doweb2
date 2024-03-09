@@ -81,12 +81,15 @@ include_once 'header.php'
 
   <div  id="filter-buttons" style="margin-top: 12px;">
        
-  <button class="btn" id="btnfil" id="back1"  onclick="window.location.href='shop.php'">Show All</button>
-    <button class="btn" id="btnfil" id="back1" onclick="window.location.href='shop.php?text=coca'">Coca-cola</button>
-    <button class="btn" id="btnfil" id="back2"  onclick="window.location.href='shop.php?text=pepsi'">Pepsi</button>
-    <button class="btn" id="btnfil" id="back3" onclick="window.location.href='shop.php?type=carbonated'" >Carbonated</button>
-
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php'"><img src="assets/images/pic/all.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?text=coca'"><img  src="assets/images/pic/coca-circle.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?text=pepsi'"><img src="assets/images/pic/pepsilogo.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?type=sprite'"><img src="assets/images/pic/sprite-circle.png"></button>
+    <button class="btn" id="btnfil" style="border-radius: 50%; border: 2px solid black;" onclick="window.location.href='shop.php?type=carbonated'"><img src="assets/images/pic/soft-drinks.png"></button>
+ <div>
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+ </div>
+  
 
 </div>
 
