@@ -51,12 +51,12 @@ include_once 'header.php'
     <i id="left" class="fa-solid fa-arrow-left"></i>
     <div class="carousel">
 
+  
       <img src="assets/images/sp/drink11.png" alt="img" draggable="false" >
       <img src="assets/images/sp/drink3.png" alt="img" draggable="false" >  
       <img src="assets/images/sp/cocacommer.png" alt="img" draggable="false" >
-      <img src="assets/images/sp/fantacommer.png" alt="img" draggable="false" >
+     
       <img src="assets/images/sp/drink1.png" alt="img" draggable="false" >
-      <img src="assets/images/sp/drink2.png" alt="img" draggable="false">
      
      
     </div>
