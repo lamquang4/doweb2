@@ -260,7 +260,7 @@ $totalPages = ceil($totalProducts / $limit);
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>">g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>"></span> </p>
   
   </div>
   
@@ -350,7 +350,7 @@ $totalPages = ceil($totalProducts / $limit);
 
 <div class="user-input">
   <label>Date Add:</label>
-<input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">
+  <input type="date" name="date_add" id="date_add" value="<?php echo date('Y-m-d', strtotime($row['date_add'])); ?>">
 </div>
 <div class="user-input">
   <label>Description:</label>

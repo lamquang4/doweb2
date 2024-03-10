@@ -100,7 +100,7 @@ include_once 'header.php'
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <?php echo $productDec2; ?>g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <?php echo $productDec2; ?></span> </p>
   
   </div>
   

@@ -315,7 +315,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?">g</span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?"></span> </p>
   
   </div>
   
