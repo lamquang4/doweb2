@@ -309,8 +309,8 @@ $totalPages = ceil($totalProducts / $limit);
    <img  src="<?php echo $row['image']?>"  width="30%" style="align-items:center;" id="show-image">
 </div>
 
-<div style="display: flex; justify-content:center; margin-bottom: 5px;">
-   <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none;align-items:center;">
+<div>
+   <img id="preview-image" src="" alt="Preview Image" width="30%">
 </div>   
 
           <div class="user-input" style="display: none;" >
@@ -413,7 +413,7 @@ $totalPages = ceil($totalProducts / $limit);
  function ktrong() {
         
   var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
-    
+  var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
     for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();
@@ -421,6 +421,13 @@ $totalPages = ceil($totalProducts / $limit);
         if (inputValue === "") {
             alert("Please fill in all fields");
             return false;
+        }
+        if(inputsToCheckNumbers.includes(inputId)) {
+            var regex = /^[0-9]+$/; 
+            if (!regex.test(inputValue)) {
+                alert("Please enter a valid number for product description");
+                return false;
+            }
         }
     }
 

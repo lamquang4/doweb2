@@ -17,22 +17,22 @@ $totalPages = ceil($totalProducts / $limit);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
-  $name = $_POST['name'];
+  $name = trim($_POST['name']);
   $price = $_POST['price'];
   $image = $_POST['image'];
   $soluong = $_POST['soluong'];
   $date_add = DateTime::createFromFormat('Y-m-d', $_POST['date_add']);
   $date_add1 = $date_add->format('d-m-Y');
-  $ml = $_POST['ml'];
-  $calo = $_POST['calo'];
-  $fatg = $_POST['fatg'];
-  $fat = $_POST['fat'];
-  $sodiummg = $_POST['sodiummg'];
-  $sodium = $_POST['sodium'];
-  $carbong = $_POST['carbong'];
-  $carbon = $_POST['carbon'];
-  $sugarg = $_POST['sugarg'];
-  $proteing = $_POST['proteing'];
+  $ml = trim($_POST['ml']);
+  $calo = trim($_POST['calo']);
+  $fatg = trim($_POST['fatg']);
+  $fat = trim($_POST['fat']);
+  $sodiummg = trim($_POST['sodiummg']);
+  $sodium = trim($_POST['sodium']);
+  $carbong = trim($_POST['carbong']);
+  $carbon = trim($_POST['carbon']);
+  $sugarg = trim($_POST['sugarg']);
+  $proteing = trim($_POST['proteing']);
   $type = $_POST['type'];
  $brand = $_POST['brand'];
 
@@ -358,8 +358,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
  <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" >
 
         </div>
-<div style="display: flex; justify-content:center; margin-bottom: 5px;">
-   <img id="preview-image" src="" alt="Preview Image" width="30%" style="display: none;align-items:center;">
+<div  id="container-img-preview">
+   <img id="preview-image" src="" alt="Preview Image" width="30%">
 
 </div>
          
@@ -475,14 +475,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
+var previewimg = document.querySelector('#preview-image');
 showadd.onclick=function(){
   containerinputs.style.display="block";
   usertab.style.display="block";
+
 }
 function hideadd(){
   var container = document.getElementById('container-inputs');
     var inputs = container.querySelectorAll('input, select, textarea');
-
+    previewimg.style.display="none";
     inputs.forEach(function (input) {
         if (input.type !== 'button') {
             input.value = '';
@@ -491,6 +493,7 @@ function hideadd(){
     inputFields.forEach(input => (input.value = ''));
   containerinputs.style.display="none";
   usertab.style.display="none";
+  previewimg.style.display="none";
 
 }
 </script>
@@ -499,7 +502,7 @@ function hideadd(){
    function ktrong() {
         
     var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
-    
+ var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
     for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();
@@ -508,7 +511,15 @@ function hideadd(){
             alert("Please fill in all fields");
             return false;
         }
+        if(inputsToCheckNumbers.includes(inputId)) {
+            var regex = /^[0-9]+$/; 
+            if (!regex.test(inputValue)) {
+                alert("Please enter a valid number for product description");
+                return false;
+            }
+        }
     }
+    
 
     var typeSelect = document.getElementById("type");
     var brandSelect = document.getElementById("brand");

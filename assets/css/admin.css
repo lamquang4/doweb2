@@ -834,3 +834,13 @@ border: none;
     
     }
 }
+
+#preview-image{
+    display: none;
+    align-items:center;
+}
+#container-img-preview{
+    display: flex; 
+    justify-content:center; 
+    margin-bottom: 5px;
+}
