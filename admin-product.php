@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $price = $_POST['price'];
   $image = $_POST['image'];
   $soluong = $_POST['soluong'];
-  $date_add = $_POST['date_add'];
+  $date_add = DateTime::createFromFormat('Y-m-d', $_POST['date_add']);
+  $date_add1 = $date_add->format('d-m-Y');
   $ml = $_POST['ml'];
   $calo = $_POST['calo'];
   $fatg = $_POST['fatg'];
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   } 
 
 
-    $query = "INSERT INTO product (name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
+    $query = "INSERT INTO product (name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add1', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
@@ -400,7 +401,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
 <div class="user-input">
   <label>Date Add:</label>
-<input type="date" name="date_add" id="date_add">
+<input type="date" name="date_add" id="date_add" >
 </div>
 <div class="user-input">
   <label>Description:</label>
@@ -420,6 +421,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
 
 </html>
+
 
   <script>
   const popup = document.querySelector('.popup');
@@ -545,6 +547,7 @@ function hideadd(){
   }
 
 </script>
+
 
 
 
