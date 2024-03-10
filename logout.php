@@ -1,9 +1,10 @@
 <?php
-require('config.php');
-session_name("user_session"); 
+session_start();
    
-$_SESSION = array();
-session_destroy();
+if(isset($_SESSION["login"])) {
+    unset($_SESSION["login"]); 
+}
    
 header("Location: login.php");
+exit;
 ?>

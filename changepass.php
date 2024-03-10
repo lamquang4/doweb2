@@ -1,4 +1,15 @@
+<?php
+require 'config.php';
 
+$select = new Select();
+if(isset($_SESSION["id"])){
+    $user = $select->selectUserById($_SESSION["id"]);
+    
+  }else{
+    header("Location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

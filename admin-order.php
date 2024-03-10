@@ -1,7 +1,6 @@
 <?php
 require 'config.php';
 
-
 if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();

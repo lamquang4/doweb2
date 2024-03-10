@@ -38,7 +38,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
       </a>
       </li>
      
-      <?php if(isset($_SESSION["id"])) { ?>
+      <?php if(isset($_SESSION["login"])) { ?>
            
             <li id="menu" id="lg-user">
                 <a id="userlogin" onclick="toggleMenu()">

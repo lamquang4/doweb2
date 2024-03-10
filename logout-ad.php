@@ -1,9 +1,10 @@
 <?php
-require('config.php');
-session_name("admin_session"); 
-   
-$_SESSION = array();
-session_destroy();
-   
+session_start(); 
+
+if(isset($_SESSION["loginad"])) {
+    unset($_SESSION["loginad"]); 
+}
+
 header("Location: login-admin.php");
+exit();
 ?>

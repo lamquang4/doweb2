@@ -6,7 +6,10 @@ if(isset($_SESSION["id"])){
     $user = $select->selectUserById($_SESSION["id"]);
     
   }
-
+  if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <link rel="stylesheet" href="assets/css/main.css">

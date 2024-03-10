@@ -22,6 +22,11 @@ $select = new Select();
 if(isset($_SESSION["id"])){
     $user = $select->selectUserById($_SESSION["id"]);
 }
+
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+  header("Location: login.php");
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
