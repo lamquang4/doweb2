@@ -9,6 +9,10 @@ if(isset($_SESSION["id"])){
     header("Location: login.php");
 }
 
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+    header("Location: login.php");
+exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

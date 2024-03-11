@@ -39,12 +39,7 @@ include_once 'header.php'
         </form>
    </div>
    </div>
-   <div class="popup" id="popup">
-    <img src="assets/images/pic/404-tick.png">
-    <h2>Thank you!</h2>
-    <p>Mail has been sent</p>
-    <button type="button" onclick="closePopup()">OK</button>
-         </div>
+
  </section>
  <?php
 include_once 'footer.php'
