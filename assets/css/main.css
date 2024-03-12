@@ -291,7 +291,7 @@ justify-content: space-between;
   flex: 0.5;
 }
 .imgBox-index img{
-width: 510px;
+width: 515px;
 height: 520px;
 margin-top: 40px;
 
@@ -346,7 +346,7 @@ transition: 0.5s ease;
 @media(max-width:1250px){
   .commercial-index{
 
-    padding: 10px 120px 0px 120px;
+    padding: 20px 120px 0px 120px;
   
   }
 
@@ -360,8 +360,8 @@ font-size: 17px;
 }
 
 .imgBox-index img{
-width: 420px;
-height: 510px;
+width: 435px;
+height: 500px;
 }
 }
 @media(max-width:1000px){
