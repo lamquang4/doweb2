@@ -70,7 +70,7 @@ include_once 'header.php'
   <div class="box">
     <img src="assets/images/pic/alldrinks.png">
     <h2 style="letter-spacing: 0.5px;">Enjoy our fresh drinks </h2>
-    <p style="padding-bottom: 5px; letter-spacing: 0.8px;">We are always proactive in understanding user needs and 
+    <p style="padding-bottom: 5px; letter-spacing: 0.8px;">We are always proactive in understand user needs and 
       are passionate about creating drinks with great flavors</p>
       <button id="btn-blog" onclick="window.location.href='brand.html'">Learn More <i class="fa-solid fa-arrow-right"></i></button>
     </div>
