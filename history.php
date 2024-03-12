@@ -94,7 +94,7 @@
                                         <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00</p>
                                         <hr>
                                         <div class="float-right" >
-                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.html"><i class="icofont-headphone-alt"></i> DETAIL</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php"><i class="icofont-headphone-alt"></i> DETAIL</a>
                                            
                                         </div>
                                     </div>
