@@ -35,7 +35,7 @@ exit();
                    <div class="osahan-account-page-left bg-white h-100" >
                        <div class="border-bottom p-4" >
                             <div style="display: flex; justify-content: center;" id="logo-history">
-        <img src="assets/images/pic/logo.png" width="52%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
+        <img src="assets/images/pic/logo.png" width="50%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
     </div>
                        </div>
                      
@@ -53,10 +53,10 @@ exit();
                    </div>
                </div>
                <div class="col-md-9" style="border: 1px solid #DFDFDF;">
-                   <div class="osahan-account-page-right  bg-white p-4 h-100">
+                   <div class="osahan-account-page-right  bg-white p-2 h-100">
                        <div class="tab-content" id="myTabContent">
                         <div class="col-md-9">
-                            <div class="tab-content">
+                            <div class="card-body pb-2">
                                 <div class="tab-pane fade active show" id="account-general">
                                     <div class="card-body media align-items-center">
                                     <img src="<?php echo $user['imguser']; ?>" alt class="d-block ui-w-80" id="userImage">
@@ -123,14 +123,14 @@ exit();
                         </div>
                   
                        </div>
-                       
+                       <div class="text-right mt-3" id="profile-button">
+                    <button type="button" class="btn btn-default" id="button-go-back"  onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                    <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>&nbsp;
+                   
+                </div>
                    </div>
                </div>
-               <div class="text-right mt-3" id="profile-button">
-                <button type="button" class="btn btn-default" onclick="window.location.href='shop.php'">Back</button>
-                <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>&nbsp;
-               
-            </div>
+        
            </div>
            
        </div>

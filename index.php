@@ -1,6 +1,5 @@
 <?php
 require 'config.php';
-
 $select = new Select();
 if(isset($_SESSION["id"])){
     $user = $select->selectUserById($_SESSION["id"]);
@@ -25,19 +24,19 @@ if(isset($_SESSION["id"])){
 include_once 'header.php'
   ?>
 
- <section class="commercial-index">
+<section class="commercial-index" >
   <div class="content-index">
   <div class="textBox-index">
-  <h2>Explore<br><span>Our Shop</span></h2>
+      <h2>Explore Our<br><span>Shop Now</span></h2>
       <p> A World Of Delightful Drinks</p>
         <p>Stay Hydrated And Refreshing</p>
      <div id="text-link-index">
-        <a href="shop.php">Shop Now</a>
+        <a href="shop.html">Shop Now</a>
      </div>
        
   </div>
   <div class="imgBox-index">
-      <img src="assets/images/sp/drinkss2.png">
+      <img src="assets/images/pic/test4.png" class="pepsi">
   </div>
   </div>
 

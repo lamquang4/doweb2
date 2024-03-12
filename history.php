@@ -19,7 +19,7 @@
             <div class="osahan-account-page-left  bg-white h-100">
                 <div class="border-bottom p-4">
                     <div style="display: flex; justify-content: center;"  id="logo-history">
-                        <img src="assets/images/pic/logo.png" width="52%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
+                        <img src="assets/images/pic/logo.png" width="50%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
                     </div>
                                    
                 </div>
@@ -64,7 +64,8 @@
                                             <p class="text-gray mb-1">x2</p>
                                             
                                           </div>
-                                        <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
+                                        
+                                        <p  style="color: #26aa99;" id="successful"><i class="fa-solid fa-truck"></i> Delivery successful</p>
                                     
                                         <hr>
                                       
@@ -86,13 +87,14 @@
                                             <p class="text-gray mb-1">x2</p>
                                            
                                           </div>
-                                        <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
+                                
+                                        
+                                        <p  style="color: #26aa99;" id="successful"><i class="fa-solid fa-truck"></i> Delivery successful </p>
                                       
-                                        <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total:</span> $60.00
-                                        </p>
+                                        <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00</p>
                                         <hr>
                                         <div class="float-right" >
-                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php"><i class="icofont-headphone-alt"></i> DETAIL</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.html"><i class="icofont-headphone-alt"></i> DETAIL</a>
                                            
                                         </div>
                                     </div>
@@ -117,12 +119,13 @@
                                         </h6>
                                         <div class="flex-container">
                                            
-                                           <p class="mb-3">$10.00</p>
-                                           <p class="text-gray mb-1">x6</p>
-                                         </div>
-                                        <p  style="color: #26aa99;">Delivery successful <i class="fa-solid fa-truck"></i></p>
+                                            <p class="mb-3">$10.00</p>
+                                            <p class="text-gray mb-1">x6</p>
+                                          </div>
+                                      
+                                        <p  style="color: #26aa99;" id="successful"> <i class="fa-solid fa-truck"></i> Delivery successful</p>
                                     
-                                        <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total:</span> $60.00
+                                        <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00
                                         </p>
                                         <hr>
                                         <div class="float-right">
@@ -139,7 +142,13 @@
 
                     </div>
                 </div>
+                <div class="text-right mt-3" id="profile-button">
+                    <button type="button" class="btn btn-default" id="button-go-back"  onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                   
+                </div>
             </div>
+            
         </div>
     </div>
 </div>

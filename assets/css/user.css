@@ -2,6 +2,7 @@ body {
     background: #f5f5f5;
     margin-top: 20px;
 }
+
 .container{
     margin: 12px 0;
     }
@@ -99,10 +100,7 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     padding     : 0.85rem 1.5rem;
     border-color: rgba(24, 28, 33, 0.03) !important;
 }
-#profile-button{
-   margin:0px 20px 0px 0px;
 
-}
 .purchase-group{
     display: flex;
     justify-content: space-between;
@@ -118,18 +116,45 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 hr{
    height: 1.2px;
 }
+#profile-button{
+    margin: 10px 0;
 
+   }
+   #button-go-back{
+    margin-right: 8px;
+    color:white;
+ word-spacing: 1.4px;
+    background-color: #ee5435;
 
+   }
+   #button-go-back:hover{
+  background-color: #cd2525;
+
+   }
+ 
+   @media(max-width:1200px) {
+    #logo-history img{
+        width: 60%;
+        }     
+}
+@media(max-width:992px) {
+    #logo-history img{
+        width: 80%;
+        }     
+}
 @media(max-width:768px){
     #logo-history img{
         width: 25%;
         }   
+        .container{
+            margin: 4px 0 8px 0;
+        }
 }
 @media(max-width:480px){
  #logo-history img{
-width: 35%;
+width: 32%;
 }  
 .container{
     margin: 0px; 
-} 
+}  
 }

@@ -22,7 +22,6 @@ exit();
     <meta name="viewport" content="width=device-width, initial-scale=0.9,maximum-scale=1">
     <title>Profile</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="icon" type="image/png" href="assets/images/pic/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="assets/css/user.css">
@@ -54,7 +53,7 @@ exit();
                    <div class="osahan-account-page-left  bg-white h-100">
                        <div class="border-bottom p-4">
                         <div style="display: flex; justify-content: center;"  id="logo-history">
-                            <img src="assets/images/pic/logo.png" width="52%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
+                            <img src="assets/images/pic/logo.png" width="50%" style="cursor: pointer;" onclick="window.location.href='index.php' " id="logo-history">
                         </div>
                                         
                        </div>
@@ -92,14 +91,15 @@ exit();
                                 </div>
                             </div>
                         </div>
+                        <div class="text-right mt-3" id="profile-button">
+                    <button type="button" class="btn btn-default" id="button-go-back"  onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                   
+                </div>
                    </div>
                    
                </div>
-               <div class="text-right mt-3" id="profile-button">
-                <button type="button" class="btn btn-default" onclick="window.location.href='shop.php'">Back</button>
-                <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-               
-            </div>
+      
         
            
             </div>

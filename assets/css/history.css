@@ -3,8 +3,8 @@ body{
     background:#eee;
 }
 .container{
-    margin: 12px 0;
-    }
+margin: 12px 0;
+}
 
 .payments-item img.mr-3 {
     width: 47px;
@@ -123,29 +123,62 @@ body{
 a:hover{
     text-decoration:none;
 }
-@media(max-width:768px){
-    #logo-history img{
-        width: 25%;
-        }   
-}
-@media(max-width:480px){
- #logo-history img{
-width: 35%;
-}  
-.container{
-    margin: 0px; 
-}  
-}
 .flex-container p{
     display: inline;
    }
    .flex-container p:nth-child(1){
      margin-right: 20px;
- 
+   
     font-size: 18px;
     font-weight: 600;
    }
    #total-money{
      font-size: 20px;
    }
- 
+   #profile-button{
+    margin: 10px 0;
+
+   }
+   #button-go-back{
+    margin-right: 8px;
+    color:white;
+ word-spacing: 1.5px;
+    background-color: #ee5435;
+
+   }
+   #button-go-back:hover{
+  background-color: #cd2525;
+
+   }
+   @media(max-width:1200px) {
+    #logo-history img{
+        width: 60%;
+        }     
+}
+@media(max-width:992px) {
+    #logo-history img{
+        width: 80%;
+        }     
+}
+@media(max-width:768px){
+    #logo-history img{
+        width: 25%;
+        }   
+        .container{
+            margin: 4px 0 8px 0;
+        }
+}
+@media(max-width:480px){
+ #logo-history img{
+width: 32%;
+}  
+.container{
+    margin: 0px; 
+}  
+}
+@media(max-width:400px){
+    #successful{
+        font-size: 15px;
+    }
+}
+
