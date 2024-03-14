@@ -33,11 +33,16 @@ exit();
         <div class="card-body">
             <h6>Order ID: OD45345345435</h6>
             <article class="card">
-                <div class="card-body row">
-                  <div class="col"> <strong>Date Order:</strong> 21-4-2021</div>
-                    <div class="col"> <strong>Delivery Date:</strong> 23-4-2021</div>
-                  
-                   
+                <div class="card-body col">
+                <div class="row" style="display: flex; justify-content: flex-start;"> 
+                
+                <span style="margin-right: 25px;"><strong>Date Order:</strong> 21-4-2021    </span> 
+              
+               
+            
+                  <span> <strong>Delivery Date:</strong> 23-4-2021</span> 
+             
+            </div>
                    
                 </div>
             
