@@ -720,7 +720,7 @@ display: none;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
-    z-index: 1; 
+    z-index: 999; 
 }
 .user-tab label{
     font-size: 17px;
@@ -728,7 +728,7 @@ display: none;
 }
 .user-tab{
     width: 410px;
-
+border: 1.5px solid black;
     position: fixed;
     top:50%;
     left: 50%;
@@ -761,7 +761,7 @@ display: none;
     padding: 3px 0;
 }
 .user-tab button{
-    padding: 5px 12px;
+    padding: 12px 35px;
 
     font-size: 16px;
     font-weight: 500;
@@ -842,5 +842,34 @@ border: none;
 #container-img-preview{
     display: flex; 
     justify-content:center; 
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
+    
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .btn-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+cursor: pointer;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .btn-upload i{
+    font-size: 30px;
+  margin-top: 6px;
+  }
+  .upload-btn-wrapper #fimage1 {
+
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }

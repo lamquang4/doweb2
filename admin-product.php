@@ -353,13 +353,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
   <label>Name:</label>
 <input type="text" name="name" id="name">
 </div>
-<div class="user-input" >
-  <label>Image:</label>
- <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" >
 
+<div class="user-input" style="margin-bottom: 10px;">
+  <label>Image:</label>
+ <div class="upload-btn-wrapper">
+    <button class="btn-upload">Upload Image <br> <i class="fa-solid fa-cloud-arrow-up"></i></button>
+    <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" />
+  </div>
         </div>
-<div  id="container-img-preview">
-   <img id="preview-image" src="" alt="Preview Image" width="30%">
+
+<div id="container-img-preview">
+   <img id="preview-image" src="" alt="Preview Image" width="25%">
 
 </div>
          

@@ -28,7 +28,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
           <!-- Title -->
           <div class="d-flex justify-content-between align-items-center py-3">
             <h2 class="h5 mb-0" style="font-size: 36px;"><a href="#" class="text-muted"></a> Order #555</h2>
-            <img src="assets/images/pic/logo.png" id="h2o-logo" width="12%">
+          
           </div>
         
           <!-- Main content -->

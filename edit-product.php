@@ -300,17 +300,20 @@ $totalPages = ceil($totalProducts / $limit);
 <input type="text" name="name" id="name" value="<?php echo $row['name']?>">
 </div>
 
-<div class="user-input" >
+<div class="user-input" style="margin-bottom: 10px;">
   <label>Image:</label>
- <input type="file" name="fimage1" id="fimage1" onchange="previewImage()">
+  <div class="upload-btn-wrapper">
+    <button class="btn-upload">Upload Image <br> <i class="fa-solid fa-cloud-arrow-up"></i></button>
+    <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" />
+  </div>
         </div>
 
-<div style="display: flex; justify-content:center; margin-bottom: 5px;">
-   <img  src="<?php echo $row['image']?>"  width="30%" style="align-items:center;" id="show-image">
+<div style="display: flex; justify-content:center; margin-bottom: 8px;">
+   <img  src="<?php echo $row['image']?>"  width="25%" style="align-items:center;" id="show-image">
 </div>
 
-<div>
-   <img id="preview-image" src="" alt="Preview Image" width="30%">
+<div style="display: flex; justify-content:center; margin-bottom: 8px;">
+   <img id="preview-image" src="" alt="Preview Image" width="25%">
 </div>   
 
           <div class="user-input" style="display: none;" >
