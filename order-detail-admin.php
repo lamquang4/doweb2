@@ -55,7 +55,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                               <img src="assets/images/sp/cocaori.png" alt="" width="50" class="img-fluid">
                             </div>
                             <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Coca Original</a></h6>
+                              <h6 class="small mb-0"><a class="text-reset">Coca Original</a></h6>
                               <span class="small">Price: $13.00</span>
                             
                             </div>
@@ -71,7 +71,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                               <img src="assets/images/sp/pepsi.png" alt="" width="50" class="img-fluid">
                             </div>
                             <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Pepsi Original</a></h6>
+                              <h6 class="small mb-0"><a class="text-reset">Pepsi Original</h6>
                               <span class="small">Price: $12.00</span>
                             </div>
                           </div>
