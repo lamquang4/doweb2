@@ -27,11 +27,11 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
         <div class="container">
           <!-- Title -->
           <div class="d-flex justify-content-between align-items-center py-3">
-            <h2 class="h5 mb-0" style="font-size: 36px;"><a href="#" class="text-muted"></a> Order #555</h2>
+            <h2 class="h5 mb-0" style="font-size: 28px;"><a href="#" class="text-muted"></a> Order #555</h2>
           
           </div>
         
-          <!-- Main content -->
+   
           <div class="row">
             <div class="col-lg-8">
               <!-- Details -->
@@ -55,7 +55,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                               <img src="assets/images/sp/cocaori.png" alt="" width="50" class="img-fluid">
                             </div>
                             <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Coca Original x2</a></h6>
+                              <h6 class="small mb-0"><a href="#" class="text-reset">Coca Original</a></h6>
                               <span class="small">Price: $13.00</span>
                             
                             </div>
@@ -71,7 +71,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                               <img src="assets/images/sp/pepsi.png" alt="" width="50" class="img-fluid">
                             </div>
                             <div class="flex-lg-grow-1 ms-3">
-                              <h6 class="small mb-0"><a href="#" class="text-reset">Pepsi Original x3</a></h6>
+                              <h6 class="small mb-0"><a href="#" class="text-reset">Pepsi Original</a></h6>
                               <span class="small">Price: $12.00</span>
                             </div>
                           </div>
