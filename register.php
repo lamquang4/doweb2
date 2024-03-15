@@ -54,7 +54,7 @@ if (isset($_POST["submit"])) {
 
 <!DOCTYPE html>
 
-<link rel="icon" type="image/png" href="assets/images/pic/logo.png">
+<link rel="icon" type="image/png" href="assets/images/pic/logo1.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/register.css">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>

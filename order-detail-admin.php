@@ -12,7 +12,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="assets/images/pic/logo.png">
+    <link rel="icon" type="image/png" href="assets/images/pic/logo1.png">
     <meta charset="UTF-8">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/admin-order.css">

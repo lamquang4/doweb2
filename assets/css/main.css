@@ -128,7 +128,7 @@ width:100%;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 12px 80px 12px 30px;
+padding: 12px 80px 12px 40px;
 background-color: white;
 box-shadow: 0.5px 5px 15px rgba(0,0,0,0.09);
 position: fixed;
@@ -2166,7 +2166,9 @@ margin-top: 120px;
   flex-basis: 32%;
   cursor: pointer;
   }
-
+  #header{
+    padding: 12px 40px 12px 20px;
+  }
 #icons{
 
 display: flex;
