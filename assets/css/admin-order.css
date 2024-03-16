@@ -73,14 +73,27 @@ body{margin-top:20px;
 width: 100px;
 height: 40px;
   }
-  
+  @media(max-width:550px){
+    .container-order-detail{
+        max-width: 500px;
+               padding: 0;
+           }
+  }
     @media(max-width:480px){
         #order-detail-table{
-            width: 150%;
+            width: 140%;
+        }
+        .container-order-detail{
+     max-width: 430px;
+            padding: 0;
         }
     }
     @media(max-width:400px){
         #order-detail-table{
-            width: 180%;
+            width: 170%;
+        }
+        .container-order-detail{
+            max-width: 370px;
+ 
         }
     }

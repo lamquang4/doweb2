@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="invoice-title">
                          
-                            <h4 class="float-end font-size-15" style="margin-bottom: 10px;text-align: center;">ORDER <span style="font-weight: 400;margin-left: 5px;"> #DS0204 </span> <span class="badge bg-success font-size-11 ms-2" style="color: white;font-size: 16px; padding: 6px 10px;margin-left: 5px;">Shipping</span></h4>
+                            <h4 class="float-end font-size-15" style="margin-bottom: 10px;text-align: center;">ORDER <span style="font-weight: 400;margin-left: 4px;"> #DS0204 </span> <span class="badge bg-success font-size-11 ms-2" style="color: white;font-size: 16px; padding: 6px 10px;margin-left: 4px;">Shipping</span></h4>
                       
                             <hr>
                              <div>
