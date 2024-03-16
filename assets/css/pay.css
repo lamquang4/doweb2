@@ -238,19 +238,22 @@ body{margin-top:20px;
     .logo-img{
         cursor: pointer;
     }
+    .logo-img{
+        width: 110px;
+       }
     @media(max-width:768px) {
-        .logo-img{
-            width: 15%;
-        }
-       
+  
     }
     @media(max-width:480px) {
         .logo-img{
-            width: 28%;
+            width: 100px;
         }
     }
     @media(max-width:400px){
         #continue-shopping-btn{
             font-size: 14px;
+        }
+        .logo-img{
+            width: 95px;
         }
     }

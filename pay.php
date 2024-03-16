@@ -28,7 +28,7 @@ if(isset($_SESSION["id"])){
 </head>
 <body>
 <div style="display: flex; justify-content: center; margin: 15px 0;" >
-    <img class="logo-img" src="assets/images/pic/logo.png" width="8%" onclick="window.location.href='index.php'">
+    <img class="logo-img" src="assets/images/pic/logo.png" onclick="window.location.href='index.php'">
 </div>
   <div class="containerx">
 
@@ -230,6 +230,18 @@ if(isset($_SESSION["id"])){
                           </li>
 
                       </ol>
+
+
+                      <div class="row my-4">
+                        <div class="float-start">
+                    
+                     <a href="shop-user.html" class="btn btn-link text-muted" id="continue-shopping-btn" style="margin-right: 10px;"><i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>                
+             
+                     <a  class="btn btn-success" id="success-pay-btn"><i class="mdi mdi-cart-outline me-1"></i> Procced </a>                       
+                        
+                    </div>
+                    </div>
+
                   </div>
               </div>
   
@@ -323,24 +335,7 @@ if(isset($_SESSION["id"])){
                       </div>
                   </div>
               </div>
-              <div class="row my-4">
-                <div class="col">
-                    <a href="shop.php" class="btn btn-link text-muted" id="continue-shopping-btn">
-                        <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
-                </div> <!-- end col -->
-                <div class="col">
-                    <div class="text-end mt-2 mt-sm-0">
-                 <button id="btn-pay-buy" style="border: none; background-color: #ffffff;">
-                     <a  class="btn btn-success">
-                            <i class="mdi mdi-cart-outline me-1"></i> Procced 
-                          </a>
-                 </button>
-                       
-                 
-                      
-                    </div>
-                </div> <!-- end col -->
-            </div> <!-- end row-->
+   
           </div>
           
       </div>
