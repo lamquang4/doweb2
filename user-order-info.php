@@ -29,14 +29,17 @@ exit();
 <body>
   <div class="container">
     <article class="card">
-        <header class="card-header"> My Orders</header>
+    <header class="card-header" style="display: flex; justify-content: start; align-items: center;"> 
+        <h3 style="font-size: 17px; font-weight: 600; margin-right: 15px;">My Orders</h3>
+        <h3 style="font-size: 17px;">ID: OD45345345435</h3>
+        </header>
         <div class="card-body">
-            <h6>Order ID: OD45345345435</h6>
+         
             <article class="card">
                 <div class="card-body col">
                 <div class="row" style="display: flex; justify-content: flex-start;"> 
                 
-                <span style="margin-right: 25px;"><strong>Date Order:</strong> 21-4-2021    </span> 
+                <span style="margin-right: 25px; margin-left: 10px;"><strong>Date Order:</strong> 21-4-2021    </span> 
               
                
             
@@ -126,7 +129,7 @@ exit();
           <h6>Delivery Address</h6>
           <article class="card">
             <div class="card-body row"  style="padding-bottom: 0;">
-              <div class="col"> <strong>Lam Dieu Quang </strong><br> (+17) 637745710</div>
+            <div class="col"> <strong>Lam Dieu Quang </strong><br> (+17) 637745710 <br>xyz@emxaple.com</div>
               <div class="col"> <strong>Address:</strong> 45 Beaver St KLOIW wewrw rwrwr</div>
              
          
