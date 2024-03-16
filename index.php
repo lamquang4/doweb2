@@ -31,7 +31,7 @@ include_once 'header.php'
       <p> A World Of Delightful Drinks</p>
         <p>Stay Hydrated And Refreshing</p>
      <div id="text-link-index">
-        <a href="shop.html">Shop Now</a>
+        <a href="shop.php">Shop Now</a>
      </div>
        
   </div>
@@ -72,14 +72,14 @@ include_once 'header.php'
     <h2 style="letter-spacing: 0.5px;">Enjoy our fresh drinks </h2>
     <p style="padding-bottom: 5px; letter-spacing: 0.8px;">We are always proactive in understand user needs and 
       are passionate about creating drinks with great flavors</p>
-      <button id="btn-blog" onclick="window.location.href='brand.html'">Learn More <i class="fa-solid fa-arrow-right"></i></button>
+      <button id="btn-blog" onclick="window.location.href='brand.php'">Learn More <i class="fa-solid fa-arrow-right"></i></button>
     </div>
   <div class="box">
     <img src="assets/images/pic/cocafamily1.png">
     <h2 style="letter-spacing: 0.5px;">For a world without waste</h2>  
     <p style="padding-bottom: 5px; letter-spacing: 0.8px;">We contribute to solving packaging problems
       through investments in the environment and packaging processes</p>
-      <button id="btn-blog" onclick="window.location.href='shop.html'">Learn More <i class="fa-solid fa-arrow-right"></i></button>
+      <button id="btn-blog" onclick="window.location.href='shop.php'">Learn More <i class="fa-solid fa-arrow-right"></i></button>
     </div>
  </section>
  <?php

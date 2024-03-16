@@ -235,7 +235,7 @@ if(isset($_SESSION["id"])){
                       <div class="row my-4">
                         <div class="float-start">
                     
-                     <a href="shop-user.html" class="btn btn-link text-muted" id="continue-shopping-btn" style="margin-right: 10px;"><i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>                
+                     <a href="shop.php" class="btn btn-link text-muted" id="continue-shopping-btn" style="margin-right: 10px;"><i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>                
              
                      <a  class="btn btn-success" id="success-pay-btn"><i class="mdi mdi-cart-outline me-1"></i> Procced </a>                       
                         
@@ -392,10 +392,6 @@ disappearaddress.style.display="none";
     
     }
 
-    const btnbuy = document.querySelector('#btn-pay-buy');
-    btnbuy.onclick=function(){
-        alert('Successful payment');
-        window.location.href='shop.php';
-    }
+
 </script>
 

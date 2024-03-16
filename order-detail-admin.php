@@ -137,7 +137,7 @@
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.html'">Back</a> 
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php'">Back</a> 
                                 </div>
                             </div>
                         </div>
