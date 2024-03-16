@@ -35,10 +35,10 @@
                             <div class="col-sm-6">
                               
                                  <div >
-                                  <h5 class="font-size-16 mb-3" style="font-weight: 500;color: black;">Order Information</h5>
-                          <h5 class="mb-3" style="font-size: 17px;">Payment Method:<span style="font-weight: 400;"> COD</span></h5>
-                          <h5 class="mb-3" style="font-size: 17px;">Date Order:<span style="font-weight: 400;"> 22-11-2021</span></h5>
-                          <h5 class="mb-3" style="font-size: 17px;">Estimated Delivery Date:<span style="font-weight: 400;"> 25-11-2021</span></h5>
+                                 <h5 class="font-size-16 mb-2">Order Information:</h5>
+                          <h3 class="h6">Payment Method:<span style="font-weight: 400;"> COD</span></h5>
+                          <h3 class="h6">Date Order:<span style="font-weight: 400;"> 22-11-2021</span></h5>
+                          <h3 class="h6">Estimated Delivery Date:<span style="font-weight: 400;"> 25-11-2021</span></h3>
                       </div>
                             </div>
                        
@@ -46,7 +46,7 @@
                               <div class="text-sm-end">
                              
                                   <div class="mt-4">
-                                      <h5 class="mb-1" style="font-size: 17px;">Note: <span style="font-weight: 400;"> If you cannot send the complete order within 10 days, please inform me immediately.</span></h5>
+                                      <h3 class="mb-1" style="font-size: 16px;">Note: <span style="font-weight: 400;"> If you cannot send the complete order within 10 days, please inform me immediately.</span></h5>
                                     
                                   </div>
                              
@@ -65,7 +65,7 @@
                               <table class="table table-borderless" id="order-detail-table">
                                 <thead>
                                   <tr style="border-bottom: 1px solid black;">
-                               <th>No</th>
+                               <th>No.</th>
                                       <th style="text-align: left; padding-left: 30px;">Item</th>
                                       <th>Quantity</th>
                                       <th >Subtotal</th>
