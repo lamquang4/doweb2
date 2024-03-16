@@ -72,10 +72,10 @@ exit();
                    </div>
                    
                </div>
-               <div class="col-md-9" style="border: 1px solid #DFDFDF;">
+               <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 0px; padding-right: 0px;">
                    <div class="osahan-account-page-right bg-white p-2 h-100">
                        <div class="tab-content" id="myTabContent">
-                        <div class="col-md-9">
+                        <div class="col-md-9" style="padding-left: 0px; padding-right: 0px;">
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label class="form-label">Current password</label>
@@ -89,13 +89,16 @@ exit();
                                     <label class="form-label">Confirm new password</label>
                                     <input type="password" class="form-control">
                                 </div>
+
+                                <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
+                                        <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                                       
+                                    </div>
+
                             </div>
                         </div>
-                        <div class="text-right mt-3" id="profile-button">
-                    <button type="button" class="btn btn-default" id="button-go-back"  onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                   
-                </div>
+                
                    </div>
                    
                </div>

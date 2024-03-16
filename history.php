@@ -38,7 +38,7 @@
                
             </div>
         </div>
-        <div class="col-md-9" style="border: 1px solid #DFDFDF;" class="right-containers">
+        <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 6px; padding-right: 6px ;" class="right-containers">
             <div class="osahan-account-page-right  bg-white p-2 h-100">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane  fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -140,13 +140,15 @@
                             </div>
                         </div>
 
+                        <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
+                                        <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                                       
+                                    </div>
+
                     </div>
                 </div>
-                <div class="text-right mt-3" id="profile-button">
-                    <button type="button" class="btn btn-default" id="button-go-back"  onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                   
-                </div>
+               
             </div>
             
         </div>
