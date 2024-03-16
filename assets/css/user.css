@@ -139,7 +139,7 @@ hr{
 
    }
    .logo-user{
-    width: 110px;
+    width: 105px;
    }
 
    @media (min-width: 576px){
@@ -181,13 +181,13 @@ html{
 }
 
 .logo-user{
-    width: 100px;
+    width: 95px;
    }
 }
 @media(max-width:400px){
   
  
     .logo-user{
-        width: 95px;
+        width: 90px;
        }
     }

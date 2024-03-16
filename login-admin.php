@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
     
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="icon" type="image/png" href="assets/images/pic/logo1.png">
+    <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
     <link rel="stylesheet" href="assets/css/lg-admin.css">
          
     <title>Login For Admin</title> 

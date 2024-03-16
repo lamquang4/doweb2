@@ -128,7 +128,7 @@ width:100%;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 12px 80px 12px 40px;
+padding: 24px 80px 24px 80px;
 background-color: white;
 box-shadow: 0.5px 5px 15px rgba(0,0,0,0.09);
 position: fixed;
@@ -157,7 +157,7 @@ font-size: 21px;
 color: black;
 }
 .logo{
-  width: 118px;
+  width: 105px;
 }
 .dropdown__icon img{
 
@@ -271,7 +271,7 @@ transform: translate(0, -50%);
 /*index.html*/
 
 .commercial-index{
-  margin-top: 118px;
+  margin-top: 100px;
   width: 100%;
 background-color: #FDF2E9;
   padding: 18px 120px 0px 180px;
@@ -436,7 +436,7 @@ height: 380px;
 @media (max-width:600px){
  
   .commercial-index{
-    margin-top: 120px;
+    margin-top: 85px;
     padding: 40px 0px 0px 0px;
     
     }
@@ -483,7 +483,7 @@ height: 455px;
 }
 @media(max-width:480px){
 .commercial-index{
-margin-top: 99px;
+margin-top: 90px;
 padding: 20px 0px 0px 0px;
 
 }
@@ -947,7 +947,7 @@ width: calc(100% / 2);
 #product1{
 margin-bottom: 55px;
 align-items: center;
-margin-top: 210px;
+margin-top: 175px;
 }
 #product1 h6{
 margin-top: 4%;
@@ -1539,7 +1539,7 @@ transform: translate(0,-10px);
   /*contact*/
   #contact-all{
     min-height: 80vh;
-    margin-top: 130px;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1659,119 +1659,7 @@ background-color: #fff;
   
   }
 
-
-
   /*----------*/
-
-/*forget*/
-#section-login1 {
-
-background-color: rgba(255, 255, 255, 0.649);
-width:100%;
-height:390px;
-margin-top: 150px;
-
-}
-#section-login1  .container1{
-
-width: 98%;
-
-padding-bottom: 20px;
-display: flex;
-justify-content: center;
-
-}
-
-.f-box1{
-  width:92%;
-  max-width:405px;
-
-text-align: center;
-background-color: white;
-padding: 30px 30px 0px;
-border-radius: 15px;
-
-}
-.f-box1 h1{
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-font-size: 48px;
-margin-bottom: 20px;
-margin-top: 10px;
-font-weight: 800;
-display: flex;
-justify-content: center;
-color:#000000;
-
-}
-
-
-.input-field1{
-background:rgb(255, 255, 255);
-margin: 15px 0;
-border-radius:10px;
-display: flex;
-align-items: center;
-margin-bottom: 18px;
-}
-#section-login1 input{
-  width: 100%;
-  background: transparent;
-  border: 0;
-  outline:0;
-  padding: 18px 15px;
-
-}
-.input-field1 i{
-  margin-left:11px;
-color: #999;
-font-size: 20px;
-
-} 
-.input-field1 {
-border:2px solid #e5e5e5;
-}
-#section-login1  form a{
-  text-decoration: none;
-  font-size:13px;
-  color: #8d8d8d;
-  display: flex;
-justify-content: left;
-font-weight: 300;
-}
-#fpass1{
-  font-weight: 610;
-}
-
-.input-group1{
-height: 110px;
-
-}
-#submit {
-width:48%;
-height:40px;
- cursor: pointer; 
- flex-basis: 50%;
-background: white;
-color: black;
-
-border:1.8px solid black;
-outline:0;
-font-size: 18px;
-font-weight: 700;
-cursor: pointer;
-transition: blue1 1s;
-}
-
-#section-login1 button{
-  transition: all 0.2s ease;
-  border: 3px solid black;
-border-radius: 0.4em;
-box-shadow: 0.35em 0.32em;
-
-}
-#section-login1   button:active{
-  transform: scale(0.96);
-}
 
 
 /*Product*/
@@ -1780,8 +1668,8 @@ box-shadow: 0.35em 0.32em;
 
   display: flex;
 
-  margin-top: 160px;
-  margin-bottom: 30px;
+  margin-top: 150px;
+  margin-bottom: 25px;
   }
   #prodetails .single-pro-details{
 
@@ -2113,7 +2001,7 @@ margin-top: 120px;
     }
     #prodetails{
     margin-bottom: 0px;
-    margin-top: 145px;
+    margin-top: 135px;
     }
     #prodetails .single-pro-details h2 {
     
@@ -2157,7 +2045,9 @@ margin-top: 120px;
 
 
 @media(max-width:768px){
-  
+  .logo {
+    width: 95px;
+}
   #product11 .pro1 #buttoncart i {
   color: #088178;
   font-size: 18px;
@@ -2167,7 +2057,7 @@ margin-top: 120px;
   cursor: pointer;
   }
   #header{
-    padding: 12px 40px 12px 20px;
+    padding: 24px 45px 24px 45px;
   }
 #icons{
 
@@ -2303,7 +2193,7 @@ margin-top: 0px;
 }
 #prodetails{
 margin-bottom: 0px;
-margin-top: 145px;
+margin-top: 135px;
 }
 #prodetails .single-pro-details h2 {
 
@@ -2352,7 +2242,7 @@ padding-top: 10px;
 
   #product1 {
   
-    margin-top: 168px;
+    margin-top: 145px;
 }
 #b-banner1 {
 
@@ -2382,10 +2272,10 @@ padding:30px 0 0 10px;
 transition: 0.3s ease;
 }
 #header{
-  padding: 12px 16px 12px 5px;
+  padding: 24px 22px 24px 22px;
 }
 #header .logo {
-width: 98px;
+width: 76px;
 }
 
 
@@ -2666,7 +2556,7 @@ border-radius: 15px;
   }
   #prodetails{
   margin-bottom: 0px;
-  margin-top: 145px;
+  margin-top: 115px;
   }
   #prodetails .single-pro-details h2 {
   
@@ -2747,10 +2637,10 @@ margin-bottom: 8px;
     font-size: 12px; 
     }
     #header .logo {
-      width: 89px;
+      width: 74px;
            }
            #header{
-             padding: 12px 12px 12px 5px;
+             padding: 24px 18px 24px 18px;
            }
 #mobile i {
 padding-left:8px;
@@ -2967,7 +2857,7 @@ display: none;
 }
 }
 #slidersss-section{
-  margin-top: 140px;
+  margin-top: 120px;
 }
 .slidersss{
  

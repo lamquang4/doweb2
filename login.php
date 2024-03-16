@@ -30,7 +30,7 @@ if(isset($_POST["submit"])){
 
 <!DOCTYPE html>
 
-<link rel="icon" type="image/png" href="assets/images/pic/logo1.png">
+<link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/login.css">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -68,7 +68,7 @@ include_once 'header.php'
        
     
            <div id="fpass">
-     <a href="forgotten.php" id="forget">Forgotten your password?</a></div>
+     <a href="#" id="forget">Forgotten your password?</a></div>
              </div>
              <div class="b-field">
                  <button type="submit" name="submit"  id="subtn">Sign in</button>

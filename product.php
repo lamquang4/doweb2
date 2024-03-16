@@ -24,12 +24,13 @@ if(isset($_GET['id'])) {
         $productDec10 = $productDetails['proteing'];
     } else {
        
-        echo "Product not found";
+        echo "<script>alert('Product id not found!'); window.location.href='shop.php';</script>";
+     
         exit;
     }
 } else {
-   
-    echo "Invalid product ID";
+  echo "<script>alert('Product id not found!'); window.location.href='shop.php';</script>";
+ 
     exit;
 }
 
@@ -46,7 +47,7 @@ if(isset($_SESSION["id"])){
 
 <!DOCTYPE html>
 
-<link rel="icon" type="image/png" href="assets/images/pic/logo1.png">
+<link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/nutri.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
