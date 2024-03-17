@@ -36,7 +36,7 @@ include_once 'header.php'
        
   </div>
   <div class="imgBox-index">
-      <img src="assets/images/pic/test4.png" class="pepsi">
+      <img src="assets/images/pic/aa.png" class="pepsi">
   </div>
   </div>
 
