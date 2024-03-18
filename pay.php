@@ -18,7 +18,7 @@ if(isset($_SESSION["id"])){
     <link rel="stylesheet" href="assets/css/pay.css">
     <link rel="stylesheet" href="assets/css/main.css">
    <title>Payment Page</title>
-    <meta name="viewport" content="width=device-width,  initial-scale=0.9,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,  initial-scale=1,maximum-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
