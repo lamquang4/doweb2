@@ -2,8 +2,8 @@
 require 'config.php';
 
 $select = new Select();
-if(isset($_SESSION["id"])){
-    $user = $select->selectUserById($_SESSION["id"]);
+if(isset($_SESSION["idkh"])){
+    $user = $select->selectUserById($_SESSION["idkh"]);
     
   }else{
     header("Location: login.php");

@@ -2,8 +2,8 @@
 require 'config.php';
 
 $select = new Select();
-if(isset($_SESSION["id"])){
-    $user = $select->selectUserById($_SESSION["id"]);
+if(isset($_SESSION["idkh"])){
+    $user = $select->selectUserById($_SESSION["idkh"]);
     
   }else{
     header("Location: login.php");
@@ -115,7 +115,7 @@ exit();
                                       
                                         <div class="form-group">
                                             <label class="form-label">Adress</label>
-                                            <input type="text" class="form-control" value="<?php echo $user['diachi']; ?>" id="addressInput">
+                                            <input type="text" class="form-control" value="" id="addressInput">
                                         </div>
                                      
                                        
@@ -151,7 +151,7 @@ document.getElementById('saveChangesBtn').addEventListener('click', function() {
 
     if (selectedImage) {
         var formData = new FormData();
-        formData.append('id', <?php echo $_SESSION["id"]; ?>);
+        formData.append('idkh', <?php echo $_SESSION["idkh"]; ?>);
         formData.append('image', selectedImage);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'updateuser.php', true);
@@ -174,12 +174,12 @@ document.getElementById('saveChangesBtn').addEventListener('click', function() {
     var newFullname = document.getElementById('fullnameInput').value;
     var newBirthday = document.getElementById('dateInput').value;
     var newPhone = document.getElementById('phoneInput').value;
-    var newAddress = document.getElementById('addressInput').value;
+
     var genderMale = document.getElementById('male').checked;
     var genderFemale = document.getElementById('female').checked;
     var selectedGender = genderMale ? 'male' : (genderFemale ? 'female' : '');
 
-    window.location.href = 'updateuser.php?id=<?php echo $_SESSION["id"]; ?>&username=' + newUsername + '&email=' + newEmail + '&fullname=' + newFullname + '&birthday=' + newBirthday + '&phone=' + newPhone + '&diachi=' + newAddress + '&gender=' + selectedGender;
+    window.location.href = 'updateuser.php?idkh=<?php echo $_SESSION["idkh"]; ?>&username=' + newUsername + '&email=' + newEmail + '&fullname=' + newFullname + '&birthday=' + newBirthday + '&phone=' + newPhone  + '&gender=' + selectedGender;
 });
 </script>
 

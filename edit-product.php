@@ -8,7 +8,7 @@ if (!isset($_GET['pid'])) {
 $connection = new Connection();
 $id = $_GET['pid'];
 
- $edit_sql = "SELECT * FROM product WHERE id=$id";
+ $edit_sql = "SELECT * FROM product WHERE id='$id'";
 $result = mysqli_query($connection->conn, $edit_sql);
 $row = mysqli_fetch_assoc($result); 
 
@@ -202,6 +202,7 @@ $totalPages = ceil($totalProducts / $limit);
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
+  <span class="las la-eye"></span>
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
      <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>

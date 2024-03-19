@@ -166,11 +166,11 @@ $totalPages = ceil($totalUsers / $limit);
                         <tbody>
                         <?php while ($user = mysqli_fetch_assoc($users)) { ?>
     <tr>
-        <td>#USER<?php echo $user['id']; ?></td>
+        <td><?php echo $user['idkh']; ?></td>
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><?php echo $user['birthday']; ?></td>
-        <td><?php echo $user['diachi']; ?></td>
+        <td></td>
         <td>
         <?php echo $user['status']; ?>
         </td>

@@ -36,8 +36,8 @@ if(isset($_GET['id'])) {
 
 $select = new Select();
 
-if(isset($_SESSION["id"])){
-    $user = $select->selectUserById($_SESSION["id"]);
+if(isset($_SESSION["idkh"])){
+    $user = $select->selectUserById($_SESSION["idkh"]);
 }
 
 
@@ -236,13 +236,7 @@ window.location.href='shop.html';
     }};
    </script>
 
-<script>
-let subMenu = document.getElementById("subMenu");
-function toggleMenu(){
-  subMenu.classList.toggle("open-menu");
-}
 
-  </script>
 
 
 

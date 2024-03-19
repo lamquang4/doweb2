@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $type = $_POST['type'];
  $brand = $_POST['brand'];
 
+ $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
   $targetDir = "assets/images/sp/";
   $fileName = basename($_FILES["fimage1"]["name"]);
   $targetFilePath = $targetDir . $fileName;
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   } 
 
 
-    $query = "INSERT INTO product (name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add1', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
+    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add1', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-  $delete_sql = "DELETE FROM product WHERE id=$pid";
+  $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
       echo "<script>alert('Delete Successful');</script>";
       header("Location: admin-product.php?page=$currentPage"); 
@@ -234,7 +235,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
 <?php while ($product = mysqli_fetch_assoc($products)) { ?>
   <tr>
-  <td>#SP<?php echo $product['id']; ?></td>
+  <td><?php echo $product['id']; ?></td>
 <td>
 
    <div class="image-product-admin">
@@ -256,7 +257,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <td><?php echo $product['date_add']; ?></td>
 <td>
   <div class="actions">
-
+  <span class="las la-eye"></span>
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
      <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>

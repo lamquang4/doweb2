@@ -13,7 +13,10 @@ if (isset($_POST["submit"])) {
   $email = isset($_POST["email"]) ? $_POST["email"] : "";
   $password = isset($_POST["password"]) ? $_POST["password"] : "";
   $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
-  $diachi = isset($_POST["diachi"]) ? $_POST["diachi"] : "";
+  $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
+  $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
+  $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
+  $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
   $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
   $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
@@ -31,7 +34,10 @@ if (isset($_POST["submit"])) {
       $email,
       $password,
       $password2,
-      $diachi,
+      $sonha,
+      $duong,
+      $quan,
+      $huyen,
       $fullname,
       $phone,
       $birthday,
@@ -41,8 +47,8 @@ if (isset($_POST["submit"])) {
   );
 
   if ($result == 1) {
-      echo "<script> alert('Registration Successful'); </script>";
-      header("location: login.php");
+      echo "<script> alert('Registration Successful'); window.location.href='login.php'; </script>";
+  
   } elseif ($result == 10) {
       echo "<script> alert('Username or Email has already taken'); </script>";
   } elseif ($result == 100) {

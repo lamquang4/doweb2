@@ -10,7 +10,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
  
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<section id="header">
+<section id="header" >
     <a href="index.php">
   <img src="assets/images/pic/logo.png" class="logo" alt="" >
    </a>
@@ -97,7 +97,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
       </div>
     </a>
     <a id="glass-search" onclick="showbar()" ><i class="fa-solid fa-magnifying-glass"></i> </a>
-    <?php if(isset($_SESSION["id"])) { ?>
+    <?php if(isset($_SESSION["idkh"])) { ?>
           
           <a  id="userlogin" onclick="toggleMenu()"><i class="fa-solid fa-circle-user"></i></a>
                  <?php } else { ?>
@@ -119,7 +119,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
    </section>
 
 
-   <div class="cart"  style="z-index: 999;">
+   <div class="cart">
     <h2 class="cart-title">Your Cart</h2>
 
 
@@ -186,15 +186,21 @@ barmenu.addEventListener("click", function() {
   searchbars.classList.remove("active25");
         searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
+        overlay.style.display = 'none';
+      subMenu.classList.remove("open-menu");
 });
 
 
 window.addEventListener("resize", function() {
 
     if (window.innerWidth >= 1136) {
-        searchbars.classList.remove("active25");
+      overlay.style.display = 'none';
+      carts.classList.remove("act");
+    icons.style.right="-300px";
+    searchbars.classList.remove("active25");
         searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
+    
       icons.classList.remove('active');
       htmlElement.style.overflowY = "scroll";
     }
@@ -209,13 +215,14 @@ window.addEventListener("resize", function() {
    
        document.getElementById('overlay').addEventListener('click', function() {
     hideOverlayAndSearchBox();
+    closebar();
   });
   function hideOverlayAndSearchBox() {
     var overlay = document.getElementById('overlay');
    
     carts.classList.remove("act");
     overlay.style.display = 'none';
-    htmlElement.style.overflowY = 'scroll';
+    
   }
   </script>
 
@@ -227,8 +234,15 @@ const cartIcon1=document.querySelector("#cart-icon1");
 
 cartIcon.addEventListener('click',()=>{
   carts.classList.add("act");
-  htmlElement.style.overflow = 'hidden';
   overlay.style.display = 'block';
+  overlay.style.zIndex = '100';
+  searchbars.classList.remove('active25');   
+        searchbars.style.opacity="0";
+        searchbars.style.pointerEvents = 'none';
+        searchbars.style.transition = "0.35s ease-in-out";
+      icons.style.right = "-300px";
+      subMenu.classList.remove("open-menu");
+      htmlElement.style.overflowY = 'scroll';
 });
 cartIcon1.addEventListener('click',()=>{
   carts.classList.add("act");
@@ -236,9 +250,11 @@ cartIcon1.addEventListener('click',()=>{
   searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
         icons.style.right = "-300px";
-      
-        htmlElement.style.overflow = 'hidden';
+        htmlElement.style.overflowY = 'scroll';
   overlay.style.display = 'block';
+  overlay.style.zIndex = '100';
+  icons.style.right = "-300px";
+  subMenu.classList.remove("open-menu");
 });
 closeCart.addEventListener('click',()=>{
   carts.classList.remove("act");
@@ -265,64 +281,29 @@ function checkloginyet() {
 }
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const addToCartButton = document.querySelector('.normal');
-        const cartContent = document.querySelector('.cart-content');
-        const cartBox = document.querySelector('.cart-box');
-        const cartImg = document.querySelector('.cart-img');
-        const cartProductTitle = document.querySelector('.cart-product-title');
-        const cartPrice = document.querySelector('.cart-price');
-        const cartQuantity = document.querySelector('.cart-quantity');
-        const totalPrice = document.querySelector('.total-price');
 
-        addToCartButton.addEventListener('click', function () {
-     
-            const productName = '<?php echo $productName; ?>';
-            const productImage = '<?php echo $productImage; ?>';
-            const productPrice = <?php echo $productPrice; ?>;
-
-            cartImg.src = productImage;
-            cartProductTitle.textContent = productName;
-            cartPrice.textContent = '$' + productPrice.toFixed(2);
-            cartQuantity.value = 1;
-
-            cartContent.style.display = 'block';
-
-
-            updateTotalPrice(productPrice);
-        });
-
-
-        function updateTotalPrice(productPrice) {
-            const currentTotalPrice = parseFloat(totalPrice.textContent.slice(1));
-
-            const newTotalPrice = currentTotalPrice + productPrice;
-
-            totalPrice.textContent = '$' + newTotalPrice.toFixed(2);
-        }
-    });
-
-</script>
 
 <script>
     var htmlElement = document.querySelector('html');
 const searchbars=document.querySelector(".search-bars");
     const glasssearch=document.getElementById("glass-search");
 function showbar(){
+  htmlElement.style.overflow = 'hidden';
         searchbars.classList.add('active25');
-        searchbars.style.pointerEvents = 'all';
-        htmlElement.style.overflow = 'hidden';
+        searchbars.style.pointerEvents = 'all';  
         searchbars.style.opacity="1";
         searchbars.style.transition = "0.35s ease-in-out";
+        overlay.style.display = 'block';
+        overlay.style.zIndex = '98';
+      subMenu.classList.remove("open-menu");
     }
     function closebar(){
- 
-        searchbars.classList.remove('active25');
-        htmlElement.style.overflowY = 'scroll';
+  htmlElement.style.overflowY = 'scroll';
+        searchbars.classList.remove('active25');   
         searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
         searchbars.style.transition = "0.35s ease-in-out";
+        overlay.style.display = 'none';
     }
     </script>
     
@@ -336,6 +317,17 @@ document.getElementById('searchInput').addEventListener('keyup', function(event)
 
     </script>
     
+    <script>
+  let subMenu = document.getElementById("subMenu");
+  function toggleMenu(){
+    subMenu.classList.toggle("open-menu");
+    overlay.style.display = 'none';
+htmlElement.style.overflowY = 'scroll';
+searchbars.classList.remove("active25");
+searchbars.style.opacity="0";
+      searchbars.style.pointerEvents = 'none';
+  }
+    </script>
     
 <style>
     #xmark{

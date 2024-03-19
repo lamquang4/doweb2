@@ -13,8 +13,9 @@ if(isset($_POST["submit"])){
  
   if($result ==1){
    $_SESSION["login"]=true;
-   $_SESSION["id"]=$login->idUser();
-   header("location: index.php");
+   $_SESSION["idkh"]=$login->idUser();
+   echo "<script> alert('Login Successful'); window.location.href='index.php'; </script>";
+   exit;
   
   }elseif($result==10){
     echo

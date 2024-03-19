@@ -42,7 +42,7 @@ button{
  
   position: absolute;
   top:67%;
-  right:5%;
+  right:3%;
   width: 210px;
   max-height: 0px;
   overflow: hidden;
@@ -150,7 +150,9 @@ padding: 0 20px;
 
 
 }
-
+#overplay{
+  z-index: 98;
+}
 #icons li{
 padding-right: 20px;
 font-size: 21px;
@@ -171,19 +173,19 @@ align-items: center;
 
 }
 .active{
-z-index:100;
+
 width:300px;
 
 position: relative;
 }
 .act-on{
-  z-index:100;
+
   width:300px;
 
   position: relative;
   }
 .choose{
-z-index:100;
+
 width:300px;
 
 position: relative;
@@ -1247,7 +1249,7 @@ padding-left: 1px;
   background-color: #ffffff;
   box-shadow: -2px solid 4px hs1(0 4% 15%/10%);
   transition: 1.2s;
-  z-index:100;
+  z-index:101;
 
   
 }
