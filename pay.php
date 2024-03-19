@@ -106,41 +106,65 @@ include_once 'header.php'
                           <div class="mb-3" id="disappear-add-address">
                                           <form id="address-info">
                                               <div>
-                                              
-  
-                                                  <div class="mb-3">
-                                                      <label class="form-label" for="billing-address">Address</label>
-                                                      <textarea maxlength="100" class="form-control" id="billing-address" rows="3" placeholder="Enter address"></textarea>
-                                                  </div>
-  
                                                   <div class="row">
+                                                 
+                                                  <div class="col-lg-4">
+                                                        <div class="mb-0">
+                                                            <label class="form-label" for="hnumber">House number</label>
+                                                            <input  type="number" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter house number">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-0">
+                                                            <label class="form-label" for="street">Street</label>
+                                                            <input type="text" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter street">
+                                                        </div>
+                                                    </div>
+
+                                                      <div class="col-lg-4">
+                                                        <div class="mb-4 mb-lg-0">
+                                                            <label class="form-label">City</label>
+                                                            <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                                                <option value="" selected>Select City</option> 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+  
                                                       <div class="col-lg-4">
                                                           <div class="mb-4 mb-lg-0">
-                                                              <label class="form-label">Country</label>
-                                                              <select class="form-control form-select" title="Country">
-                                                                  <option value="0">Select Country</option>
-                                                                  <option value="AL">Vietnam</option>
-                                                                  <option value="AF">USA</option>
-                                                                  <option value="DZ">England</option>
-                                                                  <option value="AS">Korea</option>
-                                                                                                 
-                                                              </select>
+                                                            <label class="form-label">District</label>
+                                                            <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                                                <option value="" selected>Select District</option>
+                                                                </select>
                                                           </div>
                                                       </div>
   
                                                       <div class="col-lg-4">
-                                                          <div class="mb-4 mb-lg-0">
-                                                              <label class="form-label" for="billing-city">City</label>
-                                                              <input type="text" class="form-control" id="billing-city" placeholder="Enter City">
-                                                          </div>
-                                                      </div>
-  
+                                                        <div class="mb-4 mb-lg-0">
+                                                            <label class="form-label">Ward</label>
+                                                            <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                                                <option value="" selected>Select Ward</option>
+                                                                </select>
+                                                        </div>
+                                                    </div>
+
+                                                  
+
                                                       <div class="col-lg-4">
                                                           <div class="mb-0">
                                                               <label class="form-label" for="zip-code">Phone</label>
                                                               <input min="0" type="number" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter phone number">
                                                           </div>
                                                       </div>
+
+                                                      <div class="mb-3" style="margin-top: 10px;">
+                                                        <label class="form-label" for="billing-address">Order Notes</label>
+                                                        <textarea class="form-control" maxlength="200" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                                    </div>
+                                                   
+  
+                                                    
                                                   </div>
                                               </div>
                                           </form>
@@ -429,3 +453,52 @@ color: white;
     }
  
  </style>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
+method: "GET", 
+responseType: "application/json", 
+};
+var promise = axios(Parameter);
+promise.then(function (result) {
+renderCity(result.data);
+});
+
+function renderCity(data) {
+for (const x of data) {
+citis.options[citis.options.length] = new Option(x.Name, x.Id);
+}
+citis.onchange = function () {
+district.length = 1;
+ward.length = 1;
+if(this.value != ""){
+  const result = data.filter(n => n.Id === this.value);
+
+  for (const k of result[0].Districts) {
+    district.options[district.options.length] = new Option(k.Name, k.Id);
+  }
+}
+};
+district.onchange = function () {
+ward.length = 1;
+const dataCity = data.filter((n) => n.Id === citis.value);
+if (this.value != "") {
+  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+  for (const w of dataWards) {
+    wards.options[wards.options.length] = new Option(w.Name, w.Id);
+  }
+}
+};
+}
+</script>
+
+
+

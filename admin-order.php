@@ -43,7 +43,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                     <li>
                         <a href="admin-strator.php">
                              <span class="las la-address-card"></span>
-                             <small>Administrator</small>
+                             <small>Managers</small>
                          </a>
                      </li>
                     <li >

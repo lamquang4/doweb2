@@ -115,7 +115,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
                   <li>
                     <a href="admin-strator.php">
                          <span class="las la-address-card"></span>
-                         <small>Administrator</small>
+                         <small>Managers</small>
                      </a>
                  </li>
                 <li >
@@ -346,7 +346,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <div id="container-inputs">
 
   <div class="user-tab">
-    <h1>ADD PRODUCT</h1>
+    <h1>Add Product</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
   
 

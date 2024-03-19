@@ -47,7 +47,7 @@ $totalPages = ceil($totalAds / $limit);
                     <li>
                         <a href="admin-strator.php" >
                              <span style="color: #fff;" class="las la-address-card"></span>
-                             <small style="color: #fff;">Administrator</small>
+                             <small style="color: #fff;">Managers</small>
                          </a>
                      </li>
                     <li >
@@ -113,7 +113,7 @@ $totalPages = ceil($totalAds / $limit);
                
             <div class="page-content" >
     
-                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Administrators</h1>
+                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Managers</h1>
                 
     <div >
     <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>
@@ -224,7 +224,7 @@ $totalPages = ceil($totalAds / $limit);
 <div id="container-inputs">
 
   <div class="user-tab">
-    <h1>ADD ADMIN</h1>
+    <h1>Add Manager</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
     
