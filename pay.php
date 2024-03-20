@@ -111,7 +111,7 @@ include_once 'header.php'
                                                   <div class="col-lg-4">
                                                         <div class="mb-0">
                                                             <label class="form-label" for="hnumber">House number</label>
-                                                            <input  type="number" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter house number">
+                                                            <input  type="text" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter house number">
                                                         </div>
                                                     </div>
 
