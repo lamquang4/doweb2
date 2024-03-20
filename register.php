@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
       $sonha,
       $duong,
       $quan,
-      $huyen,
+      $phuong,
       $fullname,
       $phone,
       $birthday,
@@ -76,50 +76,91 @@ if (isset($_POST["submit"])) {
 include_once 'header.php'
   ?>
 
- <section id="section-login">
-    <div class="container" id="container">
-     <div class="f-box" id="fbox">
-          <h1 id="tittle">Sign Up</h1>
-          <form  action="" id="form" method="post" autocomplete="off">
-             <div class="input-group">
+<section id="section-login">
+  <div id="content-container"> 
+      <h1 id="tittle">Sign Up</h1>
+
+        <form  action="" id="form" method="post" autocomplete="off">
+         
+          <div id="main-user-info">
               
               <div class="input-field" >
-                <i class="fa-solid fa-user"></i>
-                <input type="text" placeholder="Username" name="username" id="username" required >
+               
+                <input type="text" name="username" placeholder="Username" id="username">
              
               </div>
 
-              <div id="fpass">
+        
            <div class="input-field">
-             <i class="fa-solid fa-envelope" id="mail"></i>
-             <input  type="text" placeholder="Email" id="email" name="email" required> 
-             
+
+             <input  type="text" name="email" placeholder="Email" id="email">
+         
             </div>
 
-          
 
-           <div class="input-field">
-             <i class="fa-solid fa-lock"></i>
-             <input type="password" placeholder="Password" name="password" id="password" required> 
-           
-    
-            </div>
             <div class="input-field">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Confirm password" name="password2" id="password2" required> 
-            
-            </div>
+             
+              <input type="password" name="password" placeholder="Password" id="password"> 
+ 
+             </div>
+ 
+             <div class="input-field">
+             
+               <input type="password" name="password2" placeholder="Confirm password" id="password2"> 
+              
+             </div>
+
+            <div class="input-field">
+             
+                <input  type="text"  placeholder="Enter house number" > 
+             
+             </div>
+
+
+             <div class="input-field">
+             
+              <input type="text"  placeholder="Enter street" >
+           
+           </div>
+
+             <div class="input-field" >
+          
+              <select  id="city">
+                <option value="" selected>Select City</option> 
+            </select>
+             </div>
+
+
+             <div class="input-field" >
+
+              <select id="district">
+                <option value="" selected>Select District</option>
+                </select>
+              </div>
+
+              <div class="input-field" >
+                <select id="ward" >
+                  <option value="" selected>Select Ward</option>
+                  </select>
+              </div>
+           
+
 
              <div class="b-field">
                  <button type="button" onclick="window.location.href='login.php'" id="subtn" >Sign in</button>
-             <button type="submit" onclick="" name="submit" id="sibtn">Sign up</button>
+             <button type="submit" name="submit" id="sibtn">Sign up</button>
             
          </div>
-          </form>
-     </div>
-     </div>
 
+        </div>
+
+   
+          </form>
+    
+  
+      </div>
    </section>
+
 
  <footer>
   <div id="all-footer">
@@ -205,6 +246,51 @@ include_once 'header.php'
   });
 
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
+method: "GET", 
+responseType: "application/json", 
+};
+var promise = axios(Parameter);
+promise.then(function (result) {
+renderCity(result.data);
+});
+
+function renderCity(data) {
+for (const x of data) {
+citis.options[citis.options.length] = new Option(x.Name, x.Id);
+}
+citis.onchange = function () {
+district.length = 1;
+ward.length = 1;
+if(this.value != ""){
+  const result = data.filter(n => n.Id === this.value);
+
+  for (const k of result[0].Districts) {
+    district.options[district.options.length] = new Option(k.Name, k.Id);
+  }
+}
+};
+district.onchange = function () {
+ward.length = 1;
+const dataCity = data.filter((n) => n.Id === citis.value);
+if (this.value != "") {
+  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+  for (const w of dataWards) {
+    wards.options[wards.options.length] = new Option(w.Name, w.Id);
+  }
+}
+};
+}
+</script>
+
 
 
 
