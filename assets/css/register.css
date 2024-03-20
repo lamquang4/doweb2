@@ -53,13 +53,12 @@
     display: flex;
     flex-wrap: wrap;
     width: 50%;
-    padding-bottom: 15px;
+    margin-bottom: 20px;
   }
   .input-field select{
     width: 95%;
     height: 40px;
     padding-left: 10px;
-    margin-bottom: 9px;
     border: 2px solid #e5e5e5;
     border-radius: 7px;
   }
@@ -70,21 +69,17 @@
     outline: none;
     border: 2px solid #e5e5e5;
   padding-left: 12px;
-    margin-bottom: 9px;
   
   }
-  
-  
+   
   .b-field{
   width: 100%;
   display: flex;
   justify-content: space-between;
   }
   .b-field button{
-  
   flex-basis: 48%;
   height: 40px;
-  
   border:1.8px solid black;
   outline:0;
   font-size: 18px;
@@ -92,6 +87,7 @@
   cursor: pointer;
   transition: all 1s;
   }
+
   #subtn{
   background: white;
   
@@ -114,14 +110,14 @@
   }
   
   
-  
   @media(max-width: 600px){
    #content-container{
         min-width: 280px;
     }
   
     .input-field{
-        margin-bottom: 12px;
+      padding: 0;
+        margin-bottom: 16px;
         width: 100%;
     }
   
