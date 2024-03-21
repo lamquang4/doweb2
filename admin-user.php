@@ -178,7 +178,7 @@ $totalPages = ceil($totalUsers / $limit);
             <div class="actions">
                 <span class="las la-edit" style="color:#076FFE;"></span>
                 <span class="las la-lock" style="color: #FFAD27;"></span>
-                <span class="las la-trash" style="color: #d9534f;"></span>
+           
             </div>
         </td>
     </tr>
@@ -220,10 +220,11 @@ $totalPages = ceil($totalUsers / $limit);
     <h1>Add User</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
+<form>
 
-                <div class="user-input" style="margin-top: 30px;">  
-                    <label>Full Name:</label>
-<input type="text" name="fname" id="fname">
+<div class="user-input" style="margin-top: 30px;">  
+  <label>Username:</label>
+<input type="text" name="username" id="username">
              </div>
 
              <div class="user-input">
@@ -231,30 +232,23 @@ $totalPages = ceil($totalUsers / $limit);
                 <input type="text" name="email" id="email"> 
         </div>
     
-          <div class="user-input">
-            <label>Birthday:</label>
-          <input type="date" name="birth" id="birth">
 
-     </div>
-               <div class="user-input">
-                <label>Address:</label>
-                   <input type="text" name="address" id="address">
+        <div class="user-input">
+                <label>Password:</label>
+                <input type="password" name="password" id="password"> 
+        </div>
 
-               </div>
-          
-         <div class="user-input" style="display: none;">
-            Status:<input type="text" name="status" id="status" ></input>
-          </div>
-
-          <div class="user-input" style="display: none;">
-            Action:<input type="text" name="action" id="action">    
-      </div>
-
+        <div class="user-input">
+                <label>Confirm password:</label>
+                <input type="password" name="password2" id="password"> 
+        </div>
+    
 <div style="text-align: center;" id="button-submit">
-  <button>Submit</button>
- 
+  <button type="submit">Submit</button>
 </div>
 
+</form>
+                
 </div>
 </div>
 

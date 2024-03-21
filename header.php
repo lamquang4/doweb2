@@ -149,20 +149,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 
 <div id="overlay"></div>
 
-   <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var currentPage = window.location.href;
 
-    var links = document.querySelectorAll('.choose');
-
-    links.forEach(function(link) {
-        if (link.href === currentPage) {
-          
-            link.classList.add('act-on');
-        }
-    });
-});
-</script>
 
 <script>
     const bar = document.getElementById('bar');

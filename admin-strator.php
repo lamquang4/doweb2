@@ -178,7 +178,7 @@ $totalPages = ceil($totalAds / $limit);
                                         <span class="las la-edit" style="color:#076FFE;"></span>
                                         <span class="las la-lock" style="color: #FFAD27;"></span>
                                         <span class="las la-undo-alt"></span>
-                                        <span class="las la-trash" style="color: #d9534f;"></span>
+                                       
                                     </div>
                                 </td>
                             </tr>
@@ -227,42 +227,47 @@ $totalPages = ceil($totalAds / $limit);
     <h1>Add Manager</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
-    
-                 <div class="user-input" style="margin-top: 30px;">
-                 <label>Email:</label>
-                    <input type="text" name="email" id="email"> 
+    <form>
+
+    <div class="user-input" style="margin-top: 30px;">
+                 <label>Username:</label>
+                 <input type="text" name="username" id="username">
     
             </div>
        
               <div class="user-input">
-                <label>Username:</label>
-               <input type="text" name="username" id="username">
-    
+                <label>Email:</label>
+               <input type="text" name="email" id="email"> 
          </div>
-                   <div class="user-input" >
-                          <label>Role:</label>
+
+ <div class="user-input" >
+       <label>Role:</label>
     <select>
         <option>Customer</option>
         <option>Adminstrator</option>
         <option>Product</option>
     </select>
-                   </div>
-              
-             <div class="user-input" style="display: none;">
-                Status:<input type="text" name="status" id="status" ></input>
-              </div>
-               
-              <div class="user-input" style="display: none;">
-                Action:<input type="text" name="action" id="action" ></input>
-              </div>
-
-<div style="text-align: center;" id="button-submit">
-  <button>Submit</button>
-  
 </div>
 
+      <div class="user-input">
+                <label>Password:</label>
+               <input type="password" name="password" id="password"> 
+         </div> 
+
+         <div class="user-input">
+                <label>Confirm password:</label>
+               <input type="password" name="password2" id="password"> 
+         </div> 
+
+         <div style="text-align: center;" id="button-submit">
+  <button type="submit">Submit</button>
+</div>  
+
+    </form>
+
 </div>
 </div>
+
 </html>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
