@@ -58,7 +58,7 @@ exit();
                <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 0px; padding-right: 0px;z-index:50">
                    <div class="osahan-account-page-right bg-white p-2 h-100">
                        <div class="tab-content" id="myTabContent">
-                        <div class="col-md-9" style="padding-left: 0; padding-right: 0;">
+                        <div class="col-md-11" style="padding-left: 0; padding-right: 0;">
                             <div class="card-body pb-2">
                                 <div class="tab-pane fade active show" id="account-general">
                                     <div class="card-body media align-items-center">
@@ -95,7 +95,7 @@ exit();
     <input id="female" style="margin-left: 10px;" type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>> Female
                                         </div>
                                         
-                                        <div class="row" style="margin-bottom: 10px;">
+                                        <div class="row" style="margin-bottom: 14px;">
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
                                                     <label class="form-label">Birthday</label>
@@ -113,11 +113,36 @@ exit();
                                             
                                         </div>
                                       
-                                        <div class="form-group">
-                                            <label class="form-label">Adress</label>
-                                            <input type="text" class="form-control" value="" id="addressInput">
+                                        <div class="form-group" style="margin-bottom: 14px;">
+
+                                        <label class="form-label">Adress</label>
+
+                                        <div class="input-group">
+  <input type="text" class="form-control" placeholder="House number" >
+
+  <input type="text" class="form-control" placeholder="Street" >
+
+  <select class="form-control" id="city" aria-label=".form-select-sm">
+<option value="" selected>Select City</option> 
+   </select>
+
                                         </div>
-                                     
+                                        </div>
+
+                                        <div class="form-group">
+                                        <label class="form-label">District/Ward</label>
+                                        <div class="input-group">
+                                      
+                                        <select class="form-control" id="district" aria-label=".form-select-sm" >
+                                  <option value="" selected>Select District</option>
+                                     </select>
+ 
+                                     <select  class="form-control" id="ward" aria-label=".form-select-sm" >
+                    <option value="" selected>Select Ward</option>
+                                       </select>
+
+                                        </div>
+                                         </div>
                                        
                                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
@@ -199,6 +224,57 @@ function previewImage() {
     }
 }
 </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
+method: "GET", 
+responseType: "application/json", 
+};
+var promise = axios(Parameter);
+promise.then(function (result) {
+renderCity(result.data);
+});
+
+function renderCity(data) {
+for (const x of data) {
+citis.options[citis.options.length] = new Option(x.Name, x.Id);
+}
+citis.onchange = function () {
+district.length = 1;
+ward.length = 1;
+if(this.value != ""){
+  const result = data.filter(n => n.Id === this.value);
+
+  for (const k of result[0].Districts) {
+    district.options[district.options.length] = new Option(k.Name, k.Id);
+  }
+}
+};
+district.onchange = function () {
+ward.length = 1;
+const dataCity = data.filter((n) => n.Id === citis.value);
+if (this.value != "") {
+  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+  for (const w of dataWards) {
+    wards.options[wards.options.length] = new Option(w.Name, w.Id);
+  }
+}
+};
+}
+</script>
+
+
+
+
+
+
 
 
 

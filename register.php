@@ -17,18 +17,14 @@ if (isset($_POST["submit"])) {
   $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
   $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
   $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
+  $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
   $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
   $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
-  $emailPattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-  if (!preg_match( $emailPattern, $email)) {
-    echo "<script> alert('Invalid Email.'); </script>";
-    echo "<script>setTimeout(function(){ window.location='register.php'; }, 500);</script>";
-    exit;
-  }
+
   $result = $register->registration(
       $username,
       $email,
@@ -38,6 +34,7 @@ if (isset($_POST["submit"])) {
       $duong,
       $quan,
       $phuong,
+      $tp,
       $fullname,
       $phone,
       $birthday,
@@ -80,13 +77,13 @@ include_once 'header.php'
   <div id="content-container"> 
       <h1 id="tittle">Sign Up</h1>
 
-        <form  action="" id="form" method="post" autocomplete="off">
+        <form  action="" id="form" onsubmit="return kttrong()" method="post" autocomplete="off">
          
           <div id="main-user-info">
               
               <div class="input-field" >
                
-                <input type="text" name="username" placeholder="Username" id="username">
+                <input type="text" name="username" placeholder="Username" id="username" maxlength="9">
              
               </div>
 
@@ -233,18 +230,16 @@ include_once 'header.php'
 
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-    $(document).ready(function(){
-      $('#eye').click(function(){
-          $(this).toggleClass('open');
-          $(this).children('i').toggleClass('fa-eye-slash fa-eye');
-          if($(this).hasClass('open')){
-              $(this).prev().attr('type', 'text');
-          }else{
-              $(this).prev().attr('type', 'password');
-          }
-      });
-  });
-
+  function kttrong() {
+    var email = document.getElementById("email").value;
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+        alert("Invalid Email.");
+        return false;
+    }else{
+      return true
+    }
+}
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

@@ -77,7 +77,7 @@ class Adinad extends Connection{
 }
 
 class Register extends Connection {
-    public function registration($username, $email, $password, $password2, $sonha, $duong, $quan, $phuong, $fullname, $phone, $imguser, $gender, $birthday, $status) {
+    public function registration($username, $email, $password, $password2, $sonha, $duong, $quan, $phuong, $tp, $fullname, $phone, $imguser, $gender, $birthday, $status) {
         $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username' OR email ='$email'");
         
         if (mysqli_num_rows($duplicate) > 0) {
@@ -85,8 +85,8 @@ class Register extends Connection {
         } else {
             if ($password == $password2) {
                 $random_id = $this->generateRandomId();
-                $query = "INSERT INTO tb_user (idkh, username, email, password, sonha, duong, quan, phuong, fullname, phone, gender, imguser, birthday, status) 
-                          VALUES ('$random_id', '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','normal')";
+                $query = "INSERT INTO tb_user (idkh, username, email, password, sonha, duong, quan, phuong, tp, fullname, phone, gender, imguser, birthday, status) 
+                          VALUES ('$random_id', '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$tp', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','normal')";
                 mysqli_query($this->conn, $query);
                 return 1;
             } else {
