@@ -271,6 +271,47 @@ if (this.value != "") {
 </script>
 
 
+<script>
+     
+        const fullnameInput = document.getElementById('fullnameInput');
+        const emailInput = document.getElementById('emailInput');
+        const phoneInput = document.getElementById('phoneInput');
+        const saveChangesBtn = document.getElementById('saveChangesBtn');
+
+   
+        fullnameInput.addEventListener('input', validateForm);
+        emailInput.addEventListener('input', validateForm);
+        phoneInput.addEventListener('input', validateForm);
+
+     
+        function validateForm() {
+            const fullname = fullnameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+       
+            const fullnameRegex = /^[a-zA-Z\s]+$/; 
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+            const phoneRegex = /^0[1-9]\d{8,9}$/;
+
+       
+            if (fullname.match(fullnameRegex) && email.match(emailRegex) && phone.match(phoneRegex)) {
+                saveChangesBtn.disabled = false; 
+                saveChangesBtn.style.background = '#007bff';
+                saveChangesBtn.style.cursor = 'pointer';
+                saveChangesBtn.style.border = '#007bff';
+               
+            } else {
+            
+                saveChangesBtn.disabled = true; 
+                saveChangesBtn.style.background = '#94c3f6';
+                saveChangesBtn.style.cursor = 'not-allowed';
+                saveChangesBtn.style.border = '#94c3f6';
+               
+            }
+        }
+    </script>
+
 
 
 
