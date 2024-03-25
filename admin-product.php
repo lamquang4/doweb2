@@ -21,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $price = $_POST['price'];
   $image = $_POST['image'];
   $soluong = $_POST['soluong'];
-  $date_add = DateTime::createFromFormat('Y-m-d', $_POST['date_add']);
-  $date_add1 = $date_add->format('d-m-Y');
+  $date_add =$_POST['date_add'];
   $ml = trim($_POST['ml']);
   $calo = trim($_POST['calo']);
   $fatg = trim($_POST['fatg']);
@@ -58,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   } 
 
 
-    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add1', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
+    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
@@ -311,12 +310,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <form method="post" action="" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
-    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?"> mL)</span> </p>
+    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" placeholder="?" maxlength="3"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?"></span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" placeholder="?" maxlength="3"></span> </p>
   
   </div>
   
@@ -324,11 +323,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?">g</span> <span ><input name="fat" id="fat" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?">g</span> <span ><input id="carbon" name="carbon" min="0" placeholder="?">%</span></p>
-      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" placeholder="?">g</span> </p>
-      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" placeholder="?">g</span> </p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?" maxlength="3">g</span> <span ><input name="fat" id="fat" min="0" placeholder="?" maxlength="3">%</span></p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?" maxlength="3">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" placeholder="?" maxlength="3">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?" maxlength="3">g</span> <span ><input id="carbon" name="carbon" min="0" placeholder="?" maxlength="3">%</span></p>
+      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" placeholder="?" maxlength="3">g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" placeholder="?" maxlength="3">g</span> </p>
     
     </div>
 
@@ -352,7 +351,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
 <div class="user-input" style="margin-top: 30px;">
   <label>Name:</label>
-<input type="text" name="name" id="name">
+<input type="text" name="name" id="name" maxlength="30">
 </div>
 
 <div class="user-input" style="margin-bottom: 10px;">
@@ -399,9 +398,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
                <div class="user-input">
   <label>Price:</label>
-<input type="number" name="price" id="price">     
+<input type="number" name="price" id="price" maxlength="20">     
 <label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="1" >
+<input type="number" name="soluong" id="soluong" min="1" maxlength="20">
 </div>
 
 <div class="user-input">

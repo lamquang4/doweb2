@@ -273,22 +273,7 @@ $totalPages = ceil($totalAds / $limit);
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-<script>
-    window.addEventListener("DOMContentLoaded", function() {
-      var predefinedContent = 'Normal';
-      document.getElementById("status").value = predefinedContent;
-    });
-    window.addEventListener("DOMContentLoaded", function() {
-      var predefinedContent = '<select><option selected>Customer management</option><option > Order management</option> <option > Product management</option></select>';
-      document.getElementById("role").value = predefinedContent;
-    });
-    window.addEventListener("DOMContentLoaded", function() {
-      var predefinedContent = '<select><option selected>Customer management</option><option > Order management</option> <option > Product management</option></select>';
-      document.getElementById("action").value = predefinedContent;
-    });
-   
-      
-  </script>
+
 
 
 <script>

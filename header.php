@@ -97,7 +97,7 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
       </div>
     </a>
     <a id="glass-search" onclick="showbar()" ><i class="fa-solid fa-magnifying-glass"></i> </a>
-    <?php if(isset($_SESSION["idkh"])) { ?>
+    <?php if(isset($_SESSION["login"])) { ?>
           
           <a  id="userlogin" onclick="toggleMenu()"><i class="fa-solid fa-circle-user"></i></a>
                  <?php } else { ?>

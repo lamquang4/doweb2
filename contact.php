@@ -2,8 +2,8 @@
 require 'config.php';
 
 $select = new Select();
-if(isset($_SESSION["idkh"])){
-    $user = $select->selectUserById($_SESSION["idkh"]);
+if(isset($_SESSION["username"])){
+    $user = $select->selectUserById($_SESSION["username"]);
     
   }
 

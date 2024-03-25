@@ -20,7 +20,7 @@ class Connection{
 class Loginad extends Connection{
     public $idad;
     public function loginad($username,$password){
-        $result = mysqli_query($this->conn, "SELECT * FROM tb_ad WHERE username='$username'");
+        $result = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username='$username'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
             if($password == $row["password"]){
@@ -41,36 +41,36 @@ return 1;
 
 class Userinad extends Connection{
     public function selectUsers($start,$limit) {
-        $query = "SELECT * FROM tb_user LIMIT $start, $limit";
+        $query = "SELECT * FROM tb_customer LIMIT $start, $limit";
         $result1 = mysqli_query($this->conn, $query);
         return $result1;
     }
     public function getUserCount() {
-        $query = "SELECT COUNT(*) as total FROM tb_user";
+        $query = "SELECT COUNT(*) as total FROM tb_customer";
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
-    public function selectUserById($idkh) {
-        $query = "SELECT * FROM tb_user WHERE idkh = $idkh";
+    public function selectUserByUsername($username) {
+        $query = "SELECT * FROM tb_customer WHERE username = $username";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
 }
 class Adinad extends Connection{
     public function selectAds($start,$limit) {
-        $query = "SELECT * FROM tb_ad LIMIT $start, $limit";
+        $query = "SELECT * FROM tb_manager LIMIT $start, $limit";
         $result1 = mysqli_query($this->conn, $query);
         return $result1;
     }
     public function getAdCount() {
-        $query = "SELECT COUNT(*) as total FROM tb_ad";
+        $query = "SELECT COUNT(*) as total FROM tb_manager";
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
     public function selectAdById($idad) {
-        $query = "SELECT * FROM tb_ad WHERE idad = $idad";
+        $query = "SELECT * FROM tb_manager WHERE idad = $idad";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
@@ -78,15 +78,15 @@ class Adinad extends Connection{
 
 class Register extends Connection {
     public function registration($username, $email, $password, $password2, $sonha, $duong, $quan, $phuong, $tp, $fullname, $phone, $imguser, $gender, $birthday, $status) {
-        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username ='$username' OR email ='$email'");
+        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_customer WHERE username ='$username' OR email ='$email'");
         
         if (mysqli_num_rows($duplicate) > 0) {
             return 10;
         } else {
             if ($password == $password2) {
-                $random_id = $this->generateRandomId();
-                $query = "INSERT INTO tb_user (idkh, username, email, password, sonha, duong, quan, phuong, tp, fullname, phone, gender, imguser, birthday, status) 
-                          VALUES ('$random_id', '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$tp', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','normal')";
+               
+                $query = "INSERT INTO tb_customer ( username, email, password, sonha, duong, quan, phuong, tp, fullname, phone, gender, imguser, birthday, status) 
+                          VALUES ( '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$tp', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','normal')";
                 mysqli_query($this->conn, $query);
                 return 1;
             } else {
@@ -95,28 +95,18 @@ class Register extends Connection {
         }
     }
 
-    private function generateRandomId() {
-        $idkh = "";
-        do {
-       
-            $idkh = sprintf("%06d", rand(0, 999999));
-          
-            $result = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE idkh = '$idkh'");
-        } while (mysqli_num_rows($result) > 0); 
 
-        return $idkh;
-    }
 }
 
 
 class Login extends Connection{
-    public $idkh;
+    public $username;
     public function login($usernamelogin,$password){
-        $result = mysqli_query($this->conn, "SELECT * FROM tb_user WHERE username='$usernamelogin'");
+        $result = mysqli_query($this->conn, "SELECT * FROM tb_customer WHERE username='$usernamelogin'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
             if($password == $row["password"]){
-$this->idkh = $row["idkh"];
+$this->username = $row["username"];
 return 1;
             }
             else{
@@ -128,14 +118,14 @@ return 1;
         }
     }
    public function idUser(){
-    return $this->idkh;
+    return $this->username;
    }
 
 }
 
 class Select extends Connection{
-    public function selectUserById($idkh){
-        $result = mysqli_query($this->conn,"SELECT * FROM tb_user WHERE idkh=$idkh");
+    public function selectUserById($username){
+        $result = mysqli_query($this->conn,"SELECT * FROM tb_customer WHERE username='$username'");
         return mysqli_fetch_assoc($result);
     }
  

@@ -2,8 +2,8 @@
 require 'config.php';
 
 $select = new Select();
-if(isset($_SESSION["idkh"])){
-    $user = $select->selectUserById($_SESSION["idkh"]);
+if(isset($_SESSION["username"])){
+    $user = $select->selectUserById($_SESSION["username"]);
     
   }else{
     header("Location: login.php");
@@ -76,16 +76,16 @@ exit();
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label class="form-label">Username</label>
-                                            <input type="text" id="usernameInput" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
+                                            <input type="text" id="usernameInput" maxlength="9" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
                                         </div>
                               
                                         <div class="form-group">
                                             <label class="form-label">Full Name</label>
-                                            <input type="text" id="fullnameInput" class="form-control" value="<?php echo $user['fullname']; ?>">
+                                            <input type="text" id="fullnameInput" maxlength="20" class="form-control" value="<?php echo $user['fullname']; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
-                                            <input type="text" class="form-control mb-1" id="emailInput" value="<?php echo $user['email']; ?>">
+                                            <input type="text" class="form-control mb-1" maxlength="50" id="emailInput" value="<?php echo $user['email']; ?>">
                                         
                                         </div>
                                
@@ -106,7 +106,7 @@ exit();
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="text" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
+                                                    <input type="text" maxlength="11" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
                                                 </div>
                                             </div>
                 
@@ -170,41 +170,43 @@ exit();
 
 <script>
 document.getElementById('saveChangesBtn').addEventListener('click', function() {
-
-    var imageInput = document.getElementById('imageInput');
-    var selectedImage = imageInput.files[0];
-
-    if (selectedImage) {
-        var formData = new FormData();
-        formData.append('idkh', <?php echo $_SESSION["idkh"]; ?>);
-        formData.append('image', selectedImage);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'updateuser.php', true);
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText);
-            } else {
-                console.error('Error uploading image:', xhr.statusText);
-            }
-        };
-        xhr.send(formData);
-    }
-
-});
-
-document.getElementById('saveChangesBtn').addEventListener('click', function() {
     var newUsername = document.getElementById('usernameInput').value;
     var newEmail = document.getElementById('emailInput').value;
     var newFullname = document.getElementById('fullnameInput').value;
     var newBirthday = document.getElementById('dateInput').value;
     var newPhone = document.getElementById('phoneInput').value;
-
     var genderMale = document.getElementById('male').checked;
     var genderFemale = document.getElementById('female').checked;
     var selectedGender = genderMale ? 'male' : (genderFemale ? 'female' : '');
+    var formData = new FormData();
+    formData.append('username', "<?php echo $_SESSION["username"]; ?>");
+    formData.append('newUsername', newUsername);
+    formData.append('email', newEmail);
+    formData.append('fullname', newFullname);
+    formData.append('birthday', newBirthday);
+    formData.append('phone', newPhone);
+    formData.append('gender', selectedGender);
 
-    window.location.href = 'updateuser.php?idkh=<?php echo $_SESSION["idkh"]; ?>&username=' + newUsername + '&email=' + newEmail + '&fullname=' + newFullname + '&birthday=' + newBirthday + '&phone=' + newPhone  + '&gender=' + selectedGender;
+    // Append image file if selected
+    var fileInput = document.getElementById('imageInput');
+    if (fileInput.files.length > 0) {
+        formData.append('image', fileInput.files[0]);
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'updateuser.php', true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            alert('Update successful');
+            window.location.reload();
+        } else {
+            console.error('Error updating user:', xhr.statusText);
+        }
+    };
+
+    xhr.send(formData);
 });
 </script>
 

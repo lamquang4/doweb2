@@ -152,7 +152,7 @@ $totalPages = ceil($totalUsers / $limit);
                     <table width="100%" id="table-user">
                     <thead>
                             <tr id="select-filter">
-                                <th>ID USER</th>
+                                <th>USERNAME</th>
                                 <th> FULL NAME</th>
                                 <th> EMAIL</th>
                            
@@ -166,7 +166,7 @@ $totalPages = ceil($totalUsers / $limit);
                         <tbody>
                         <?php while ($user = mysqli_fetch_assoc($users)) { ?>
     <tr>
-        <td><?php echo $user['idkh']; ?></td>
+        <td><?php echo $user['username']; ?></td>
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><?php echo $user['birthday']; ?></td>
@@ -257,19 +257,7 @@ $totalPages = ceil($totalUsers / $limit);
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 
-<script>
-      window.addEventListener("DOMContentLoaded", function() {
-        var predefinedContent = 'Normal';
-        document.getElementById("status").value = predefinedContent;
-      });
-      window.addEventListener("DOMContentLoaded", function() {
-        var predefinedContent = '  <div class="actions"><span class="lab la-telegram-plane"></span><span class="las la-edit"></span><span class="las la-trash"></span></div>';
-        document.getElementById("action").value = predefinedContent;
-      });
-    
-       
-        
-    </script>
+
 
 <script>
 const showadd= document.getElementById('showadd');

@@ -13,7 +13,7 @@ if(isset($_POST["submit"])){
  
   if($result ==1){
    $_SESSION["login"]=true;
-   $_SESSION["idkh"]=$login->idUser();
+   $_SESSION["username"]=$login->idUser();
    echo "<script> alert('Login Successful'); window.location.href='index.php'; </script>";
    exit;
   
@@ -22,7 +22,7 @@ if(isset($_POST["submit"])){
     "<script> alert('Wrong password'); </script>";
   }elseif($result==100){
     echo
-    "<script> alert('User not registered'); </script>";
+    "<script> alert('Wrong username or password!'); </script>";
   }
 }
 
@@ -55,13 +55,13 @@ include_once 'header.php'
              <div class="input-group">
               <div class="input-field" >
                 <i class="fa-solid fa-user"></i>
-                <input type="text" placeholder="Username" id="usernamelogin" name="usernamelogin" required>
+                <input type="text" placeholder="Username" id="usernamelogin" maxlength="9" name="usernamelogin" required>
              
               </div>
      
            <div class="input-field">
              <i class="fa-solid fa-lock"></i>
-             <input type="password" placeholder="Password" id="password" required name="password"> 
+             <input type="password" placeholder="Password" id="password" maxlength="20" required name="password"> 
                <div id="eye"> 
                  <i class="fa-solid fa-eye-slash" style="cursor: pointer;"></i> </div>
             

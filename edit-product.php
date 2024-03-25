@@ -256,12 +256,12 @@ $totalPages = ceil($totalProducts / $limit);
 <form method="post" action="update-product.php" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
-    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>"> mL)</span> </p>
+    <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
   
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
-    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>"></span> </p>
+    <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>" maxlength="3"></span> </p>
   
   </div>
   
@@ -269,11 +269,11 @@ $totalPages = ceil($totalProducts / $limit);
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" value="<?php echo $row['fatg']?>">g</span> <span ><input name="fat" id="fat" min="0" value="<?php echo $row['fat']?>">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" value="<?php echo $row['sodiummg']?>">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" value="<?php echo $row['sodium']?>">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" value="<?php echo $row['carbong']?>">g</span> <span ><input id="carbon" name="carbon" min="0" value="<?php echo $row['carbon']?>">%</span></p>
-      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" value="<?php echo $row['sugarg']?>">g</span> </p>
-      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" value="<?php echo $row['proteing']?>">g</span> </p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" maxlength="3" id="fatg" min="0" value="<?php echo $row['fatg']?>">g</span> <span ><input name="fat" id="fat" maxlength="3" min="0" value="<?php echo $row['fat']?>">%</span></p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" value="<?php echo $row['sodiummg']?>">mg</span> <span ><input name="sodium" id="sodium" maxlength="3" min="0" min="0" value="<?php echo $row['sodium']?>">%</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" maxlength="3" value="<?php echo $row['carbong']?>">g</span> <span ><input id="carbon" maxlength="3" name="carbon" min="0" value="<?php echo $row['carbon']?>">%</span></p>
+      <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" maxlength="3" value="<?php echo $row['sugarg']?>">g</span> </p>
+      <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" maxlength="3" value="<?php echo $row['proteing']?>">g</span> </p>
     
     </div>
 

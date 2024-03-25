@@ -11,7 +11,6 @@ if(isset($_GET['id'])) {
         $productName = $productDetails['name'];
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
-        $productImage1 = $productDetails['thungimg'];
         $productDec1 = $productDetails['ml'];
         $productDec2 = $productDetails['calo'];
         $productDec3 = $productDetails['fatg'];
@@ -36,8 +35,8 @@ if(isset($_GET['id'])) {
 
 $select = new Select();
 
-if(isset($_SESSION["idkh"])){
-    $user = $select->selectUserById($_SESSION["idkh"]);
+if(isset($_SESSION["username"])){
+    $user = $select->selectUserById($_SESSION["username"]);
 }
 
 

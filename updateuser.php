@@ -1,53 +1,34 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'config.php';
 
     $select = new Select(); 
-    $idkh = $_GET["idkh"];
-    $newUsername = trim($_GET["username"]);
-    $newEmail = trim($_GET["email"]);
-    $newFullname = trim($_GET["fullname"]);
-    $newPhone = trim($_GET["phone"]);
-    $newBirthday = $_GET["birthday"];
-    $newGender = isset($_GET["gender"]) ? $_GET["gender"] : ''; 
+    $username = $_POST["username"];
+    $newEmail = trim($_POST["email"]);
+    $newFullname = trim($_POST["fullname"]);
+    $newPhone = trim($_POST["phone"]);
+    $newBirthday = $_POST["birthday"];
+    $newGender = isset($_POST["gender"]) ? $_POST["gender"] : '';
 
+    // Upload image file
+    if (isset($_FILES['image'])) {
+        $file = $_FILES['image'];
+        $fileName = $username . '_' . $file['name']; // Concatenate username with original file name
+        $filePath = 'imguser/' . $fileName;
+        move_uploaded_file($file['tmp_name'], $filePath);
+        // Update image path in database
+        $updateImagePathQuery = "UPDATE tb_customer SET imguser='$filePath' WHERE username='$username'";
+        $resultImagePath = mysqli_query($select->conn, $updateImagePathQuery);
+        if (!$resultImagePath) {
+            die('Error updating user image path: ' . mysqli_error($select->conn));
+        }
+    }
 
-    $updateQuery = "UPDATE tb_user SET username='$newUsername', email='$newEmail', fullname='$newFullname', phone='$newPhone', birthday='$newBirthday', gender='$newGender' WHERE idkh=$idkh";
+    $updateQuery = "UPDATE tb_customer SET email='$newEmail', fullname='$newFullname', phone='$newPhone', birthday='$newBirthday', gender='$newGender' WHERE username='$username'";
     $result = mysqli_query($select->conn, $updateQuery);
 
     if (!$result) {
         die('Error updating user: ' . mysqli_error($select->conn));
-    }
-
-    header("Location: user.php");
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require 'config.php';
-
-    $select = new Select();
-    $idkh = $_POST["idkh"];
-
-    $currentUser = $select->selectUserById($idkh);
-    $existingImage = $currentUser['imguser'];
-
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-     
-        $imageTmpName = $_FILES['image']['tmp_name'];
-        $newImageFileName = 'imguser/' . $idkh . '_' . $_FILES['image']['name'];
-        move_uploaded_file($imageTmpName, $newImageFileName);
-
-
-        if ($existingImage != 'assets/images/pic/usernew.png' && file_exists($existingImage)) {
-            unlink($existingImage);
-        }
-
-        $updateImageQuery = "UPDATE tb_user SET imguser='$newImageFileName' WHERE idkh=$idkh";
-        $result = mysqli_query($select->conn, $updateImageQuery);
-
-        if (!$result) {
-            die('Error updating user image: ' . mysqli_error($select->conn));
-        }
     }
 }
 ?>
