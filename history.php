@@ -142,7 +142,7 @@
 
                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                                        <button type="button" class="btn btn-primary" style="cursor: not-allowed;background:#94c3f6;border:#94c3f6;" disabled>Save changes</button>&nbsp;
                                        
                                     </div>
 
