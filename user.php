@@ -187,7 +187,6 @@ document.getElementById('saveChangesBtn').addEventListener('click', function() {
     formData.append('phone', newPhone);
     formData.append('gender', selectedGender);
 
-    // Append image file if selected
     var fileInput = document.getElementById('imageInput');
     if (fileInput.files.length > 0) {
         formData.append('image', fileInput.files[0]);

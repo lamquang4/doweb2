@@ -10,13 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newBirthday = $_POST["birthday"];
     $newGender = isset($_POST["gender"]) ? $_POST["gender"] : '';
 
-    // Upload image file
+
     if (isset($_FILES['image'])) {
         $file = $_FILES['image'];
-        $fileName = $username . '_' . $file['name']; // Concatenate username with original file name
+        $fileName = $username . '_' . $file['name']; 
         $filePath = 'imguser/' . $fileName;
         move_uploaded_file($file['tmp_name'], $filePath);
-        // Update image path in database
+      
         $updateImagePathQuery = "UPDATE tb_customer SET imguser='$filePath' WHERE username='$username'";
         $resultImagePath = mysqli_query($select->conn, $updateImagePathQuery);
         if (!$resultImagePath) {
