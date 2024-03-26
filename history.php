@@ -1,3 +1,19 @@
+<?php
+require 'config.php';
+
+$select = new Select();
+if(isset($_SESSION["username"])){
+    $user = $select->selectUserById($_SESSION["username"]);
+    
+  }else{
+    header("Location: login.php");
+}
+
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+    header("Location: login.php");
+exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -81,7 +81,12 @@ include_once 'header.php'
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
 
-<input class="in-put" type="number" value="1" min="1" max="6">
+  <div class="button-de-increase">
+    <div class="minus"><i class="fa-solid fa-minus" style="font-size: 18px;"></i></div>
+    <div><input type="text" maxlength="2" class="numbers" value="1"></div>
+    <div class="plus"><i class="fa-solid fa-plus" style="font-size: 18px;"></i></div>
+  </div>
+
 <button class="normal" onclick="addToCart()">Add to Cart</button>
   
  <div id="infor-nutri">
@@ -193,20 +198,37 @@ include_once 'header.php'
   <?php
 include_once 'footer.php'
   ?>
+
+<script>
+   const plus = document.querySelector(".plus"),
+    minus = document.querySelector(".minus"),
+    num = document.querySelector(".numbers");
+    let a = 1;
+    plus.addEventListener("click", () => {
+    if (a < 10) { 
+      a++;
+      num.value = a; 
+    }
+  });
+
+  minus.addEventListener("click", () => {
+    if (a > 1) {
+      a--;
+      num.value = a; 
+    }
+  });
+  </script>
+
  <script>
 
   var nutri= document.querySelector(".label");
 var nutriopen=document.getElementById("nutri-open");
-
-let isHidden = true;
 let isRotate = true;
 nutriopen.onclick = function() {
-  isHidden = !isHidden;
+
  isRotate=!isRotate;
 nutriopen.style.transform = isRotate ? "rotate(180deg)" : "rotate(0deg)";
-  setTimeout(() => {
-    nutri.style.display = isHidden ? "block" : "none";
-  }, 240);
+
 };
 
   var MainImg  =document.getElementById("MainImg");
@@ -233,7 +255,36 @@ MainImg.src = small[3].src;
    </script>
 
 
+<style>
+  .button-de-increase{
+  height: 48px;
+width: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+margin-bottom: 20px;
+  border: 1px solid black;
+}
+.button-de-increase div{
+  width: 100%;
 
+  text-align: center;
+  align-items: center;
+font-weight: 400;
+  cursor: pointer;
+  user-select: none;
+}
+.button-de-increase .numbers{
+  font-size: 21px;
+  font-weight: 400;
+border: none;
+width: 30px;
+text-align: center;
+
+}
+
+</style>
 
 
 
