@@ -83,27 +83,27 @@ include_once 'header.php'
               
               <div class="input-field" >
                
-                <input type="text" name="username" placeholder="Username" id="username" maxlength="9">
+                <input type="text" name="username" placeholder="Username" id="username" maxlength="9" required>
              
               </div>
 
         
            <div class="input-field">
 
-             <input  type="text" name="email" placeholder="Email" id="email" maxlength="50">
+             <input  type="text" name="email" placeholder="Email" id="email" maxlength="50" required>
          
             </div>
 
 
             <div class="input-field">
              
-              <input type="password" name="password" placeholder="Password" id="password" maxlength="20"> 
+              <input type="password" name="password" placeholder="Password" id="password" maxlength="20" required> 
  
              </div>
  
              <div class="input-field">
              
-               <input type="password" name="password2" placeholder="Confirm password" id="password2" maxlength="20"> 
+               <input type="password" name="password2" placeholder="Confirm password" id="password2" maxlength="20" required> 
               
              </div>
 

@@ -258,13 +258,13 @@ MainImg.src = small[3].src;
 <style>
   .button-de-increase{
   height: 48px;
-width: 115px;
+width: 112px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #FFF;
 margin-bottom: 20px;
-  border: 1px solid black;
+  border: 0.8px solid black;
 }
 .button-de-increase div{
   width: 100%;

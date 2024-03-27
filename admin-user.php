@@ -15,7 +15,54 @@ $users = $userinad->selectUsers($start,$limit);
 $totalUsers = $userinad->getUserCount();
 $totalPages = ceil($totalUsers / $limit);
 
+$register  = new Register();
+if (isset($_POST["submit"])) {
+ 
+  $username = isset($_POST["username"]) ? $_POST["username"] : "";
+  $email = isset($_POST["email"]) ? $_POST["email"] : "";
+  $password = isset($_POST["password"]) ? $_POST["password"] : "";
+  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
+  $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
+  $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
+  $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
+  $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
+  $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
+  $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
+  $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
+  $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+  $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
+  $status = isset($_POST["status"]) ? $_POST["status"] : "";
 
+  $result = $register->registration(
+      $username,
+      $email,
+      $password,
+      $password2,
+      $sonha,
+      $duong,
+      $quan,
+      $phuong,
+      $tp,
+      $fullname,
+      $phone,
+      $birthday,
+      $gender,
+      $imguser,
+      $status
+  );
+
+  if ($result == 1) {
+      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php';</script>";
+  
+  } elseif ($result == 10) {
+      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php'; </script>";
+   
+  } elseif ($result == 100) {
+      echo "<script> alert('Password does not match'); window.location.href='admin-user.php'; </script>";
+   
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -220,31 +267,31 @@ $totalPages = ceil($totalUsers / $limit);
     <h1>Add User</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
-<form>
+<form method="post"  onsubmit="return kttrong()">
 
 <div class="user-input" style="margin-top: 30px;">  
   <label>Username:</label>
-<input type="text" name="username" id="username">
+<input type="text" name="username" id="username" required>
              </div>
 
              <div class="user-input">
                 <label>Email:</label>
-                <input type="text" name="email" id="email"> 
+                <input type="text" name="email" id="email" required> 
         </div>
     
 
         <div class="user-input">
                 <label>Password:</label>
-                <input type="password" name="password" id="password"> 
+                <input type="password" name="password" id="password" required> 
         </div>
 
         <div class="user-input">
                 <label>Confirm password:</label>
-                <input type="password" name="password2" id="password"> 
+                <input type="password" name="password2" id="password" required> 
         </div>
     
 <div style="text-align: center;" id="button-submit">
-  <button type="submit">Submit</button>
+  <button type="submit" name="submit">Submit</button>
 </div>
 
 </form>

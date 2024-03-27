@@ -35,7 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $type = $_POST['type'];
  $brand = $_POST['brand'];
 
- $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
+ do {
+  $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
+  $check_query = "SELECT COUNT(*) AS count FROM product WHERE id='$random_id'";
+  $result = mysqli_query($connection->conn, $check_query);
+  $row = mysqli_fetch_assoc($result);
+  $count = $row['count'];
+} while ($count > 0);
+
   $targetDir = "assets/images/sp/";
   $fileName = basename($_FILES["fimage1"]["name"]);
   $targetFilePath = $targetDir . $fileName;

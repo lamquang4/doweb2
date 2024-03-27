@@ -231,13 +231,13 @@ $totalPages = ceil($totalAds / $limit);
 
     <div class="user-input" style="margin-top: 30px;">
                  <label>Username:</label>
-                 <input type="text" name="username" id="username">
+                 <input type="text" name="username" id="username" required>
     
             </div>
        
               <div class="user-input">
                 <label>Email:</label>
-               <input type="text" name="email" id="email"> 
+               <input type="text" name="email" id="email" required> 
          </div>
 
  <div class="user-input" >
@@ -251,16 +251,16 @@ $totalPages = ceil($totalAds / $limit);
 
       <div class="user-input">
                 <label>Password:</label>
-               <input type="password" name="password" id="password"> 
+               <input type="password" name="password" id="password" required> 
          </div> 
 
          <div class="user-input">
                 <label>Confirm password:</label>
-               <input type="password" name="password2" id="password"> 
+               <input type="password" name="password2" id="password" required> 
          </div> 
 
          <div style="text-align: center;" id="button-submit">
-  <button type="submit">Submit</button>
+  <button type="submit" name="submit">Submit</button>
 </div>  
 
     </form>

@@ -178,7 +178,7 @@ $totalPages = ceil($totalProducts / $limit);
 
 <?php while ($product = mysqli_fetch_assoc($products)) { ?>
   <tr>
-  <td>#SP<?php echo $product['id']; ?></td>
+  <td><?php echo $product['id']; ?></td>
 <td>
 
    <div class="image-product-admin">
