@@ -81,11 +81,11 @@ exit();
                               
                                         <div class="form-group">
                                             <label class="form-label">Full Name</label>
-                                            <input type="text" id="fullnameInput" maxlength="20" class="form-control" value="<?php echo $user['fullname']; ?>">
+                                            <input type="text" id="fullnameInput" maxlength="30" class="form-control" value="<?php echo $user['fullname']; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
-                                            <input type="text" class="form-control mb-1" maxlength="50" id="emailInput" value="<?php echo $user['email']; ?>">
+                                            <input type="text" class="form-control" maxlength="50" id="emailInput" value="<?php echo $user['email']; ?>">
                                         
                                         </div>
                                
@@ -273,45 +273,46 @@ if (this.value != "") {
 
 
 <script>
-     
-        const fullnameInput = document.getElementById('fullnameInput');
-        const emailInput = document.getElementById('emailInput');
-        const phoneInput = document.getElementById('phoneInput');
-        const saveChangesBtn = document.getElementById('saveChangesBtn');
+    const fullnameInput = document.getElementById('fullnameInput');
+    const emailInput = document.getElementById('emailInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const saveChangesBtn = document.getElementById('saveChangesBtn');
 
-   
-        fullnameInput.addEventListener('input', validateForm);
-        emailInput.addEventListener('input', validateForm);
-        phoneInput.addEventListener('input', validateForm);
+    fullnameInput.addEventListener('input', validateForm);
+    emailInput.addEventListener('input', validateForm);
+    phoneInput.addEventListener('input', validateForm);
 
-     
-        function validateForm() {
-            const fullname = fullnameInput.value.trim();
-            const email = emailInput.value.trim();
-            const phone = phoneInput.value.trim();
+    function validateForm() {
+        const fullname = fullnameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
 
-       
-            const fullnameRegex = /^[a-zA-Z\s]+$/; 
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
-            const phoneRegex = /^0[1-9]\d{8,9}$/;
+        const fullnameRegex = /^[a-zA-Z\s]+$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^0[1-9]\d{8,9}$/;
 
-       
-            if (fullname.match(fullnameRegex) && email.match(emailRegex) && phone.match(phoneRegex)) {
-                saveChangesBtn.disabled = false; 
-                saveChangesBtn.style.background = '#007bff';
-                saveChangesBtn.style.cursor = 'pointer';
-                saveChangesBtn.style.border = '#007bff';
-               
-            } else {
-            
-                saveChangesBtn.disabled = true; 
-                saveChangesBtn.style.background = '#94c3f6';
-                saveChangesBtn.style.cursor = 'not-allowed';
-                saveChangesBtn.style.border = '#94c3f6';
-               
-            }
+        const fullnameValid = fullname.match(fullnameRegex);
+        const emailValid = email.match(emailRegex);
+        const phoneValid = phone.match(phoneRegex);
+
+        if (fullnameValid && emailValid && phoneValid) {
+            saveChangesBtn.disabled = false;
+            saveChangesBtn.style.background = '#007bff';
+            saveChangesBtn.style.cursor = 'pointer';
+            saveChangesBtn.style.border = '#007bff';
+        } else {
+            saveChangesBtn.disabled = true;
+            saveChangesBtn.style.background = '#94c3f6';
+            saveChangesBtn.style.cursor = 'not-allowed';
+            saveChangesBtn.style.border = '#94c3f6';
         }
-    </script>
+
+        fullnameInput.style.border = fullnameValid ? '1px solid #ced4da' : '2px solid red';
+        emailInput.style.border = emailValid ? '1px solid #ced4da' : '2px solid red';
+        phoneInput.style.border = phoneValid ? '1px solid #ced4da' : '2px solid red';
+
+    }
+</script>
 
 
 

@@ -18,7 +18,7 @@ $totalPages = ceil($totalProducts / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $name = trim($_POST['name']);
-  $price = $_POST['price'];
+  $price = trim($_POST['price']);
   $image = $_POST['image'];
   $soluong = $_POST['soluong'];
   $date_add =$_POST['date_add'];
@@ -207,7 +207,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
 
 <div class="browse">
-<input type="search" placeholder="Search (#ID)" class="record-search">
+<input type="search" placeholder="Search (ID)" class="record-search">
 
 </div>
 

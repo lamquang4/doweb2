@@ -9,17 +9,17 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
 $register  = new Register();
 if (isset($_POST["submit"])) {
  
-  $username = isset($_POST["username"]) ? $_POST["username"] : "";
-  $email = isset($_POST["email"]) ? $_POST["email"] : "";
-  $password = isset($_POST["password"]) ? $_POST["password"] : "";
+  $username = trim(isset($_POST["username"]) ? $_POST["username"] : "");
+  $email = trim(isset($_POST["email"]) ? $_POST["email"] : "");
+  $password = trim(isset($_POST["password"]) ? $_POST["password"] : "");
   $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
-  $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
-  $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
+  $sonha = trim(isset($_POST["sonha"]) ? $_POST["sonha"] : "");
+  $duong = trim(isset($_POST["duong"]) ? $_POST["duong"] : "");
   $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
   $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
   $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
-  $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
-  $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
+  $fullname = trim(isset($_POST["fullname"]) ? $_POST["fullname"] : "");
+  $phone = trim(isset($_POST["phone"]) ? $_POST["phone"] : "");
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
@@ -231,14 +231,18 @@ include_once 'header.php'
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
   function kttrong() {
-    var email = document.getElementById("email").value;
+    var email = document.getElementById("email").value.trim();
+    var password = document.getElementById("password").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
         return false;
-    }else{
-      return true
     }
+    if(password.length<6){
+      alert('The password must be over 6 characters.');
+      return false;
+    }
+    return true;
 }
 </script>
 

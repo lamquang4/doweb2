@@ -17,14 +17,35 @@ class Connection{
     
 }
 
+class Registerad extends Connection {
+    public function registration($username, $email, $password, $password2, $fullname, $phone, $role, $status) {
+        $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username ='$username' OR email ='$email' OR phone='$phone'");
+        
+        if (mysqli_num_rows($duplicate) > 0) {
+            return 10;
+        } else {
+            if ($password == $password2) {
+               
+                $query = "INSERT INTO tb_manager ( username, email, password, fullname, phone, role, status) 
+                          VALUES ( '$username', '$email', '$password', '$fullname', '$phone', '$role','$status')";
+                mysqli_query($this->conn, $query);
+                return 1;
+            } else {
+                return 100;
+            }
+        }
+    }
+
+
+}
 class Loginad extends Connection{
-    public $idad;
+    public $username;
     public function loginad($username,$password){
         $result = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username='$username'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
             if($password == $row["password"]){
-$this->idad = $row["idad"];
+$this->username = $row["username"];
 return 1;
             }
             else{
@@ -34,7 +55,7 @@ return 1;
      
     }
    public function idUserad(){
-    return $this->idad;
+    return $this->username;
    }
 
 }
@@ -69,8 +90,8 @@ class Adinad extends Connection{
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
-    public function selectAdById($idad) {
-        $query = "SELECT * FROM tb_manager WHERE idad = $idad";
+    public function selectAdById($username) {
+        $query = "SELECT * FROM tb_manager WHERE username = '$username'";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }

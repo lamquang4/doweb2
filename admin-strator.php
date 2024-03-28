@@ -13,6 +13,37 @@ $start = ($page - 1) * $limit;
 $ads = $adinad->selectAds($start,$limit);
 $totalAds = $adinad ->getAdCount();
 $totalPages = ceil($totalAds / $limit);
+
+$registerad  = new Registerad();
+if (isset($_POST["submit"])) {
+  $username = trim(isset($_POST["username"]) ? $_POST["username"] : "");
+  $email = trim(isset($_POST["email"]) ? $_POST["email"] : "");
+  $password = trim(isset($_POST["password"]) ? $_POST["password"] : "");
+  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $fullname = trim(isset($_POST["fullname"]) ? $_POST["fullname"] : "");
+  $phone = trim(isset($_POST["phone"]) ? $_POST["phone"] : "");
+  $role = isset($_POST["role"]) ? $_POST["role"] : "";
+  $status = isset($_POST["status"]) ? $_POST["status"] : "";
+  $result = $registerad->registration(
+    $username,
+      $email,
+      $password,
+      $password2,
+      $fullname,
+      $phone,
+      $role,
+      $status
+  );
+
+  if ($result == 1) {
+      echo "<script> alert('Registration Successful'); window.location.href='admin-strator.php'; </script>";
+  
+  } elseif ($result == 10) {
+      echo "<script> alert('Username or Email or Phone Number has already taken'); window.location.href='admin-strator.php'; </script>";
+  } elseif ($result == 100) {
+      echo "<script> alert('Password does not match'); window.location.href='admin-strator.php'; </script>";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -148,10 +179,10 @@ $totalPages = ceil($totalAds / $limit);
                     <table width="100%" id="table-adminstrator">
                     <thead>
                             <tr id="select-filter">
-                                                         
+                            <th> USERNAME</th> 
+                            <th> FULL NAME</th>                   
                                 <th> EMAIL</th>
-                                <th> USERNAME</th>
-                                <th> ROLE </th>
+                                <th> PHONE</th>
                                 <th>STATUS </th>
                                 <th> ACTION</th>
                             </tr>
@@ -160,16 +191,20 @@ $totalPages = ceil($totalAds / $limit);
                         <?php while ($ad = mysqli_fetch_assoc($ads)) { ?>
                             <tr>
                                 
-                             
+                            <td>
+<?php echo $ad['username']; ?>
+</td>   
+<td>
+<?php echo $ad['fullname']; ?>
+</td>                        
 <td>
 <?php echo $ad['email']; ?>
 </td>
 <td>
-<?php echo $ad['username']; ?>
+<?php echo $ad['phone']; ?>
 </td>
-                                <td>
-                                 Customer
-                                </td>
+
+                             
                                 <td>
                                     Normal
                                 </td>
@@ -227,27 +262,30 @@ $totalPages = ceil($totalAds / $limit);
     <h1>Add Manager</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
-    <form>
+    <form method="post"  onsubmit="return kttrong()">
 
     <div class="user-input" style="margin-top: 30px;">
                  <label>Username:</label>
-                 <input type="text" name="username" id="username" required>
+                 <input type="text" name="username" id="username" maxlength="9" required>
     
             </div>
        
+            <div class="user-input">
+                <label>Fullname:</label>
+               <input type="text" name="fullname" id="fullname" maxlength="30" required> 
+         </div>
+
               <div class="user-input">
                 <label>Email:</label>
                <input type="text" name="email" id="email" required> 
          </div>
 
- <div class="user-input" >
-       <label>Role:</label>
-    <select>
-        <option>Customer</option>
-        <option>Adminstrator</option>
-        <option>Product</option>
-    </select>
-</div>
+         <div class="user-input">
+                <label>Phone:</label>
+               <input type="text" name="phone" id="phone" maxlength="11" required> 
+         </div>
+
+
 
       <div class="user-input">
                 <label>Password:</label>
@@ -296,6 +334,33 @@ function hideadd(){
   containerinputs.style.display="none";
   usertab.style.display="none";
  
+}
+
+function kttrong() {
+    var email = document.getElementById("email").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var fullname = document.getElementById("fullname").value.trim();
+    var password = document.getElementById("password").value.trim();
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    var phoneRegex = /^0[1-9]\d{8,9}$/;
+  var fullnameRegex = /^[a-zA-Z\s]+$/; 
+  if (!fullnameRegex.test(fullname)) {
+        alert("Full name must contain only letters.");
+        return false;
+    }
+    if (!emailRegex.test(email)) {
+        alert("Invalid Email.");
+        return false;
+    }
+    if(!phoneRegex.test(phone)){
+        alert("Invalid Phone Number.");
+        return false;
+    }
+    if(password.length<6){
+      alert('The password must be over 6 characters.');
+      return false;
+    }
+    return true;
 }
 </script>
 

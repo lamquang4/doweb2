@@ -180,7 +180,7 @@ if (isset($_POST["submit"])) {
                 <div class="record-header">
 
                     <div class="browse">
-                       <input type="search" placeholder="Search (#ID)" class="record-search">
+                       <input type="search" placeholder="Search" class="record-search">
                      
                     </div>
 
@@ -271,7 +271,7 @@ if (isset($_POST["submit"])) {
 
 <div class="user-input" style="margin-top: 30px;">  
   <label>Username:</label>
-<input type="text" name="username" id="username" required>
+<input type="text" name="username" id="username" maxlength="9" required>
              </div>
 
              <div class="user-input">
@@ -326,6 +326,28 @@ function hideadd(){
   containerinputs.style.display="none";
   usertab.style.display="none";
 
+}
+
+function kttrong() {
+    var email = document.getElementById("email").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var password = document.getElementById("password").value.trim();
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  var phoneRegex = /^0[1-9]\d{8,9}$/;
+    if (!emailRegex.test(email)) {
+        alert("Invalid Email.");
+        return false;
+    }
+    if(!phoneRegex.test(phone)){
+        alert("Invalid Phone Number.");
+        return false;
+    }
+    if(password.length<6){
+      alert('The password must be over 6 characters.');
+      return false;
+    }
+      return true
+    
 }
 </script>
 

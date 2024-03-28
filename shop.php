@@ -108,9 +108,9 @@ include_once 'header.php'
 
 <div>
   <label>PRICE:</label>
-  <input name="min_price" id="minPrice" placeholder="Min Price" style="margin-bottom:10px">
+  <input type="number" name="min_price" id="minPrice" placeholder="Min Price" style="margin-bottom:10px">
 <label>TO</label>
-  <input name="max_price" id="maxPrice" placeholder="Max Price">
+  <input type="number" name="max_price" id="maxPrice" placeholder="Max Price">
 </div>
 
 <hr style="margin: 20px 0;  border: 1px solid #ccc;">

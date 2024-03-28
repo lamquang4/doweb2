@@ -112,7 +112,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
            
             <div class="record-header">
               <div class="browse">
-                <input type="search" placeholder="Search (#ID)" class="record-search">
+                <input type="search" placeholder="Search (ID)" class="record-search">
               
              </div>
                 <div class="add">
