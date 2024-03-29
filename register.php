@@ -232,11 +232,16 @@ include_once 'header.php'
 <script>
   function kttrong() {
     var email = document.getElementById("email").value.trim();
+    var username = document.getElementById("username").value.trim();
     var password = document.getElementById("password").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
         return false;
+    }
+    if(username.length<5){
+      alert('The username must be over 5 characters.');
+      return false;
     }
     if(password.length<6){
       alert('The password must be over 6 characters.');

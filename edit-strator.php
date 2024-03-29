@@ -1,11 +1,18 @@
 <?php
 require 'config.php';
-
-
 if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
+
+$connection = new Connection();
+$username = $_GET['manager'];
+
+ $edit_sql = "SELECT * FROM tb_manager WHERE username='$username'";
+$result = mysqli_query($connection->conn, $edit_sql);
+$row = mysqli_fetch_assoc($result); 
+
+
 $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -14,37 +21,6 @@ $ads = $adinad->selectAds($start,$limit);
 $totalAds = $adinad ->getAdCount();
 $totalPages = ceil($totalAds / $limit);
 
-$registerad  = new Registerad();
-if (isset($_POST["submit"])) {
-  $username = trim(isset($_POST["username"]) ? $_POST["username"] : "");
-  $email = trim(isset($_POST["email"]) ? $_POST["email"] : "");
-  $password = trim(isset($_POST["password"]) ? $_POST["password"] : "");
-  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
-  $fullname = trim(isset($_POST["fullname"]) ? $_POST["fullname"] : "");
-  $phone = trim(isset($_POST["phone"]) ? $_POST["phone"] : "");
-  $role = isset($_POST["role"]) ? $_POST["role"] : "";
-  $status = isset($_POST["status"]) ? $_POST["status"] : "";
-  $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-  $result = $registerad->registration(
-    $username,
-      $email,
-      $password,
-      $password2,
-      $fullname,
-      $phone,
-      $role,
-      $status
-  );
-
-  if ($result == 1) {
-      echo "<script> alert('Registration Successful'); window.location.href='admin-strator.php?page=$currentPage'; </script>";
-  
-  } elseif ($result == 10) {
-      echo "<script> alert('Username or Email or Phone Number has already taken'); window.location.href='admin-strator.php?page=$currentPage'; </script>";
-  } elseif ($result == 100) {
-      echo "<script> alert('Password does not match'); window.location.href='admin-strator.php?page=$currentPage'; </script>";
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -211,7 +187,7 @@ if (isset($_POST["submit"])) {
                                 </td>
                                 <td>
                                 <div class="actions">
-                                <a href="edit-strator.php?manager=<?php echo $ad['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+                                <a href="edit-strator.php?manager=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
                                         <span class="las la-lock" style="color: #FFAD27;"></span>
                                         <span class="las la-undo-alt"></span>
                                        
@@ -257,46 +233,36 @@ if (isset($_POST["submit"])) {
 </body>
 </html>
 
-<div id="container-inputs">
+<div id="container-inputs" style="display: block;">
 
   <div class="user-tab">
     <h1>Add Manager</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?>';"></i>
 
-    <form method="post"  onsubmit="return kttrong()">
+    <form method="post" action="update-strator.php"  onsubmit="return kttrong()">
+
+    <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 
     <div class="user-input" style="margin-top: 30px;">
                  <label>Username:</label>
-                 <input type="text" name="username" id="username" maxlength="9" required>
+                 <input type="text" name="manager" id="username" maxlength="9" value="<?php echo $row['username']?>" readonly style="cursor:not-allowed;">
     
             </div>
        
             <div class="user-input">
                 <label>Fullname:</label>
-               <input type="text" name="fullname" id="fullname" maxlength="30" required> 
+               <input type="text" name="fullname" id="fullname" maxlength="30" value="<?php echo $row['fullname']?>"> 
          </div>
 
               <div class="user-input">
                 <label>Email:</label>
-               <input type="text" name="email" id="email" required> 
+               <input type="text" name="email" id="email" value="<?php echo $row['email']?>"> 
          </div>
 
          <div class="user-input">
                 <label>Phone:</label>
-               <input type="text" name="phone" id="phone" maxlength="11" required> 
+               <input type="text" name="phone" id="phone" maxlength="11" value="<?php echo $row['phone']?>"> 
          </div>
-
-
-
-      <div class="user-input">
-                <label>Password:</label>
-               <input type="password" name="password" id="password" required> 
-         </div> 
-
-         <div class="user-input">
-                <label>Confirm password:</label>
-               <input type="password" name="password2" id="password" required> 
-         </div> 
 
          <div style="text-align: center;" id="button-submit">
   <button type="submit" name="submit">Submit</button>
@@ -319,27 +285,10 @@ if (isset($_POST["submit"])) {
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
-showadd.onclick=function(){
-  containerinputs.style.display="block";
-  usertab.style.display="block";
-}
-function hideadd(){
-    var container = document.getElementById('container-inputs');
-    var inputs = container.querySelectorAll('input, select, textarea');
 
-    inputs.forEach(function (input) {
-        if (input.type !== 'button') {
-            input.value = '';
-        }
-    });
-  containerinputs.style.display="none";
-  usertab.style.display="none";
- 
-}
 
 function kttrong() {
     var email = document.getElementById("email").value.trim();
-    var username = document.getElementById("username").value.trim();
     var phone = document.getElementById("phone").value.trim();
     var fullname = document.getElementById("fullname").value.trim();
     var password = document.getElementById("password").value.trim();
@@ -358,14 +307,7 @@ function kttrong() {
         alert("Invalid Phone Number.");
         return false;
     }
-    if(username.length<5){
-      alert('The username must be over 5 characters.');
-      return false;
-    }
-    if(password.length<6){
-      alert('The password must be over 6 characters.');
-      return false;
-    }
+ 
     return true;
 }
 </script>

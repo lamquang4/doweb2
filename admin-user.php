@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
-
+  $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $result = $register->registration(
       $username,
       $email,
@@ -53,13 +53,13 @@ if (isset($_POST["submit"])) {
   );
 
   if ($result == 1) {
-      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php';</script>";
+      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php?page=$currentPage';</script>";
   
   } elseif ($result == 10) {
-      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php'; </script>";
+      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php?page=$currentPage'; </script>";
    
   } elseif ($result == 100) {
-      echo "<script> alert('Password does not match'); window.location.href='admin-user.php'; </script>";
+      echo "<script> alert('Password does not match'); window.location.href='admin-user.php?page=$currentPage'; </script>";
    
   }
 }
@@ -331,6 +331,7 @@ function hideadd(){
 function kttrong() {
     var email = document.getElementById("email").value.trim();
     var phone = document.getElementById("phone").value.trim();
+    var username = document.getElementById("username").value.trim();
     var password = document.getElementById("password").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   var phoneRegex = /^0[1-9]\d{8,9}$/;
@@ -341,6 +342,10 @@ function kttrong() {
     if(!phoneRegex.test(phone)){
         alert("Invalid Phone Number.");
         return false;
+    }
+    if(username.length<5){
+      alert('The username must be over 5 characters.');
+      return false;
     }
     if(password.length<6){
       alert('The password must be over 6 characters.');
