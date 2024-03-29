@@ -567,7 +567,7 @@
         }
           #table-user td:nth-child(2) {
            
-      width: 14%;
+      width: 15%;
         }
         #table-user td:nth-child(3) {
           
@@ -577,35 +577,33 @@
           width: 12%;   
         }
         #table-user th:nth-child(5){
-            width: 17%; 
+            width: 21%; 
         }
         #table-user th:nth-child(6){
-            width: 12%;
+            width: 10%;
         } 
         #table-user th:nth-child(7) {
-    width:13%;
+    width:10%;
         }
-        
-
-       
+          
      
        #table-adminstrator td:nth-child(1){
-        width: 15%;
+        width: 16%;
        }
        #table-adminstrator td:nth-child(2){
-        width: 18%;
+        width: 19%;
        }
        #table-adminstrator td:nth-child(3){
-        width: 22%;
+        width: 25%;
        }
        #table-adminstrator td:nth-child(4){
-        width: 15%;
+        width: 14%;
        }
        #table-adminstrator td:nth-child(5){
-        width: 15%;
+        width: 12%;
        }
        #table-adminstrator td:nth-child(6){
-        width: 15%;
+        width: 14%;
        }
      
     .image-product-admin img{

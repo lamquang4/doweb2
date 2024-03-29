@@ -354,7 +354,7 @@ $totalPages = ceil($totalProducts / $limit);
 
 <div class="user-input">
   <label>Date Add:</label>
-  <input type="date" name="date_add" id="date_add" value="<?php echo date('Y-m-d', strtotime($row['date_add'])); ?>">
+  <input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">
 </div>
 <div class="user-input">
   <label>Description:</label>

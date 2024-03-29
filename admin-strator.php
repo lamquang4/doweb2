@@ -180,7 +180,7 @@ if (isset($_POST["submit"])) {
                     <thead>
                             <tr id="select-filter">
                             <th> USERNAME</th> 
-                            <th> FULL NAME</th>                   
+                            <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
                                 <th>STATUS </th>

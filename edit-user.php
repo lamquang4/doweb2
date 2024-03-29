@@ -1,11 +1,16 @@
 <?php
 require 'config.php';
+if (!isset($_GET['customer'])) {
+    header('Location: admin-user.php');
+    exit(); 
+  }
 
+$connection = new Connection();
+$username = $_GET['customer'];
 
-if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
-    header("Location: login-admin.php");
-    exit();
-}
+ $edit_sql = "SELECT * FROM tb_customer WHERE username='$username'";
+$result = mysqli_query($connection->conn, $edit_sql);
+$row = mysqli_fetch_assoc($result); 
 
 $userinad = new Userinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -15,54 +20,6 @@ $users = $userinad->selectUsers($start,$limit);
 $totalUsers = $userinad->getUserCount();
 $totalPages = ceil($totalUsers / $limit);
 
-$register  = new Register();
-if (isset($_POST["submit"])) {
- 
-  $username = isset($_POST["username"]) ? $_POST["username"] : "";
-  $email = isset($_POST["email"]) ? $_POST["email"] : "";
-  $password = isset($_POST["password"]) ? $_POST["password"] : "";
-  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
-  $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
-  $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
-  $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
-  $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
-  $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
-  $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
-  $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
-  $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
-  $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
-  $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
-  $status = isset($_POST["status"]) ? $_POST["status"] : "";
-
-  $result = $register->registration(
-      $username,
-      $email,
-      $password,
-      $password2,
-      $sonha,
-      $duong,
-      $quan,
-      $phuong,
-      $tp,
-      $fullname,
-      $phone,
-      $birthday,
-      $gender,
-      $imguser,
-      $status
-  );
-
-  if ($result == 1) {
-      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php';</script>";
-  
-  } elseif ($result == 10) {
-      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php'; </script>";
-   
-  } elseif ($result == 100) {
-      echo "<script> alert('Password does not match'); window.location.href='admin-user.php'; </script>";
-   
-  }
-}
 
 ?>
 <!DOCTYPE html>
@@ -200,7 +157,7 @@ if (isset($_POST["submit"])) {
                     <thead>
                             <tr id="select-filter">
                                 <th>USERNAME</th>
-                                <th> FULL NAME</th>
+                                <th> FULLNAME</th>
                                 <th> EMAIL</th>
                            
                                 <th> BIRTHDAY</th>
@@ -223,7 +180,7 @@ if (isset($_POST["submit"])) {
         </td>
         <td>
             <div class="actions">
-            <a href="edit-user.php?customer=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+                <span class="las la-edit" style="color:#076FFE;"></span>
                 <span class="las la-lock" style="color: #FFAD27;"></span>
            
             </div>
@@ -261,34 +218,36 @@ if (isset($_POST["submit"])) {
 
 </main>
 
-<div id="container-inputs">
+<div id="container-inputs" style="display: block;">
 
   <div class="user-tab">
     <h1>Add User</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
+  <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?>';"></i>
 
-<form method="post"  onsubmit="return kttrong()">
+<form method="post" action="update-user.php"  onsubmit="return kttrong()">
+
+<input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 
 <div class="user-input" style="margin-top: 30px;">  
-  <label>Username:</label>
-<input type="text" name="username" id="username" maxlength="9" required>
+<label>Username:</label>
+<input type="text" name="customer" id="username" value="<?php echo $row['username']?>" readonly style="cursor:not-allowed;">   
              </div>
 
              <div class="user-input">
-                <label>Email:</label>
-                <input type="text" name="email" id="email" required> 
+                <label>Fullname:</label>
+                <input type="text" value="<?php echo $row['fullname']?>" name="fullname" id="fullname" maxlength="30"> 
+        </div>
+
+             <div class="user-input" >  
+<label>Email:</label>
+                <input type="text" value="<?php echo $row['email']?>" name="email" id="email"> 
+             </div>
+
+        <div class="user-input">
+                <label>Phone:</label>
+                <input type="text" value="<?php echo $row['phone']?>" name="phone" id="phone" maxlength="11"> 
         </div>
     
-
-        <div class="user-input">
-                <label>Password:</label>
-                <input type="password" name="password" id="password" required> 
-        </div>
-
-        <div class="user-input">
-                <label>Confirm password:</label>
-                <input type="password" name="password2" id="password" required> 
-        </div>
     
 <div style="text-align: center;" id="button-submit">
   <button type="submit" name="submit">Submit</button>
@@ -310,30 +269,19 @@ if (isset($_POST["submit"])) {
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
-showadd.onclick=function(){
-  containerinputs.style.display="block";
-  usertab.style.display="block";
-}
-function hideadd(){
-    var container = document.getElementById('container-inputs');
-    var inputs = container.querySelectorAll('input, select, textarea');
 
-    inputs.forEach(function (input) {
-        if (input.type !== 'button') {
-            input.value = '';
-        }
-    });
-  containerinputs.style.display="none";
-  usertab.style.display="none";
-
-}
 
 function kttrong() {
     var email = document.getElementById("email").value.trim();
     var phone = document.getElementById("phone").value.trim();
-    var password = document.getElementById("password").value.trim();
+    var fullname = document.getElementById("fullname").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   var phoneRegex = /^0[1-9]\d{8,9}$/;
+  var fullnameRegex = /^[a-zA-Z\s]+$/;
+  if (!fullnameRegex.test(fullname)) {
+        alert("Full name must contain only letters.");
+        return false;
+    } 
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
         return false;
@@ -342,10 +290,7 @@ function kttrong() {
         alert("Invalid Phone Number.");
         return false;
     }
-    if(password.length<6){
-      alert('The password must be over 6 characters.');
-      return false;
-    }
+
       return true
     
 }
