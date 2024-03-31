@@ -12,10 +12,15 @@ if(isset($_POST["submit"])){
   $result = $login->login($_POST["usernamelogin"], $_POST["password"]);
  
   if($result ==1){
-   $_SESSION["login"]=true;
-   $_SESSION["username"]=$login->idUser();
-   echo "<script> alert('Login Successful'); window.location.href='index.php'; </script>";
-   exit;
+     $userStatus = $login->getUserStatus($login->idUser());
+        if ($userStatus == 0) {
+            echo "<script> alert('Your account is blocked.'); window.location.href='login.php';</script>";
+        } else {
+            $_SESSION["login"] = true;
+            $_SESSION["username"] = $login->idUser();
+            echo "<script> alert('Login Successful'); window.location.href='index.php'; </script>";
+            exit;
+        }
   
   }elseif($result==10){
     echo

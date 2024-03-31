@@ -6,6 +6,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
+$connection = new Connection();
 $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -44,6 +45,34 @@ if (isset($_POST["submit"])) {
   } elseif ($result == 100) {
       echo "<script> alert('Password does not match'); window.location.href='admin-strator.php?page=$currentPage'; </script>";
   }
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager'])) {
+    $username = $_GET['manager']; 
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+
+    $query = "UPDATE tb_manager SET status = 0 WHERE username = '$username'";
+    
+    if (mysqli_query($connection->conn, $query)) {
+        echo "<script>window.location.href='admin-strator.php?page=$currentPage';</script>";
+    
+    } else {
+        echo "<script>alert('Block Manager Fail');window.location.href='admin-strator.php?page=$currentPage';</script>";
+    }
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manager'])) {
+    $username = $_GET['manager']; 
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+
+    $query = "UPDATE tb_manager SET status = 1 WHERE username = '$username'";
+    
+    if (mysqli_query($connection->conn, $query)) {
+        echo "<script>alert('Unblock Successful');window.location.href='admin-strator.php?page=$currentPage';</script>";
+      
+    } else {
+        echo "<script>alert('Unblock Manager Fail');window.location.href='admin-strator.php?page=$currentPage';</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -207,14 +236,27 @@ if (isset($_POST["submit"])) {
 
                              
                                 <td>
-                                    Normal
+                                <?php 
+        if ($ad['status'] == 1) {
+            echo 'Normal';
+        } else {
+            echo 'Blocked';
+        }
+    ?>
                                 </td>
                                 <td>
                                 <div class="actions">
                                 <a href="edit-strator.php?manager=<?php echo $ad['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
-                                        <span class="las la-lock" style="color: #FFAD27;"></span>
-                                        <span class="las la-undo-alt"></span>
-                                       
+                                <?php if ($ad['status'] == 1) { ?>
+        <a onclick="return confirm('Are you sure you want to block this manager?');" href="admin-strator.php?action=block&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-lock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } else { ?>
+        <a href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-unlock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } ?>
+                                                                        
                                     </div>
                                 </td>
                             </tr>

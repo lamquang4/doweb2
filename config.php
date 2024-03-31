@@ -27,7 +27,7 @@ class Registerad extends Connection {
             if ($password == $password2) {
                
                 $query = "INSERT INTO tb_manager ( username, email, password, fullname, phone, role, status) 
-                          VALUES ( '$username', '$email', '$password', '$fullname', '$phone', '$role','$status')";
+                          VALUES ( '$username', '$email', '$password', '$fullname', '$phone', '$role', 1)";
                 mysqli_query($this->conn, $query);
                 return 1;
             } else {
@@ -51,12 +51,22 @@ return 1;
             else{
                 return 10;
             }
+        }else{
+            return 100;
         }
      
     }
    public function idUserad(){
     return $this->username;
    }
+   public function getAdStatus($username) {
+    $result = mysqli_query($this->conn, "SELECT status FROM tb_manager WHERE username='$username'");
+    $row = mysqli_fetch_assoc($result);
+    if (mysqli_num_rows($result) > 0) {
+        return $row['status'];
+    }
+    return null;
+}
 
 }
 
@@ -107,7 +117,7 @@ class Register extends Connection {
             if ($password == $password2) {
                
                 $query = "INSERT INTO tb_customer ( username, email, password, sonha, duong, quan, phuong, tp, fullname, phone, gender, imguser, birthday, status) 
-                          VALUES ( '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$tp', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday','normal')";
+                          VALUES ( '$username', '$email', '$password', '$sonha','$duong','$quan','$phuong', '$tp', '$fullname', '$phone', '$gender', 'assets/images/pic/usernew.png', '$birthday', 1)";
                 mysqli_query($this->conn, $query);
                 return 1;
             } else {
@@ -142,6 +152,14 @@ return 1;
     return $this->username;
    }
 
+   public function getUserStatus($username) {
+    $result = mysqli_query($this->conn, "SELECT status FROM tb_customer WHERE username='$username'");
+    $row = mysqli_fetch_assoc($result);
+    if (mysqli_num_rows($result) > 0) {
+        return $row['status'];
+    }
+    return null;
+}
 }
 
 class Select extends Connection{

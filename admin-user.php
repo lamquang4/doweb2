@@ -6,7 +6,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
-
+$connection = new Connection();
 $userinad = new Userinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -64,6 +64,33 @@ if (isset($_POST["submit"])) {
   }
 }
 
+if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['customer'])) {
+    $username = $_GET['customer']; 
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+
+    $query = "UPDATE tb_customer SET status = 0 WHERE username = '$username'";
+    
+    if (mysqli_query($connection->conn, $query)) {
+        echo "<script>window.location.href='admin-user.php?page=$currentPage';</script>";
+    
+    } else {
+        echo "<script>alert('Block Customer Fail');window.location.href='admin-user.php?page=$currentPage';</script>";
+    }
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['customer'])) {
+    $username = $_GET['customer']; 
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+
+    $query = "UPDATE tb_customer SET status = 1 WHERE username = '$username'";
+    
+    if (mysqli_query($connection->conn, $query)) {
+        echo "<script>alert('Unblock Successful');window.location.href='admin-user.php?page=$currentPage';</script>";
+      
+    } else {
+        echo "<script>alert('Block Customer Fail');window.location.href='admin-user.php?page=$currentPage';</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -219,12 +246,27 @@ if (isset($_POST["submit"])) {
         <td><?php echo $user['birthday']; ?></td>
         <td></td>
         <td>
-        <?php echo $user['status']; ?>
+        <?php 
+        if ($user['status'] == 1) {
+            echo 'Normal';
+        } else {
+            echo 'Blocked';
+        }
+    ?>
         </td>
         <td>
             <div class="actions">
             <a href="edit-user.php?customer=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
-                <span class="las la-lock" style="color: #FFAD27;"></span>
+            
+            <?php if ($user['status'] == 1) { ?>
+        <a onclick="return confirm('Are you sure you want to block this customer?');" href="admin-user.php?action=block&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-lock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } else { ?>
+        <a href="admin-user.php?action=unblock&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-unlock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } ?>
            
             </div>
         </td>
@@ -264,7 +306,7 @@ if (isset($_POST["submit"])) {
 <div id="container-inputs">
 
   <div class="user-tab">
-    <h1>Add User</h1>
+    <h1>Add Customer</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
 
 <form method="post"  onsubmit="return kttrong()">

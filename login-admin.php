@@ -12,12 +12,22 @@ if (isset($_POST["submit"])) {
     $result = $loginad->loginad($_POST["username"], $_POST["password"]);
 
     if ($result == 1) {
-        $_SESSION["loginad"] = true;
-        $_SESSION["idad"] = $loginad->idUserad();
-        header("location: admin-strator.php");
+        $adStatus = $loginad->getAdStatus($loginad->idUserad());
+        if($adStatus == 0){
+            echo "<script> alert('Your account is blocked.'); window.location.href='login-admin.php';</script>";
+        }else{
+            $_SESSION["loginad"] = true;
+            $_SESSION["idad"] = $loginad->idUserad();
+            echo "<script> alert('Login Successful'); window.location.href='admin-strator.php'; </script>";
+            exit;
+        }
+     
     } elseif ($result == 10) {
-        echo "<script> alert('Wrong username or password'); </script>";
-    }
+        echo "<script> alert('Wrong password'); </script>";
+    }elseif($result==100){
+        echo
+        "<script> alert('Wrong username or password!'); </script>";
+      }
 }
 ?>
 <!DOCTYPE html>

@@ -236,7 +236,7 @@ $totalPages = ceil($totalAds / $limit);
 <div id="container-inputs" style="display: block;">
 
   <div class="user-tab">
-    <h1>Add Manager</h1>
+    <h1>Edit Manager</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?>';"></i>
 
     <form method="post" action="update-strator.php"  onsubmit="return kttrong()">

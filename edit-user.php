@@ -221,7 +221,7 @@ $totalPages = ceil($totalUsers / $limit);
 <div id="container-inputs" style="display: block;">
 
   <div class="user-tab">
-    <h1>Add User</h1>
+    <h1>Edit Customer</h1>
   <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?>';"></i>
 
 <form method="post" action="update-user.php"  onsubmit="return kttrong()">
@@ -246,6 +246,11 @@ $totalPages = ceil($totalUsers / $limit);
         <div class="user-input">
                 <label>Phone:</label>
                 <input type="text" value="<?php echo $row['phone']?>" name="phone" id="phone" maxlength="11"> 
+        </div>
+
+        <div class="user-input">
+                <label>Birthday:</label>
+                <input type="date" value="<?php echo $row['birthday']?>" name="birthday" id="birthday"> 
         </div>
     
     
