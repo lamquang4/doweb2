@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_FILES['image'])) {
         $file = $_FILES['image'];
-        $fileName = $username . '_' . $file['name']; 
+        $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $fileName = $username . '.' . $fileExtension; 
         $filePath = 'imguser/' . $fileName;
         move_uploaded_file($file['tmp_name'], $filePath);
       
