@@ -230,8 +230,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
     <th> IMAGE </th>
     <th> NAME </th>
     <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> PRICE </th>
-    <th > QUANTITY </th>
-    <th> DATE ADD </th>
+    <th> QUANTITY </th>
+    <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> DATE ADD </th>
     <th>ACTION</th>
    
 </tr>
@@ -272,8 +272,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 </td>   
 </tr> 
     <?php } ?>
-
-
 
 
 </tbody>

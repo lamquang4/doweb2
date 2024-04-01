@@ -50,14 +50,18 @@ if (isset($_POST["submit"])) {
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager'])) {
     $username = $_GET['manager']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-
-    $query = "UPDATE tb_manager SET status = 0 WHERE username = '$username'";
     
-    if (mysqli_query($connection->conn, $query)) {
-        echo "<script>window.location.href='admin-strator.php?page=$currentPage';</script>";
-    
+    if ($_SESSION["username"] !== $username) {
+        $query = "UPDATE tb_manager SET status = 0 WHERE username = '$username'";
+        
+        if (mysqli_query($connection->conn, $query)) {
+            echo "<script>window.location.href='admin-strator.php?page=$currentPage';</script>";
+        
+        } else {
+            echo "<script>alert('Block Manager Fail');window.location.href='admin-strator.php?page=$currentPage';</script>";
+        }
     } else {
-        echo "<script>alert('Block Manager Fail');window.location.href='admin-strator.php?page=$currentPage';</script>";
+        echo "<script>alert('You cannot block your own account.');window.location.href='admin-strator.php?page=$currentPage';</script>";
     }
 }
 

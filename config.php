@@ -191,7 +191,7 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
-    
+     $query .= " ORDER BY date_add DESC";
         $query .= " LIMIT $start, $limit";
     
         $result = mysqli_query($this->conn, $query);
