@@ -169,6 +169,7 @@ $totalPages = ceil($totalProducts / $limit);
     <th> PRICE </th>
     <th > QUANTITY </th>
     <th> DATE ADD </th>
+    <th>Status</th>
     <th>ACTION</th>
    
 </tr>
@@ -201,12 +202,34 @@ $totalPages = ceil($totalProducts / $limit);
 <td><?php echo $product['soluong']; ?></td>
 <td><?php echo $product['date_add']; ?></td>
 <td>
+<?php 
+        if ($product['status'] == 1) {
+            echo 'On sale';
+        } else {
+            echo 'Not yet released';
+        }
+    ?>
+
+</td>
+<td>
   <div class="actions">
-  <span class="las la-eye"></span>
+
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
-     <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
-   
+  <?php if ($product['status'] == 1): ?>
+    <a href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-eye"></span>
+    </a>
+<?php elseif($product['status'] == 0): ?>
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-trash" style="color: #d9534f;"></span>
+    </a>
+<?php else: ?>
+
+    <a href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-eye-slash"></span>
+    </a>
+<?php endif; ?>
   </div>
 </td>   
 </tr> 
@@ -325,13 +348,13 @@ $totalPages = ceil($totalProducts / $limit);
          <div class="user-input">
           <label> Type:</label>
          <select name="type" id="type">
-            <option value="0">Select Type</option>
+     
             <option value="carbonated" <?php echo ($row['type'] == 'carbonated') ? 'selected' : ''; ?> >Carbonated</option>
             <option value="nogas" <?php echo ($row['type'] == 'nogas') ? 'selected' : ''; ?>>Non-carbonated</option>
           </select>
           <label> Brand:</label>
          <select name="brand" id="brand">
-            <option value="0">Select Brand</option>
+        
             <option value="cocacola" <?php echo ($row['brand'] == 'cocacola') ? 'selected' : ''; ?>>Coca-cola</option>
             <option value="pepsi" <?php echo ($row['brand'] == 'pepsi') ? 'selected' : ''; ?>>Pepsi</option>
             <option value="fanta" <?php echo ($row['brand'] == 'fanta') ? 'selected' : ''; ?>>Fanta</option>
@@ -357,6 +380,12 @@ $totalPages = ceil($totalProducts / $limit);
   <input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">
 </div>
 <div class="user-input">
+<label>Status:</label>
+         <select name="status" onchange="checkStatus()">
+        
+            <option value="0" <?php echo ($row['status'] == 0) ? 'selected' : ''; ?>>Not yet released</option>
+            <option value="1" <?php echo ($row['status'] == 1) ? 'selected' : ''; ?>>On sale</option>
+          </select>
   <label>Description:</label>
 <input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
 </div>
@@ -486,4 +515,21 @@ const usertab = document.querySelector('.usertab');
   }
 
 </script>
+
+<script>
+    function checkStatus() {
+        var status = <?php echo $row['status']; ?>;
+        var select = document.getElementsByName("status")[0];
+        var notYetReleasedOption = select.options[0];
+
+        if (status == 1) {
+            notYetReleasedOption.disabled = true;
+        } else {
+            notYetReleasedOption.disabled = false;
+        }
+    }
+
+    checkStatus();
+</script>
+
 

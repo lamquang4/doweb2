@@ -13,8 +13,8 @@ $maxPrice = isset($_GET['max_price']) ? $_GET['max_price'] : null;
 $searchType = isset($_GET['type']) ? $_GET['type'] : null;
 $searchBrand = isset($_GET['brand']) ? $_GET['brand'] : null;
 
-$products = $productObj->selectProducts($start, $limit, $searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
-$totalProducts = $productObj->getProductCount($searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
+$products = $productObj->selectProducts1($start, $limit, $searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
+$totalProducts = $productObj->getProductCount1($searchText, $searchType, $minPrice, $maxPrice, $searchBrand);
 $totalPages = ceil($totalProducts / $limit);
 
 $select = new Select();
@@ -151,19 +151,19 @@ include_once 'header.php'
 
 
 <div class="pro-container1" id="product-list">
-    <?php while ($product = mysqli_fetch_assoc($products)) { ?>
-        <div class="pro1 product-box">
-            <a href="product.php?id=<?php echo $product['id']; ?>">
-                <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
-            </a>
-            <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
-            <h5 class="product-title"><?php echo $product['name']; ?></h5>
-
-            <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
-
-            <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>
-        </div>
-    <?php } ?>
+    <?php while ($product = mysqli_fetch_assoc($products)) {
+        if ($product['status'] == 1) { ?>
+            <div class="pro1 product-box">
+                <a href="product.php?id=<?php echo $product['id']; ?>">
+                    <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
+                </a>
+                <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
+                <h5 class="product-title"><?php echo $product['name']; ?></h5>
+                <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
+                <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>
+            </div>
+    <?php }
+    } ?>
 </div>
 
 <div id="containerpage">

@@ -622,20 +622,22 @@
       }
     
     #table-product td:nth-child(4){
-        width: 15%;
+        width: 10%;
       
     }
     #table-product td:nth-child(5){
-        width: 17%;
+        width: 11%;
     }
 
       #table-product td:nth-child(6){
-    width: 16%;
+    width: 13%;
       }
       #table-product td:nth-child(7){
-        width: 10%;
+        width: 13%;
           }
-     
+          #table-product td:nth-child(8){
+            width: 11%;
+              }
       
     
       #table-order th:nth-child(1){

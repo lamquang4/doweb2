@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $proteing = trim($_POST['proteing']);
   $type = $_POST['type'];
  $brand = $_POST['brand'];
-
+ $status = $_POST['status'];
  do {
   $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
   $check_query = "SELECT COUNT(*) AS count FROM product WHERE id='$random_id'";
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   } 
 
 
-    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type')";
+    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
@@ -81,10 +81,32 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
-      echo "<script>alert('Delete Successful');</script>";
-      header("Location: admin-product.php?page=$currentPage"); 
+      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+ 
   } else {
       echo "<script>alert('Delete Fail');</script>";
+  }
+}
+if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
+  $pid = $_GET['pid'];
+  $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+  $sql = "UPDATE product SET status = 2  WHERE id='$pid'";
+  if (mysqli_query($connection->conn, $sql)) {
+      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+
+  } else {
+      echo "<script>alert('Hide Product Fail');</script>";
+  }
+}
+if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
+  $pid = $_GET['pid'];
+  $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+  $sql = "UPDATE product SET status = 1  WHERE id='$pid'";
+  if (mysqli_query($connection->conn, $sql)) {
+      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+    
+  } else {
+      echo "<script>alert('Show Product Fail');</script>";
   }
 }
 ?>
@@ -232,6 +254,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
     <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> PRICE </th>
     <th> QUANTITY </th>
     <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> DATE ADD </th>
+    <th> STATUS </th>
     <th>ACTION</th>
    
 </tr>
@@ -262,12 +285,37 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <td><?php echo $product['soluong']; ?></td>
 <td><?php echo $product['date_add']; ?></td>
 <td>
+<?php 
+        if ($product['status'] == 1) {
+            echo 'On sale';
+        } else if($product['status'] == 0) {
+            echo 'Not yet released';
+        }else{
+          echo 'Product hidden';
+        }
+    ?>
+
+</td>
+<td>
   <div class="actions">
-  <span class="las la-eye"></span>
+
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
-     <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-trash" style="color: #d9534f;"></span></a>
-   
+  <?php if ($product['status'] == 1): ?>
+    <a href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-eye"></span>
+    </a>
+<?php elseif($product['status'] == 0): ?>
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-trash" style="color: #d9534f;"></span>
+    </a>
+<?php else: ?>
+
+    <a href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+        <span class="las la-eye-slash"></span>
+    </a>
+<?php endif; ?>
+
   </div>
 </td>   
 </tr> 
@@ -380,14 +428,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 
          <div class="user-input">
           <label> Type:</label>
-         <select name="type">
-            <option value="0">Select Type</option>
+         <select name="type" id="type">
+            <option value="0" selected>Select Type</option>
             <option value="carbonated">Carbonated</option>
             <option value="nogas">Non-carbonated</option>
           </select>
           <label> Brand:</label>
          <select name="brand" id="brand">
-            <option value="0">Select Brand</option>
+            <option value="0" selected>Select Brand</option>
             <option value="cocacola">Coca-cola</option>
             <option value="pepsi">Pepsi</option>
             <option value="fanta">Fanta</option>
@@ -413,6 +461,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 <input type="date" name="date_add" id="date_add" >
 </div>
 <div class="user-input">
+<label>Status:</label>
+         <select name="status" id="status">
+            <option value="no" selected>Select Status</option>
+            <option value="0">Not yet released</option>
+            <option value="1">On sale</option>
+          </select>
   <label>Description:</label>
 <input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
 </div>
@@ -509,10 +563,24 @@ function hideadd(){
 
 <script>
    function ktrong() {
-        
+    var typeSelect = document.getElementById("type");
+    var brandSelect = document.getElementById("brand");
+    var statusSelect = document.getElementById("status");
+    var selectedTypeValue = typeSelect.value;
+    var selectedBrandValue = brandSelect.value;
+    var selectedStatusValue = statusSelect.value;
     var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
  var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
-    for (var i = 0; i < inputsToCheck.length; i++) {
+    
+ if (selectedTypeValue === "0" || selectedBrandValue === "0") {
+    alert("Please choose brand or type");
+    return false;
+}
+  if(selectedStatusValue === "no"){
+    alert("Please choose status");
+        return false;
+  }
+ for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();
 
@@ -529,15 +597,6 @@ function hideadd(){
         }
     }
     
-
-    var typeSelect = document.getElementById("type");
-    var brandSelect = document.getElementById("brand");
-    var selectedValue = typeSelect.value;
-    var selectedValue = brandSelect.value;
-    if (selectedValue === "0") {
-        alert("Please choose product type");
-        return false;
-    }
 
     return true;
     }

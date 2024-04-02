@@ -227,6 +227,55 @@ class Product extends Connection {
         return mysqli_fetch_assoc($result);
     }
 
+    public function selectProducts1($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
+        $query = "SELECT * FROM product WHERE status=1";
+    
+        if (!empty($searchText)) {
+            $query .= " AND name LIKE '%$searchText%'";
+        }
+    
+        if (!empty($searchType)) {
+            $query .= " AND type LIKE '%$searchType%'";
+        }
+    
+        if (!empty($minPrice) && !empty($maxPrice)) {
+            $query .= " AND price BETWEEN $minPrice AND $maxPrice";
+        }
+    
+        if (!empty($searchBrand)) {
+            $query .= " AND brand = '$searchBrand'";
+        }
+     $query .= " ORDER BY date_add DESC";
+        $query .= " LIMIT $start, $limit";
+    
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    public function getProductCount1($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
+        $query = "SELECT COUNT(*) as total FROM product WHERE status=1";
+    
+        if (!empty($searchText)) {
+            $query .= " AND name LIKE '%$searchText%'";
+        }
+    
+        if (!empty($searchType)) {
+            $query .= " AND type LIKE '%$searchType%'";
+        }
+    
+        if (!empty($minPrice) && !empty($maxPrice)) {
+            $query .= " AND price BETWEEN $minPrice AND $maxPrice";
+        }
+    
+        if (!empty($searchBrand)) {
+            $query .= " AND brand = '$searchBrand'";
+        }
+    
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
+
   
 }
 
