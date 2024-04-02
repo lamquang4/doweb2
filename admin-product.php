@@ -291,7 +291,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
         } else if($product['status'] == 0) {
             echo 'Not yet released';
         }else{
-          echo 'Product hidden';
+          echo 'Hidden';
         }
     ?>
 
