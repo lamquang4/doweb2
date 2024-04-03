@@ -502,7 +502,7 @@
  
     @media(max-width:768px){
         #table-user{
-            width:200%;
+            width:210%;
         }
         #table-order{
             width:180%;
@@ -574,10 +574,10 @@
       width: 22%;
         }
         #table-user th:nth-child(4){
-          width: 12%;   
+          width: 10%;   
         }
         #table-user th:nth-child(5){
-            width: 21%; 
+            width: 23%; 
         }
         #table-user th:nth-child(6){
             width: 10%;

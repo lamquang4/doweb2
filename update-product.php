@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
             echo "<script> alert('Sorry, there was an error uploading your file.'); </script>";
         }
     } else {
-        echo "<script> alert('Sorry, only JPG, JPEG, PNG files are allowed to upload.'); </script>";
+       
     }
 }
 
@@ -50,9 +50,8 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
     $updatequery = "UPDATE product SET name='$name', brand='$brand', type='$type', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
-        echo "<script> alert('Success'); </script>";
-        header("Location: admin-product.php?page={$page}");
-        exit;
+        echo "<script> alert('Success'); window.location.href='admin-product.php?page={$page}'; </script>";
+       
     } else {
         echo "<script> alert('Fail'); </script>";
     }

@@ -1,85 +1,88 @@
 
-
 #section-login {
   background-color: rgba(255, 255, 255, 0.649);
-  width: 100%;
+  width:100%;
+  height:540px;
+  margin-top: 145px;
+  }
+  #section-login   .container{
   
+  width: 98%;
+  padding-bottom: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
   
-  margin-top: 135px;
-  margin-bottom: 60px;
   }
   
-  
-  #content-container{
-  
-    width:100%;
-    max-width:650px;
-    padding: 28px;
-    margin: 0 28px;
+  .f-box{
+    width:90%;
+    max-width:405px;
   text-align: center;
   background-color: white;
-  box-shadow: inset -2px 2px 2px white;
+  padding: 15px 30px 0px 30px;
   border-radius: 15px;
   
   }
-  
-  #main-user-info{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding:  20px 0;
-    
-  }
-  
-  #content-container #tittle{
+  .f-box h1{
   font-size: 50px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   margin-top: 10px;
-  font-weight: 800;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   color:#000000;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   
-  .input-field:nth-child(2n){
-    justify-content: end;
-  }
   
   .input-field{
-    display: flex;
-    flex-wrap: wrap;
-    width: 50%;
-    margin-bottom: 20px;
+  background:rgb(255, 255, 255);
+  margin: 15px 0;
+  border-radius:10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
   }
-  .input-field select{
-    width: 95%;
-    height: 40px;
-    padding-left: 10px;
-    border: 2px solid #e5e5e5;
-    border-radius: 7px;
-  }
-  .input-field input{
-    height: 40px;
-    width: 95%;
-    border-radius: 7px;
-    outline: none;
-    border: 2px solid #e5e5e5;
-  padding-left: 12px;
+  #section-login input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline:0;
+    padding: 18px 15px;
   
   }
-   
+  .input-field i{
+    margin-left:11px;
+  color: #999;
+  
+  } 
+  .input-field #mail{
+  font-size: 19px;
+  }
+  .input-field {
+  border:2px solid #e5e5e5;
+  }
+  #section-login form a{
+    text-decoration: none;
+    font-size:13px;
+    color: #8d8d8d;
+  display: flex;
+  justify-content: left;
+  font-weight: 300;
+  }
+  #fpass{
+    font-weight: 610;
+  }
   .b-field{
   width: 100%;
   display: flex;
   justify-content: space-between;
   }
   .b-field button{
+  
   flex-basis: 48%;
   height: 40px;
+  
   border:1.8px solid black;
   outline:0;
   font-size: 18px;
@@ -87,58 +90,40 @@
   cursor: pointer;
   transition: all 1s;
   }
-
   #subtn{
   background: white;
   
   }
   #sibtn{
-    background: white;
+  background: white;
   color: black;
   }
+  .input-group{
+  height: 200px;
   
+  }
+  #eye{
+  margin-right: 14px;
+  font-size: 17.5px;
   
-  .b-field button{
+  }
+  
+  #section-login button{
     transition: all 0.2s ease;
     border: 3px solid black;
   border-radius: 0.4em;
   box-shadow: 0.35em 0.32em;
   
   }
-  .b-field button:active{
+  #section-login button:active{
     transform: scale(0.96);
   }
   
+
   
-  @media(max-width: 600px){
-   #content-container{
-        min-width: 280px;
-    }
-  
-    .input-field{
-      padding: 0;
-        margin-bottom: 16px;
-        width: 100%;
-    }
-  
-    .input-field:nth-child(2n){
-        justify-content: space-between;
-    }
-  
-    .main-user-info{
-        max-height: 380px;
-        overflow: auto;
-    }
-  
-    .main-user-info::-webkit-scrollbar{
-        width: 0;
-    }
-  }
   @media(max-width:480px){
-    #section-login{
+    #section-login {
    
-      margin-top: 102px;
+      margin-top: 135px;
       }
   }
-  
-  

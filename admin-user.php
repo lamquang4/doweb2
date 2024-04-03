@@ -244,7 +244,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><?php echo $user['birthday']; ?></td>
-        <td></td>
+        <td><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></td>
         <td>
         <?php 
         if ($user['status'] == 1) {
@@ -333,7 +333,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
         </div>
     
 <div style="text-align: center;" id="button-submit">
-  <button type="submit" name="submit">Submit</button>
+  <button type="submit" name="submit" onclick="return validateForm1();">Submit</button>
 </div>
 
 </form>
@@ -396,6 +396,22 @@ function kttrong() {
       return true
     
 }
+</script>
+
+<script>
+    function validateForm1() {
+        var city = document.getElementById('city').value;
+        var district = document.getElementById('district').value;
+        var ward = document.getElementById('ward').value;
+        var sonha = document.getElementById('sonha').value;
+        var duong = document.getElementById('duong').value;
+
+        if (city === '0' || district === '0' || ward === '0' || sonha.trim() === '' || duong.trim() === '') {
+            alert('Please fill in all fields.');
+            return false; 
+        }
+        return true;
+    }
 </script>
 
 

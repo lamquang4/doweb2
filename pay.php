@@ -9,6 +9,10 @@ if(isset($_SESSION["username"])){
     header("Location: login.php");
 }
 
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+    header("Location: login.php");
+exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,14 +115,14 @@ include_once 'header.php'
                                                   <div class="col-lg-4">
                                                         <div class="mb-0">
                                                             <label class="form-label" for="hnumber">House number</label>
-                                                            <input  type="text" class="form-control" id="zip-code"  placeholder="Enter house number">
+                                                            <input  type="text" class="form-control" id="sonha"  placeholder="Enter house number">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4">
                                                         <div class="mb-0">
                                                             <label class="form-label" for="street">Street</label>
-                                                            <input type="text" class="form-control" id="zip-code"  placeholder="Enter street">
+                                                            <input type="text" class="form-control" id="duong"  placeholder="Enter street">
                                                         </div>
                                                     </div>
 
@@ -454,51 +458,6 @@ color: white;
  
  </style>
 
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-var citis = document.getElementById("city");
-var districts = document.getElementById("district");
-var wards = document.getElementById("ward");
-var Parameter = {
-url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
-method: "GET", 
-responseType: "application/json", 
-};
-var promise = axios(Parameter);
-promise.then(function (result) {
-renderCity(result.data);
-});
-
-function renderCity(data) {
-for (const x of data) {
-citis.options[citis.options.length] = new Option(x.Name, x.Id);
-}
-citis.onchange = function () {
-district.length = 1;
-ward.length = 1;
-if(this.value != ""){
-  const result = data.filter(n => n.Id === this.value);
-
-  for (const k of result[0].Districts) {
-    district.options[district.options.length] = new Option(k.Name, k.Id);
-  }
-}
-};
-district.onchange = function () {
-ward.length = 1;
-const dataCity = data.filter((n) => n.Id === citis.value);
-if (this.value != "") {
-  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
-  for (const w of dataWards) {
-    wards.options[wards.options.length] = new Option(w.Name, w.Id);
-  }
-}
-};
-}
-</script>
 
 
 

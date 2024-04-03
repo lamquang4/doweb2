@@ -15,9 +15,9 @@ if (isset($_POST["submit"])) {
   $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
   $sonha = trim(isset($_POST["sonha"]) ? $_POST["sonha"] : "");
   $duong = trim(isset($_POST["duong"]) ? $_POST["duong"] : "");
-  $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
-  $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
-  $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
+  $district = isset($_POST["district"]) ? $_POST["district"] : "";
+  $ward = isset($_POST["ward"]) ? $_POST["ward"] : "";
+  $city = isset($_POST["city"]) ? $_POST["city"] : "";
   $fullname = trim(isset($_POST["fullname"]) ? $_POST["fullname"] : "");
   $phone = trim(isset($_POST["phone"]) ? $_POST["phone"] : "");
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
@@ -32,9 +32,9 @@ if (isset($_POST["submit"])) {
       $password2,
       $sonha,
       $duong,
-      $quan,
-      $phuong,
-      $tp,
+      $district,
+      $ward,
+      $city,
       $fullname,
       $phone,
       $birthday,
@@ -74,88 +74,49 @@ include_once 'header.php'
   ?>
 
 <section id="section-login">
-  <div id="content-container"> 
-      <h1 id="tittle">Sign Up</h1>
-
-        <form  action="" id="form" onsubmit="return kttrong()" method="post" autocomplete="off">
-         
-          <div id="main-user-info">
-              
+    <div class="container" id="container">
+     <div class="f-box">
+          <h1 id="tittle">Sign Up</h1>
+          <form  action="" id="form" onsubmit="return kttrong()" method="post" autocomplete="off">
+             <div class="input-group">
               <div class="input-field" >
-               
-                <input type="text" name="username" placeholder="Username" id="username" maxlength="9" required>
+                <i class="fa-solid fa-user"></i>
+                <input type="text" placeholder="Username" id="username" maxlength="9" name="username" required>
              
               </div>
 
-        
+              <div class="input-field" >
+              <i class="fa-solid fa-envelope" style="font-size: 18px;"></i>
+                <input type="text" placeholder="Email" id="email" maxlength="50" name="email" required>
+             
+              </div>
+     
            <div class="input-field">
-
-             <input  type="text" name="email" placeholder="Email" id="email" maxlength="50" required>
-         
-            </div>
-
-
-            <div class="input-field">
-             
-              <input type="password" name="password" placeholder="Password" id="password" maxlength="20" required> 
- 
-             </div>
- 
-             <div class="input-field">
-             
-               <input type="password" name="password2" placeholder="Confirm password" id="password2" maxlength="20" required> 
+             <i class="fa-solid fa-lock"></i>
+             <input type="password" placeholder="Password" id="password" maxlength="20" required name="password"> 
               
-             </div>
+            
+                </div>
 
-            <div class="input-field">
-             
-                <input  type="text"  placeholder="Enter house number" > 
-             
-             </div>
-
-
-             <div class="input-field">
-             
-              <input type="text"  placeholder="Enter street" >
-           
-           </div>
-
-             <div class="input-field" >
-          
-              <select  id="city">
-                <option value="" selected>Select City</option> 
-            </select>
-             </div>
-
-
-             <div class="input-field" >
-
-              <select id="district">
-                <option value="" selected>Select District</option>
-                </select>
-              </div>
-
-              <div class="input-field" >
-                <select id="ward" >
-                  <option value="" selected>Select Ward</option>
-                  </select>
-              </div>
-           
-
-
+                <div class="input-field">
+             <i class="fa-solid fa-lock"></i>
+             <input type="password" placeholder="Confirm password" id="password2" maxlength="20" required name="password2"> 
+ 
+                </div>
+      
              <div class="b-field">
-                 <button type="button" onclick="window.location.href='login.php'" id="subtn" >Sign in</button>
-             <button type="submit" name="submit" id="sibtn">Sign up</button>
+                 <button onclick="window.location.href='login.php'"  id="subtn">Sign in</button>
+            <button type="submit" name="submit"  id="sibtn">Sign up</button>
             
          </div>
-
-        </div>
-
-   
+         
           </form>
     
-  
-      </div>
+     
+     </div>
+
+     </div>
+     
    </section>
 
 
@@ -251,49 +212,6 @@ include_once 'header.php'
 }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-var citis = document.getElementById("city");
-var districts = document.getElementById("district");
-var wards = document.getElementById("ward");
-var Parameter = {
-url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
-method: "GET", 
-responseType: "application/json", 
-};
-var promise = axios(Parameter);
-promise.then(function (result) {
-renderCity(result.data);
-});
-
-function renderCity(data) {
-for (const x of data) {
-citis.options[citis.options.length] = new Option(x.Name, x.Id);
-}
-citis.onchange = function () {
-district.length = 1;
-ward.length = 1;
-if(this.value != ""){
-  const result = data.filter(n => n.Id === this.value);
-
-  for (const k of result[0].Districts) {
-    district.options[district.options.length] = new Option(k.Name, k.Id);
-  }
-}
-};
-district.onchange = function () {
-ward.length = 1;
-const dataCity = data.filter((n) => n.Id === citis.value);
-if (this.value != "") {
-  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
-  for (const w of dataWards) {
-    wards.options[wards.options.length] = new Option(w.Name, w.Id);
-  }
-}
-};
-}
-</script>
 
 
 

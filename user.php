@@ -61,12 +61,13 @@ exit();
                         <div class="col-md-11" style="padding-left: 0; padding-right: 0;">
                             <div class="card-body pb-2">
                                 <div class="tab-pane fade active show" id="account-general">
+                                    <form method="post" action="updateuser.php" enctype="multipart/form-data" onsubmit="return kttrong()"> 
                                     <div class="card-body media align-items-center">
                                     <img src="<?php echo $user['imguser']; ?>" alt class="d-block ui-w-80" id="userImage">
                                         <div class="media-body ml-4">
                                             <label class="btn btn-outline-primary">
                                                 Select photo
-                                                <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/jpeg, image/png, image/gif">
+                                                <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/jpeg, image/png, image/gif" name="userImage">
                                     </label> &nbsp;       
                                             
                                            
@@ -76,16 +77,16 @@ exit();
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label class="form-label">Username</label>
-                                            <input type="text" id="usernameInput" maxlength="9" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
+                                            <input type="text" id="username" name="username" maxlength="9" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
                                         </div>
                               
                                         <div class="form-group">
                                             <label class="form-label">Full Name</label>
-                                            <input type="text" id="fullnameInput" maxlength="30" class="form-control" value="<?php echo $user['fullname']; ?>">
+                                            <input type="text" id="fullname" name="fullname" maxlength="30" class="form-control" value="<?php echo $user['fullname']; ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
-                                            <input type="text" class="form-control" maxlength="50" id="emailInput" value="<?php echo $user['email']; ?>">
+                                            <input type="text" class="form-control" name="email" maxlength="50" id="email" value="<?php echo $user['email']; ?>" required>
                                         
                                         </div>
                                
@@ -99,46 +100,60 @@ exit();
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
                                                     <label class="form-label">Birthday</label>
-                                                    <input type="date" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput">
+                                                    <input type="date" name="birthday" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput" >
                                                 </div>
                                             </div>
                 
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="text" maxlength="11" class="form-control" value="<?php echo $user['phone']; ?>" id="phoneInput">
+                                                    <input type="text" name="phone" maxlength="11" class="form-control" value="<?php echo $user['phone']; ?>" id="phone" required>
                                                 </div>
                                             </div>
                 
                                             
                                         </div>
                                       
-                                        <div class="form-group" style="margin-bottom: 14px;">
+                                        <div class="form-group" style="margin-bottom: 25px;">
 
                                         <label class="form-label">Adress</label>
 
                                         <div class="input-group">
-  <input type="text" class="form-control" placeholder="House number" >
+  <input type="text" name="sonha" id="sonha"  class="form-control" placeholder="House number" value="<?php echo $user['sonha']; ?>" required>
 
-  <input type="text" class="form-control" placeholder="Street" >
+  <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
 
-  <select class="form-control" id="city" aria-label=".form-select-sm">
-<option value="" selected>Select City</option> 
+  <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
+<option value="0" selected>Select City</option> 
+<option value="Hồ Chí Minh City" <?php echo ($user['city'] == 'Hồ Chí Minh City') ? 'selected' : ''; ?>>Hồ Chí Minh City</option> 
+<option value="Hà Nội City" <?php echo ($user['city'] == 'Hà Nội City') ? 'selected' : ''; ?>>Hà Nội City</option> 
    </select>
 
                                         </div>
                                         </div>
 
                                         <div class="form-group">
-                                        <label class="form-label">District/Ward</label>
+                                   
                                         <div class="input-group">
                                       
-                                        <select class="form-control" id="district" aria-label=".form-select-sm" >
-                                  <option value="" selected>Select District</option>
+                                        <select class="form-control" id="district" name="district" aria-label=".form-select-sm" >
+                                  <option value="0">Select District</option>
+                                  <option value="District 1" <?php echo ($user['district'] == 'District 1') ? 'selected' : ''; ?>>District 1</option> 
+                                  <option value="District 2" <?php echo ($user['district'] == 'District 2') ? 'selected' : ''; ?>>District 2</option> 
+                                  <option value="District 3" <?php echo ($user['district'] == 'District 3') ? 'selected' : ''; ?>>District 3</option> 
+                                  <option value="District 4" <?php echo ($user['district'] == 'District 4') ? 'selected' : ''; ?>>District 4</option> 
+                                  <option value="District 5" <?php echo ($user['district'] == 'District 5') ? 'selected' : ''; ?>>District 5</option> 
+                                  <option value="District 6" <?php echo ($user['district'] == 'District 6') ? 'selected' : ''; ?>>District 6</option> 
                                      </select>
  
-                                     <select  class="form-control" id="ward" aria-label=".form-select-sm" >
-                    <option value="" selected>Select Ward</option>
+                                     <select  class="form-control" id="ward" name="ward" aria-label=".form-select-sm" >
+                    <option value="0" selected>Select Ward</option>
+                    <option value="Ward 1" <?php echo ($user['ward'] == 'Ward 1') ? 'selected' : ''; ?>>Ward 1</option> 
+                                  <option value="Ward 2" <?php echo ($user['ward'] == 'Ward 2') ? 'selected' : ''; ?>>Ward 2</option> 
+                                  <option value="Ward 3" <?php echo ($user['ward'] == 'Ward 3') ? 'selected' : ''; ?>>Ward 3</option> 
+                                  <option value="Ward 4" <?php echo ($user['ward'] == 'Ward 4') ? 'selected' : ''; ?>>Ward 4</option> 
+                                  <option value="Ward 5" <?php echo ($user['ward'] == 'Ward 5') ? 'selected' : ''; ?>>Ward 5</option> 
+                                  <option value="Ward 6" <?php echo ($user['ward'] == 'Ward 6') ? 'selected' : ''; ?>>Ward 6</option> 
                                        </select>
 
                                         </div>
@@ -146,12 +161,12 @@ exit();
                                        
                                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
-                                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>&nbsp;
+                                        <button class="btn btn-primary" id="saveChangesBtn" name="submit" type="submit">Save changes</button>&nbsp;
                                        
                                     </div>
-
+                                    </form>
                                     </div>
-           
+                                  
                              
                             </div>
                         </div>
@@ -168,46 +183,8 @@ exit();
 
 </html>
 
-<script>
-document.getElementById('saveChangesBtn').addEventListener('click', function() {
-    var newUsername = document.getElementById('usernameInput').value;
-    var newEmail = document.getElementById('emailInput').value;
-    var newFullname = document.getElementById('fullnameInput').value;
-    var newBirthday = document.getElementById('dateInput').value;
-    var newPhone = document.getElementById('phoneInput').value;
-    var genderMale = document.getElementById('male').checked;
-    var genderFemale = document.getElementById('female').checked;
-    var selectedGender = genderMale ? 'male' : (genderFemale ? 'female' : '');
-    var formData = new FormData();
-    formData.append('username', "<?php echo $_SESSION["username"]; ?>");
-    formData.append('newUsername', newUsername);
-    formData.append('email', newEmail);
-    formData.append('fullname', newFullname);
-    formData.append('birthday', newBirthday);
-    formData.append('phone', newPhone);
-    formData.append('gender', selectedGender);
 
-    var fileInput = document.getElementById('imageInput');
-    if (fileInput.files.length > 0) {
-        formData.append('image', fileInput.files[0]);
-    }
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'updateuser.php', true);
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            console.log(xhr.responseText);
-            alert('Update successful');
-            window.location.reload();
-        } else {
-            console.error('Error updating user:', xhr.statusText);
-        }
-    };
-
-    xhr.send(formData);
-});
-</script>
 
 <script>
 function previewImage() {
@@ -226,101 +203,55 @@ function previewImage() {
 }
 </script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
-var citis = document.getElementById("city");
-var districts = document.getElementById("district");
-var wards = document.getElementById("ward");
-var Parameter = {
-url: "https://raw.githubusercontent.com/lamquang4/login2/main/data.json", 
-method: "GET", 
-responseType: "application/json", 
-};
-var promise = axios(Parameter);
-promise.then(function (result) {
-renderCity(result.data);
-});
+    function kttrong() {
+        var email = document.getElementById("email").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var fullname = document.getElementById("fullname").value.trim();
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  var phoneRegex = /^0[1-9]\d{8,9}$/;
+  var fullnameRegex = /^[a-zA-Z\s]+$/;
+  if (!fullnameRegex.test(fullname)) {
+        alert("Full name must contain only letters.");
+        window.location.href='user.php';
+        return false;
+    } 
+    if (!emailRegex.test(email)) {
+        alert("Invalid Email.");
+        window.location.href='user.php';
+        return false;
+    }
+    if(!phoneRegex.test(phone)){
+        alert("Invalid Phone Number.");
+        window.location.href='user.php';
+        return false;
+    }
 
-function renderCity(data) {
-for (const x of data) {
-citis.options[citis.options.length] = new Option(x.Name, x.Id);
-}
-citis.onchange = function () {
-district.length = 1;
-ward.length = 1;
-if(this.value != ""){
-  const result = data.filter(n => n.Id === this.value);
-
-  for (const k of result[0].Districts) {
-    district.options[district.options.length] = new Option(k.Name, k.Id);
-  }
-}
-};
-district.onchange = function () {
-ward.length = 1;
-const dataCity = data.filter((n) => n.Id === citis.value);
-if (this.value != "") {
-  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
-  for (const w of dataWards) {
-    wards.options[wards.options.length] = new Option(w.Name, w.Id);
-  }
-}
-};
-}
-</script>
-
-
-<script>
-    const fullnameInput = document.getElementById('fullnameInput');
-    const emailInput = document.getElementById('emailInput');
-    const phoneInput = document.getElementById('phoneInput');
-    const saveChangesBtn = document.getElementById('saveChangesBtn');
-
-    fullnameInput.addEventListener('input', validateForm);
-    emailInput.addEventListener('input', validateForm);
-    phoneInput.addEventListener('input', validateForm);
-
-    function validateForm() {
-        const fullname = fullnameInput.value.trim();
-        const email = emailInput.value.trim();
-        const phone = phoneInput.value.trim();
-
-        const fullnameRegex = /^[a-zA-Z\s]+$/;
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const phoneRegex = /^0[1-9]\d{8,9}$/;
-
-        const fullnameValid = fullname.match(fullnameRegex);
-        const emailValid = email.match(emailRegex);
-        const phoneValid = phone.match(phoneRegex);
-
-        if (fullnameValid && emailValid && phoneValid) {
-            saveChangesBtn.disabled = false;
-            saveChangesBtn.style.background = '#007bff';
-            saveChangesBtn.style.cursor = 'pointer';
-            saveChangesBtn.style.border = '#007bff';
-        } else {
-            saveChangesBtn.disabled = true;
-            saveChangesBtn.style.background = '#94c3f6';
-            saveChangesBtn.style.cursor = 'not-allowed';
-            saveChangesBtn.style.border = '#94c3f6';
+        var city = document.getElementById('city').value;
+        if (city === "0") {
+            alert("Please select a city");
+            window.location.href='user.php';
+            return false;
         }
 
-        fullnameInput.style.border = fullnameValid ? '1px solid #ced4da' : '2px solid red';
-        emailInput.style.border = emailValid ? '1px solid #ced4da' : '2px solid red';
-        phoneInput.style.border = phoneValid ? '1px solid #ced4da' : '2px solid red';
 
+        var district = document.getElementById('district').value;
+        if (district === "0") {
+            alert("Please select a district");
+            window.location.href='user.php';
+            return false;
+        }
+
+        var ward = document.getElementById('ward').value;
+        if (ward === "0") {
+            alert("Please select a ward");
+            window.location.href='user.php';
+            return false;
+        }
+
+        return true;
+       
     }
 </script>
-
-
-
-
-
-
-
-
-
 
 

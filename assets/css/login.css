@@ -119,19 +119,7 @@ box-shadow: 0.35em 0.32em;
   transform: scale(0.96);
 }
 
-.input-field.success  {
-    border-color: #09c372;
-}
 
-.input-field.error  {
-    border-color: #ff3860;
-}
-
-.input-field .error {
-    color: #ff3860;
-    font-size: 9px;
-    height: 13px;
-}
 
 @media(max-width:480px){
   #section-login {
