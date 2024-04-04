@@ -71,10 +71,10 @@ include_once 'header.php'
                                                                 <input type="radio" name="address" id="info-address1" class="card-radio-input">
                                                                 <div class="card-radio text-truncate p-3">
                                                                     <span class="fs-14 mb-4 d-block">Your Account Address</span>
-                                                                    <span class="fs-14 mb-2 d-block">USA</span>
-                                                                    <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                                   
-                                                                    <span class="text-muted fw-normal d-block">+17637745710</span>
+                                                                       <span class="fs-14 mb-2 d-block"><?php echo $user['phone']; ?></span>
+                                                                    <span class="text-muted fw-normal text-wrap mb-1 d-block"><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></span>
+                                                                   <span class="text-muted fw-normal d-block" style="visibility: hidden;">USA</span>
+                                                                 
                                                                 </div>
                                                             </label>
                                                       
@@ -112,61 +112,60 @@ include_once 'header.php'
                                               <div>
                                                   <div class="row">
                                                  
+                                                  <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="fullname">Full name</label>
+                                                            <input  type="text" name="fullname" class="form-control" id="fullname"  placeholder="Enter full name">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-2">
+                                                            <label class="form-label" for="street">Phone number</label>
+                                                            <input type="text" class="form-control" id="phone" name="phone"  placeholder="Enter phone number">
+                                                        </div>
+                                                    </div>
+
                                                   <div class="col-lg-4">
-                                                        <div class="mb-0">
+                                                        <div class="mb-2">
                                                             <label class="form-label" for="hnumber">House number</label>
                                                             <input  type="text" class="form-control" id="sonha"  placeholder="Enter house number">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4">
-                                                        <div class="mb-0">
+                                                        <div class="mb-2">
                                                             <label class="form-label" for="street">Street</label>
                                                             <input type="text" class="form-control" id="duong"  placeholder="Enter street">
                                                         </div>
                                                     </div>
 
                                                       <div class="col-lg-4">
-                                                        <div class="mb-4 mb-lg-0">
+                                                        <div class="mb-2">
                                                             <label class="form-label">City</label>
-                                                            <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                                            <select class="form-select" id="city" aria-label=".form-select-sm">
                                                                 <option value="" selected>Select City</option> 
                                                             </select>
                                                         </div>
                                                     </div>
   
                                                       <div class="col-lg-4">
-                                                          <div class="mb-4 mb-lg-0">
+                                                          <div class="mb-2">
                                                             <label class="form-label">District</label>
-                                                            <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                                            <select class="form-select" id="district" aria-label=".form-select-sm">
                                                                 <option value="" selected>Select District</option>
                                                                 </select>
                                                           </div>
                                                       </div>
   
                                                       <div class="col-lg-4">
-                                                        <div class="mb-4 mb-lg-0">
+                                                        <div class="mb-2">
                                                             <label class="form-label">Ward</label>
-                                                            <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                                            <select class="form-select" id="ward" aria-label=".form-select-sm">
                                                                 <option value="" selected>Select Ward</option>
                                                                 </select>
                                                         </div>
-                                                    </div>
-
-                                                  
-
-                                                      <div class="col-lg-4">
-                                                          <div class="mb-0">
-                                                              <label class="form-label" for="zip-code">Phone</label>
-                                                              <input min="0" type="number" class="form-control" id="zip-code" inputmode="numeric" placeholder="Enter phone number">
-                                                          </div>
-                                                      </div>
-
-                                                      <div class="mb-3" style="margin-top: 10px;">
-                                                        <label class="form-label" for="billing-address">Order Notes</label>
-                                                        <textarea class="form-control" maxlength="200" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                                    </div>
-                                                   
+                                                    </div>         
   
                                                     
                                                   </div>
@@ -222,35 +221,37 @@ include_once 'header.php'
                                           
                                       </div>
 
-                                           <div class="col-lg-4" style="margin-top: 10px; display: none;" id="pay-card-number" >
-                                        <div class="mb-4 mb-lg-0">
+                                      <div class="row" style="margin-top: 10px;" id="pay-date-cvv1">
+                                      <div class="col-lg-5" style="margin-top: 10px; display: none;" id="pay-card-number" >
+                                        <div class="mb-2">
                                             <label class="form-label" for="card-number">Card Number</label>
                                             <input type="number" inputmode="numeric" class="form-control" style="display: none;" id="card-number" placeholder="Enter Card Number">
                                         </div>
                                         
                                     </div>
 
+        </div>
+
+                                    
+
                                     <div class="row" style="margin-top: 10px; display: none;" id="pay-date-cvv">
             
-                                      <div class="col-lg-4">
-                                          <div class="mb-4 mb-lg-0">
+                                      <div class="col-lg-5">
+                                          <div class="mb-2">
                                               <label class="form-label" for="billing-city">Expiry Date</label>
                                               <input type="date" style="display: none;" class="form-control" id="expiry-date" placeholder="Enter Expiry Date" >
                                           </div>
                                       </div>
 
-                                      <div class="col-lg-4">
-                                          <div class="mb-0">
+                                      <div class="col-lg-5">
+                                          <div class="mb-2">
                                               <label class="form-label" for="zip-code">CVV</label>
                                               <input type="number"  style="display: none;" class="form-control" id="cvv" placeholder="Enter CVV" >
                                           </div>
                                       </div>
                                       
                                   </div>
-                                      <div class="mb-3" style="margin-top: 10px;">
-                                        <label class="form-label" for="billing-address">Order Notes</label>
-                                        <textarea class="form-control" maxlength="200" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>
+                                
                                     
                                  
                              
@@ -398,11 +399,11 @@ cod.addEventListener('click',()=>{
     expirydate.style.display='none';
 });
   visa.addEventListener('click',()=>{
-    expiry.style.display='flex';
+    expiry.style.display='block';
     cvv.style.display='flex';
-    cardnumber.style.display='flex';
-    cvvs.style.display='flex';
-    expirydate.style.display='flex';
+    cardnumber.style.display='block';
+    cvvs.style.display='block';
+    expirydate.style.display='block';
   });
 
 </script>
