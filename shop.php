@@ -167,7 +167,7 @@ include_once 'header.php'
         }
     } else {
        
-        echo "<h2 style='font-size:28px;margin:10px 0;'>Product not found</h2>";
+        echo "<h2 style='font-size:32px;margin:15px 0;'>SORRY - PRODUCT NOT FOUND</h2>";
      
     }
     ?>

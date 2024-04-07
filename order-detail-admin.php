@@ -136,14 +136,14 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                     <td>
                                       <div class="d-flex mb-2">
                                         <div class="flex-shrink-0">
-                                          <img src="<?php echo $orderdetail['image']; ?>" alt="" width="55" class="img-fluid">
+                                          <img src="<?php echo $orderdetail['image']; ?>" alt="" width="65" class="img-fluid">
                                         </div>
                                         <div class="flex-lg-grow-1 ms-3" >
-                                            <h6 class="mb-2" style="font-size: 18px;">
+                                            <h6 class="mb-2" style="font-size: 17px;font-weight:400;">
                                        
-                                          Coca Original
+                                            <?php echo $orderdetail['name']; ?>
                                       </h6>
-                                          <span class="small">Price: $<?php echo $orderdetail['price']; ?>.00</span>
+                                          <span class="medium">$<?php echo $orderdetail['price']; ?>.00</span>
                                         
                                         </div>
                                       </div>

@@ -87,7 +87,7 @@ $totalPages = ceil($totalOrders / $limit);
                                     </a>
                                     <div class="media-body">
                                        
-                                        <h6 class="mb-2" style="font-size: 18px;">
+                                        <h6 class="mb-2" style="font-size: 18px; font-weight:400;">
                                         <?php echo $orderdetail['name']; ?>
                                         </h6>
                                         <div class="flex-container" style="margin-bottom: 5px;">
@@ -96,7 +96,16 @@ $totalPages = ceil($totalOrders / $limit);
                                             <p class="text-gray mb-1">x<?php echo $orderdetail['sl_mua']; ?></p>
                                           </div>
                                       
-                                         <?php 
+                                    
+                                        <hr>
+                                    
+                                   
+                                      
+                                    </div>
+                                </div>
+
+                                <?php } ?>
+                                <?php 
                                          if($order['status']==1){
                                             echo ' <p  style="color: #26aa99;" id="successful"> <i class="fa-solid fa-truck"></i> Delivery successful</p>';
                                          }else if($order['status']==0){
@@ -109,15 +118,7 @@ $totalPages = ceil($totalOrders / $limit);
                                        
                                     
                                        ?>
-                                        <hr>
-                                    
-                                   
-                                      
-                                    </div>
-                                </div>
-
-                                <?php } ?>
-                                <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00
+                                <p class="mb-0 text-black text-primary" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00
                                         </p>
                                 <div class="float-right">
                                             <a class="btn btn-sm btn-outline-primary" href="user-order-info.php?idorder=<?php echo $order['idorder']; ?>"><i class="icofont-headphone-alt"></i> DETAIL</a>

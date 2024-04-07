@@ -647,13 +647,13 @@
         width: 12%;
            } 
             #table-order th:nth-child(2){
-            width: 15%;
+            width: 12%;
                }
                #table-order th:nth-child(3){
-                width: 12%;
+                width: 13%;
                }
                #table-order th:nth-child(4){
-                width: 36%;
+                width: 38%;
             
                }
                #table-order td:nth-child(4){

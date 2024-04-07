@@ -160,6 +160,10 @@ a:hover{
 .logo-user{
     width: 105px;
 }
+#successful{
+    font-size: 17px;
+    margin: 8px 0;
+  }
 @media (min-width: 576px){
     .containerz{
         max-width: 540px;
