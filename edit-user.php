@@ -157,7 +157,7 @@ $totalPages = ceil($totalUsers / $limit);
                     <thead>
                             <tr id="select-filter">
                                 <th>USERNAME</th>
-                                <th> FULLNAME</th>
+                                <th> FULL NAME</th>
                                 <th> EMAIL</th>
                            
                                 <th> BIRTHDAY</th>
@@ -174,9 +174,15 @@ $totalPages = ceil($totalUsers / $limit);
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><?php echo $user['birthday']; ?></td>
-        <td></td>
+        <td><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></td>
         <td>
-        <?php echo $user['status']; ?>
+        <?php 
+        if ($user['status'] == 1) {
+            echo 'Normal';
+        } else {
+            echo 'Blocked';
+        }
+    ?>
         </td>
         <td>
             <div class="actions">

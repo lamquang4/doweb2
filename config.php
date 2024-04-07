@@ -299,7 +299,7 @@ class Order extends Connection{
         return mysqli_fetch_assoc($result2);
     }
 
-
+// hiện tất cả
     public function selectOrders($start,$limit) {
         $query = "SELECT * FROM tb_order ORDER BY username LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
@@ -315,6 +315,20 @@ class Order extends Connection{
         $query = "SELECT * FROM tb_order WHERE idorder = '$idorder'";
         $result2 = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result2);
+    }
+
+    // tìm kiếm status
+    public function selectOrdersByStatus($status, $start, $limit) {
+        $query = "SELECT * FROM tb_order WHERE status = '$status' ORDER BY username LIMIT $start, $limit";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+
+    public function getOrderCountByStatus($status) {
+        $query = "SELECT COUNT(*) as total FROM tb_order WHERE status = '$status'";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
     }
 }
 

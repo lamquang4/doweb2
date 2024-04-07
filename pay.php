@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $count = $row['count'];
     } while ($count > 0);
 
-    $query = "INSERT INTO tb_order (idorder,fullname,phone,sonha,duong,district,ward,city,username,dateorder,total,paymethod) VALUES ('$random_id','$fullname','$phone','$sonha','$duong','$district','$ward','$city','$username',NOW(),'$total','$payment_method')";
+    $query = "INSERT INTO tb_order (idorder,fullname,phone,sonha,duong,district,ward,city,username,dateorder,total,paymethod,status) VALUES ('$random_id','$fullname','$phone','$sonha','$duong','$district','$ward','$city','$username',NOW(),'$total','$payment_method',3)";
 
     if (mysqli_query($connection->conn, $query)) {
         foreach($_SESSION["shopping_cart"] as $key => $value)
@@ -72,9 +72,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $query1 = "INSERT INTO order_detail (idorder,id,sl_mua,subtotal) VALUES ('$random_id','$id','$sl_mua','$subtotal')";
             mysqli_query($connection->conn, $query1);
         }
-
-        echo "<script> alert('Success'); window.location.href='shop.php'; </script>";
-        unset($_SESSION['shopping_cart']);
+  unset($_SESSION['shopping_cart']);
+        echo "<script>alert('Success'); window.location.href='shop.php'; </script>";
      exit;
     } else {
         echo "<script> alert('Fail'); </script>";

@@ -10,8 +10,15 @@ $order = new Order();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
 $start = ($page - 1) * $limit;
-$orders = $order->selectOrders($start,$limit);
-$totalOrders = $order->getOrderCount();
+if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2'|| $_GET['status'] === '3')) {
+    $status = $_GET['status'];
+    $orders = $order->selectOrdersByStatus($status, $start, $limit); 
+    $totalOrders = $order->getOrderCountByStatus($status); 
+} else {
+   
+    $orders = $order->selectOrders($start, $limit);
+    $totalOrders = $order->getOrderCount();
+}
 $totalPages = ceil($totalOrders / $limit);
 
 ?>
@@ -136,6 +143,7 @@ $totalPages = ceil($totalOrders / $limit);
             </div>
         
             <div>
+   
                 <table width="100%" id="table-order">
                 <thead>
                         <tr id="select-filter">
@@ -143,11 +151,20 @@ $totalPages = ceil($totalOrders / $limit);
                             <th>USERNAME</th>
                             <th> ORDER DATE </th>
                             <th> DELIVERY ADDRESS </th>
-                            <th>STATUS </th>
+                            <th onclick="toggleDropdown()" style="cursor: pointer;">STATUS <i class="fa-solid fa-sort"></i>
+                            <div id="statusDropdown" class="dropdown-content">
+                            <a href="admin-order.php">All</a>
+    <a href="admin-order.php?status=0">Confirm</a>
+    <a href="admin-order.php?status=1">Successful</a>
+    <a href="admin-order.php?status=2">Cancel</a>
+    <a href="admin-order.php?status=3">Waiting</a>
+</div></th>
+                            
                             <th> ACTION</th>
                           
                         </tr>
                     </thead>
+ 
                     <tbody>
                         
                     <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
@@ -157,8 +174,8 @@ $totalPages = ceil($totalOrders / $limit);
         <td><?php echo $order['dateorder']; ?></td>
         <td><?php echo $order['sonha']; ?> <?php echo $order['duong']; ?> <?php echo $order['city']; ?> <?php echo $order['district']; ?> <?php echo $order['ward']; ?></td>
                               <td>
-                              <select id="select-status-order" class="select-status-order">
-                                <option value="">Select status</option>
+                              <select id="select-status-order" class="select-status-order" onchange="checkStatus(this)" name="status">
+                                <option value="3">Select status</option>
                                 <option value="0" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 0) ? 'selected' : ''; ?>>Confirm</option>
                                 <option value="1" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 1) ? 'selected' : ''; ?>>Successful</option>
                                 <option value="2" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 2) ? 'selected' : ''; ?>>Cancel</option> 
@@ -176,6 +193,8 @@ $totalPages = ceil($totalOrders / $limit);
        
                         </tbody>
                     </table>
+
+                    
 
                     <ul class="pagination" id="pagination">
                     <?php
@@ -214,7 +233,7 @@ $totalPages = ceil($totalOrders / $limit);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
-    $('.select-status-order').on('change', function(){ // Sử dụng class thay vì id
+    $('.select-status-order').on('change', function(){ 
         var status = $(this).val();
         var orderId = $(this).find('option:selected').data('order-id');
 
@@ -228,7 +247,87 @@ $(document).ready(function(){
         });
     });
 });
+
+function toggleDropdown() {
+    var dropdown = document.getElementById("statusDropdown");
+    dropdown.classList.toggle("show");
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('th')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
 </script>
 
- 
+
+<style>
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+   
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+</style>
+
+<script>
+    function checkStatus(select) {
+        var status = select.value;
+        var options = select.options;
+        for (var i = 0; i < options.length; i++) {
+            options[i].disabled = false;
+        }
+        if (status == 0) {
+       
+            options[0].disabled = true;
+            options[1].disabled = false;
+            options[2].disabled = false;
+            options[3].disabled = false;
+        } else if (status == 1) {
+            options[0].disabled = true;
+            options[1].disabled = true;
+            options[3].disabled = true;
+        } else if (status == 2) {
+            options[0].disabled = true;
+            options[1].disabled = true;
+            options[2].disabled = true;
+        } else if (status == 3) {
+        
+            options[0].disabled = false;
+            options[1].disabled = false;
+            options[2].disabled = true;
+            options[3].disabled = true;
+       
+        }
+    }
+
+    document.querySelectorAll('.select-status-order').forEach(function(select) {
+    checkStatus(select);
+});
+
+</script>
 

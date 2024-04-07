@@ -69,6 +69,8 @@ $totalPages = ceil($totalOrders / $limit);
                        
                         <?php
                         $orderdetailObj = new Orderdetail();
+
+                        if(mysqli_num_rows($orders) > 0) {
                         while ($order = mysqli_fetch_assoc($orders)) { 
                             $orderId = $order['idorder'];
 
@@ -126,8 +128,18 @@ $totalPages = ceil($totalOrders / $limit);
                                         </div>
                             </div>
                         </div>
-                        <?php }?>
+                        <?php }
+                        }else{
+                            echo "<div style='margin-top: 20vh; height:50vh;'>
+                            <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
+                            <img src='assets/images/pic/order-empty.png'>
+                            </div> 
+                            <div><p style='text-align:center;font-size:21px; '>No Orders Yet</p></div>
+                            </div>";   
+                        }
+                        ?>
 
+<?php if (mysqli_num_rows($orders) > 0): ?>
                         <ul class="pagination" id="pagination">
                     <?php
         
@@ -148,6 +160,8 @@ $totalPages = ceil($totalOrders / $limit);
             }
             ?>
                       </ul>
+                      <?php endif; ?>
+
 
                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>

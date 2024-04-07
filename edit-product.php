@@ -4,15 +4,7 @@ if (!isset($_GET['pid'])) {
   header('Location: admin-product.php');
   exit(); 
 }
-
 $connection = new Connection();
-$id = $_GET['pid'];
-
- $edit_sql = "SELECT * FROM product WHERE id='$id'";
-$result = mysqli_query($connection->conn, $edit_sql);
-$row = mysqli_fetch_assoc($result); 
-
-
 $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
@@ -20,6 +12,15 @@ $start = ($page - 1) * $limit;
 $products = $productObj->selectProducts($start, $limit);
 $totalProducts = $productObj ->getProductCount();
 $totalPages = ceil($totalProducts / $limit);
+
+$id = $_GET['pid'];
+
+ $edit_sql = "SELECT * FROM product WHERE id='$id'";
+$result = mysqli_query($connection->conn, $edit_sql);
+$row = mysqli_fetch_assoc($result); 
+
+
+
 
 
 ?>
@@ -182,13 +183,11 @@ $totalPages = ceil($totalProducts / $limit);
   <td><?php echo $product['id']; ?></td>
 <td>
 
-   <div class="image-product-admin">
+<div class="image-product-admin">
     <div>
-   <img src="<?php echo $product['image']; ?>">
+   <img src="<?php echo $product['image']; ?>" id="productImage">
     </div>
-    <div>
-   <img src="" id="productImage">
-    </div>
+    
         
    </div>
  
@@ -245,13 +244,13 @@ $totalPages = ceil($totalProducts / $limit);
 <?php
         
         if ($page > 1) {
-            echo '<li href="?page=' . ($page - 1) . '"><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
         } else {
             echo '<li class="disabled">Prev</li>';
         }
 
         for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<li ' . (($i == $page) ? 'class="active"' : '') . ' href="?page=' . $i . '">' . $i . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
         }
 
         if ($page < $totalPages) {

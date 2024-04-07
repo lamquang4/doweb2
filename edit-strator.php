@@ -189,7 +189,7 @@ $totalPages = ceil($totalAds / $limit);
                                 <div class="actions">
                                 <a href="edit-strator.php?manager=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
                                         <span class="las la-lock" style="color: #FFAD27;"></span>
-                                        <span class="las la-undo-alt"></span>
+                                     
                                        
                                     </div>
                                 </td>

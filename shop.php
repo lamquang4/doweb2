@@ -172,6 +172,7 @@ include_once 'header.php'
     }
     ?>
 </div>
+
 <?php if (mysqli_num_rows($products) > 0): ?>
 <div id="containerpage">
     <div class="pages">

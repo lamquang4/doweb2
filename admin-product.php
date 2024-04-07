@@ -251,9 +251,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     <th>ID PRODUCT</th>
     <th> IMAGE </th>
     <th> NAME </th>
-    <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> PRICE </th>
+    <th>PRICE </th>
     <th> QUANTITY </th>
-    <th><i class="fa-solid fa-sort" style="cursor: pointer;"></i> DATE ADD </th>
+    <th> DATE ADD </th>
     <th> STATUS </th>
     <th>ACTION</th>
    
