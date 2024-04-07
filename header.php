@@ -5,6 +5,17 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
     header('Location: index.php');
     exit();
 }
+if(isset($_GET['action']) && isset($_GET['id'])){
+  if($_GET['action'] == "remove"){
+      foreach($_SESSION['shopping_cart'] as $keys => $values){
+          if($values["item_id"] == $_GET['id']){
+              unset($_SESSION['shopping_cart'][$keys]);
+          }
+          header('Location: shop.php');
+      }
+  }
+}
+
 
 ?>
  
@@ -33,10 +44,15 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 </form>
   </div> 
       <li id="menu" ><a id="cart-icon">
-        <div class="cart-follow-icon">
-        <i class="fa-solid fa-cart-shopping add-cart"></i>
-        <span id="count-cart-add" style="  font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
-      </div>
+      <div class="cart-follow-icon">
+    <i class="fa-solid fa-cart-shopping add-cart"></i>
+    <?php if(isset($_SESSION["shopping_cart"]) && !empty($_SESSION["shopping_cart"])): ?>
+        <span id="count-cart-add" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">!</span>
+        <?php else: ?>
+        <span id="count-cart-add" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
+    <?php endif; ?>
+      
+</div>
       </a>
       </li>
      
@@ -89,12 +105,15 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 </div>
 
   <div id="mobile"> 
-  
     <a id="cart-icon1">
-      <div class="cart-follow-icon">
-        <i class="fa-solid fa-cart-shopping add-cart"></i>
-        <span id="count-cart-add1" style="  font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
-      </div>
+    <div class="cart-follow-icon">
+    <i class="fa-solid fa-cart-shopping add-cart"></i>
+    <?php if(isset($_SESSION["shopping_cart"]) && !empty($_SESSION["shopping_cart"])): ?>
+        <span id="count-cart-add1" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">!</span>
+        <?php else: ?>
+        <span id="count-cart-add1" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
+    <?php endif; ?>
+</div>
     </a>
     <a id="glass-search" onclick="showbar()" ><i class="fa-solid fa-magnifying-glass"></i> </a>
     <?php if(isset($_SESSION["login"])) { ?>
@@ -121,31 +140,54 @@ if (basename($_SERVER['PHP_SELF']) === 'header.php') {
 
    <div class="cart">
     <h2 class="cart-title">Your Cart</h2>
+    <form method="post" action="" onsubmit="return checkloginyet()">
+        <?php
+        if (!empty($_SESSION["shopping_cart"])) {
+            $total = 0;
+            foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+                ?>
+                <div class="cart-content">
+                    
+                    <div class="cart-box">
+                        <img src="<?php echo $values["item_img"]; ?>" alt="" class="cart-img">
+                        <div class="detail-box">
+                            <input type="hidden" value="<?php echo $values["item_id"]; ?>">
+                            <div class="cart-product-title"><?php echo $values["item_name"]; ?></div>
+                            <div class="cart-price">$<?php echo $values["item_price"]; ?>.00</div>
+                            <input type="text" min="1" max="9" maxlength="1" class="cart-quantity"
+                                   value="<?php echo $values["item_quantity"]; ?>" readonly>
+                        </div>
 
-
-    <div class="cart-content" style="display: none;">
-    <div class="cart-box">
-        <img src="" alt="" class="cart-img">
-        <div class="detail-box">
-            <div class="cart-product-title"></div>
-            <div class="cart-price"></div>
-            <input type="number" value="1" min="1" max="6" class="cart-quantity">
+                        <a href='shop.php?action=remove&id=<?php echo $values["item_id"]; ?>'><i
+                                    class='bx bx-trash cart-remove' id="remove-counter"></i></a>
+                    </div>
+                </div>
+                <?php
+                $total = $total + ($values["item_quantity"] * $values["item_price"]);
+            }
+        } else {
+          
+            ?>
+            <div class="cart-content">
+                <div class="simply-cart">
+                    <img src="assets/images/pic/empty-cart.png">
+                </div>
+            </div>
+            <?php
+            $total = 0;
+        }
+        ?>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">$<?php echo $total ?>.00</div>
         </div>
-     
-        <i class='bx bx-trash cart-remove' id="remove-counter"></i>
-    </div>
 
-    </div>
+        <button type="submit" class="btn-buy" name="submit">CHECKOUT</button>
 
-    <div class="total">
-        <div class="total-title">Total</div>
-        <div class="total-price">$0</div>
-    </div>
-
-    <button type="button" class="btn-buy" onclick="checkloginyet()">CHECKOUT</button>
-
-    <i class="fa-solid fa-x" id="cart-close"></i>
+        <i class="fa-solid fa-x" id="cart-close"></i>
+    </form>
 </div>
+
 
 <div id="overlay"></div>
 
@@ -254,17 +296,20 @@ closeCart.addEventListener('click',()=>{
 
 <script>
 function checkloginyet() {
-
     var isLoggedIn = <?php echo isset($_SESSION["login"]) && $_SESSION["login"] === true ? 'true' : 'false'; ?>;
-
-    if (isLoggedIn) {
+    if (isLoggedIn && <?php echo !empty($_SESSION["shopping_cart"]) ? 'true' : 'false'; ?>) {
+        window.location.href = "pay.php";
+       return false;
+    }
+    else if (isLoggedIn) {
       
-    
-    } else {
-     
+    }else {
         alert("You must be a registered customer to make a purchase.");
         window.location.href = "register.php";
+        return false;
     }
+
+ return true;
 }
 </script>
 
@@ -314,86 +359,6 @@ searchbars.classList.remove("active25");
 searchbars.style.opacity="0";
       searchbars.style.pointerEvents = 'none';
   }
-    </script>
-    
-<style>
-    #xmark{
-        cursor: pointer;
-    }
-.search-bars{
-
-    position: absolute;
-    left: 0;
-bottom: -35%;
-    width: 100%;
-    height: 25%;
-opacity: 0;
-display:flex;
-
-    align-items: center;
-  padding: 20px 0;
- 
-    pointer-events: none;
-    background-color: #fff;
-
-}
-.search-bars.active25{
-    bottom: -52%;
   
-}
-.search-bars input{
-    border-bottom: 1.2px solid #E6E6E6;
-    border-top: 1.2px solid #E6E6E6;
-    border-right: none;
-    border-left: none;
-    padding: 0px 35px;
-    width: 100%;
-   font-size: 18px;
-    height: 90px;
- letter-spacing: .2em;
-
-    outline: none;
-    color: #000000;
-    background-color: #fff;
-   
-}
-.search-bars i{
-  position: absolute;
-  right:8%;
-  font-size: 27px;
-}
-@media (max-width:480px){
-    .search-bars input{
-   font-size: 18px;
-    height: 60px;
-
-   
-} 
-.search-bars.active25{
-    bottom: -50%;
-}
-.search-bars i{
-
-font-size: 22px;
-}
-}
-@media (max-width:400px){
-    .search-bars input{
-
-   font-size: 16px;
-    height: 60px;  
-} 
-.search-bars.active25{
-    bottom: -47%;
-}
-.search-bars i{
-
-  font-size: 22px;
-}
-}
-    </style>
-
-
-
-
-
+    </script>
+  

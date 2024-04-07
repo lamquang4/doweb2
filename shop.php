@@ -79,8 +79,6 @@ include_once 'header.php'
  <section id="product11" class="section-p11" class="shop container" >
   <h2>FEATURED PRODUCTS</h2> 
 
-
-
   <div  id="filter-buttons" style="margin-top: 12px;">
        
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php'"><img src="assets/images/pic/all.png"></button>
@@ -151,21 +149,30 @@ include_once 'header.php'
 
 
 <div class="pro-container1" id="product-list">
-    <?php while ($product = mysqli_fetch_assoc($products)) {
-        if ($product['status'] == 1) { ?>
-            <div class="pro1 product-box">
-                <a href="product.php?id=<?php echo $product['id']; ?>">
-                    <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
-                </a>
-                <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
-                <h5 class="product-title"><?php echo $product['name']; ?></h5>
-                <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
-                <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>
-            </div>
-    <?php }
-    } ?>
+    <?php 
+    if (mysqli_num_rows($products) > 0) {
+        // Products found
+        while ($product = mysqli_fetch_assoc($products)) {
+            if ($product['status'] == 1) { ?>
+                <div class="pro1 product-box">
+                    <a href="product.php?id=<?php echo $product['id']; ?>">
+                        <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
+                    </a>
+                    <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
+                    <h5 class="product-title"><?php echo $product['name']; ?></h5>
+                    <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
+                    <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>
+                </div>
+        <?php }
+        }
+    } else {
+       
+        echo "<h2 style='font-size:28px;margin:10px 0;'>Product not found</h2>";
+     
+    }
+    ?>
 </div>
-
+<?php if (mysqli_num_rows($products) > 0): ?>
 <div id="containerpage">
     <div class="pages">
         <ul class="listPage">
@@ -212,6 +219,7 @@ if ($page < $totalPages) {
         </ul>
     </div>
 </div>
+<?php endif; ?>
 </section>
 
 <?php
@@ -320,8 +328,16 @@ window.onresize = function(event) {
     reloadSlider();
 };
 
+if (window.location.href.indexOf('page=1') > -1 || window.location.href.indexOf('page=2') > -1 || window.location.href.indexOf('page=3') > -1 || window.location.href.indexOf('page=4') > -1) {
 
+    var element = document.getElementById('product11');
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 </script>
+
+
 
 
 

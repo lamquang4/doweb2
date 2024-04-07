@@ -280,4 +280,63 @@ class Product extends Connection {
 }
 
 
+class Order extends Connection{
+
+    public function selectOrdersByUsername($username,$start,$limit) {
+        $query = "SELECT * FROM tb_order WHERE username = '$username' LIMIT $start, $limit ";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+    public function getOrderCount1($username) {
+        $query = "SELECT COUNT(*) as total FROM tb_order WHERE username = '$username'";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
+    public function selectOrdersById1($idorder, $username) {
+        $query = "SELECT * FROM tb_order WHERE idorder = '$idorder' AND username = '$username'";
+        $result2 = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result2);
+    }
+
+
+    public function selectOrders($start,$limit) {
+        $query = "SELECT * FROM tb_order ORDER BY username LIMIT $start, $limit";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+    public function getOrderCount() {
+        $query = "SELECT COUNT(*) as total FROM tb_order";
+        $result2 = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result2);
+        return $data['total'];
+    }
+    public function selectOrdersById($idorder) {
+        $query = "SELECT * FROM tb_order WHERE idorder = '$idorder'";
+        $result2 = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result2);
+    }
+}
+
+class Orderdetail extends Connection{
+    public function selectOrdertails(){
+        $query = "SELECT * FROM order_detail";
+        $result3 = mysqli_query($this->conn, $query);
+        return $result3;  
+    }
+    public function selectOrderdetailsById($idorder) {
+        $query = "SELECT * FROM order_detail WHERE idorder = '$idorder'";
+        $result3 = mysqli_query($this->conn, $query);
+        return mysqli_fetch_assoc($result3);
+    }
+    public function selectOrdertailsandProduct($orderId){
+        $query = "SELECT od.*, p.* FROM order_detail od
+        INNER JOIN product p ON od.id = p.id
+        WHERE od.idorder = '$orderId'";
+        $result3 = mysqli_query($this->conn, $query);
+        return $result3;  
+    }
+
+    
+}
 ?>

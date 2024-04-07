@@ -36,6 +36,99 @@ button{
   cursor: pointer;
 }
 
+.simply-cart{
+  display: flex;
+  flex-direction: column;
+  margin: 7.5rem 25px;
+  text-align: center;
+  align-items: center;
+}
+.simply-cart img{
+  width:60%;
+}
+.simply-cart p{
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+/*searchbar*/
+#xmark{
+  cursor: pointer;
+}
+.search-bars{
+
+position: absolute;
+left: 0;
+bottom: -35%;
+width: 100%;
+height: 25%;
+opacity: 0;
+display:flex;
+
+align-items: center;
+padding: 20px 0;
+
+pointer-events: none;
+background-color: #fff;
+
+}
+.search-bars.active25{
+bottom: -52%;
+
+}
+.search-bars input{
+border-bottom: 1.2px solid #E6E6E6;
+border-top: 1.2px solid #E6E6E6;
+border-right: none;
+border-left: none;
+padding: 0px 35px;
+width: 100%;
+font-size: 18px;
+height: 90px;
+letter-spacing: .2em;
+
+outline: none;
+color: #000000;
+background-color: #fff;
+
+}
+.search-bars i{
+position: absolute;
+right:8%;
+font-size: 27px;
+}
+@media (max-width:480px){
+.search-bars input{
+font-size: 18px;
+height: 60px;
+
+
+} 
+.search-bars.active25{
+bottom: -50%;
+}
+.search-bars i{
+
+font-size: 22px;
+}
+}
+@media (max-width:400px){
+.search-bars input{
+
+font-size: 16px;
+height: 60px;  
+} 
+.search-bars.active25{
+bottom: -47%;
+}
+.search-bars i{
+
+font-size: 22px;
+}
+}
+/*---*/
 
 /*profile menu dropdown*/
 .sub-menu-wrap{
@@ -1292,7 +1385,7 @@ margin-left: 10px;
 }
 .cart-quantity{
   border: 1px solid black;
-  width:2.5rem;
+  width:2.2rem;
   height:2rem;
   text-align: center;
   font-size: 1rem;
@@ -1665,7 +1758,34 @@ background-color: #fff;
 
 
 /*Product*/
+.button-de-increase{
+  height: 48px;
+width: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+margin-bottom: 20px;
+  border: 0.8px solid black;
+}
+.button-de-increase div{
+  width: 100%;
 
+  text-align: center;
+  align-items: center;
+font-weight: 400;
+  cursor: pointer;
+  user-select: none;
+}
+.button-de-increase .numbers{
+  font-size: 21px;
+  font-weight: 400;
+border: none;
+width: 30px;
+text-align: center;
+
+
+}
 #prodetails{
 
   display: flex;

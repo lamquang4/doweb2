@@ -574,16 +574,19 @@
       width: 22%;
         }
         #table-user th:nth-child(4){
-          width: 10%;   
+          width: 11%;   
         }
+        #table-user td:nth-child(5){
+           padding-right: 10px; 
+          }
         #table-user th:nth-child(5){
-            width: 23%; 
+            width: 25%; 
         }
         #table-user th:nth-child(6){
-            width: 10%;
+            width: 9%;
         } 
         #table-user th:nth-child(7) {
-    width:10%;
+    width:8%;
         }
           
      
@@ -644,16 +647,21 @@
         width: 12%;
            } 
             #table-order th:nth-child(2){
-            width: 21%;
+            width: 15%;
                }
                #table-order th:nth-child(3){
-                width: 18%;
+                width: 12%;
                }
                #table-order th:nth-child(4){
-                width: 18%;
+                width: 36%;
+            
+               }
+               #table-order td:nth-child(4){
+             
+                padding-right: 10px;
                }
                #table-order th:nth-child(5){
-                width:21%;
+                width:15%;
                }
                #table-order th:nth-child(6){
                 width: 10%;
@@ -874,4 +882,9 @@ cursor: pointer;
     left: 0;
     top: 0;
     opacity: 0;
+  }
+
+  #select-status-order{
+    padding: 6px 0px;
+    font-size: 15px;
   }

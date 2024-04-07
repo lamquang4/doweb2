@@ -208,9 +208,12 @@ function previewImage() {
         var email = document.getElementById("email").value.trim();
     var phone = document.getElementById("phone").value.trim();
     var fullname = document.getElementById("fullname").value.trim();
+    var sonha = document.getElementById("sonha").value.trim();
+    var duong = document.getElementById("duong").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/;
+  var addressRegex = /[a-zA-Z0-9\s/đĐÀÁẢẠÃÀÂẤẦẨẬẪĂẮẰẲẶẴÉẺẸẼÈẾỀỂỆỄÍÌỈỊĨÓÒỎỌÕÔỐỒỔỘỖƠỚỜỞỢỠÚÙỦỤŨỨỪỬỰỮÝỲỶỴỸíìỉịĩóòỏọõôốồổộỗơớờởợỡúùủụũưứừửựữýỳỷỵỹ]/;
   if (!fullnameRegex.test(fullname)) {
         alert("Full name must contain only letters.");
         window.location.href='user.php';
@@ -223,6 +226,11 @@ function previewImage() {
     }
     if(!phoneRegex.test(phone)){
         alert("Invalid Phone Number.");
+        window.location.href='user.php';
+        return false;
+    }
+    if(!addressRegex.test(sonha) || !addressRegex.test(duong)){
+        alert("Invalid Address.");
         window.location.href='user.php';
         return false;
     }

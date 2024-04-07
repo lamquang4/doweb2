@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
-
+$connection = new Connection();
+$order = new Order();
 $select = new Select();
 if(isset($_SESSION["username"])){
     $user = $select->selectUserById($_SESSION["username"]);
@@ -13,6 +14,15 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
     header("Location: login.php");
 exit();
 }
+$username = $_SESSION["username"];
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 6;
+$start = ($page - 1) * $limit;
+$orders = $order->selectOrdersByUsername($username,$start,$limit);
+$totalOrders = $order->getOrderCount1($username);
+$totalPages = ceil($totalOrders / $limit);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +49,7 @@ exit();
                     </div>
                                    
                 </div>
-              
-           
+
                     <a class="list-group-item list-group-item-action" data-toggle="list"
                     href="user.php">Profile</a>
                     <a class="list-group-item list-group-item-action active" data-toggle="list"
@@ -48,9 +57,7 @@ exit();
 
                 <a class="list-group-item list-group-item-action" data-toggle="list"
                     href="changepass.php">Change password</a>
-             
-
-                   
+                    
                
             </div>
         </div>
@@ -59,102 +66,87 @@ exit();
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane  fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                         <h4 class="font-weight-bold mt-0 mb-4">Purchase Order</h4>
+                       
+                        <?php
+                        $orderdetailObj = new Orderdetail();
+                        while ($order = mysqli_fetch_assoc($orders)) { 
+                            $orderId = $order['idorder'];
 
+    $orderdetails = $orderdetailObj->selectOrdertailsandProduct($orderId);
+                            ?>
                         <div class="bg-white card mb-4 order-list shadow-sm">
                             <div class="gold-members p-4">
-                                <a href="#">
-                                </a>
+                            <?php
+                                $count = 0;
+                                while ($orderdetail = mysqli_fetch_assoc($orderdetails)) { 
+                            $count++;
+                                  ?>
                                 <div class="media">
                                     <a href="#">
-                                        <img class="mr-4" src="assets/images/sp/cocaori.png" alt="Generic placeholder image">
-                                    </a>
-                                    
-                                    <div class="media-body">
-                                       
-                                        <h6 class="mb-2" style="font-size: 18px;">
-                                         
-                                            Coca Original
-                                        </h6>
-                                        <div class="flex-container">
-                                            <p class="mb-3"> $13.00</p>
-                                            <p class="text-gray mb-1">x2</p>
-                                            
-                                          </div>
-                                        
-                                        <p  style="color: #26aa99;" id="successful"><i class="fa-solid fa-truck"></i> Delivery successful</p>
-                                    
-                                        <hr>
-                                      
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <a href="#">
-                                        <img class="mr-4" src="assets/images/sp/lemon.png" alt="Generic placeholder image">
-                                    </a>
-                                    
-                                    <div class="media-body">
-                                       
-                                        <h6 class="mb-2" style="font-size: 18px;">
-                                         
-                                           Lemon Tea
-                                        </h6>
-                                        <div class="flex-container">
-                                            <p class="mb-3">$16.00</p>
-                                            <p class="text-gray mb-1">x2</p>
-                                           
-                                          </div>
-                                
-                                        
-                                        <p  style="color: #26aa99;" id="successful"><i class="fa-solid fa-truck"></i> Delivery successful </p>
-                                      
-                                        <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00</p>
-                                        <hr>
-                                        <div class="float-right" >
-                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php"><i class="icofont-headphone-alt"></i> DETAIL</a>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                              
-                            
-                            </div>
-                        </div>
-                     
-                        <div class="bg-white card mb-4 order-list shadow-sm">
-                            <div class="gold-members p-4">
-                                <a href="#">
-                                </a>
-                                <div class="media">
-                                    <a href="#">
-                                        <img class="mr-4" src="assets/images/sp/fanta3.png" alt="Generic placeholder image">
+                                        <img class="mr-4" src="<?php echo $orderdetail['image']; ?>" alt="Generic placeholder image">
                                     </a>
                                     <div class="media-body">
                                        
                                         <h6 class="mb-2" style="font-size: 18px;">
-                                            Fanta Sassafras
+                                        <?php echo $orderdetail['name']; ?>
                                         </h6>
-                                        <div class="flex-container">
+                                        <div class="flex-container" style="margin-bottom: 5px;">
                                            
-                                            <p class="mb-3">$10.00</p>
-                                            <p class="text-gray mb-1">x6</p>
+                                            <p class="mb-3">$<?php echo $orderdetail['price']; ?>.00</p>
+                                            <p class="text-gray mb-1">x<?php echo $orderdetail['sl_mua']; ?></p>
                                           </div>
                                       
-                                        <p  style="color: #26aa99;" id="successful"> <i class="fa-solid fa-truck"></i> Delivery successful</p>
+                                         <?php 
+                                         if($order['status']==1){
+                                            echo ' <p  style="color: #26aa99;" id="successful"> <i class="fa-solid fa-truck"></i> Delivery successful</p>';
+                                         }else if($order['status']==0){
+                                            echo ' <p  style="color: #26aa99;" id="successful"> <i class="fa-regular fa-circle-check"></i> Confirmed</p>';
+                                         }else if($order['status']==2){
+                                            echo ' <p  style="color: red;" id="successful"> <i class="fa-solid fa-ban"></i> Delivery cancelled</p>';
+                                         }else{
+                                            echo '<p  style="color: gray;" id="successful"> <i class="fa-solid fa-hourglass-half"></i> Awaiting processing</p>';
+                                         }
+                                       
                                     
-                                        <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $60.00
-                                        </p>
+                                       ?>
                                         <hr>
-                                        <div class="float-right">
-                                            <a class="btn btn-sm btn-outline-primary" href="#"><i class="icofont-headphone-alt"></i> DETAIL</a>
-                                           
-                                        </div>
+                                    
                                    
                                       
                                     </div>
                                 </div>
 
+                                <?php } ?>
+                                <p class="mb-0 text-black text-primary pt-2" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00
+                                        </p>
+                                <div class="float-right">
+                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php?idorder=<?php echo $order['idorder']; ?>"><i class="icofont-headphone-alt"></i> DETAIL</a>
+                                           
+                                        </div>
                             </div>
                         </div>
+                        <?php }?>
+
+                        <ul class="pagination" id="pagination">
+                    <?php
+        
+            if ($page > 1) {
+                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            } else {
+                echo '<li class="disabled">Prev</li>';
+            }
+
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+
+            if ($page < $totalPages) {
+                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
+            } else {
+                echo '<li class="disabled">Next</li>';
+            }
+            ?>
+                      </ul>
 
                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>

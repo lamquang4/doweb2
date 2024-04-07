@@ -40,6 +40,38 @@ if(isset($_SESSION["username"])){
 }
 
 
+if(isset($_POST["add_to_cart"])){
+  if(isset($_SESSION["shopping_cart"])){
+      $item_array_id = array_column($_SESSION["shopping_cart"],"item_id");
+      if(!in_array($_GET["id"],$item_array_id)){
+          $count = count($_SESSION["shopping_cart"]);
+          $item_array = array(
+              'item_id' => $_GET["id"],
+              'item_name' => $_POST["namesp"],
+              'item_price' => $_POST["pricesp"],
+              'item_img' => $_POST["imgsp"],
+              'item_quantity' => $_POST["quantity"]
+          );
+          // bo $count []
+          $_SESSION["shopping_cart"][]=$item_array;
+      }
+  }else {
+    $item_array = array(
+        'item_id' => $_GET["id"],
+        'item_name' => $_POST["namesp"],
+        'item_price' => $_POST["pricesp"],
+        'item_img' => $_POST["imgsp"],
+        'item_quantity' => $_POST["quantity"]
+    );
+    $_SESSION["shopping_cart"][0] = $item_array;
+}
+
+
+  header('Location: product.php?id=' . $productId);
+  exit;
+}
+
+
 ?>
 
 
@@ -67,28 +99,30 @@ include_once 'header.php'
   <div class="single-pro-image">
       <img src="<?php echo $productImage; ?>" width="100%" id="MainImg" alt="">
   <div class="small-img-group">
-  <div class="small-img-col">
+  <div class="small-img-col" style="display: none;">
   <img src="<?php echo $productImage; ?>" width="100%" class="small-img" alt="">
   </div>
-  <div class="small-img-col">
-      <img src="<?php echo $productImage1; ?>" width="100%" class="small-img" alt="" >
-      </div>
+
    
   </div>
   </div>
   
   <div class="single-pro-details">
+<form method="post" action="">
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
-
+  <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">
+  <input type="hidden"  name="namesp" value="<?php echo $productName; ?>">
+  <input type="hidden"  name="pricesp" value="<?php echo $productPrice; ?>">
+  <input type="hidden"  name="imgsp" value="<?php echo $productImage; ?>">
   <div class="button-de-increase">
     <div class="minus"><i class="fa-solid fa-minus" style="font-size: 18px;"></i></div>
-    <div><input type="text" maxlength="2" class="numbers" value="1"></div>
+    <div><input readonly type="text" maxlength="2" name="quantity" class="numbers" value="1"></div>
     <div class="plus"><i class="fa-solid fa-plus" style="font-size: 18px;"></i></div>
   </div>
 
-<button class="normal" onclick="addToCart()">Add to Cart</button>
-  
+<button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
+</form>
  <div id="infor-nutri">
   <h3>Nutriton</h3>
   <i id="nutri-open" class="fa-solid fa-angle-up fa-rotate-180"></i>
@@ -251,40 +285,10 @@ small[3].onclick = function(){
 MainImg.src = small[3].src;
 }
 
-
    </script>
 
 
-<style>
-  .button-de-increase{
-  height: 48px;
-width: 112px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #FFF;
-margin-bottom: 20px;
-  border: 0.8px solid black;
-}
-.button-de-increase div{
-  width: 100%;
 
-  text-align: center;
-  align-items: center;
-font-weight: 400;
-  cursor: pointer;
-  user-select: none;
-}
-.button-de-increase .numbers{
-  font-size: 21px;
-  font-weight: 400;
-border: none;
-width: 30px;
-text-align: center;
-
-}
-
-</style>
 
 
 

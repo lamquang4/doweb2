@@ -5,7 +5,14 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     header("Location: login-admin.php");
     exit();
 }
-
+$connection = new Connection();
+$order = new Order();
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$start = ($page - 1) * $limit;
+$orders = $order->selectOrders($start,$limit);
+$totalOrders = $order->getOrderCount();
+$totalPages = ceil($totalOrders / $limit);
 
 ?>
 <!DOCTYPE html>
@@ -132,172 +139,65 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
                 <table width="100%" id="table-order">
                 <thead>
                         <tr id="select-filter">
-                            <th>ID ORDER</th>                          
-                           
-                            <th>DELIVERY ADDRESS</th>
+                            <th>ID ORDER</th>                                          
+                            <th>USERNAME</th>
                             <th> ORDER DATE </th>
-                            <th> DELIVERY DATE </th>
-                            
-                            <th> ORDER STATUS </th>
+                            <th> DELIVERY ADDRESS </th>
+                            <th>STATUS </th>
                             <th> ACTION</th>
                           
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#1285</td>
-                         
-                         
-
-<td>
-  95 Starrs Rd
-</td>
-
-<td>
-2023/05/20
-</td>
-<td>
-2023/05/22                        
-</td>
-
-                            <td>
-                            <select>
-                              <option selected>Processed</option>
-                              <option >Unprocessed</option>
-
-                            </select>
-                            </td>
-                            <td>
-                                <a href="">Details</a>
-                            </td>
-                         
-                          
-                        </tr>
-                   
-                        <tr>
-                            <td>#555</td>
-                          
-                      
-
-                            <td>
-                              45 Beaver St
-                            </td>
-                            <td>
-                              2023/01/12
+                        
+                    <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
+    <tr>
+        <td><?php echo $order['idorder']; ?></td>
+        <td><?php echo $order['username']; ?></td>
+        <td><?php echo $order['dateorder']; ?></td>
+        <td><?php echo $order['sonha']; ?> <?php echo $order['duong']; ?> <?php echo $order['city']; ?> <?php echo $order['district']; ?> <?php echo $order['ward']; ?></td>
+                              <td>
+                              <select id="select-status-order" class="select-status-order">
+                                <option value="">Select status</option>
+                                <option value="0" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 0) ? 'selected' : ''; ?>>Confirm</option>
+                                <option value="1" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 1) ? 'selected' : ''; ?>>Successful</option>
+                                <option value="2" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 2) ? 'selected' : ''; ?>>Cancel</option> 
+                              </select>
                               </td>
-                            <td>
-                              2023/01/15
-                            </td>
-                        
-                            <td>
-                              <select>
-                                <option >Processed</option>
-                                <option selected>Unprocessed</option>
-                                
-                              </select>
-                            </td>
-                            <td>
-                                <a href="order-detail-admin.php">Details</a>
-                            </td>
-                        
-                       
-                        </tr>
-                        <tr>
-                            <td>#1478</td>
-                           
-                    
+                              <td>
+                              <div class="actions">
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+                    </div>
+                              </td>
+     
+       
+    </tr>
+<?php } ?>
+       
+                        </tbody>
+                    </table>
 
-                            <td>
-                              370 Memorial
-                            </td>
-                            <td>
-                              2023/02/01
-                            </td>
-                            <td>
-                              2023/02/10
-                            </td>
-                            
-                            <td>
-                              <select>
-                                <option selected>Processed</option>
-                                <option >Unprocessed</option>
-                                
-                              </select>
-                            </td>
-                            <td>
-                                <a href="">Details</a>
-                            </td>
-                          
-                     
-                        </tr>
-                 
-                        <tr>
-                            <td>#4862</td>
-                            
-                  
+                    <ul class="pagination" id="pagination">
+                    <?php
+        
+            if ($page > 1) {
+                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            } else {
+                echo '<li class="disabled">Prev</li>';
+            }
 
-                            <td>
-                            	37 Royal Terrace
-                            </td>
-                            <td>
-                              2023/04/18
-                            </td>
-                            <td>
-                              2023/04/21
-                            </td>
-                          
-                            <td>
-                              <select>
-                                <option selected>Processed</option>
-                                <option >Unprocessed</option>
-                                
-                              </select>
-                            </td>
-                            <td>
-                                <a href="">Details</a>
-                            </td>
-                         
-                         
-                        </tr>
-               
-                        <tr>
-                            <td>#4899</td>
-                            
-                        
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
+            }
 
-                            <td>
-                              257 Avenue
-                            </td>
-                            <td>
-                              2023/02/24
-                            </td>
-                            <td>
-                              2023/02/26
-                            </td>
-                           
-                            <td>
-                              <select>
-                                <option selected>Processed</option>
-                                <option >Unprocessed</option>
-                                
-                              </select>
-                            </td>
-                            <td>
-                                <a href="">Details</a>
-                            </td>
-                         
-                         
-                        </tr>
-                 
-                        
-                    </tbody>
-                </table>
+            if ($page < $totalPages) {
+                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
+            } else {
+                echo '<li class="disabled">Next</li>';
+            }
+            ?>
+                      </ul>
 
-                <ul class="pagination" id="pagination">
-                  <li onclick="prevPage()">Prev</li>
-                 
-                  <li onclick="nextPage()">Next</li>
-                </ul>
             </div>
         
         </div> 
@@ -306,14 +206,29 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 
 </main>
 
-
-
-
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.select-status-order').on('change', function(){ // Sử dụng class thay vì id
+        var status = $(this).val();
+        var orderId = $(this).find('option:selected').data('order-id');
+
+        $.ajax({
+            url: 'update-status-order.php',
+            type: 'POST',
+            data: {status: status, orderId: orderId},
+            success: function(response){
+                console.log(response);
+            }
+        });
+    });
+});
+</script>
 
  
 

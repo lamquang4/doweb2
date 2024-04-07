@@ -275,3 +275,8 @@ width: 35%;
   #total-money{
     font-size: 20px;
   }
+
+  #successful{
+    font-size: 18px;
+    margin: 5px 0;
+  }
