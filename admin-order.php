@@ -152,22 +152,26 @@ $totalPages = ceil($totalOrders / $limit);
                             <th> ORDER DATE </th>
                             <th> DELIVERY ADDRESS </th>
                             <th onclick="toggleDropdown()" style="cursor: pointer;">STATUS <i class="fa-solid fa-sort"></i>
+                
                             <div id="statusDropdown" class="dropdown-content">
                             <a href="admin-order.php">All</a>
     <a href="admin-order.php?status=0">Confirm</a>
     <a href="admin-order.php?status=1">Successful</a>
     <a href="admin-order.php?status=2">Cancel</a>
     <a href="admin-order.php?status=3">Waiting</a>
-</div></th>
-                            
+</div>
+                        </th>    
+                    
                             <th> ACTION</th>
                           
                         </tr>
                     </thead>
  
                     <tbody>
-                        
-                    <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
+                  
+                    <?php 
+                          if(mysqli_num_rows($orders) > 0) {  
+                        while ($order = mysqli_fetch_assoc($orders)) { ?>
     <tr>
         <td><?php echo $order['idorder']; ?></td>
         <td><?php echo $order['username']; ?></td>
@@ -189,13 +193,31 @@ $totalPages = ceil($totalOrders / $limit);
      
        
     </tr>
-<?php } ?>
+  
+<?php }
+}else{
+    echo "
+    <tfoot>
+    <tr>
+    <td colspan='6'>
+    <div style='margin-top: 20vh; height:54vh;'>
+    <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
+    <img src='assets/images/pic/order-empty.png'>
+    </div> 
+    <div><p style='text-align:center;font-size:21px; '>No Orders Yet</p></div>
+    </div>
+    </td>
+    </tr>
+    </tfoot>
+    ";   
+}
+?>
        
-                        </tbody>
+       </tbody>         
                     </table>
 
                     
-
+                    <?php if (mysqli_num_rows($orders) > 0): ?>
                     <ul class="pagination" id="pagination">
                     <?php
         
@@ -216,6 +238,7 @@ $totalPages = ceil($totalOrders / $limit);
             }
             ?>
                       </ul>
+                      <?php endif; ?>
 
             </div>
         
@@ -264,17 +287,22 @@ window.onclick = function(event) {
         }
     }
 }
+
+
 </script>
 
 
 <style>
     .dropdown-content {
     display: none;
-    position: absolute;
+    position:absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    top: 100%; 
+    left: 0;
+    
 }
 
 .dropdown-content a {
@@ -284,7 +312,9 @@ window.onclick = function(event) {
     display: block;
    
 }
-
+#select-filter th:nth-child(5) {
+    position: relative;
+}
 .dropdown-content a:hover {
     background-color: #ddd;
 }
@@ -292,6 +322,7 @@ window.onclick = function(event) {
 .show {
     display: block;
 }
+
 </style>
 
 <script>
