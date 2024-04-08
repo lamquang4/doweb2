@@ -121,7 +121,7 @@ $totalPages = ceil($totalAds / $limit);
                
             <div class="page-content" >
     
-                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Managers</h1>
+                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Managers <?php echo '(' . $totalAds . ')'; ?></h1>
                 
     <div >
     <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>

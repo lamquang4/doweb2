@@ -125,8 +125,8 @@ exit();
 
   <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
 <option value="0" selected>Select City</option> 
-<option value="Hồ Chí Minh City" <?php echo ($user['city'] == 'Hồ Chí Minh City') ? 'selected' : ''; ?>>Hồ Chí Minh City</option> 
-<option value="Hà Nội City" <?php echo ($user['city'] == 'Hà Nội City') ? 'selected' : ''; ?>>Hà Nội City</option> 
+<option value="Ho Chi Minh City" <?php echo ($user['city'] == 'Ho Chi Minh City') ? 'selected' : ''; ?>>Ho Chi Minh City</option> 
+<option value="Ha Noi City" <?php echo ($user['city'] == 'Ha Noi City') ? 'selected' : ''; ?>>Ha Noi City</option> 
    </select>
 
                                         </div>
@@ -213,7 +213,7 @@ function previewImage() {
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/;
-  var addressRegex = /[a-zA-Z0-9\s/đĐÀÁẢẠÃÀÂẤẦẨẬẪĂẮẰẲẶẴÉẺẸẼÈẾỀỂỆỄÍÌỈỊĨÓÒỎỌÕÔỐỒỔỘỖƠỚỜỞỢỠÚÙỦỤŨỨỪỬỰỮÝỲỶỴỸíìỉịĩóòỏọõôốồổộỗơớờởợỡúùủụũưứừửựữýỳỷỵỹ]/;
+  var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
   if (!fullnameRegex.test(fullname)) {
         alert("Full name must contain only letters.");
         window.location.href='user.php';

@@ -9,7 +9,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 $connection = new Connection();
 $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 10;
+$limit = 12;
 $start = ($page - 1) * $limit;
 $products = $productObj->selectProducts($start, $limit);
 $totalProducts = $productObj ->getProductCount();
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $fileName = basename($_FILES["fimage1"]["name"]);
   $targetFilePath = $targetDir . $fileName;
   $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-  $allowTypes = array('jpg','png','jpeg');
+  $allowTypes = array('png');
   if(in_array($fileType, $allowTypes)){
 
       if(move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)){
@@ -59,12 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
       } else{
           $error_msg = "Sorry, there was an error uploading your file.";
       }
-  } else{
-      $error_msg = "Sorry, only JPG, JPEG, PNG files are allowed to upload.";
-  } 
+  }
 
 
-    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', '$date_add', '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
+    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', NOW(), '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
@@ -207,7 +205,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
         <main >
 <div class="page-content">
         
-    <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products</h1>
+    <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products  <?php echo '(' . $totalProducts . ')'; ?></h1>
    
 <div>
 <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add Product</button>
@@ -269,7 +267,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 
    <div class="image-product-admin">
     <div>
-   <img src="<?php echo $product['image']; ?>" id="productImage">
+   <img src="<?php echo $product['image']; ?>" id="productImage" alt="Product image">
     </div>
     
         
@@ -456,7 +454,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 <input type="number" name="soluong" id="soluong" min="1" maxlength="20">
 </div>
 
-<div class="user-input">
+<div class="user-input" style="display:none;">
   <label>Date Add:</label>
 <input type="date" name="date_add" id="date_add" >
 </div>
@@ -569,7 +567,7 @@ function hideadd(){
     var selectedTypeValue = typeSelect.value;
     var selectedBrandValue = brandSelect.value;
     var selectedStatusValue = statusSelect.value;
-    var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
+    var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
  var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
     
  if (selectedTypeValue === "0" || selectedBrandValue === "0") {
@@ -585,7 +583,7 @@ function hideadd(){
         var inputValue = document.getElementById(inputId).value.trim();
 
         if (inputValue === "") {
-            alert("Please fill in all fields");
+            alert("Please fill in all fields and upload product image");
             return false;
         }
         if(inputsToCheckNumbers.includes(inputId)) {
@@ -597,7 +595,6 @@ function hideadd(){
         }
     }
     
-
     return true;
     }
 </script>
@@ -609,19 +606,30 @@ function hideadd(){
     var imageNameInput = document.getElementById('image');
 
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
+        var reader = new FileReader();
 
-      reader.onload = function (e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      };
+        reader.onload = function (e) {
+            var img = new Image();
+            img.src = e.target.result;
 
-      reader.readAsDataURL(input.files[0]);
+            img.onload = function () {
+                if (this.width === 500 && this.height === 500 && input.files[0].type === 'image/png') {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    imageNameInput.value = input.files[0].name;
+                } else {
+                    alert("Please choose a PNG image file with dimensions 500 x 500 pixels.");
+               
+                    input.value = '';
+       
+                    preview.style.display = 'none';
+             
+                    imageNameInput.value = '';
+                }
+            };
+        };
 
-    
-      imageNameInput.value = input.files[0].name;
-
-    
+        reader.readAsDataURL(input.files[0]);
     }
   }
 

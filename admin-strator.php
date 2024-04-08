@@ -178,7 +178,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                
             <div class="page-content" >
     
-                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Managers</h1>
+                <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="adminstrator">Managers <?php echo '(' . $totalAds . ')'; ?></h1>
                 
     <div >
     <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>
@@ -256,7 +256,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
             <span class="las la-lock" style="color: #FFAD27;"></span>
         </a>
     <?php } else { ?>
-        <a href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?>">
+        <a onclick="return confirm('Are you sure you want to unblock this manager?');" href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?>">
             <span class="las la-unlock" style="color: #FFAD27;"></span>
         </a>
     <?php } ?>
@@ -313,7 +313,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
 
     <div class="user-input" style="margin-top: 30px;">
                  <label>Username:</label>
-                 <input type="text" name="username" id="username" maxlength="9" required>
+                 <input type="text" name="username" id="username" maxlength="10" required>
     
             </div>
        
@@ -404,8 +404,8 @@ function kttrong() {
         alert("Invalid Phone Number.");
         return false;
     }
-    if(username.length<5){
-      alert('The username must be over 5 characters.');
+    if(username.length<6){
+      alert('The username must be over 6 characters.');
       return false;
     }
     if(password.length<6){

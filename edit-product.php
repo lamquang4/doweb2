@@ -123,7 +123,7 @@ $row = mysqli_fetch_assoc($result);
         <main >
 <div class="page-content">
         
-    <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products</h1>
+    <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="product">Products <?php echo '(' . $totalProducts . ')'; ?></h1>
    
 <div>
 <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add Product</button>
@@ -185,7 +185,7 @@ $row = mysqli_fetch_assoc($result);
 
 <div class="image-product-admin">
     <div>
-   <img src="<?php echo $product['image']; ?>" id="productImage">
+   <img src="<?php echo $product['image']; ?>" id="productImage" alt="Product image">
     </div>
     
         
@@ -339,7 +339,7 @@ $row = mysqli_fetch_assoc($result);
    <img id="preview-image" src="" alt="Preview Image" width="25%">
 </div>   
 
-          <div class="user-input" style="display: none;" >
+          <div class="user-input" style="display: none;">
   <label>URL:</label>
  <input type="text" id="image" name="image" value="<?php echo $row['image']?>" >
         </div>
@@ -374,7 +374,7 @@ $row = mysqli_fetch_assoc($result);
 <input type="number" name="soluong" id="soluong" min="1" value="<?php echo $row['soluong']?>">
 </div>
 
-<div class="user-input">
+<div class="user-input" style="display: none;">
   <label>Date Add:</label>
   <input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">
 </div>
@@ -444,14 +444,14 @@ $row = mysqli_fetch_assoc($result);
 
  function ktrong() {
         
-  var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong", "date_add"];
+  var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
   var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
     for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();
 
         if (inputValue === "") {
-            alert("Please fill in all fields");
+            alert("Please fill in all fields and upload product image");
             return false;
         }
         if(inputsToCheckNumbers.includes(inputId)) {
@@ -471,6 +471,7 @@ $row = mysqli_fetch_assoc($result);
         alert("Please choose product type or product brand");
         return false;
     }
+
 
     return true;
         }
@@ -493,29 +494,44 @@ const usertab = document.querySelector('.usertab');
 
 <script>
     function previewImage() {
-    var input = document.getElementById('fimage1');
-    var preview = document.getElementById('preview-image');
-    var imageNameInput = document.getElementById('image');
-    var showimage = document.getElementById('show-image');
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+        var input = document.getElementById('fimage1');
+        var preview = document.getElementById('preview-image');
+        var imageNameInput = document.getElementById('image');
+        var showimage = document.getElementById('show-image');
+        
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-      reader.onload = function (e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        showimage.style.display = 'none';
-      };
+            reader.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
 
-      reader.readAsDataURL(input.files[0]);
+                img.onload = function () {
+                    if (this.width === 500 && this.height === 500 && input.files[0].type === 'image/png') {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        showimage.style.display = 'none';
+                        imageNameInput.value = 'assets/images/sp/' + input.files[0].name;
+                    } else {
+                        alert("Please choose a PNG image file with dimensions 500 x 500 pixels.");
+              
+                        input.value = '';
+                  
+                        preview.style.display = 'none';
+                     
+                    }
+                };
+            };
 
-
-      imageNameInput.value = 'assets/images/sp/' + input.files[0].name;
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-  }
-
 </script>
 
+
+
 <script>
+  
     function checkStatus() {
         var status = <?php echo $row['status']; ?>;
         var select = document.getElementsByName("status")[0];
@@ -529,6 +545,5 @@ const usertab = document.querySelector('.usertab');
     }
 
     checkStatus();
+    
 </script>
-
-

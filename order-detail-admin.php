@@ -88,7 +88,13 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                               
                                  <div >
                                  <h5 class="font-size-16 mb-2">Order Information:</h5>
-                          <h3 class="h6">Payment Method:<span style="font-weight: 400;text-transform: uppercase;"> <?php echo $paymethod; ?></span></h5>
+                          <h3 class="h6">Payment Method:<span style="font-weight: 400;">    
+                          <?php  if($order['paymethod']=='cod'){
+                                            echo 'COD';
+                                        }else{
+                                            echo 'Credit card';
+                                        } ?>
+                                        </span></h5>
                           <h3 class="h6">Date Order:<span style="font-weight: 400;"> <?php echo $dateorder; ?></span></h5>
                     
                       </div>

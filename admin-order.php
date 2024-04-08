@@ -118,7 +118,7 @@ $totalPages = ceil($totalOrders / $limit);
         </header>
         <div class="page-content" style="margin-top: 50px;">
             
-            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Orders</h1>
+            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Orders <?php echo '(' . $totalOrders . ')'; ?></h1>
           
         </div>
         

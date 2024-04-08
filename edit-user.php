@@ -120,7 +120,7 @@ $totalPages = ceil($totalUsers / $limit);
 
 
         <div class="page-content" style="margin-top: 50px;">
-            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="customer">Customers</h1>
+            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="customer">Customers <?php echo '(' . $totalUsers . ')'; ?></h1>
 
        
 

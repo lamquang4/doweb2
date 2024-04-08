@@ -81,7 +81,7 @@ include_once 'header.php'
              <div class="input-group">
               <div class="input-field" >
                 <i class="fa-solid fa-user"></i>
-                <input type="text" placeholder="Username" id="username" maxlength="9" name="username" required>
+                <input type="text" placeholder="Username" id="username" maxlength="10" name="username" required>
              
               </div>
 
@@ -200,8 +200,8 @@ include_once 'header.php'
         alert("Invalid Email.");
         return false;
     }
-    if(username.length<5){
-      alert('The username must be over 5 characters.');
+    if(username.length<6){
+      alert('The username must be over 6 characters.');
       return false;
     }
     if(password.length<6){

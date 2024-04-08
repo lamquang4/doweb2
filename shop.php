@@ -153,7 +153,7 @@ include_once 'header.php'
     if (mysqli_num_rows($products) > 0) {
         // Products found
         while ($product = mysqli_fetch_assoc($products)) {
-            if ($product['status'] == 1) { ?>
+         ?>
                 <div class="pro1 product-box">
                     <a href="product.php?id=<?php echo $product['id']; ?>">
                         <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
@@ -165,7 +165,7 @@ include_once 'header.php'
                 </div>
         <?php }
         }
-    } else {
+     else {
        
         echo "<h2 style='font-size:32px;margin:15px 0;'>SORRY - PRODUCT NOT FOUND</h2>";
      

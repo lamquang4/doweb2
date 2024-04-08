@@ -66,8 +66,7 @@ if(isset($_POST["add_to_cart"])){
     $_SESSION["shopping_cart"][0] = $item_array;
 }
 
-
-  header('Location: product.php?id=' . $productId);
+echo "<script>alert('Item has been added to cart'); window.location.href='product.php?id=$productId';</script>";
   exit;
 }
 

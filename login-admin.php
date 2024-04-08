@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
     <div class="container">
         <div class="forms">
             <div class="form login">
-                <span class="title">Login</span>
+                <span class="title">Login For Manager</span>
 
                 <form action="login-admin.php" method="POST">
                     <div class="input-field">

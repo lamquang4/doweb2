@@ -191,7 +191,7 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
-     $query .= " ORDER BY date_add DESC";
+     $query .= " ORDER BY date_add";
         $query .= " LIMIT $start, $limit";
     
         $result = mysqli_query($this->conn, $query);
@@ -216,7 +216,8 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
-    
+
+
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
@@ -245,7 +246,8 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
-     $query .= " ORDER BY date_add DESC";
+
+        $query .= " ORDER BY date_add";
         $query .= " LIMIT $start, $limit";
     
         $result = mysqli_query($this->conn, $query);

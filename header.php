@@ -80,7 +80,7 @@ if(isset($_GET['action']) && isset($_GET['id'])){
   <div class="sub-menu">
 <div class="user-info">
 
-<h2>Hello <?php echo $user["username"]; ?>!</h2>
+<h2>Hello <?php echo $user["username"]; ?></h2>
 </div>
 <hr>
 <a href="user.php" class="sub-menu-index-link">
@@ -307,6 +307,10 @@ function checkloginyet() {
         alert("You must be a registered customer to make a purchase.");
         window.location.href = "register.php";
         return false;
+    }
+    if (<?php echo empty($_SESSION["shopping_cart"]) ? 'true' : 'false'; ?>) {
+      alert('There is no item in cart yet!');
+      return false;
     }
 
  return true;

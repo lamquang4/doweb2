@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
     $fileName = basename($_FILES["fimage1"]["name"]);
     $targetFilePath = $targetDir . $fileName;
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-    $allowTypes = array('jpg', 'png', 'jpeg');
+    $allowTypes = array('png');
 
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)) {
@@ -19,9 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
         } else {
             echo "<script> alert('Sorry, there was an error uploading your file.'); </script>";
         }
-    } else {
-       
-    }
+    } 
 }
 
 

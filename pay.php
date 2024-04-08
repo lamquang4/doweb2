@@ -130,7 +130,7 @@ include_once 'header.php'
                                         <div>
                                            
                                            
-                                            <div class="mb-3">
+                                            <div class="mb-1">
                                                 <div class="row">
                                             
                                                     <div class="col-lg-4 col-sm-6" >
@@ -189,7 +189,7 @@ include_once 'header.php'
                                           <input type="hidden" name="cityacc" value="<?php echo $user['city']; ?>">
                                               <div>
                                                   <div class="row">
-                                                 
+                                         
                                                   <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <label class="form-label" for="fullname">Full name</label>
@@ -223,8 +223,8 @@ include_once 'header.php'
                                                             <label class="form-label">City</label>
                                                             <select class="form-select" id="city" name="city" aria-label=".form-select-sm">
                                                                 <option value="0" selected>Select City</option> 
-                                                                <option value="Hồ Chí Minh City">Hồ Chí Minh City</option> 
-                                                                <option value="Hà Nội City">Hà Nội City</option> 
+                                                                <option value="Ho Chi Minh City">Ho Chi Minh City</option> 
+                                                                <option value="Ha Noi City">Ha Noi City</option> 
                                                             </select>
                                                         </div>
                                                     </div>
@@ -490,7 +490,7 @@ if (addressOption === "info-address2") {
     var fullname = document.getElementById("fullname").value.trim();
     var sonha = document.getElementById("sonha").value.trim();
     var duong = document.getElementById("duong").value.trim();
-    addressRegex = /[a-zA-Z0-9\s/đĐÀÁẢẠÃÀÂẤẦẨẬẪĂẮẰẲẶẴÉẺẸẼÈẾỀỂỆỄÍÌỈỊĨÓÒỎỌÕÔỐỒỔỘỖƠỚỜỞỢỠÚÙỦỤŨỨỪỬỰỮÝỲỶỴỸíìỉịĩóòỏọõôốồổộỗơớờởợỡúùủụũưứừửựữýỳỷỵỹ]/;
+    var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
   var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/;
 
