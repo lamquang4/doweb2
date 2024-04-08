@@ -44,14 +44,14 @@ if (isset($_POST["submit"])) {
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
     <link rel="stylesheet" href="assets/css/lg-admin.css">
          
-    <title>Login For Admin</title> 
+    <title>Login</title> 
 </head>
 <body>
     
     <div class="container">
         <div class="forms">
             <div class="form login">
-                <span class="title">Login For Admin</span>
+                <span class="title">Login</span>
 
                 <form action="login-admin.php" method="POST">
                     <div class="input-field">

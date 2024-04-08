@@ -318,7 +318,6 @@ window.onclick = function(event) {
 .dropdown-content a:hover {
     background-color: #ddd;
 }
-
 .show {
     display: block;
 }

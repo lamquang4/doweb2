@@ -302,7 +302,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
   <?php if ($product['status'] == 1): ?>
-    <a href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
         <span class="las la-eye"></span>
     </a>
 <?php elseif($product['status'] == 0): ?>
@@ -311,7 +311,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     </a>
 <?php else: ?>
 
-    <a href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
         <span class="las la-eye-slash"></span>
     </a>
 <?php endif; ?>
