@@ -222,6 +222,21 @@ class Product extends Connection {
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
+
+    // tim kiem status
+    public function selectProductsByStatus($status, $start, $limit) {
+        $query = "SELECT * FROM product WHERE status = '$status' ORDER BY date_add LIMIT $start, $limit";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+
+    public function getProductCountByStatus($status) {
+        $query = "SELECT COUNT(*) as total FROM product WHERE status = '$status'";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
+
     public function selectProductsById($id) {
         $query = "SELECT * FROM product WHERE id = '$id'";
         $result = mysqli_query($this->conn, $query);

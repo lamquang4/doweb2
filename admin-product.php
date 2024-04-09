@@ -11,10 +11,17 @@ $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 12;
 $start = ($page - 1) * $limit;
-$products = $productObj->selectProducts($start, $limit);
-$totalProducts = $productObj ->getProductCount();
-$totalPages = ceil($totalProducts / $limit);
 
+if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2')) {
+  $status = $_GET['status'];
+  $products = $productObj->selectProductsByStatus($status, $start, $limit); 
+  $totalProducts = $productObj->getProductCountByStatus($status); 
+} else {
+  $products = $productObj->selectProducts($start, $limit);
+  $totalProducts = $productObj ->getProductCount();
+
+}
+$totalPages = ceil($totalProducts / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $name = trim($_POST['name']);
@@ -252,7 +259,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     <th>PRICE </th>
     <th> QUANTITY </th>
     <th> DATE ADD </th>
-    <th> STATUS </th>
+    <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                
+                <div id="statusDropdown" class="dropdown-content">
+                <a href="admin-product.php">All</a>
+<a href="admin-product.php?status=1">On Sale</a>
+<a href="admin-product.php?status=0">Not yet released</a>
+<a href="admin-product.php?status=2">Hidden</a>
+</div>
+            </th>    
     <th>ACTION</th>
    
 </tr>
@@ -260,7 +275,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 <tbody>
 
 
-<?php while ($product = mysqli_fetch_assoc($products)) { ?>
+<?php 
+    if(mysqli_num_rows($products) > 0) {  
+while ($product = mysqli_fetch_assoc($products)) { ?>
   <tr>
   <td><?php echo $product['id']; ?></td>
 <td>
@@ -297,7 +314,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 <td>
   <div class="actions">
 
-  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+
 
   <?php if ($product['status'] == 1): ?>
     <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
@@ -317,32 +335,53 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
   </div>
 </td>   
 </tr> 
-    <?php } ?>
+<?php }
+}else{
+    echo "
+    <tfoot>
+    <tr>
+    <td colspan='8'>
+    <div style='margin-top: 17vh; height:55vh;'>
+    <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
+    <img src='assets/images/pic/notfound1.png' width='335px' id='product-not-found'>
+    </div> 
+   
+    </div>
+    </td>
+    </tr>
+    </tfoot>
+    ";   
+}
+?>
 
 
 </tbody>
 </table>
-
+<?php if (mysqli_num_rows($products) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
-        
+      $searchParams = array();
+if (isset($_GET['status'])) {
+  $searchParams['status'] = $_GET['status'];
+}  
         if ($page > 1) {
-            echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
+            echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
         } else {
             echo '<li class="disabled">Prev</li>';
         }
 
         for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '">' . $i . '</a></li>';
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '&' . http_build_query($searchParams) .  '">' . $i . '</a></li>';
         }
 
         if ($page < $totalPages) {
-            echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
+            echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
         } else {
             echo '<li class="disabled">Next</li>';
         }
         ?>
 </ul>
+<?php endif; ?>
 </div>
 
 </div>
@@ -633,6 +672,23 @@ function hideadd(){
     }
   }
 
+
+  function toggleDropdown() {
+    var dropdown = document.getElementById("statusDropdown");
+    dropdown.classList.toggle("show");
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('th')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
 </script>
 
 

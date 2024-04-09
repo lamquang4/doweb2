@@ -7,11 +7,18 @@ if (!isset($_GET['pid'])) {
 $connection = new Connection();
 $productObj = new Product();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 10;
+$limit = 12;
 $start = ($page - 1) * $limit;
-$products = $productObj->selectProducts($start, $limit);
-$totalProducts = $productObj ->getProductCount();
-$totalPages = ceil($totalProducts / $limit);
+if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2')) {
+    $status = $_GET['status'];
+    $products = $productObj->selectProductsByStatus($status, $start, $limit); 
+    $totalProducts = $productObj->getProductCountByStatus($status); 
+  } else {
+    $products = $productObj->selectProducts($start, $limit);
+    $totalProducts = $productObj ->getProductCount();
+  
+  }
+  $totalPages = ceil($totalProducts / $limit);
 
 $id = $_GET['pid'];
 
@@ -170,7 +177,15 @@ $row = mysqli_fetch_assoc($result);
     <th> PRICE </th>
     <th > QUANTITY </th>
     <th> DATE ADD </th>
-    <th>Status</th>
+    <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                
+                <div id="statusDropdown" class="dropdown-content">
+                <a href="admin-product.php">All</a>
+<a href="admin-product.php?status=1">On Sale</a>
+<a href="admin-product.php?status=0">Not yet released</a>
+<a href="admin-product.php?status=2">Hidden</a>
+</div>
+            </th>    
     <th>ACTION</th>
    
 </tr>
@@ -178,12 +193,14 @@ $row = mysqli_fetch_assoc($result);
 <tbody>
 
 
-<?php while ($product = mysqli_fetch_assoc($products)) { ?>
+<?php 
+    if(mysqli_num_rows($products) > 0) {  
+while ($product = mysqli_fetch_assoc($products)) { ?>
   <tr>
   <td><?php echo $product['id']; ?></td>
 <td>
 
-<div class="image-product-admin">
+   <div class="image-product-admin">
     <div>
    <img src="<?php echo $product['image']; ?>" id="productImage" alt="Product image">
     </div>
@@ -204,8 +221,10 @@ $row = mysqli_fetch_assoc($result);
 <?php 
         if ($product['status'] == 1) {
             echo 'On sale';
-        } else {
+        } else if($product['status'] == 0) {
             echo 'Not yet released';
+        }else{
+          echo 'Hidden';
         }
     ?>
 
@@ -216,7 +235,7 @@ $row = mysqli_fetch_assoc($result);
   <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
   <?php if ($product['status'] == 1): ?>
-    <a href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
         <span class="las la-eye"></span>
     </a>
 <?php elseif($product['status'] == 0): ?>
@@ -225,21 +244,37 @@ $row = mysqli_fetch_assoc($result);
     </a>
 <?php else: ?>
 
-    <a href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
         <span class="las la-eye-slash"></span>
     </a>
 <?php endif; ?>
+
   </div>
 </td>   
 </tr> 
-    <?php } ?>
-
-
+<?php }
+}else{
+    echo "
+    <tfoot>
+    <tr>
+    <td colspan='8'>
+    <div style='margin-top: 15vh; height:58vh;'>
+    <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
+    <img src='assets/images/pic/noproduct.png' width='320px'>
+    </div> 
+   
+    </div>
+    </td>
+    </tr>
+    </tfoot>
+    ";   
+}
+?>
 
 
 </tbody>
 </table>
-
+<?php if (mysqli_num_rows($products) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
         
@@ -260,6 +295,7 @@ $row = mysqli_fetch_assoc($result);
         }
         ?>
 </ul>
+<?php endif; ?>
 </div>
 
 </div>
@@ -314,7 +350,7 @@ $row = mysqli_fetch_assoc($result);
 
   <div class="user-tab">
     <h1>EDIT PRODUCT</h1>
-    <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php?page=<?php echo $page; ?>';"></i>
+    <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
   
 <input type="hidden" name="pid" value="<?php echo $row['id']?>">
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
@@ -530,20 +566,3 @@ const usertab = document.querySelector('.usertab');
 
 
 
-<script>
-  
-    function checkStatus() {
-        var status = <?php echo $row['status']; ?>;
-        var select = document.getElementsByName("status")[0];
-        var notYetReleasedOption = select.options[0];
-
-        if (status == 1) {
-            notYetReleasedOption.disabled = true;
-        } else {
-            notYetReleasedOption.disabled = false;
-        }
-    }
-
-    checkStatus();
-    
-</script>

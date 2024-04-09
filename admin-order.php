@@ -151,7 +151,7 @@ $totalPages = ceil($totalOrders / $limit);
                             <th>USERNAME</th>
                             <th> ORDER DATE </th>
                             <th> DELIVERY ADDRESS </th>
-                            <th onclick="toggleDropdown()" style="cursor: pointer;">STATUS <i class="fa-solid fa-sort"></i>
+                            <th onclick="toggleDropdown()" style="cursor: pointer;   position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
                             <div id="statusDropdown" class="dropdown-content">
                             <a href="admin-order.php">All</a>
@@ -187,7 +187,7 @@ $totalPages = ceil($totalOrders / $limit);
                               </td>
                               <td>
                               <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                     </div>
                               </td>
      
@@ -218,27 +218,30 @@ $totalPages = ceil($totalOrders / $limit);
 
                     
                     <?php if (mysqli_num_rows($orders) > 0): ?>
-                    <ul class="pagination" id="pagination">
-                    <?php
-        
-            if ($page > 1) {
-                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
-            } else {
-                echo '<li class="disabled">Prev</li>';
-            }
+<ul class="pagination" id="pagination">
+<?php
+      $searchParams = array();
+if (isset($_GET['status'])) {
+  $searchParams['status'] = $_GET['status'];
+}  
+        if ($page > 1) {
+            echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
+        } else {
+            echo '<li class="disabled">Prev</li>';
+        }
 
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
-            }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '&' . http_build_query($searchParams) .  '">' . $i . '</a></li>';
+        }
 
-            if ($page < $totalPages) {
-                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
-            } else {
-                echo '<li class="disabled">Next</li>';
-            }
-            ?>
-                      </ul>
-                      <?php endif; ?>
+        if ($page < $totalPages) {
+            echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
+        } else {
+            echo '<li class="disabled">Next</li>';
+        }
+        ?>
+</ul>
+<?php endif; ?>
 
             </div>
         
@@ -291,38 +294,6 @@ window.onclick = function(event) {
 
 </script>
 
-
-<style>
-    .dropdown-content {
-    display: none;
-    position:absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    top: 100%; 
-    left: 0;
-    
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-   
-}
-#select-filter th:nth-child(5) {
-    position: relative;
-}
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-.show {
-    display: block;
-}
-
-</style>
 
 <script>
     function checkStatus(select) {

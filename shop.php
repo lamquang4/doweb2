@@ -167,7 +167,12 @@ include_once 'header.php'
         }
      else {
        
-        echo "<h2 style='font-size:32px;margin:15px 0;'>SORRY - PRODUCT NOT FOUND</h2>";
+        echo "    <div style='margin-top: 17vh; height:55vh;'>
+        <div style='display:flex; justify-content:center; align-items:center;'>
+        <img src='assets/images/pic/notfound1.png' width='335px' id='product-not-found'>
+        </div> 
+       
+        </div>";
      
     }
     ?>

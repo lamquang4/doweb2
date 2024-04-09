@@ -2,9 +2,8 @@
 require 'config.php';
 
 $connection = new Connection();
-
-
-
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$status = isset($_GET['status']) ? $_GET['status'] : 1;
 if(isset($_GET['idorder'])) {
   $orderId = $_GET['idorder'];
     
@@ -179,7 +178,7 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php'">Back</a> 
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>'">Back</a> 
                                 </div>
                             </div>
                         </div>
