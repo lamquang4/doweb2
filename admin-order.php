@@ -204,7 +204,7 @@ $totalPages = ceil($totalOrders / $limit);
     <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
     <img src='assets/images/pic/order-empty.png'>
     </div> 
-    <div><p style='text-align:center;font-size:21px; '>No Orders Yet</p></div>
+    <div><p style='text-align:center;font-size:21px;'>No Orders Yet</p></div>
     </div>
     </td>
     </tr>

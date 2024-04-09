@@ -17,8 +17,15 @@ $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
 $start = ($page - 1) * $limit;
-$ads = $adinad->selectAds($start,$limit);
-$totalAds = $adinad ->getAdCount();
+if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
+    $status = $_GET['status'];
+    $ads = $adinad->selectAdsByStatus($status, $start, $limit); 
+    $totalAds = $adinad->getAdCountByStatus($status); 
+  } else {
+    $ads = $adinad->selectAds($start,$limit);
+    $totalAds = $adinad ->getAdCount();
+  
+  }
 $totalPages = ceil($totalAds / $limit);
 
 ?>
@@ -160,12 +167,23 @@ $totalPages = ceil($totalAds / $limit);
                             <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
-                                <th>STATUS </th>
+                                <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                
+                <div id="statusDropdown" class="dropdown-content">
+                <a href="admin-strator.php">All</a>
+<a href="admin-strator.php?status=1">Normal</a>
+<a href="admin-strator.php?status=0">Blocked</a>
+
+</div>
+            </th>  
                                 <th> ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php while ($ad = mysqli_fetch_assoc($ads)) { ?>
+
+                        <?php
+                           if(mysqli_num_rows($ads) > 0) { 
+                        while ($ad = mysqli_fetch_assoc($ads)) { ?>
                             <tr>
                                 
                             <td>
@@ -183,43 +201,78 @@ $totalPages = ceil($totalAds / $limit);
 
                              
                                 <td>
-                                    Normal
+                                <?php 
+        if ($ad['status'] == 1) {
+            echo 'Normal';
+        } else {
+            echo 'Blocked';
+        }
+    ?>
                                 </td>
                                 <td>
                                 <div class="actions">
-                                <a href="edit-strator.php?manager=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
-                                        <span class="las la-lock" style="color: #FFAD27;"></span>
-                                     
-                                       
+                                <a href="edit-strator.php?manager=<?php echo $ad['username'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+                                <?php if ($ad['status'] == 1) { ?>
+        <a onclick="return confirm('Are you sure you want to block this manager?');" href="admin-strator.php?action=block&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+            <span class="las la-lock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } else { ?>
+        <a onclick="return confirm('Are you sure you want to unblock this manager?');" href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+            <span class="las la-unlock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } ?>
+                                                                        
                                     </div>
                                 </td>
                             </tr>
-                            <?php } ?>
+                            <?php }
+}else{
+    echo "
+    <tfoot>
+    <tr>
+    <td colspan='8'>
+    <div style='margin-top: 13vh; height:67vh;'>
+    <div style='display:flex; justify-content:center; align-items:center;'>
+    <img src='assets/images/pic/notfound.png' width='315px' id='product-not-found'>
+    </div> 
+   
+    </div>
+    </td>
+    </tr>
+    </tfoot>
+    ";   
+}
+?>
                            
                      
                             
                         </tbody>
                     </table>
-                    <ul class="pagination" id="pagination">
-                    <?php
-        
-            if ($page > 1) {
-                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
-            } else {
-                echo '<li class="disabled">Prev</li>';
-            }
+                    <?php if (mysqli_num_rows($ads) > 0): ?>
+<ul class="pagination" id="pagination">
+<?php
+      $searchParams = array();
+if (isset($_GET['status'])) {
+  $searchParams['status'] = $_GET['status'];
+}  
+        if ($page > 1) {
+            echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
+        } else {
+            echo '<li class="disabled">Prev</li>';
+        }
 
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
-            }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '&' . http_build_query($searchParams) .  '">' . $i . '</a></li>';
+        }
 
-            if ($page < $totalPages) {
-                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
-            } else {
-                echo '<li class="disabled">Next</li>';
-            }
-            ?>
-                      </ul>
+        if ($page < $totalPages) {
+            echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
+        } else {
+            echo '<li class="disabled">Next</li>';
+        }
+        ?>
+</ul>
+<?php endif; ?>
                  
                 </div>
 
@@ -237,9 +290,9 @@ $totalPages = ceil($totalAds / $limit);
 
   <div class="user-tab">
     <h1>Edit Manager</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?>';"></i>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
 
-    <form method="post" action="update-strator.php"  onsubmit="return kttrong()">
+    <form method="post" action="update-strator.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
 
     <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 

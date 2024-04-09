@@ -87,6 +87,20 @@ class Userinad extends Connection{
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }
+
+// tim kiem status
+    public function selectUsersByStatus($status, $start, $limit) {
+        $query = "SELECT * FROM tb_customer WHERE status = '$status' ORDER BY username LIMIT $start, $limit";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+
+    public function getUserCountByStatus($status) {
+        $query = "SELECT COUNT(*) as total FROM tb_customer WHERE status = '$status'";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    }
 }
 class Adinad extends Connection{
     public function selectAds($start,$limit) {
@@ -104,6 +118,20 @@ class Adinad extends Connection{
         $query = "SELECT * FROM tb_manager WHERE username = '$username'";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
+    }
+
+    // tim kiem status
+    public function selectAdsByStatus($status, $start, $limit) {
+        $query = "SELECT * FROM tb_manager WHERE status = '$status' ORDER BY username LIMIT $start, $limit";
+        $result2 = mysqli_query($this->conn, $query);
+        return $result2;
+    }
+
+    public function getAdCountByStatus($status) {
+        $query = "SELECT COUNT(*) as total FROM tb_manager WHERE status = '$status'";
+        $result = mysqli_query($this->conn, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
     }
 }
 
@@ -128,7 +156,6 @@ class Register extends Connection {
 
 
 }
-
 
 class Login extends Connection{
     public $username;

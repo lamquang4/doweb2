@@ -16,8 +16,15 @@ $userinad = new Userinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 10;
 $start = ($page - 1) * $limit;
-$users = $userinad->selectUsers($start,$limit);
-$totalUsers = $userinad->getUserCount();
+if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
+    $status = $_GET['status'];
+    $users = $userinad->selectUsersByStatus($status, $start, $limit); 
+    $totalUsers = $userinad->getUserCountByStatus($status); 
+  } else {
+    $users = $userinad->selectUsers($start,$limit);
+    $totalUsers = $userinad->getUserCount();
+  
+  }
 $totalPages = ceil($totalUsers / $limit);
 
 
@@ -163,12 +170,22 @@ $totalPages = ceil($totalUsers / $limit);
                                 <th> BIRTHDAY</th>
                                 <th> ADDRESS</th>
                                
-                                <th> STATUS </th>
+                                <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                
+                <div id="statusDropdown" class="dropdown-content">
+                <a href="admin-user.php">All</a>
+<a href="admin-user.php?status=1">Normal</a>
+<a href="admin-user.php?status=0">Blocked</a>
+
+</div>
+            </th>  
                                 <th> ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php while ($user = mysqli_fetch_assoc($users)) { ?>
+                        <?php 
+                        if(mysqli_num_rows($users) > 0) { 
+                        while ($user = mysqli_fetch_assoc($users)) { ?>
     <tr>
         <td><?php echo $user['username']; ?></td>
         <td><?php echo $user['fullname']; ?></td>
@@ -186,37 +203,67 @@ $totalPages = ceil($totalUsers / $limit);
         </td>
         <td>
             <div class="actions">
-                <span class="las la-edit" style="color:#076FFE;"></span>
-                <span class="las la-lock" style="color: #FFAD27;"></span>
+            <a href="edit-user.php?customer=<?php echo $user['username'];?>&page=<?php echo $page; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+            
+            <?php if ($user['status'] == 1) { ?>
+        <a onclick="return confirm('Are you sure you want to block this customer?');" href="admin-user.php?action=block&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-lock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } else { ?>
+        <a onclick="return confirm('Are you sure you want to unblock this customer?');" href="admin-user.php?action=unblock&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?>">
+            <span class="las la-unlock" style="color: #FFAD27;"></span>
+        </a>
+    <?php } ?>
            
             </div>
         </td>
     </tr>
-<?php } ?>
+    <?php }
+}else{
+    echo "
+    <tfoot>
+    <tr>
+    <td colspan='8'>
+    <div style='margin-top: 13vh; height:67vh;'>
+    <div style='display:flex; justify-content:center; align-items:center;'>
+    <img src='assets/images/pic/notfound.png' width='315px' id='product-not-found'>
+    </div> 
+   
+    </div>
+    </td>
+    </tr>
+    </tfoot>
+    ";   
+}
+?>
        
                         </tbody>
                     </table>
+                    <?php if (mysqli_num_rows($users) > 0): ?>
+<ul class="pagination" id="pagination">
+<?php
+      $searchParams = array();
+if (isset($_GET['status'])) {
+  $searchParams['status'] = $_GET['status'];
+}  
+        if ($page > 1) {
+            echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
+        } else {
+            echo '<li class="disabled">Prev</li>';
+        }
 
-                    <ul class="pagination" id="pagination">
-                    <?php
-        
-            if ($page > 1) {
-                echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
-            } else {
-                echo '<li class="disabled">Prev</li>';
-            }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '&' . http_build_query($searchParams) .  '">' . $i . '</a></li>';
+        }
 
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a href="?page=' . $i . '">' . $i . '</a></li>';
-            }
-
-            if ($page < $totalPages) {
-                echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
-            } else {
-                echo '<li class="disabled">Next</li>';
-            }
-            ?>
-                      </ul>
+        if ($page < $totalPages) {
+            echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
+        } else {
+            echo '<li class="disabled">Next</li>';
+        }
+        ?>
+</ul>
+<?php endif; ?>
                         </div>
             </div>
            
@@ -228,9 +275,9 @@ $totalPages = ceil($totalUsers / $limit);
 
   <div class="user-tab">
     <h1>Edit Customer</h1>
-  <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?>';"></i>
+  <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
 
-<form method="post" action="update-user.php"  onsubmit="return kttrong()">
+<form method="post" action="update-user.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
 
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 

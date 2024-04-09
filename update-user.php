@@ -13,12 +13,16 @@ $email = $_POST['email'];
 $phone = $_POST['phone'];
 $username = $_POST['customer'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
-   
+
     $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone' WHERE username='$username'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
-        echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}'; </script>";
-       
+        if(isset($_GET['status'])) {
+            echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}&status={$_GET['status']}'; </script>";
+        } else {
+            echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}'; </script>";
+        }
+  
     } else {
         echo "<script> alert('Fail'); </script>";
     }

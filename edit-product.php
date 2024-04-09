@@ -259,7 +259,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
     <tr>
     <td colspan='8'>
     <div style='margin-top: 15vh; height:58vh;'>
-    <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
+    <div style='display:flex; justify-content:center; align-items:center;'>
     <img src='assets/images/pic/noproduct.png' width='320px'>
     </div> 
    
@@ -311,7 +311,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php" onsubmit="return ktrong()" enctype="multipart/form-data">
+<form method="post" action="update-product.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
