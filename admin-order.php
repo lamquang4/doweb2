@@ -269,7 +269,12 @@ $(document).ready(function(){
             type: 'POST',
             data: {status: status, orderId: orderId},
             success: function(response){
-                console.log(response);
+                if (response === "shortage") {
+                    alert("This order doesn't have enough items in stock.");
+                    window.location.href='admin-order.php';
+                } else {
+                    console.log(response);
+                }
             }
         });
     });
@@ -322,7 +327,7 @@ window.onclick = function(event) {
             options[0].disabled = false;
             options[1].disabled = false;
             options[2].disabled = true;
-            options[3].disabled = true;
+            options[3].disabled = false;
        
         }
     }

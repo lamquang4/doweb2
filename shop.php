@@ -151,13 +151,20 @@ include_once 'header.php'
 <div class="pro-container1" id="product-list">
     <?php 
     if (mysqli_num_rows($products) > 0) {
-        // Products found
         while ($product = mysqli_fetch_assoc($products)) {
          ?>
                 <div class="pro1 product-box">
                     <a href="product.php?id=<?php echo $product['id']; ?>">
                         <img src="<?php echo $product['image']; ?>" class="product-img" alt="">
+          
                     </a>
+
+                    <?php if ($product['soluong'] <= 0) { ?> 
+                      <div id="sold-out-container">
+                       <span class="sold-out-text">Sold Out</span>  
+                      </div>
+           
+        <?php } ?>
                     <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
                     <h5 class="product-title"><?php echo $product['name']; ?></h5>
                     <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
@@ -343,6 +350,31 @@ if (window.location.href.indexOf('page=1') > -1 || window.location.href.indexOf(
 }
 </script>
 
+<style>
+
+#sold-out-container {
+    position: absolute;
+   top:110px;
+   left:91px;
+   background-color: #EF3847;
+    color: white; 
+    padding: 9px 12px;
+pointer-events: none;
+    z-index: 1;
+  
+    
+}
+.sold-out-text{
+  display: inline-block;
+text-transform: uppercase;
+letter-spacing: 1.3px;
+font-weight: bold;
+}
+
+.product-box {
+    position: relative; 
+}
+</style>
 
 
 

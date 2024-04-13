@@ -11,6 +11,7 @@ if(isset($_GET['id'])) {
         $productName = $productDetails['name'];
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
+        $productSoluong = $productDetails['soluong'];
         $productDec1 = $productDetails['ml'];
         $productDec2 = $productDetails['calo'];
         $productDec3 = $productDetails['fatg'];
@@ -107,7 +108,7 @@ include_once 'header.php'
   </div>
   
   <div class="single-pro-details">
-<form method="post" action="">
+<form method="post" action="" onsubmit="return validateQuantity()">
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
   <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">
@@ -120,7 +121,8 @@ include_once 'header.php'
     <div class="plus"><i class="fa-solid fa-plus" style="font-size: 18px;"></i></div>
   </div>
 
-<button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
+   <button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
+
 </form>
  <div id="infor-nutri">
   <h3>Nutriton</h3>
@@ -285,6 +287,18 @@ MainImg.src = small[3].src;
 }
 
    </script>
+
+<script>
+  function validateQuantity() {
+    var selectedQuantity = parseInt(document.querySelector("input[name='quantity']").value);
+    var availableQuantity = <?php echo $productSoluong; ?>;
+    if (selectedQuantity > availableQuantity) {
+      alert("The current stock has <?php echo $productSoluong; ?> of these products remaining.");
+      return false; 
+    }
+    return true; 
+  }
+</script>
 
 
 

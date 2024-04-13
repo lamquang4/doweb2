@@ -6,24 +6,34 @@ if(isset($_POST['status']) && isset($_POST['orderId'])) {
     $orderId = $_POST['orderId'];
   
     $connection = new Connection();
-    $query = "UPDATE tb_order SET status = '$status' WHERE idorder = '$orderId'";
-    $result = mysqli_query($connection->conn, $query);
-    
 
-    //cap nhat so luong san pham trong kho khi status = 1
-    if($status == 1) { 
- 
-        $orderDetailQuery = "SELECT * FROM order_detail WHERE idorder = '$orderId'";
-        $orderDetailResult = mysqli_query($connection->conn, $orderDetailQuery);
+    $checkQuantityQuery = "SELECT COUNT(*) AS shortage FROM order_detail od INNER JOIN product p ON od.id = p.id WHERE od.idorder = '$orderId' AND p.soluong < od.sl_mua";
+    $checkQuantityResult = mysqli_query($connection->conn, $checkQuantityQuery);
+    $row = mysqli_fetch_assoc($checkQuantityResult);
+    $shortage = $row['shortage'];
 
-        while($row = mysqli_fetch_assoc($orderDetailResult)) {
-            $productId = $row['id'];
-            $quantity = $row['sl_mua'];
+    if($shortage > 0){
+        echo "shortage";
+    }else{
+      if($shortage == 0) {
+   
+        $query = "UPDATE tb_order SET status = '$status' WHERE idorder = '$orderId'";
+        $result = mysqli_query($connection->conn, $query);
 
-            $updateProductQuery = "UPDATE product SET soluong = soluong - $quantity WHERE id = '$productId'";
-            mysqli_query($connection->conn, $updateProductQuery);
+        if($status == 1) { 
+            $orderDetailQuery = "SELECT * FROM order_detail WHERE idorder = '$orderId'";
+            $orderDetailResult = mysqli_query($connection->conn, $orderDetailQuery);
+
+            while($row = mysqli_fetch_assoc($orderDetailResult)) {
+                $productId = $row['id'];
+                $quantity = $row['sl_mua'];
+
+                $updateProductQuery = "UPDATE product SET soluong = soluong - $quantity WHERE id = '$productId'";
+                mysqli_query($connection->conn, $updateProductQuery);
+            }
         }
+    }    
     }
-  
+   
 }
 ?>
