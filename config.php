@@ -283,6 +283,10 @@ class Product extends Connection {
     
         if (!empty($minPrice) && !empty($maxPrice)) {
             $query .= " AND price BETWEEN $minPrice AND $maxPrice";
+        }elseif (!empty($minPrice)) {
+            $query .= " AND price >= $minPrice";
+        } elseif (!empty($maxPrice)) {
+            $query .= " AND price <= $maxPrice";
         }
     
         if (!empty($searchBrand)) {
@@ -309,6 +313,10 @@ class Product extends Connection {
     
         if (!empty($minPrice) && !empty($maxPrice)) {
             $query .= " AND price BETWEEN $minPrice AND $maxPrice";
+        }elseif (!empty($minPrice)) {
+            $query .= " AND price >= $minPrice";
+        } elseif (!empty($maxPrice)) {
+            $query .= " AND price <= $maxPrice";
         }
     
         if (!empty($searchBrand)) {
