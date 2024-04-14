@@ -44,7 +44,7 @@ class Loginad extends Connection{
         $result = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username='$username'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
-            if($password == $row["password"]){
+            if(md5($password) == $row["password"]){
 $this->username = $row["username"];
 return 1;
             }
@@ -163,7 +163,7 @@ class Login extends Connection{
         $result = mysqli_query($this->conn, "SELECT * FROM tb_customer WHERE username='$usernamelogin'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
-            if($password == $row["password"]){
+            if(md5($password) == $row["password"]){
 $this->username = $row["username"];
 return 1;
             }

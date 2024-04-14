@@ -137,12 +137,8 @@ $totalPages = ceil($totalOrders / $limit);
                         <option value="">16</option>
                         <option value="">20</option>
                     </select>
-                    
-                </div>
-        
-              
+                </div>           
             </div>
-        
             <div>
    
                 <table width="100%" id="table-order">
@@ -337,4 +333,5 @@ window.onclick = function(event) {
 });
 
 </script>
+
 

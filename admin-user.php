@@ -28,8 +28,8 @@ if (isset($_POST["submit"])) {
  
   $username = isset($_POST["username"]) ? $_POST["username"] : "";
   $email = isset($_POST["email"]) ? $_POST["email"] : "";
-  $password = isset($_POST["password"]) ? $_POST["password"] : "";
-  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $password = md5(trim(isset($_POST["password"]) ? $_POST["password"] : ""));
+  $password2 = md5(trim(isset($_POST["password2"]) ? $_POST["password2"] : ""));
   $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
   $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
   $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";

@@ -27,8 +27,8 @@ $registerad  = new Registerad();
 if (isset($_POST["submit"])) {
   $username = trim(isset($_POST["username"]) ? $_POST["username"] : "");
   $email = trim(isset($_POST["email"]) ? $_POST["email"] : "");
-  $password = trim(isset($_POST["password"]) ? $_POST["password"] : "");
-  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $password = md5(trim(isset($_POST["password"]) ? $_POST["password"] : ""));
+  $password2 = md5(trim(isset($_POST["password2"]) ? $_POST["password2"] : ""));
   $fullname = trim(isset($_POST["fullname"]) ? $_POST["fullname"] : "");
   $phone = trim(isset($_POST["phone"]) ? $_POST["phone"] : "");
   $role = isset($_POST["role"]) ? $_POST["role"] : "";

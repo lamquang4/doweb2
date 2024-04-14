@@ -11,8 +11,8 @@ if (isset($_POST["submit"])) {
  
   $username = trim(isset($_POST["username"]) ? $_POST["username"] : "");
   $email = trim(isset($_POST["email"]) ? $_POST["email"] : "");
-  $password = trim(isset($_POST["password"]) ? $_POST["password"] : "");
-  $password2 = isset($_POST["password2"]) ? $_POST["password2"] : "";
+  $password = md5(trim(isset($_POST["password"]) ? $_POST["password"] : ""));
+  $password2 = md5(trim(isset($_POST["password2"]) ? $_POST["password2"] : ""));
   $sonha = trim(isset($_POST["sonha"]) ? $_POST["sonha"] : "");
   $duong = trim(isset($_POST["duong"]) ? $_POST["duong"] : "");
   $district = isset($_POST["district"]) ? $_POST["district"] : "";
@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
   $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
-
+  
   $result = $register->registration(
       $username,
       $email,

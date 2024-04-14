@@ -11,10 +11,11 @@ $connection = new Connection();
 $fullname = $_POST['fullname'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
+$birthday = $_POST['birthday'];
 $username = $_POST['customer'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
 
-    $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone' WHERE username='$username'";
+    $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone', birthday='$birthday' WHERE username='$username'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
         if(isset($_GET['status'])) {
