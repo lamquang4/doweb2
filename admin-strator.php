@@ -227,9 +227,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                             <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
-                                <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                                <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
-                <div id="statusDropdown" class="dropdown-content">
+                <div id="statusDropdown" class="dropdown-content show">
                 <a href="admin-strator.php">All</a>
 <a href="admin-strator.php?status=1">Normal</a>
 <a href="admin-strator.php?status=0">Blocked</a>
@@ -459,20 +459,9 @@ function kttrong() {
 }
 
 function toggleDropdown() {
-    var dropdown = document.getElementById("statusDropdown");
-    dropdown.classList.toggle("show");
-}
-
-window.onclick = function(event) {
-    if (!event.target.matches('th')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
+    var dropdown1 = document.getElementById("statusDropdown");
+    dropdown1.classList.toggle("show");
+    
 }
 </script>
 

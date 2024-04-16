@@ -568,11 +568,11 @@
         }
           #table-user td:nth-child(2) {
            
-      width: 15%;
+      width: 14%;
         }
         #table-user td:nth-child(3) {
           
-      width: 22%;
+      width: 20%;
         }
         #table-user th:nth-child(4){
           width: 11%;   
@@ -581,10 +581,10 @@
            padding-right: 10px; 
           }
         #table-user th:nth-child(5){
-            width: 25%; 
+            width: 27%; 
         }
         #table-user th:nth-child(6){
-            width: 9%;
+            width: 10%;
         } 
         #table-user th:nth-child(7) {
     width:8%;
@@ -645,13 +645,13 @@
       
     
       #table-order th:nth-child(1){
-        width: 12%;
+        width: 11%;
            } 
             #table-order th:nth-child(2){
-            width: 12%;
+            width: 11%;
                }
                #table-order th:nth-child(3){
-                width: 13%;
+                width: 15%;
                }
                #table-order th:nth-child(4){
                 width: 38%;
@@ -891,13 +891,13 @@ cursor: pointer;
   }
 
   .dropdown-content {
-    display: none;
+   
     position:absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 10;
-    top: 100%; 
+    top: 90%; 
     left: 0;
     
 }
@@ -914,7 +914,7 @@ cursor: pointer;
     background-color: #ddd;
 }
 .show {
-    display: block;
+    display: none;
 }
 
 
@@ -927,4 +927,59 @@ cursor: pointer;
     #product-not-found{
       width: 270px;
     }
+  }
+
+  .hidden{
+    display: none;
+  }
+  #addressdropdown{
+
+    position:absolute;
+    background-color: #f9f9f9;
+    min-width: 210px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 90%; 
+    left: 0;
+   
+  }
+  #dropdowninside{
+  
+    padding: 16px 10px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  #dropdowninside label{
+    font-size: 15px;
+  }
+  #dropdowninside select{
+width: 120px;
+  }
+
+
+  #datedropdown{
+
+    position:absolute;
+    background-color: #f9f9f9;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 90%; 
+    left: 0;
+   
+  }
+  #dropdowninside1{
+  
+    padding: 16px 5px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  #dropdowninside1 label{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .hide1{
+    display: none;
   }

@@ -146,11 +146,50 @@ $totalPages = ceil($totalOrders / $limit);
                         <tr id="select-filter">
                             <th>ID ORDER</th>                                          
                             <th>USERNAME</th>
-                            <th> ORDER DATE </th>
-                            <th> DELIVERY ADDRESS </th>
-                            <th onclick="toggleDropdown()" style="cursor: pointer;   position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                            <th style="position: relative;"> ORDER DATE <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown2()"></i>
+                       <div id="datedropdown" class="hide1">
+                            <div id="dropdowninside1">
+                            <label>From</label>
+                            <input type="date">
+                        </div>
+                        <div id="dropdowninside1">
+                            <label>To</label>
+                            <input type="date">
+                        </div>
+                       </div>
+                        
+                        </th>
+                            <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i>
+                            <div id="addressdropdown" class="hidden">
+   <div id="dropdowninside">
+    <label>District</label>
+    <select>
+        <option>Select District</option>
+        <option>District 1</option>
+        <option>District 2</option>
+        <option>District 3</option>
+        <option>District 4</option>
+        <option>District 5</option>
+        <option>District 6</option>
+    </select>
+   </div>
+   <div id="dropdowninside">
+    <label>Ward</label>
+    <select>
+    <option>Select Ward</option>
+        <option>Ward 1</option>
+        <option>Ward 2</option>
+        <option>Ward 3</option>
+        <option>Ward 4</option>
+        <option>Ward 5</option>
+        <option>Ward 6</option>
+    </select>
+   </div>
+</div>
+                            </th>
+                            <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
-                            <div id="statusDropdown" class="dropdown-content">
+                            <div id="statusDropdown" class="dropdown-content show">
                             <a href="admin-order.php">All</a>
     <a href="admin-order.php?status=0">Confirm</a>
     <a href="admin-order.php?status=1">Successful</a>
@@ -276,22 +315,6 @@ $(document).ready(function(){
     });
 });
 
-function toggleDropdown() {
-    var dropdown = document.getElementById("statusDropdown");
-    dropdown.classList.toggle("show");
-}
-
-window.onclick = function(event) {
-    if (!event.target.matches('th')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
 
 
 </script>
@@ -332,6 +355,19 @@ window.onclick = function(event) {
     checkStatus(select);
 });
 
+function toggleDropdown2() {
+    var dropdown2 = document.getElementById("datedropdown");
+    dropdown2.classList.toggle("hide1");
+}
+function toggleDropdown1() {
+    var dropdown = document.getElementById("addressdropdown");
+    dropdown.classList.toggle("hidden");
+}
+function toggleDropdown() {
+    var dropdown1 = document.getElementById("statusDropdown");
+    dropdown1.classList.toggle("show");
+    
+}
 </script>
 
 
