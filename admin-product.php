@@ -603,12 +603,17 @@ function hideadd(){
     var typeSelect = document.getElementById("type");
     var brandSelect = document.getElementById("brand");
     var statusSelect = document.getElementById("status");
+    var name = document.getElementById("name").value;
     var selectedTypeValue = typeSelect.value;
     var selectedBrandValue = brandSelect.value;
     var selectedStatusValue = statusSelect.value;
     var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
  var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
-    
+ var nameRegex = /^[a-zA-Z\s]+$/;
+ if (!nameRegex.test(name)) {
+        alert("Product name must contain only letters.");
+        return false;
+    } 
  if (selectedTypeValue === "0" || selectedBrandValue === "0") {
     alert("Please choose brand or type");
     return false;

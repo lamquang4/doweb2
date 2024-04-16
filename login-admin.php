@@ -53,9 +53,9 @@ if (isset($_POST["submit"])) {
             <div class="form login">
                 <span class="title">Login For Manager</span>
 
-                <form action="login-admin.php" method="POST">
+                <form action="login-admin.php" method="POST" onsubmit="return kttrong()">
                     <div class="input-field">
-                        <input  name="username"  id="username" type="text" placeholder="Enter your username" required>
+                        <input name="username" id="username" type="text" placeholder="Enter your username" required maxlength="10">
                         <i class="uil uil-user icon"></i>
                     </div>
                     <div class="input-field">
@@ -124,5 +124,16 @@ if (isset($_POST["submit"])) {
     login.addEventListener("click", ( )=>{
         container.classList.remove("active");
     });
+
+    function kttrong(){
+        var username = document.getElementById('username').value;
+        var usernameRegex = /^[a-zA-Z0-9\s]+$/;
+        if (!usernameRegex.test(username)) {
+        alert("Username must contain only letters and numbers.");
+    
+        return false;
+    } 
+    return true
+    }
 </script>
 

@@ -479,7 +479,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 
  function ktrong() {
-        
+  var name = document.getElementById("name").value;
   var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
   var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
     for (var i = 0; i < inputsToCheck.length; i++) {
@@ -507,7 +507,11 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         alert("Please choose product type or product brand");
         return false;
     }
-
+    var nameRegex = /^[a-zA-Z\s]+$/;
+ if (!nameRegex.test(name)) {
+        alert("Product name must contain only letters.");
+        return false;
+    } 
 
     return true;
         }

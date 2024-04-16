@@ -19,6 +19,13 @@ class Connection{
 
 class Registerad extends Connection {
     public function registration($username, $email, $password, $password2, $fullname, $phone, $role, $status) {
+        $username = $this->conn->real_escape_string($username);
+        $email = $this->conn->real_escape_string($email);
+        $password = $this->conn->real_escape_string($password);
+        $password2 = $this->conn->real_escape_string($password2);
+        $fullname = $this->conn->real_escape_string($fullname);
+        $phone = $this->conn->real_escape_string($phone);
+        $status = $this->conn->real_escape_string($status);
         $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username ='$username' OR email ='$email' OR phone='$phone'");
         
         if (mysqli_num_rows($duplicate) > 0) {
@@ -41,6 +48,8 @@ class Registerad extends Connection {
 class Loginad extends Connection{
     public $username;
     public function loginad($username,$password){
+        $username = $this->conn->real_escape_string($username);
+        $password = $this->conn->real_escape_string($password);
         $result = mysqli_query($this->conn, "SELECT * FROM tb_manager WHERE username='$username'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){
@@ -137,6 +146,21 @@ class Adinad extends Connection{
 
 class Register extends Connection {
     public function registration($username, $email, $password, $password2, $sonha, $duong, $district, $ward, $city, $fullname, $phone, $imguser, $gender, $birthday, $status) {
+        $username = $this->conn->real_escape_string($username);
+        $email = $this->conn->real_escape_string($email);
+        $password = $this->conn->real_escape_string($password);
+        $password2 = $this->conn->real_escape_string($password2);
+        $sonha = $this->conn->real_escape_string($sonha);
+        $duong = $this->conn->real_escape_string($duong);
+        $district = $this->conn->real_escape_string($district);
+        $ward = $this->conn->real_escape_string($ward);
+        $city = $this->conn->real_escape_string($city);
+        $fullname = $this->conn->real_escape_string($fullname);
+        $phone = $this->conn->real_escape_string($phone);
+        $imguser = $this->conn->real_escape_string($imguser);
+        $gender = $this->conn->real_escape_string($gender);
+        $birthday = $this->conn->real_escape_string($birthday);
+        $status = $this->conn->real_escape_string($status);
         $duplicate = mysqli_query($this->conn, "SELECT * FROM tb_customer WHERE username ='$username' OR email ='$email'");
         
         if (mysqli_num_rows($duplicate) > 0) {
@@ -160,6 +184,8 @@ class Register extends Connection {
 class Login extends Connection{
     public $username;
     public function login($usernamelogin,$password){
+        $usernamelogin = $this->conn->real_escape_string($usernamelogin);
+        $password = $this->conn->real_escape_string($password);
         $result = mysqli_query($this->conn, "SELECT * FROM tb_customer WHERE username='$usernamelogin'");
         $row = mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result)>0){

@@ -26,26 +26,26 @@ if (empty($user['fullname']) || empty($user['phone']) || empty($user['sonha']) |
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if (isset($_POST['address']) && $_POST['address'] === 'info-address1') {
-        $fullname = $_POST['fullnameacc'];
-        $phone = $_POST['phoneacc'];
-        $sonha = $_POST['sonhaacc'];
-        $duong = $_POST['duongacc'];
-        $district = $_POST['districtacc'];
-        $ward = $_POST['wardacc'];
-        $city = $_POST['cityacc'];
-        $username = $_POST['username'];
-         $total = $_POST['total'];
+        $fullname = $connection->conn->real_escape_string(trim($_POST['fullnameacc']));
+        $phone = $connection->conn->real_escape_string($_POST['phoneacc']);
+        $sonha = $connection->conn->real_escape_string(trim($_POST['sonhaacc']));
+        $duong = $connection->conn->real_escape_string(trim($_POST['duongacc']));
+        $district = $connection->conn->real_escape_string($_POST['districtacc']);
+        $ward = $connection->conn->real_escape_string($_POST['wardacc']);
+        $city = $connection->conn->real_escape_string($_POST['cityacc']);
+        $username = $connection->conn->real_escape_string($_POST['username']);
+         $total = $connection->conn->real_escape_string($_POST['total']);
          
     } else {
-    $fullname = trim($_POST['fullname']);
-    $phone = trim($_POST['phone']);
-    $sonha = trim($_POST['sonha']);
-    $duong = trim($_POST['duong']);
-    $district = $_POST['district'];
-    $ward = $_POST['ward'];
-    $city = $_POST['city'];
-    $total = $_POST['total'];
-    $username = $_POST['username'];
+    $fullname = $connection->conn->real_escape_string(trim($_POST['fullname']));
+    $phone = $connection->conn->real_escape_string(trim($_POST['phone']));
+    $sonha = $connection->conn->real_escape_string(trim($_POST['sonha']));
+    $duong = $connection->conn->real_escape_string(trim($_POST['duong']));
+    $district = $connection->conn->real_escape_string($_POST['district']);
+    $ward = $connection->conn->real_escape_string($_POST['ward']);
+    $city = $connection->conn->real_escape_string($_POST['city']);
+    $total = $connection->conn->real_escape_string($_POST['total']);
+    $username = $connection->conn->real_escape_string($_POST['username']);
     }
     if (isset($_POST['pay-method']) && $_POST['pay-method'] === 'cc') {
         $payment_method = 'cc';
@@ -189,7 +189,8 @@ include_once 'header.php'
                                           <input type="hidden" name="cityacc" value="<?php echo $user['city']; ?>">
                                               <div>
                                                   <div class="row">
-                                         
+                                                  <h5 class="font-size-16" style="margin-bottom: 12px;">Receiver Info </h5>
+                                              
                                                   <div class="col-lg-6">
                                                         <div class="mb-2">
                                                             <label class="form-label" for="fullname">Full name</label>
@@ -494,6 +495,16 @@ if (addressOption === "info-address2") {
   var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/;
 
+  if(payOption==='cc'){
+        var cardNumber = document.getElementById("card-number").value.trim();
+    var expiryDate = document.getElementById("expiry-date").value.trim();
+    var cvv = document.getElementById("cvv").value.trim();
+    if (cardNumber === "" || expiryDate === "" || cvv === "") {
+        alert("Please fill in all credit card fields.");
+        return false;
+    }
+    }
+
   if (fullname === "" || phone === "" || sonha === "" || duong === "") {
             alert("Please fill in all fields.");
             return false;
@@ -539,15 +550,7 @@ if (addressOption === "info-address2") {
 
         return true;
     }
-    if(payOption==='cc'){
-        var cardNumber = document.getElementById("card-number").value.trim();
-    var expiryDate = document.getElementById("expiry-date").value.trim();
-    var cvv = document.getElementById("cvv").value.trim();
-    if (cardNumber === "" || expiryDate === "" || cvv === "") {
-        alert("Please fill in all credit card fields.");
-        return false;
-    }
-    }
+
     }
 </script>
 

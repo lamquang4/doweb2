@@ -56,11 +56,11 @@ include_once 'header.php'
     <div class="container" id="container">
      <div class="f-box">
           <h1 id="tittle">Sign In</h1>
-          <form  action="" id="form" method="post" autocomplete="off">
+          <form  action="" id="form" method="post" autocomplete="off"  onsubmit="return kttrong()">
              <div class="input-group">
               <div class="input-field" >
                 <i class="fa-solid fa-user"></i>
-                <input type="text" placeholder="Username" id="usernamelogin" maxlength="9" name="usernamelogin" required>
+                <input type="text" placeholder="Username" id="usernamelogin" maxlength="10" name="usernamelogin" required>
              
               </div>
      
@@ -110,7 +110,16 @@ include_once 'footer.php'
       });
   });
 
-
+  function kttrong(){
+        var usernamelogin = document.getElementById('usernamelogin').value;
+        var usernameRegex = /^[a-zA-Z0-9\s]+$/;
+        if (!usernameRegex.test(usernamelogin)) {
+        alert("Username must contain only letters and numbers.");
+    
+        return false;
+    } 
+    return true
+    }
 
 </script>
 

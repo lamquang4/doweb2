@@ -2,17 +2,17 @@
     require 'config.php';
     $connection = new Connection();
 
-    $username = $_POST["username"];
-    $email = trim($_POST["email"]);
-    $fullname = trim($_POST["fullname"]);
-    $phone = trim($_POST["phone"]);
-    $birthday = $_POST["birthday"];
-    $gender = isset($_POST["gender"]) ? $_POST["gender"] : '';
-$city = $_POST["city"];
-    $district = $_POST["district"];
-    $ward = $_POST["ward"];
-    $duong = trim($_POST["duong"]);
-    $sonha = trim($_POST["sonha"]);
+    $username = $connection->conn->real_escape_string($_POST["username"]);
+    $email = $connection->conn->real_escape_string(trim($_POST["email"]));
+    $fullname = $connection->conn->real_escape_string(trim($_POST["fullname"]));
+    $phone = $connection->conn->real_escape_string(trim($_POST["phone"]));
+    $birthday = $connection->conn->real_escape_string($_POST["birthday"]);
+    $gender = $connection->conn->real_escape_string(isset($_POST["gender"]) ? $_POST["gender"] : '');
+$city = $connection->conn->real_escape_string($_POST["city"]);
+    $district = $connection->conn->real_escape_string($_POST["district"]);
+    $ward = $connection->conn->real_escape_string($_POST["ward"]);
+    $duong = $connection->conn->real_escape_string(trim($_POST["duong"]));
+    $sonha = $connection->conn->real_escape_string(trim($_POST["sonha"]));
 
     if (isset($_FILES['userImage'])) {
         $file = $_FILES['userImage'];
