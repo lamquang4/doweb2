@@ -3,7 +3,7 @@ require 'config.php';
 
 $connection = new Connection();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $status = $_GET['status'];
+  
 
 if(isset($_GET['idorder'])) {
   $orderId = $_GET['idorder'];

@@ -8,6 +8,11 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 $connection = new Connection();
 $order = new Order();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$dateStart = isset($_GET['date_from']) ? $_GET['date_from'] : null;
+$dateEnd = isset($_GET['date_to']) ? $_GET['date_to'] : null;
+$searchDistrict = isset($_GET['district']) ? $_GET['district'] : null;
+$searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
+
 $limit = 10;
 $start = ($page - 1) * $limit;
 if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2'|| $_GET['status'] === '3')) {
@@ -16,8 +21,8 @@ if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1
     $totalOrders = $order->getOrderCountByStatus($status); 
 } else {
    
-    $orders = $order->selectOrders($start, $limit);
-    $totalOrders = $order->getOrderCount();
+    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard);
+    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard);
 }
 $totalPages = ceil($totalOrders / $limit);
 
@@ -148,43 +153,54 @@ $totalPages = ceil($totalOrders / $limit);
                             <th>USERNAME</th>
                             <th style="position: relative;"> ORDER DATE <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown2()"></i>
                        <div id="datedropdown" class="hide1">
+                        <form method="GET" action="admin-order.php">
                             <div id="dropdowninside1">
                             <label>From</label>
-                            <input type="date">
+                            <input type="date" name="date_from">
                         </div>
                         <div id="dropdowninside1">
                             <label>To</label>
-                            <input type="date">
+                            <input type="date" name="date_to">
                         </div>
+                        <div id="button-content">
+    <button type="submit">Submit</button>
+   </div>
+   </form>
                        </div>
                         
                         </th>
                             <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i>
                             <div id="addressdropdown" class="hidden">
-   <div id="dropdowninside">
-    <label>District</label>
-    <select>
-        <option>Select District</option>
-        <option>District 1</option>
-        <option>District 2</option>
-        <option>District 3</option>
-        <option>District 4</option>
-        <option>District 5</option>
-        <option>District 6</option>
+                            <form method="GET" action="admin-order.php">
+                            <div id="dropdowninside">
+    <label>Districs</label>
+    <select name="district">
+        <option value="0">Select District</option>
+        <option value="District 1">District 1</option>
+        <option value="District 2">District 2</option>
+        <option value="District 3">District 3</option>
+        <option value="District 4">District 4</option>
+        <option value="District 5">District 5</option>
+        <option value="District 6">District 6</option>
     </select>
    </div>
    <div id="dropdowninside">
     <label>Ward</label>
-    <select>
-    <option>Select Ward</option>
-        <option>Ward 1</option>
-        <option>Ward 2</option>
-        <option>Ward 3</option>
-        <option>Ward 4</option>
-        <option>Ward 5</option>
-        <option>Ward 6</option>
+    <select name="ward">
+    <option value="0">Select Ward</option>
+        <option value="Ward 1">Ward 1</option>
+        <option value="Ward 2">Ward 2</option>
+        <option value="Ward 3">Ward 3</option>
+        <option value="Ward 4">Ward 4</option>
+        <option value="Ward 5">Ward 5</option>
+        <option value="Ward 6">Ward 6</option>
     </select>
    </div>
+   <div id="button-content">
+    <button type="submit">Submit</button>
+   </div>
+        </form>
+   
 </div>
                             </th>
                             <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
@@ -260,6 +276,19 @@ $totalPages = ceil($totalOrders / $limit);
 if (isset($_GET['status'])) {
   $searchParams['status'] = $_GET['status'];
 }  
+if (isset($_GET['date_from'])) {
+    $searchParams['date_from'] = $_GET['date_from'];
+}
+
+if (isset($_GET['date_to'])) {
+    $searchParams['date_to'] = $_GET['date_to'];
+}
+if (isset($_GET['district'])) {
+    $searchParams['district'] = $_GET['district'];
+}
+if (isset($_GET['ward'])) {
+    $searchParams['ward'] = $_GET['ward'];
+}
         if ($page > 1) {
             echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
         } else {

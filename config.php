@@ -378,17 +378,53 @@ class Order extends Connection{
     }
 
 // hiện tất cả
-    public function selectOrders($start,$limit) {
-        $query = "SELECT * FROM tb_order ORDER BY username LIMIT $start, $limit";
+    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null) {
+        $query = "SELECT * FROM tb_order WHERE 1=1";
+
+        if (!empty($dateStart) && !empty($dateEnd)) {
+            $query .= " AND dateorder BETWEEN '$dateStart' AND '$dateEnd'";
+        }elseif (!empty($dateStart)) {
+            $query .= " AND dateorder >= '$dateStart'";
+        } elseif (!empty($dateEnd)) {
+            $query .= " AND dateorder <= '$dateEnd'";
+        }
+   
+        if (!empty($searchDistrict)) {
+            $query .= " AND district = '$searchDistrict'";
+        }
+        if (!empty($searchWard)) {
+            $query .= " AND ward = '$searchWard'";
+        }
+    
+       
+        $query .= " ORDER BY username";
+        $query .= " LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }
-    public function getOrderCount() {
-        $query = "SELECT COUNT(*) as total FROM tb_order";
+    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null) {
+        $query = "SELECT COUNT(*) as total FROM tb_order WHERE 1=1";
+        
+        if (!empty($dateStart) && !empty($dateEnd)) {
+            $query .= " AND dateorder BETWEEN '$dateStart' AND '$dateEnd'";
+        }elseif (!empty($dateStart)) {
+            $query .= " AND dateorder >= '$dateStart'";
+        } elseif (!empty($dateEnd)) {
+            $query .= " AND dateorder <= '$dateEnd'";
+        }
+
+      if (!empty($searchDistrict)) {
+            $query .= " AND district = '$searchDistrict'";
+        }
+        if (!empty($searchWard)) {
+            $query .= " AND ward = '$searchWard'";
+        }
+        
         $result2 = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result2);
         return $data['total'];
     }
+
     public function selectOrdersById($idorder) {
         $query = "SELECT * FROM tb_order WHERE idorder = '$idorder'";
         $result2 = mysqli_query($this->conn, $query);

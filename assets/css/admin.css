@@ -955,6 +955,7 @@ cursor: pointer;
   }
   #dropdowninside select{
 width: 120px;
+background-color: white;
   }
 
 
@@ -971,7 +972,7 @@ width: 120px;
   }
   #dropdowninside1{
   
-    padding: 16px 5px;
+    padding: 16px 9px;
     display: flex;
     justify-content: space-between;
 
@@ -980,6 +981,23 @@ width: 120px;
     font-size: 15px;
     font-weight: bold;
   }
+  #dropdowninside1 input{
+    width: 100px;
+  }
   .hide1{
     display: none;
+  }
+  #button-content{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+   margin-top: 5px;
+  }
+  #button-content button{
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #0AB39C;
+    color:white;
+    border:none;
+cursor: pointer;
   }
