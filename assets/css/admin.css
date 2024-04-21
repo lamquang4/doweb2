@@ -1001,3 +1001,15 @@ background-color: white;
     border:none;
 cursor: pointer;
   }
+  #form-searchdate input{
+    padding: 2px 4px;
+  }
+  #form-searchdate button{
+    padding: 5px 13px;
+    background-color: #0AB39C;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+  }
+

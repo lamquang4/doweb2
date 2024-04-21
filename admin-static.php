@@ -8,18 +8,23 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 $connection = new Connection();
 $order = new Order();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-$dateStart = isset($_GET['date_from']) ? $_GET['date_from'] : null;
-$dateEnd = isset($_GET['date_to']) ? $_GET['date_to'] : null;
-$searchDistrict = isset($_GET['district']) ? $_GET['district'] : null;
-$searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
+$dateStart = isset($_GET['dateStart']) ? $_GET['dateStart'] : null;
+$dateEnd = isset($_GET['dateEnd']) ? $_GET['dateEnd'] : null;
+$orders_result = $order->selectTopOrder($dateStart, $dateEnd);
 
-$limit = 10;
-$start = ($page - 1) * $limit;
-    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard);
-    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard);
+$usernames = [];
+$totals = [];
+$colors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)'];
+$colorIndex = 0;
 
-$totalPages = ceil($totalOrders / $limit);
-
+while ($row = mysqli_fetch_assoc($orders_result)) { 
+    $usernames[] = $row['username'];
+    $totals[] = $row['total_total'];
+    $colorIndex++;
+    if ($colorIndex >= count($colors)) {
+        $colorIndex = 0;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +34,7 @@ $totalPages = ceil($totalOrders / $limit);
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>Admin Order</title>
     <link rel="stylesheet" href="assets/css/admin.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -75,11 +80,17 @@ $totalPages = ceil($totalOrders / $limit);
                     </li>
                     <li >
                        <a href="admin-order.php" >
-                            <span class="las la-shopping-cart" style="color: #fff;"></span>
-                            <small style="color: #fff;">Orders</small>
+                            <span class="las la-shopping-cart"></span>
+                            <small>Orders</small>
                         </a>
                     </li>
-                  
+                    <li >
+                       <a href="admin-static.php" >
+                            <span class="las la-chart-bar" style="color: #fff;"></span>
+                            <small style="color: #fff;">Charts</small>
+                        </a>
+                    </li>
+                
               
                 </ul>
             </div>
@@ -95,10 +106,8 @@ $totalPages = ceil($totalOrders / $limit);
                 </label>
                 
                 <div class="header-menu">
-                    <label for="">
-                    
-                    </label>
-                    <div class="notify-icon">
+                  
+                <div class="notify-icon">
                       <span class="las la-envelope"></span>
                       <span class="notify">4</span>
                   </div>
@@ -118,13 +127,25 @@ $totalPages = ceil($totalOrders / $limit);
         </header>
         <div class="page-content" style="margin-top: 50px;">
             
-            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Orders <?php echo '(' . $totalOrders . ')'; ?></h1>
+            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Charts </h1>
           
-        </div>
+            <div>
+                <form method="GET" id="form-searchdate">
+                <label style="margin-right: 4px;">Date from</label>
+                <input type="date" name="dateStart" style="margin-right: 10px;">
+                <label style="margin-right: 4px;">Date to</label>
+                <input type="date" name="dateEnd" style="margin-right: 10px;">
+                <button type="submit">Submit</button>
+                </form>
+            </div>
         
-        <div class="records table-responsive" >
+            <canvas id="myChart" width="300" height="120" ></canvas>
            
-            <div class="record-header">
+        </div>
+ 
+        <div class="records table-responsive" style="margin-bottom: 20px;">
+           
+            <div class="record-header" style="display: none;">
               <div class="browse">
                 <input type="search" placeholder="Search (ID)" class="record-search">
               
@@ -145,27 +166,10 @@ $totalPages = ceil($totalOrders / $limit);
                         <tr id="select-filter">
                             <th>ID ORDER</th>                                          
                             <th>USERNAME</th>
-                            <th style="position: relative;"> ORDER DATE <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown2()"></i>
-                       <div id="datedropdown" class="hide1">
-                        <form method="GET" action="admin-order.php">
-                            <div id="dropdowninside1">
-                            <label>From</label>
-                            <input type="date" name="date_from">
-                        </div>
-                        <div id="dropdowninside1">
-                            <label>To</label>
-                            <input type="date" name="date_to">
-                        </div>
-                        <div id="button-content">
-    <button type="submit">Submit</button>
-   </div>
-   </form>
-                       </div>
-                        
-                        </th>
-                  <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i></th>
-                            <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i> </th>    
-                    
+                            <th style="position: relative;"> ORDER DATE</th>
+                  <th style="position: relative;"> DELIVERY ADDRESS</th>
+                           
+                  <th> TOTAL</th>
                             <th> ACTION</th>
                           
                         </tr>
@@ -174,97 +178,38 @@ $totalPages = ceil($totalOrders / $limit);
                     <tbody>
                   
                     <?php 
-                          if(mysqli_num_rows($orders) > 0) {  
-                        while ($order = mysqli_fetch_assoc($orders)) { ?>
-    <tr>
-        <td><?php echo $order['idorder']; ?></td>
-        <td><?php echo $order['username']; ?></td>
-        <td><?php echo $order['dateorder']; ?></td>
-        <td><?php echo $order['sonha']; ?> <?php echo $order['duong']; ?> <?php echo $order['city']; ?> <?php echo $order['district']; ?> <?php echo $order['ward']; ?></td>
-                              <td>
-                              <select id="select-status-order" class="select-status-order" onchange="checkStatus(this)" name="status">
-                                <option value="3">Select status</option>
-                                <option value="0" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 0) ? 'selected' : ''; ?>>Confirm</option>
-                                <option value="1" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 1) ? 'selected' : ''; ?>>Successful</option>
-                                <option value="2" data-order-id="<?php echo $order['idorder']; ?>" <?php echo ($order['status'] == 2) ? 'selected' : ''; ?>>Cancel</option> 
-                              </select>
-                              </td>
-                              <td>
-                              <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
-                    </div>
-                              </td>
-     
-       
-    </tr>
-  
-<?php }
-}else{
-    echo "
-    <tfoot>
-    <tr>
-    <td colspan='6'>
-    <div style='margin-top: 20vh; height:54vh;'>
-    <div style='display:flex; justify-content:center; align-items:center; margin-bottom:6px;'>
-    <img src='assets/images/pic/order-empty.png'>
-    </div> 
-    <div><p style='text-align:center;font-size:21px;'>No Orders Yet</p></div>
-    </div>
-    </td>
-    </tr>
-    </tfoot>
-    ";   
-}
-?>
+                  
+                  foreach ($usernames as $username) {
+                    $order_kq = $order->selectOrderWithMaxTotal($username,$dateStart,$dateEnd);
+                 
+                    while ($order_row = mysqli_fetch_assoc($order_kq)) {
+                    
+                        ?>
+                        <tr>
+                            <td><?php echo $order_row['idorder']; ?></td>
+                            <td><?php echo $order_row['username']; ?></td>
+                            <td><?php echo $order_row['dateorder']; ?></td>
+                            <td><?php echo $order_row['sonha']; ?> <?php echo $order_row['duong']; ?> <?php echo $order_row['city']; ?> <?php echo $order_row['district']; ?> <?php echo $order_row['ward']; ?></td>
+                            <td>$<?php echo $order_row['total']; ?>.00</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="order-detail-admin.php?idorder=<?php echo $order_row['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php 
+                    }
+                }
+                ?>
        
        </tbody>         
                     </table>
-
-                    
-                    <?php if (mysqli_num_rows($orders) > 0): ?>
-<ul class="pagination" id="pagination">
-<?php
-      $searchParams = array();
-if (isset($_GET['status'])) {
-  $searchParams['status'] = $_GET['status'];
-}  
-if (isset($_GET['date_from'])) {
-    $searchParams['date_from'] = $_GET['date_from'];
-}
-
-if (isset($_GET['date_to'])) {
-    $searchParams['date_to'] = $_GET['date_to'];
-}
-if (isset($_GET['district'])) {
-    $searchParams['district'] = $_GET['district'];
-}
-if (isset($_GET['ward'])) {
-    $searchParams['ward'] = $_GET['ward'];
-}
-        if ($page > 1) {
-            echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
-        } else {
-            echo '<li class="disabled">Prev</li>';
-        }
-
-        for ($i = 1; $i <= $totalPages; $i++) {
-            echo '<li ' . (($i == $page) ? 'class="active"' : '') . '><a  href="?page=' . $i . '&' . http_build_query($searchParams) .  '">' . $i . '</a></li>';
-        }
-
-        if ($page < $totalPages) {
-            echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
-        } else {
-            echo '<li class="disabled">Next</li>';
-        }
-        ?>
-</ul>
-<?php endif; ?>
 
             </div>
         
         </div> 
         
-    
+ 
 
 </main>
 
@@ -274,31 +219,7 @@ if (isset($_GET['ward'])) {
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('.select-status-order').on('change', function(){ 
-        var status = $(this).val();
-        var orderId = $(this).find('option:selected').data('order-id');
 
-        $.ajax({
-            url: 'update-status-order.php',
-            type: 'POST',
-            data: {status: status, orderId: orderId},
-            success: function(response){
-                if (response === "shortage") {
-                    alert("This order doesn't have enough items in stock.");
-                    window.location.href='admin-order.php';
-                } else {
-                    console.log(response);
-                }
-            }
-        });
-    });
-});
-
-
-
-</script>
 
 
 <script>
@@ -336,19 +257,58 @@ $(document).ready(function(){
     checkStatus(select);
 });
 
-function toggleDropdown2() {
-    var dropdown2 = document.getElementById("datedropdown");
-    dropdown2.classList.toggle("hide1");
-}
-function toggleDropdown1() {
-    var dropdown = document.getElementById("addressdropdown");
-    dropdown.classList.toggle("hidden");
-}
-function toggleDropdown() {
-    var dropdown1 = document.getElementById("statusDropdown");
-    dropdown1.classList.toggle("show");
-    
-}
-</script>
 
+</script>
+<script>
+   
+    const usernames = <?php echo json_encode($usernames); ?>;
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "Gusername"; 
+    hiddenInput.value = usernames.join(','); 
+
+    document.getElementById("yourForm").appendChild(hiddenInput); 
+
+</script>
+<script>
+    const data = {
+        labels: <?php echo json_encode($usernames); ?>,
+        datasets: [{
+            label: 'Total Order',
+            data: <?php echo json_encode($totals); ?>,
+            backgroundColor: [
+                <?php 
+                for ($i = 0; $i < count($usernames); $i++) {
+                    echo "'" . $colors[$i % count($colors)] . "',";
+                }
+                ?>
+            ],
+            borderColor: [
+                <?php 
+                for ($i = 0; $i < count($usernames); $i++) {
+                    echo "'" . $colors[$i % count($colors)] . "',";
+                }
+                ?>
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+</script>
 

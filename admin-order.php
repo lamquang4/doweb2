@@ -85,6 +85,12 @@ $totalPages = ceil($totalOrders / $limit);
                             <small style="color: #fff;">Orders</small>
                         </a>
                     </li>
+                    <li >
+                       <a href="admin-static.php" >
+                            <span class="las la-chart-bar"></span>
+                            <small>Charts</small>
+                        </a>
+                    </li>
                   
               
                 </ul>

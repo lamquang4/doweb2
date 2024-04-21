@@ -88,7 +88,12 @@ $row = mysqli_fetch_assoc($result);
                         <small>Orders</small>
                     </a>
                 </li>
-               
+                <li >
+                       <a href="admin-static.php" >
+                            <span class="las la-chart-bar"></span>
+                            <small>Charts</small>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

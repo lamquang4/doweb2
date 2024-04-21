@@ -144,6 +144,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                             <small>Orders</small>
                         </a>
                     </li>
+                    <li >
+                       <a href="admin-static.php" >
+                            <span class="las la-chart-bar"></span>
+                            <small>Charts</small>
+                        </a>
+                    </li>
                    
               
                 </ul>

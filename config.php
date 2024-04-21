@@ -444,6 +444,42 @@ class Order extends Connection{
         $data = mysqli_fetch_assoc($result);
         return $data['total'];
     }
+
+  
+    // tim tong tien status = 1 lon nhat cua username do
+    public function selectTopOrder($dateStart = null,$dateEnd = null){
+
+$query ="SELECT *, SUM(total) AS total_total
+FROM tb_order
+WHERE status = 1 ";
+
+ if (!empty($dateStart) && !empty($dateEnd)) {
+    $query .= " AND dateorder BETWEEN '$dateStart' AND '$dateEnd'";
+}elseif (!empty($dateStart)) {
+    $query .= " AND dateorder >= '$dateStart'";
+} elseif (!empty($dateEnd)) {
+    $query .= " AND dateorder <= '$dateEnd'";
+}
+$query .= " GROUP BY username ORDER BY total_total DESC";
+
+       $result = mysqli_query($this->conn, $query);
+       return $result;
+    }
+   
+    public function selectOrderWithMaxTotal($username,$dateStart = null,$dateEnd = null){
+        $query = "SELECT * FROM tb_order WHERE status = 1 AND username = '$username' ";
+        if (!empty($dateStart) && !empty($dateEnd)) {
+            $query .= " AND dateorder BETWEEN '$dateStart' AND '$dateEnd'";
+        }elseif (!empty($dateStart)) {
+            $query .= " AND dateorder >= '$dateStart'";
+        } elseif (!empty($dateEnd)) {
+            $query .= " AND dateorder <= '$dateEnd'";
+        }
+        $query .= " ORDER BY  username";
+         $result = mysqli_query($this->conn, $query);
+         return $result;
+    }
+
 }
 
 class Orderdetail extends Connection{

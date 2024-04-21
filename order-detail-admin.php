@@ -186,8 +186,9 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?>'">Back</a> 
-                                </div>
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?>'">Back To Order</a> 
+                                    <a style="background: #3055CE;" id="back-to-admin-order" onclick="window.location.href='admin-static.php?page=<?php echo $page; ?>'">Back To Chart</a> 
+                                  </div>
                              
                             </div>
                         </div>
