@@ -2,6 +2,7 @@
 require 'config.php';
 $connection = new Connection();
 $select = new Select();
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 if(isset($_SESSION["username"])){
     $user = $select->selectUserById($_SESSION["username"]);
     
@@ -62,9 +63,15 @@ if(isset($_GET['idorder'])) {
 <body>
   <div class="container">
     <article class="card">
-    <header class="card-header" style="display: flex; justify-content: start; align-items: center;"> 
-        <h3 style="font-size: 17px; font-weight: 600; margin-right: 15px;">My Orders</h3>
-        <h3 style="font-size: 17px;">ID: <?php echo $orderId; ?></h3>
+    <header class="card-header" style="display: flex; justify-content:space-between; align-items:center;"> 
+    <div>
+       <h3 style="font-size: 17px; font-weight: 600; margin-right: 15px;">My Orders <span style="font-weight: 400;">| ID: <?php echo $orderId; ?> </span></h3>
+      
+    </div>
+    <div>
+                                    <img src="assets/images/pic/logo.png"  id="order-info-logo" onclick="window.location.href='index.php';">
+                                </div>
+                             
         </header>
         <div class="card-body">
          
@@ -189,7 +196,7 @@ if(isset($_GET['idorder'])) {
           <h6>Delivery Address</h6>
           <article class="card">
             <div class="card-body row"  style="padding-bottom: 0;">
-            <div class="col"> <strong><?php echo $fullname; ?> </strong><br> <?php echo $phone; ?></div>
+            <div class="col"> <strong>Fullname:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
               <div class="col"> <strong>Address:</strong> <?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></div>
              
          
@@ -206,7 +213,7 @@ if(isset($_GET['idorder'])) {
         
         </article>
             <hr>
-            <a href="history.php" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
+            <a href="history.php?page=<?php echo $page; ?>" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
         </div>
     </article>
 </div>

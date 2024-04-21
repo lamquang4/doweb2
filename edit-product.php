@@ -179,7 +179,7 @@ $row = mysqli_fetch_assoc($result);
     <th> DATE ADD </th>
     <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
-                <div id="statusDropdown" class="dropdown-content">
+                <div id="statusDropdown" class="dropdown-content show">
                 <a href="admin-product.php">All</a>
 <a href="admin-product.php?status=1">On Sale</a>
 <a href="admin-product.php?status=0">Not yet released</a>

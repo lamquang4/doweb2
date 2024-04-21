@@ -15,15 +15,9 @@ $searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
 
 $limit = 10;
 $start = ($page - 1) * $limit;
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2'|| $_GET['status'] === '3')) {
-    $status = $_GET['status'];
-    $orders = $order->selectOrdersByStatus($status, $start, $limit); 
-    $totalOrders = $order->getOrderCountByStatus($status); 
-} else {
-   
     $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard);
     $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard);
-}
+
 $totalPages = ceil($totalOrders / $limit);
 
 
@@ -169,50 +163,8 @@ $totalPages = ceil($totalOrders / $limit);
                        </div>
                         
                         </th>
-                            <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i>
-                            <div id="addressdropdown" class="hidden">
-                            <form method="GET" action="admin-order.php">
-                            <div id="dropdowninside">
-    <label>Districs</label>
-    <select name="district">
-        <option value="0">Select District</option>
-        <option value="District 1">District 1</option>
-        <option value="District 2">District 2</option>
-        <option value="District 3">District 3</option>
-        <option value="District 4">District 4</option>
-        <option value="District 5">District 5</option>
-        <option value="District 6">District 6</option>
-    </select>
-   </div>
-   <div id="dropdowninside">
-    <label>Ward</label>
-    <select name="ward">
-    <option value="0">Select Ward</option>
-        <option value="Ward 1">Ward 1</option>
-        <option value="Ward 2">Ward 2</option>
-        <option value="Ward 3">Ward 3</option>
-        <option value="Ward 4">Ward 4</option>
-        <option value="Ward 5">Ward 5</option>
-        <option value="Ward 6">Ward 6</option>
-    </select>
-   </div>
-   <div id="button-content">
-    <button type="submit">Submit</button>
-   </div>
-        </form>
-   
-</div>
-                            </th>
-                            <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
-                
-                            <div id="statusDropdown" class="dropdown-content show">
-                            <a href="admin-order.php">All</a>
-    <a href="admin-order.php?status=0">Confirm</a>
-    <a href="admin-order.php?status=1">Successful</a>
-    <a href="admin-order.php?status=2">Cancel</a>
-    <a href="admin-order.php?status=3">Waiting</a>
-</div>
-                        </th>    
+                  <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i></th>
+                            <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i> </th>    
                     
                             <th> ACTION</th>
                           
@@ -239,7 +191,7 @@ $totalPages = ceil($totalOrders / $limit);
                               </td>
                               <td>
                               <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                     </div>
                               </td>
      

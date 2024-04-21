@@ -172,7 +172,7 @@ $totalPages = ceil($totalUsers / $limit);
                                
                                 <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
-                <div id="statusDropdown" class="dropdown-content">
+                <div id="statusDropdown" class="dropdown-content show">
                 <a href="admin-user.php">All</a>
 <a href="admin-user.php?status=1">Normal</a>
 <a href="admin-user.php?status=0">Blocked</a>

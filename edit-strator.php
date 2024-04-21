@@ -169,7 +169,7 @@ $totalPages = ceil($totalAds / $limit);
                                 <th> PHONE</th>
                                 <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
-                <div id="statusDropdown" class="dropdown-content">
+                <div id="statusDropdown" class="dropdown-content show">
                 <a href="admin-strator.php">All</a>
 <a href="admin-strator.php?status=1">Normal</a>
 <a href="admin-strator.php?status=0">Blocked</a>

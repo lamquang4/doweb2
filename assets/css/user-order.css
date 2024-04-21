@@ -287,3 +287,18 @@ width: 35%;
     font-size: 18px;
     margin: 5px 0;
   }
+  #order-info-logo{
+    width: 100px;
+    cursor: pointer;
+  }
+
+  @media (max-width:480px){
+    #order-info-logo{
+        width: 90px;
+      } 
+  }
+  @media (max-width:400px){
+    #order-info-logo{
+        width: 85px;
+      } 
+  }

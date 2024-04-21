@@ -123,7 +123,7 @@ $totalPages = ceil($totalOrders / $limit);
                                 <p class="mb-0 text-black" id="total-money"><span class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00
                                         </p>
                                 <div class="float-right">
-                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php?idorder=<?php echo $order['idorder']; ?>"><i class="icofont-headphone-alt"></i> DETAIL</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="user-order-info.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?>"><i class="icofont-headphone-alt"></i> DETAIL</a>
                                            
                                         </div>
                             </div>

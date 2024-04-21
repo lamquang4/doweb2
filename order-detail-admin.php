@@ -57,9 +57,10 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="invoice-title">
+                        <div class="invoice-title" >
                          
-                            <h4 class="float-end font-size-15" style="margin-bottom: 10px;text-align: center;">ORDER  <?php 
+                            <h4 class="float-end font-size-15" style="margin-bottom: 10px;text-align: center;">ORDER <span  style="font-weight: 400;"> <?php echo $orderId ?> |</span>
+                            <?php 
                                          if($order['status']==1){
                                             echo ' <span style="font-weight: 400;margin-left: 4px;"> <?php echo $orderId; ?></span> <span class="badge bg-success font-size-11 ms-2" style="color: white;font-size: 16px; padding: 6px 10px;margin-left: 4px;">Delivery successful</span>';
                                          }else if($order['status']==0){
@@ -74,19 +75,7 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                        ?></h4>
                       
                             <hr>
-                             <div>
-                                    <h5 class="font-size-16 mb-2">Customer Information:</h5>
-                                    <h3 class="h6">By: <span style="font-weight: 400;"><?php echo $fullname; ?></span></h3>
-                                    <h3 class="h6">Phone: <span style="font-weight: 400;"><?php echo $phone; ?></span></h3>
-                                    <h3 class="h6">Address: <span style="font-weight: 400;"><?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></span></h3>
-                                </div>
-                        </div>
-    
-                        <hr class="my-4">
-                    
-                        <div class="row">
-                            <div class="col-sm-6">
-                              
+                           <div style="display: flex; justify-content:space-between; align-items:center;">
                                  <div >
                                  <h5 class="font-size-16 mb-2">Order Information:</h5>
                           <h3 class="h6">Payment Method:<span style="font-weight: 400;">    
@@ -99,6 +88,23 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                           <h3 class="h6">Date Order:<span style="font-weight: 400;"> <?php echo $dateorder; ?></span></h5>
                     
                       </div>
+                      <div>
+                        <img src="assets/images/pic/logo.png" width="100px">
+                      </div>
+                           </div>
+                           
+                        </div>
+    
+                        <hr class="my-3">
+                    
+                        <div class="row">
+                            <div class="col-sm">
+                            <div>
+                                    <h5 class="font-size-16 mb-2">Customer Information:</h5>
+                                    <h3 class="h6">By: <span style="font-weight: 400;"><?php echo $fullname; ?></span></h3>
+                                    <h3 class="h6">Phone: <span style="font-weight: 400;"><?php echo $phone; ?></span></h3>
+                                    <h3 class="h6">Address: <span style="font-weight: 400;"><?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></span></h3>
+                                </div>
                             </div>
                        
                             <div class="col-sm-6" style="display: none;">
@@ -180,8 +186,9 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>'">Back</a> 
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?>'">Back</a> 
                                 </div>
+                             
                             </div>
                         </div>
                     </div>
