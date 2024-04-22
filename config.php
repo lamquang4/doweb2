@@ -465,7 +465,7 @@ WHERE status = 1 ";
     $query .= " AND dateorder <= '$dateEnd'";
 }
 $query .= " GROUP BY username ORDER BY total_total DESC";
-
+$query .= " LIMIT 5";
        $result = mysqli_query($this->conn, $query);
        return $result;
     }
