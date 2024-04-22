@@ -38,7 +38,7 @@ $row = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>Admin Product</title>
+    <title>Product</title>
     <link rel="stylesheet" href="assets/css/popup.css">
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
@@ -91,7 +91,7 @@ $row = mysqli_fetch_assoc($result);
                 <li >
                        <a href="admin-static.php" >
                             <span class="las la-chart-bar"></span>
-                            <small>Charts</small>
+                            <small>Statistics</small>
                         </a>
                     </li>
                 </ul>

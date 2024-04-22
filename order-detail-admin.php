@@ -3,7 +3,9 @@ require 'config.php';
 
 $connection = new Connection();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  
+if(isset($_GET['usernamestatus1'])) {
+  $usernamestatus1 = $_GET['usernamestatus1'];
+}
 
 if(isset($_GET['idorder'])) {
   $orderId = $_GET['idorder'];
@@ -15,7 +17,7 @@ $orderdetailObj = new Orderdetail();
  $orderdetail = $orderdetailObj->selectOrderdetailsById($orderId);
  $orderdetails = $orderdetailObj->selectOrdertailsandProduct($orderId);
   if($order && $orderdetail) {
-    
+   
       $fullname = $order['fullname'];
       $phone = $order['phone'];
       $sonha = $order['sonha'];
@@ -186,8 +188,9 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?>'">Back To Order</a> 
-                                    <a style="background: #3055CE;" id="back-to-admin-order" onclick="window.location.href='admin-static.php?page=<?php echo $page; ?>'">Back To Chart</a> 
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($usernamestatus1)) echo '&usernamestatus1=' . $usernamestatus1; ?>'">Back To Order</a>
+
+                                  
                                   </div>
                              
                             </div>

@@ -514,6 +514,9 @@
         #table-product{
             width: 180%;
         }
+        #table-static{
+            width: 180%;
+        }
     }
     @media(max-width:480px){
      
@@ -527,6 +530,9 @@
             width:320%;
         }
         #table-product{
+            width: 320%;
+        }
+        #table-static{
             width: 320%;
         }
     }
@@ -544,6 +550,9 @@
            #table-product{
                width: 360%;
            }
+           #table-static{
+            width: 360%;
+        }
        }
     @media(width>768px){
         #bar-admin{
@@ -668,7 +677,24 @@
                 width: 10%;
                }
            
-
+               #table-static  th:nth-child(1){
+width: 11%;
+               }
+               #table-static  th:nth-child(2){
+                width: 20%;
+                               }
+                               #table-static  th:nth-child(3){
+                                width: 10%;
+                                               }
+                                               #table-static  th:nth-child(4){
+                                                width: 35%;
+                                                               }
+                                                               #table-static  th:nth-child(5){
+                                                                width:15%;
+                                                                               }
+                                                                               #table-static  th:nth-child(6){
+                                                                                width: 9%;
+                                                                                               }
       .user-input input{
     padding: 2px 0px;
       }

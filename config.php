@@ -378,7 +378,7 @@ class Order extends Connection{
     }
 
 // hiện tất cả
-    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null) {
+    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null) {
         $query = "SELECT * FROM tb_order WHERE 1=1";
 
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -395,14 +395,16 @@ class Order extends Connection{
         if (!empty($searchWard)) {
             $query .= " AND ward = '$searchWard'";
         }
-    
+        if (!empty($searchUsername)) {
+            $query .= " AND username = '$searchUsername' AND status = 1";
+        }
        
         $query .= " ORDER BY username";
         $query .= " LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }
-    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null) {
+    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null) {
         $query = "SELECT COUNT(*) as total FROM tb_order WHERE 1=1";
         
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -419,7 +421,9 @@ class Order extends Connection{
         if (!empty($searchWard)) {
             $query .= " AND ward = '$searchWard'";
         }
-        
+        if (!empty($searchUsername)) {
+            $query .= " AND username = '$searchUsername' AND status = 1";
+        }
         $result2 = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result2);
         return $data['total'];
@@ -466,7 +470,25 @@ $query .= " GROUP BY username ORDER BY total_total DESC";
        return $result;
     }
    
-    public function selectOrderWithMaxTotal($username,$dateStart = null,$dateEnd = null){
+    public function selectOrderWithMaxTotal($username, $dateStart = null, $dateEnd = null){
+        $query = "SELECT o.*, c.*, SUM(o.total) AS total_total FROM tb_order o INNER JOIN tb_customer c ON c.username = o.username WHERE o.status = 1 AND o.username = '$username' ";
+        
+        if (!empty($dateStart) && !empty($dateEnd)) {
+            $query .= " AND o.dateorder BETWEEN '$dateStart' AND '$dateEnd'";
+        } elseif (!empty($dateStart)) {
+            $query .= " AND o.dateorder >= '$dateStart'";
+        } elseif (!empty($dateEnd)) {
+            $query .= " AND o.dateorder <= '$dateEnd'";
+        }
+        
+        $query .= " GROUP BY o.username ORDER BY total_total DESC LIMIT 1"; // Sử dụng LIMIT 1 để chỉ lấy đơn hàng có tổng giá trị lớn nhất
+        
+        $result = mysqli_query($this->conn, $query);
+        
+        return $result;
+    }
+
+    public function selectOrderWithMaxTotal1($username,$dateStart = null,$dateEnd = null){
         $query = "SELECT * FROM tb_order WHERE status = 1 AND username = '$username' ";
         if (!empty($dateStart) && !empty($dateEnd)) {
             $query .= " AND dateorder BETWEEN '$dateStart' AND '$dateEnd'";

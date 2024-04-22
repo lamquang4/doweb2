@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>Admin Order</title>
+    <title>Statistic</title>
     <link rel="stylesheet" href="assets/css/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                     <li >
                        <a href="admin-static.php" >
                             <span class="las la-chart-bar" style="color: #fff;"></span>
-                            <small style="color: #fff;">Charts</small>
+                            <small style="color: #fff;">Statistics</small>
                         </a>
                     </li>
                 
@@ -127,7 +127,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
         </header>
         <div class="page-content" style="margin-top: 50px;">
             
-            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Charts </h1>
+            <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Statistics </h1>
           
             <div>
                 <form method="GET" id="form-searchdate">
@@ -135,7 +135,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                 <input type="date" name="dateStart" style="margin-right: 10px;">
                 <label style="margin-right: 4px;">Date to</label>
                 <input type="date" name="dateEnd" style="margin-right: 10px;">
-                <button type="submit">Submit</button>
+                <button type="submit">Statistics</button>
                 </form>
             </div>
         
@@ -161,17 +161,17 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
             </div>
             <div>
    
-                <table width="100%" id="table-order">
+                <table width="100%" id="table-static">
                 <thead>
                         <tr id="select-filter">
-                            <th>ID ORDER</th>                                          
+                                                        
                             <th>USERNAME</th>
-                            <th style="position: relative;"> ORDER DATE</th>
-                  <th style="position: relative;"> DELIVERY ADDRESS</th>
-                           
-                  <th> TOTAL</th>
-                            <th> ACTION</th>
-                          
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>ADDRESS</th>
+                  <th> TOTAL ALL ORDERS</th>
+                      
+                          <th>ACTION</th>
                         </tr>
                     </thead>
  
@@ -183,17 +183,17 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                     $order_kq = $order->selectOrderWithMaxTotal($username,$dateStart,$dateEnd);
                  
                     while ($order_row = mysqli_fetch_assoc($order_kq)) {
-                    
                         ?>
                         <tr>
-                            <td><?php echo $order_row['idorder']; ?></td>
+                       
                             <td><?php echo $order_row['username']; ?></td>
-                            <td><?php echo $order_row['dateorder']; ?></td>
+                            <td><?php echo $order_row['email']; ?></td>
+                            <td><?php echo $order_row['phone']; ?></td>
                             <td><?php echo $order_row['sonha']; ?> <?php echo $order_row['duong']; ?> <?php echo $order_row['city']; ?> <?php echo $order_row['district']; ?> <?php echo $order_row['ward']; ?></td>
-                            <td>$<?php echo $order_row['total']; ?>.00</td>
+                            <td>$<?php echo $order_row['total_total']; ?>.00</td>
                             <td>
                                 <div class="actions">
-                                    <a href="order-detail-admin.php?idorder=<?php echo $order_row['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+                                    <a href="admin-order.php?usernamestatus1=<?php echo $order_row['username']; ?>&page=<?php echo $page; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                                 </div>
                             </td>
                         </tr>
@@ -202,14 +202,18 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                 }
                 ?>
        
-       </tbody>         
+       </tbody> 
+
+      
                     </table>
+
+                  
 
             </div>
         
         </div> 
         
- 
+       
 
 </main>
 

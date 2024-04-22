@@ -12,7 +12,7 @@ $dateStart = isset($_GET['date_from']) ? $_GET['date_from'] : null;
 $dateEnd = isset($_GET['date_to']) ? $_GET['date_to'] : null;
 $searchDistrict = isset($_GET['district']) ? $_GET['district'] : null;
 $searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
-
+$searchUsername = isset($_GET['usernamestatus1']) ? $_GET['usernamestatus1'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
 if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2'|| $_GET['status'] === '3')) {
@@ -21,8 +21,8 @@ if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1
     $totalOrders = $order->getOrderCountByStatus($status); 
 } else {
    
-    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard);
-    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard);
+    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername);
+    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername);
 }
 $totalPages = ceil($totalOrders / $limit);
 
@@ -33,7 +33,7 @@ $totalPages = ceil($totalOrders / $limit);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>Admin Order</title>
+    <title>Order</title>
     <link rel="stylesheet" href="assets/css/admin.css">
 
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
@@ -88,7 +88,7 @@ $totalPages = ceil($totalOrders / $limit);
                     <li >
                        <a href="admin-static.php" >
                             <span class="las la-chart-bar"></span>
-                            <small>Charts</small>
+                            <small>Statistics</small>
                         </a>
                     </li>
                   
@@ -151,7 +151,7 @@ $totalPages = ceil($totalOrders / $limit);
                 </div>           
             </div>
             <div>
-   
+            <input type="hidden" name="usernamestatus1">
                 <table width="100%" id="table-order">
                 <thead>
                         <tr id="select-filter">
@@ -168,6 +168,7 @@ $totalPages = ceil($totalOrders / $limit);
                             <label>To</label>
                             <input type="date" name="date_to">
                         </div>
+                     
                         <div id="button-content">
     <button type="submit">Submit</button>
    </div>
@@ -245,7 +246,7 @@ $totalPages = ceil($totalOrders / $limit);
                               </td>
                               <td>
                               <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&usernamestatus1=' . $searchUsername; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                     </div>
                               </td>
      
