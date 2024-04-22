@@ -3,8 +3,23 @@ require 'config.php';
 
 $connection = new Connection();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-if(isset($_GET['usernamestatus1'])) {
-  $usernamestatus1 = $_GET['usernamestatus1'];
+if(isset($_GET['username'])) {
+  $username = $_GET['username'];
+}
+if(isset($_GET['status'])) {
+  $status = $_GET['status'];
+}
+if(isset($_GET['district'])) {
+  $districts = $_GET['district'];
+}
+if(isset($_GET['ward'])) {
+  $wards = $_GET['ward'];
+}
+if(isset($_GET['date_from'])) {
+  $date_from = $_GET['date_from'];
+}
+if(isset($_GET['date_to'])) {
+  $date_to = $_GET['date_to'];
 }
 
 if(isset($_GET['idorder'])) {
@@ -188,7 +203,7 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($usernamestatus1)) echo '&usernamestatus1=' . $usernamestatus1; ?>'">Back To Order</a>
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($username)) echo '&username=' . $username; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($districts)) echo '&district=' . $districts; ?><?php if(isset($wards)) echo '&ward=' . $wards; ?><?php if(isset($date_from)) echo '&date_from=' . $date_from; ?><?php if(isset($date_to)) echo '&date_to=' . $date_to; ?>'">Back To Order</a>
 
                                   
                                   </div>

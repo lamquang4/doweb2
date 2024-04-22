@@ -378,7 +378,7 @@ class Order extends Connection{
     }
 
 // hiện tất cả
-    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null) {
+    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null, $searchStatus = null) {
         $query = "SELECT * FROM tb_order WHERE 1=1";
 
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -398,13 +398,15 @@ class Order extends Connection{
         if (!empty($searchUsername)) {
             $query .= " AND username = '$searchUsername' AND status = 1";
         }
-       
+        if (!empty($searchStatus) || $searchStatus === '0') {
+            $query .= " AND status = $searchStatus";
+        }
         $query .= " ORDER BY username";
         $query .= " LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }
-    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null) {
+    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null, $searchStatus = null) {
         $query = "SELECT COUNT(*) as total FROM tb_order WHERE 1=1";
         
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -422,7 +424,10 @@ class Order extends Connection{
             $query .= " AND ward = '$searchWard'";
         }
         if (!empty($searchUsername)) {
-            $query .= " AND username = '$searchUsername' AND status = 1";
+            $query .= " AND username = '$searchUsername'";
+        }
+        if (!empty($searchStatus) || $searchStatus === '0') {
+            $query .= " AND status = $searchStatus";
         }
         $result2 = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result2);
@@ -435,21 +440,6 @@ class Order extends Connection{
         return mysqli_fetch_assoc($result2);
     }
 
-    // tìm kiếm status
-    public function selectOrdersByStatus($status, $start, $limit) {
-        $query = "SELECT * FROM tb_order WHERE status = '$status' ORDER BY username LIMIT $start, $limit";
-        $result2 = mysqli_query($this->conn, $query);
-        return $result2;
-    }
-
-    public function getOrderCountByStatus($status) {
-        $query = "SELECT COUNT(*) as total FROM tb_order WHERE status = '$status'";
-        $result = mysqli_query($this->conn, $query);
-        $data = mysqli_fetch_assoc($result);
-        return $data['total'];
-    }
-
-  
     // tim tong tien status = 1 lon nhat cua username do
     public function selectTopOrder($dateStart = null,$dateEnd = null){
 

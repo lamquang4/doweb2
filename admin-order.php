@@ -12,18 +12,13 @@ $dateStart = isset($_GET['date_from']) ? $_GET['date_from'] : null;
 $dateEnd = isset($_GET['date_to']) ? $_GET['date_to'] : null;
 $searchDistrict = isset($_GET['district']) ? $_GET['district'] : null;
 $searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
-$searchUsername = isset($_GET['usernamestatus1']) ? $_GET['usernamestatus1'] : null;
+$searchUsername = isset($_GET['username']) ? $_GET['username'] : null;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
-$start = ($page - 1) * $limit;
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2'|| $_GET['status'] === '3')) {
-    $status = $_GET['status'];
-    $orders = $order->selectOrdersByStatus($status, $start, $limit); 
-    $totalOrders = $order->getOrderCountByStatus($status); 
-} else {
-   
-    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername);
-    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername);
-}
+$start = ($page - 1) * $limit; 
+    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername,$searchStatus);
+    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername,$searchStatus);
+
 $totalPages = ceil($totalOrders / $limit);
 
 
@@ -151,7 +146,7 @@ $totalPages = ceil($totalOrders / $limit);
                 </div>           
             </div>
             <div>
-            <input type="hidden" name="usernamestatus1">
+            <input type="hidden" name="username">
                 <table width="100%" id="table-order">
                 <thead>
                         <tr id="select-filter">
@@ -160,6 +155,10 @@ $totalPages = ceil($totalOrders / $limit);
                             <th style="position: relative;"> ORDER DATE <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown2()"></i>
                        <div id="datedropdown" class="hide1">
                         <form method="GET" action="admin-order.php">
+                        <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
+                        <input type="hidden" name="district" value="<?php if(isset($searchDistrict)) echo $searchDistrict; ?>">
+                        <input type="hidden" name="ward" value="<?php if(isset($searchWard)) echo $searchWard; ?>">
+                        <input type="hidden" name="username" value="<?php if(isset($searchUsername)) echo $searchUsername; ?>">
                             <div id="dropdowninside1">
                             <label>From</label>
                             <input type="date" name="date_from">
@@ -180,6 +179,10 @@ $totalPages = ceil($totalOrders / $limit);
                             <div id="addressdropdown" class="hidden">
                             <form method="GET" action="admin-order.php">
                             <div id="dropdowninside">
+                            <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
+                            <input type="hidden" name="date_from" value="<?php if(isset($dateStart)) echo $dateStart; ?>">
+                            <input type="hidden" name="date_to" value="<?php if(isset($dateEnd)) echo $dateEnd; ?>">
+                            <input type="hidden" name="username" value="<?php if(isset($searchUsername)) echo $searchUsername; ?>">
     <label>Districs</label>
     <select name="district">
         <option value="0">Select District</option>
@@ -213,11 +216,12 @@ $totalPages = ceil($totalOrders / $limit);
                             <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
                             <div id="statusDropdown" class="dropdown-content show">
-                            <a href="admin-order.php">All</a>
-    <a href="admin-order.php?status=0">Confirm</a>
-    <a href="admin-order.php?status=1">Successful</a>
-    <a href="admin-order.php?status=2">Cancel</a>
-    <a href="admin-order.php?status=3">Waiting</a>
+                            <a href="admin-order.php?status=<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>">All</a>
+                            <input type="hidden" name="status">
+    <a href="admin-order.php?status=0<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Confirm</a>
+    <a href="admin-order.php?status=1<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Successful</a>
+    <a href="admin-order.php?status=2<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Cancel</a>
+    <a href="admin-order.php?status=3<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Waiting</a>
 </div>
                         </th>    
                     
@@ -246,7 +250,7 @@ $totalPages = ceil($totalOrders / $limit);
                               </td>
                               <td>
                               <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&usernamestatus1=' . $searchUsername; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                     </div>
                               </td>
      

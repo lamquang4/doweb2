@@ -193,7 +193,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                             <td>$<?php echo $order_row['total_total']; ?>.00</td>
                             <td>
                                 <div class="actions">
-                                    <a href="admin-order.php?usernamestatus1=<?php echo $order_row['username']; ?>&page=<?php echo $page; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+                                    <a href="admin-order.php?username=<?php echo $order_row['username']; ?>&page=<?php echo $page; ?>&status=1"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                                 </div>
                             </td>
                         </tr>
