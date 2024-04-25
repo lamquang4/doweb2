@@ -81,11 +81,11 @@ include_once 'header.php'
 
   <div  id="filter-buttons" style="margin-top: 12px;">
        
-    <button class="btn" id="btnfil" onclick="window.location.href='shop.php'"><img src="assets/images/pic/all.png"></button>
-    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?text=coca'"><img  src="assets/images/pic/coca-circle.png"></button>
-    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?text=pepsi'"><img src="assets/images/pic/pepsilogo.png"></button>
-    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?text=sprite'"><img src="assets/images/pic/sprite-circle.png"></button>
-    <button class="btn" id="btnfil" style="border-radius: 50%; border: 2px solid black;" onclick="window.location.href='shop.php?type=carbonated'"><img src="assets/images/pic/soft-drinks.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php#product11'"><img src="assets/images/pic/all.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=cocacola#product11'"><img  src="assets/images/pic/coca-circle.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=pepsi#product11'"><img src="assets/images/pic/pepsilogo.png"></button>
+    <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=sprite#product11'"><img src="assets/images/pic/sprite-circle.png"></button>
+    <button class="btn" id="btnfil" style="border-radius: 50%; border: 2px solid black;" onclick="window.location.href='shop.php?type=carbonated#product11'"><img src="assets/images/pic/soft-drinks.png"></button>
  <div>
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
  </div>
@@ -98,7 +98,7 @@ include_once 'header.php'
   <h1>Advanced Search</h1>
   <i class="fa-solid fa-x" id="x-icon-close"></i>
   <hr style="margin: 20px 0;">
-<form method="GET" action="shop.php">
+<form method="GET" action="shop.php#product11">
 <div>
   <label>NAME:</label>
   <input type="text" name="text" id="productName" placeholder="Product Name">
@@ -214,17 +214,17 @@ if (isset($_GET['brand'])) {
 
 
 if ($page > 1) {
-    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '"><i class="fa fa-chevron-left"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . 'product11"><i class="fa fa-chevron-left"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
 }
 
 for ($i = 1; $i <= $totalPages; $i++) {
-    echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&' . http_build_query($searchParams) . '">' . $i . '</a></li>';
+    echo '<li ' . (($i == $page) ? 'class="activi"' : '') . '><a href="?page=' . $i . '&' . http_build_query($searchParams) . '#product11">' . $i . '</a></li>';
 }
 
 if ($page < $totalPages) {
-    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) . '"><i class="fa fa-chevron-right"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) . 'product11"><i class="fa fa-chevron-right"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-right"></i></li>';
 }
@@ -341,14 +341,10 @@ window.onresize = function(event) {
     reloadSlider();
 };
 
-if (window.location.href.indexOf('page=1') > -1 || window.location.href.indexOf('page=2') > -1 || window.location.href.indexOf('page=3') > -1 || window.location.href.indexOf('page=4') > -1) {
 
-    var element = document.getElementById('product11');
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
 </script>
+
+
 
 <style>
 
@@ -375,16 +371,3 @@ font-weight: bold;
     position: relative; 
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-

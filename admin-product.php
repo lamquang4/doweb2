@@ -8,6 +8,7 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 
 $connection = new Connection();
 $productObj = new Product();
+$searchText = isset($_GET['text']) ? $_GET['text'] : null;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 12;
 $start = ($page - 1) * $limit;
@@ -17,8 +18,8 @@ if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1
   $products = $productObj->selectProductsByStatus($status, $start, $limit); 
   $totalProducts = $productObj->getProductCountByStatus($status); 
 } else {
-  $products = $productObj->selectProducts($start, $limit);
-  $totalProducts = $productObj ->getProductCount();
+  $products = $productObj->selectProducts($start, $limit,$searchText);
+  $totalProducts = $productObj ->getProductCount($searchText);
 
 }
 $totalPages = ceil($totalProducts / $limit);
@@ -240,10 +241,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 
 
 <div class="browse">
-<input type="search" placeholder="Search (ID)" class="record-search">
+<input type="search" placeholder="Search (name)" class="record-search" name="text">
 
 </div>
-
 <div class="add">
 
   <span>Entries</span>
@@ -369,6 +369,9 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
       $searchParams = array();
 if (isset($_GET['status'])) {
   $searchParams['status'] = $_GET['status'];
+} 
+if (isset($_GET['text'])) {
+  $searchParams['text'] = $_GET['text'];
 }  
         if ($page > 1) {
             echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
@@ -691,6 +694,15 @@ function hideadd(){
 }
 </script>
 
+<script>
+document.querySelector('.record-search').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        var searchText = this.value.trim();
+        window.location.href = 'admin-product.php?text=' + encodeURIComponent(searchText);
+    }
+});
+
+    </script>
 
 
 

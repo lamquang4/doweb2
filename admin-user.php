@@ -223,7 +223,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
                 <div class="record-header">
 
                     <div class="browse">
-                       <input type="search" placeholder="Search" class="record-search">
+                       <input type="search" placeholder="Search (username)" class="record-search">
                      
                     </div>
 

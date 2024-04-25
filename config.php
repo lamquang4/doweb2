@@ -396,7 +396,7 @@ class Order extends Connection{
             $query .= " AND ward = '$searchWard'";
         }
         if (!empty($searchUsername)) {
-            $query .= " AND username = '$searchUsername' AND status = 1";
+            $query .= " AND username = '$searchUsername'";
         }
         if (!empty($searchStatus) || $searchStatus === '0') {
             $query .= " AND status = $searchStatus";

@@ -133,7 +133,7 @@ $totalPages = ceil($totalOrders / $limit);
            
             <div class="record-header">
               <div class="browse">
-                <input type="search" placeholder="Search (ID)" class="record-search">
+                <input type="search" placeholder="Search (username)" class="record-search">
               
              </div>
                 <div class="add">
@@ -300,6 +300,9 @@ if (isset($_GET['district'])) {
 if (isset($_GET['ward'])) {
     $searchParams['ward'] = $_GET['ward'];
 }
+if (isset($_GET['username'])) {
+    $searchParams['username'] = $_GET['username'];
+}
         if ($page > 1) {
             echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
         } else {
@@ -409,5 +412,15 @@ function toggleDropdown() {
     
 }
 </script>
+
+<script>
+document.querySelector('.record-search').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        var searchUsername = this.value.trim();
+        window.location.href = 'admin-order.php?username=' + encodeURIComponent(searchUsername);
+    }
+});
+
+    </script>
 
 
