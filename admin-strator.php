@@ -441,6 +441,11 @@ function kttrong() {
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/; 
+  var usernameRegex = /^[a-zA-Z0-9\s]+$/;
+  if (!usernameRegex.test(username)) {
+        alert("Username must contain only letters and numbers.");  
+        return false;
+    } 
   if (!fullnameRegex.test(fullname)) {
         alert("Full name must contain only letters.");
         return false;

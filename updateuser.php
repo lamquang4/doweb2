@@ -1,7 +1,19 @@
 <?php
     require 'config.php';
-    $connection = new Connection();
 
+    $connection = new Connection();
+    $select = new Select();
+    if(isset($_SESSION["username"])){
+        $user = $select->selectUserById($_SESSION["username"]);
+        
+      }else{
+        header("Location: login.php");
+    }
+    
+    if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+        header("Location: login.php");
+    exit();
+    }
     $username = $connection->conn->real_escape_string($_POST["username"]);
     $email = $connection->conn->real_escape_string(trim($_POST["email"]));
     $fullname = $connection->conn->real_escape_string(trim($_POST["fullname"]));
@@ -14,7 +26,7 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
     $duong = $connection->conn->real_escape_string(trim($_POST["duong"]));
     $sonha = $connection->conn->real_escape_string(trim($_POST["sonha"]));
 
-    if (isset($_FILES['userImage'])) {
+    if (isset($_FILES['userImage']) && $_FILES['userImage']['size'] > 0) {
         $file = $_FILES['userImage'];
         $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
         $fileName = $username . '.' . $fileExtension; 

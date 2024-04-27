@@ -349,7 +349,6 @@ function kttrong() {
     var email = document.getElementById("email").value.trim();
     var phone = document.getElementById("phone").value.trim();
     var fullname = document.getElementById("fullname").value.trim();
-    var password = document.getElementById("password").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     var phoneRegex = /^0[1-9]\d{8,9}$/;
   var fullnameRegex = /^[a-zA-Z\s]+$/; 

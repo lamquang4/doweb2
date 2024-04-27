@@ -196,6 +196,11 @@ include_once 'header.php'
     var username = document.getElementById("username").value.trim();
     var password = document.getElementById("password").value.trim();
     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    var usernameRegex = /^[a-zA-Z0-9\s]+$/;
+  if (!usernameRegex.test(username)) {
+        alert("Username must contain only letters and numbers.");  
+        return false;
+    } 
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
         return false;

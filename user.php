@@ -216,29 +216,29 @@ function previewImage() {
   var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
   if (!fullnameRegex.test(fullname)) {
         alert("Full name must contain only letters.");
-        window.location.href='user.php';
+       
         return false;
     } 
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
-        window.location.href='user.php';
+   
         return false;
     }
     if(!phoneRegex.test(phone)){
         alert("Invalid Phone Number.");
-        window.location.href='user.php';
+
         return false;
     }
     if(!addressRegex.test(sonha) || !addressRegex.test(duong)){
         alert("Invalid Address.");
-        window.location.href='user.php';
+   
         return false;
     }
 
         var city = document.getElementById('city').value;
         if (city === "0") {
             alert("Please select a city");
-            window.location.href='user.php';
+          
             return false;
         }
 
@@ -246,14 +246,14 @@ function previewImage() {
         var district = document.getElementById('district').value;
         if (district === "0") {
             alert("Please select a district");
-            window.location.href='user.php';
+         
             return false;
         }
 
         var ward = document.getElementById('ward').value;
         if (ward === "0") {
             alert("Please select a ward");
-            window.location.href='user.php';
+           
             return false;
         }
 

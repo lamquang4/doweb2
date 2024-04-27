@@ -486,15 +486,7 @@ cod.addEventListener('click',()=>{
     function kttrong() {
         var addressOption = document.querySelector('input[name="address"]:checked').value;
         var payOption = document.querySelector('input[name="pay-method"]:checked').value;
-if (addressOption === "info-address2") {
-    var phone = document.getElementById("phone").value.trim();
-    var fullname = document.getElementById("fullname").value.trim();
-    var sonha = document.getElementById("sonha").value.trim();
-    var duong = document.getElementById("duong").value.trim();
-    var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
-  var phoneRegex = /^0[1-9]\d{8,9}$/;
-  var fullnameRegex = /^[a-zA-Z\s]+$/;
-
+        
   if(payOption==='cc'){
         var cardNumber = document.getElementById("card-number").value.trim();
     var expiryDate = document.getElementById("expiry-date").value.trim();
@@ -504,6 +496,15 @@ if (addressOption === "info-address2") {
         return false;
     }
     }
+if (addressOption === "info-address2") {
+    var phone = document.getElementById("phone").value.trim();
+    var fullname = document.getElementById("fullname").value.trim();
+    var sonha = document.getElementById("sonha").value.trim();
+    var duong = document.getElementById("duong").value.trim();
+    var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
+  var phoneRegex = /^0[1-9]\d{8,9}$/;
+  var fullnameRegex = /^[a-zA-Z\s]+$/;
+
 
   if (fullname === "" || phone === "" || sonha === "" || duong === "") {
             alert("Please fill in all fields.");

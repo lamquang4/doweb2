@@ -1,4 +1,9 @@
 <?php
+if (basename($_SERVER['PHP_SELF']) === 'config.php') {
+   
+    header('Location: index.php');
+    exit();
+}
 session_start();
 
 class Connection{
@@ -361,7 +366,7 @@ class Product extends Connection {
 class Order extends Connection{
 
     public function selectOrdersByUsername($username,$start,$limit) {
-        $query = "SELECT * FROM tb_order WHERE username = '$username' LIMIT $start, $limit ";
+        $query = "SELECT * FROM tb_order WHERE username = '$username' LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }
