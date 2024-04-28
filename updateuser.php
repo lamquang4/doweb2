@@ -28,15 +28,33 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
 
     if (isset($_FILES['userImage']) && $_FILES['userImage']['size'] > 0) {
         $file = $_FILES['userImage'];
-        $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $fileName = $username . '.' . $fileExtension; 
+        $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $fileName = $username . '.' . $fileExtension;
         $filePath = 'imguser/' . $fileName;
-        move_uploaded_file($file['tmp_name'], $filePath);
-      
-        $updateImagePathQuery = "UPDATE tb_customer SET imguser='$filePath' WHERE username='$username'";
-        $resultImagePath = mysqli_query($connection->conn, $updateImagePathQuery);
-        if (!$resultImagePath) {
-            die('Error updating user image path: ' . mysqli_error($connection->conn));
+
+        $allowedExtensions = array('png', 'jpeg', 'jpg');
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            echo "<script>alert('Invalid file type. Please upload a PNG, JPEG, or JPG file.'); window.location.href='user.php';</script>";
+            exit;
+        }
+    
+        $maxWidth = 500;
+        $maxHeight = 500;
+        list($width, $height) = getimagesize($file['tmp_name']);
+        if ($width > $maxWidth || $height > $maxHeight) {
+            echo "<script>alert('Image dimensions exceed the maximum allowed size of 500x500.'); window.location.href='user.php';</script>";
+            exit;
+        }
+
+        if (move_uploaded_file($file['tmp_name'], $filePath)) {
+            $updateImagePathQuery = "UPDATE tb_customer SET imguser='$filePath' WHERE username='$username'";
+            $resultImagePath = mysqli_query($connection->conn, $updateImagePathQuery);
+            if (!$resultImagePath) {
+                die('Error updating user image path: ' . mysqli_error($connection->conn));
+            }
+        } else {
+            echo "<script>alert('Failed to upload image. Please try again.'); window.location.href='user.php';</script>";
+            exit;
         }
     }
 
@@ -46,7 +64,7 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
        
         exit;
     } else {
-        echo "<script> alert('Fail'); </script>";
+        echo "<script> alert('Fail'); window.location.href='user.php'; </script>";
     }
 
 ?>

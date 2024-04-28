@@ -67,7 +67,7 @@ exit();
                                         <div class="media-body ml-4">
                                             <label class="btn btn-outline-primary">
                                                 Select photo
-                                                <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/jpeg, image/png, image/gif" name="userImage">
+                                                <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/jpeg, image/png, image/jpg" name="userImage">
                                     </label> &nbsp;       
                                             
                                            

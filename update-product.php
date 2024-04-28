@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
            
             $image = $fileName;
         } else {
-            echo "<script> alert('Sorry, there was an error uploading your file.'); </script>";
+            echo "<script> alert('Sorry, there was an error uploading your file.'); window.location.href='admin-product.php';</script>";
         }
     } 
 }
@@ -55,7 +55,7 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
         }
        
     } else {
-        echo "<script> alert('Fail'); </script>";
+        echo "<script> alert('Fail'); window.location.href='admin-product.php?page={$page}';</script>";
     }
 
 

@@ -316,7 +316,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
+<form method="post" action="update-product.php?<?php if(isset($status)) echo '&status=' . $status; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
@@ -368,7 +368,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
   <label>Image:</label>
   <div class="upload-btn-wrapper">
     <button class="btn-upload">Upload Image <br> <i class="fa-solid fa-cloud-arrow-up"></i></button>
-    <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" />
+    <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" accept="image/png"/>
   </div>
         </div>
 
@@ -412,7 +412,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
   <label>Price:</label>
 <input type="number" name="price" id="price" value="<?php echo $row['price']?>">     
 <label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="1" value="<?php echo $row['soluong']?>">
+<input type="number" name="soluong" id="soluong" min="0" value="<?php echo $row['soluong']?>">
 </div>
 
 <div class="user-input" style="display: none;">
@@ -425,6 +425,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         
             <option value="0" <?php echo ($row['status'] == 0) ? 'selected' : ''; ?>>Not yet released</option>
             <option value="1" <?php echo ($row['status'] == 1) ? 'selected' : ''; ?>>On sale</option>
+            <option value="2" <?php echo ($row['status'] == 2) ? 'selected' : ''; ?>>Hidden</option>
           </select>
   <label>Description:</label>
 <input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">

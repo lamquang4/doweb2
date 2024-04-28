@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $type = $_POST['type'];
  $brand = $_POST['brand'];
  $status = $_POST['status'];
+ 
  do {
   $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
   $check_query = "SELECT COUNT(*) AS count FROM product WHERE id='$random_id'";
@@ -72,47 +73,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
 
     $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', NOW(), '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+    $status = $_GET['status'];
     if (mysqli_query($connection->conn, $query)) {
-      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage'; </script>";
+      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status'; </script>";
        
     
         exit;
     } else {
-        echo "<script> alert('Fail'); </script>";
+        echo "<script> alert('Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
+  $status = $_GET['status'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
-      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
  
   } else {
-      echo "<script>alert('Delete Fail');</script>";
+      echo "<script>alert('Delete Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
   }
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
+  $status = $_GET['status'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 2  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
 
   } else {
-      echo "<script>alert('Hide Product Fail');</script>";
+      echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
   }
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
+  $status = $_GET['status'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 1  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage';</script>";
+      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
     
   } else {
-      echo "<script>alert('Show Product Fail');</script>";
+      echo "<script>alert('Show Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
   }
 }
 ?>
@@ -324,16 +329,16 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 
   <?php if ($product['status'] == 1): ?>
-    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
         <span class="las la-eye"></span>
     </a>
 <?php elseif($product['status'] == 0): ?>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
         <span class="las la-trash" style="color: #d9534f;"></span>
     </a>
 <?php else: ?>
 
-    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
+    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
         <span class="las la-eye-slash"></span>
     </a>
 <?php endif; ?>
@@ -457,7 +462,7 @@ if (isset($_GET['text'])) {
   <label>Image:</label>
  <div class="upload-btn-wrapper">
     <button class="btn-upload">Upload Image <br> <i class="fa-solid fa-cloud-arrow-up"></i></button>
-    <input type="file" name="fimage1" id="fimage1" onchange="previewImage()" />
+    <input type="file" name="fimage1" id="fimage1" accept="image/png" onchange="previewImage()" />
   </div>
         </div>
 
@@ -499,7 +504,7 @@ if (isset($_GET['text'])) {
   <label>Price:</label>
 <input type="number" name="price" id="price" maxlength="20">     
 <label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="1" maxlength="20">
+<input type="number" name="soluong" id="soluong" min="0">
 </div>
 
 <div class="user-input" style="display:none;">
