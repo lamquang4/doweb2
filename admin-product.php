@@ -703,7 +703,7 @@ function hideadd(){
 document.querySelector('.record-search').addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         var searchText = this.value.trim();
-        window.location.href = 'admin-product.php?text=' + encodeURIComponent(searchText);
+        window.location.href = 'admin-product.php?text=' + encodeURIComponent(searchText) + '&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';
     }
 });
 

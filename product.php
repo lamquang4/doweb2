@@ -41,35 +41,48 @@ if(isset($_SESSION["username"])){
 }
 
 
-if(isset($_POST["add_to_cart"])){
-  if(isset($_SESSION["shopping_cart"])){
-      $item_array_id = array_column($_SESSION["shopping_cart"],"item_id");
-      if(!in_array($_GET["id"],$item_array_id)){
-          $count = count($_SESSION["shopping_cart"]);
-          $item_array = array(
-              'item_id' => $_GET["id"],
-              'item_name' => $_POST["namesp"],
-              'item_price' => $_POST["pricesp"],
-              'item_img' => $_POST["imgsp"],
-              'item_quantity' => $_POST["quantity"]
-          );
-          // bo $count []
-          $_SESSION["shopping_cart"][]=$item_array;
-      }
-  }else {
-    $item_array = array(
-        'item_id' => $_GET["id"],
-        'item_name' => $_POST["namesp"],
-        'item_price' => $_POST["pricesp"],
-        'item_img' => $_POST["imgsp"],
-        'item_quantity' => $_POST["quantity"]
-    );
-    $_SESSION["shopping_cart"][0] = $item_array;
-}
+if(isset($_POST["add_to_cart"])) {
+  $productId = $_POST["idsp"];
+  $productName = $_POST["namesp"];
+  $productPrice = $_POST["pricesp"];
+  $productImage = $_POST["imgsp"];
+  $quantity = $_POST["quantity"];
 
-echo "<script>alert('Item has been added to cart'); window.location.href='product.php?id=$productId';</script>";
+  if($quantity > 10) {
+    $quantity = 10;
+  }
+
+  if(!isset($_SESSION["shopping_cart"])) {
+      $_SESSION["shopping_cart"] = array();
+  }
+
+  $found = false;
+  foreach ($_SESSION["shopping_cart"] as $key => $item) {
+      if($item["item_id"] == $productId) {
+          if(($item["item_quantity"] + $quantity) > 10) {
+            $quantity = 10 - $item["item_quantity"]; // Giới hạn số lượng mới
+          }
+          $_SESSION["shopping_cart"][$key]["item_quantity"] += $quantity;
+          $found = true;
+          break;
+      }
+  }
+
+  if(!$found) {
+      $item_array = array(
+          'item_id' => $productId,
+          'item_name' => $productName,
+          'item_price' => $productPrice,
+          'item_img' => $productImage,
+          'item_quantity' => $quantity
+      );
+      $_SESSION["shopping_cart"][] = $item_array;
+  }
+
+  echo "<script>alert('Item has been added to cart'); window.location.href='product.php?id=$productId';</script>";
   exit;
 }
+
 
 
 ?>
@@ -121,8 +134,9 @@ include_once 'header.php'
     <div class="plus"><i class="fa-solid fa-plus" style="font-size: 18px;"></i></div>
   </div>
 
-   <button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
 
+   <button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
+ 
 </form>
  <div id="infor-nutri">
   <h3>Nutriton</h3>
@@ -292,7 +306,7 @@ MainImg.src = small[3].src;
   function validateQuantity() {
     var selectedQuantity = parseInt(document.querySelector("input[name='quantity']").value);
     var availableQuantity = <?php echo $productSoluong; ?>;
-    if (selectedQuantity > availableQuantity) {
+    if (availableQuantity === 0) {
       alert("The current stock has <?php echo $productSoluong; ?> of these products remaining.");
       return false; 
     }

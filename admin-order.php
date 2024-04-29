@@ -349,7 +349,7 @@ $(document).ready(function(){
             success: function(response){
                 if (response === "shortage") {
                     alert("This order doesn't have enough items in stock.");
-                    window.location.href='admin-order.php';
+                    window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>';
                 } else {
                     console.log(response);
                 }
@@ -417,7 +417,7 @@ function toggleDropdown() {
 document.querySelector('.record-search').addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         var searchUsername = this.value.trim();
-        window.location.href = 'admin-order.php?username=' + encodeURIComponent(searchUsername);
+        window.location.href = 'admin-order.php?username=' + encodeURIComponent(searchUsername) + '&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>';
     }
 });
 

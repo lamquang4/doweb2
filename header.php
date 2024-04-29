@@ -139,14 +139,14 @@ if(isset($_GET['action']) && isset($_GET['id'])){
 
 
    <div class="cart">
-    <h2 class="cart-title">Your Cart</h2>
+    <h2 class="cart-title" style="margin-bottom: 16px;">Your Cart</h2>
     <form method="post" action="" onsubmit="return checkloginyet()">
         <?php
         if (!empty($_SESSION["shopping_cart"])) {
             $total = 0;
             foreach ($_SESSION["shopping_cart"] as $keys => $values) {
                 ?>
-                <div class="cart-content">
+                <div class="cart-content" style="margin-bottom: 34px;">
                     
                     <div class="cart-box">
                         <img src="<?php echo $values["item_img"]; ?>" alt="" class="cart-img">
@@ -154,7 +154,8 @@ if(isset($_GET['action']) && isset($_GET['id'])){
                             <input type="hidden" value="<?php echo $values["item_id"]; ?>">
                             <div class="cart-product-title"><?php echo $values["item_name"]; ?></div>
                             <div class="cart-price">$<?php echo $values["item_price"]; ?>.00</div>
-                            <input type="text" min="1" max="9" maxlength="1" class="cart-quantity"
+                            <p style="font-size:13px; font-style: italic;">LIMIT: 10 PER PERSON</p>
+                            <input type="text" min="1" max="10" maxlength="1" class="cart-quantity"
                                    value="<?php echo $values["item_quantity"]; ?>" readonly>
                         </div>
 

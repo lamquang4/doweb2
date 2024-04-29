@@ -1347,7 +1347,7 @@ padding-left: 1px;
   height:100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 20px;
+  padding: 15px;
   background-color: #ffffff;
   box-shadow: -2px solid 4px hs1(0 4% 15%/10%);
   transition: 1.2s;
@@ -1386,7 +1386,7 @@ padding-left: 1px;
 margin-left: 10px;
 }
 .cart-product-title{
-  font-size: 1rem;
+  font-size: 0.93rem;
   text-transform: uppercase;
 }
 .cart-price{
