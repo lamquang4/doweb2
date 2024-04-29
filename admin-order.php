@@ -353,6 +353,7 @@ $(document).ready(function(){
                 } else {
                     console.log(response);
                 }
+                window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>';
             }
         });
     });
@@ -396,7 +397,9 @@ $(document).ready(function(){
 
     document.querySelectorAll('.select-status-order').forEach(function(select) {
     checkStatus(select);
+    
 });
+
 
 function toggleDropdown2() {
     var dropdown2 = document.getElementById("datedropdown");
