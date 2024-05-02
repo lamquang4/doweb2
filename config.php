@@ -366,7 +366,7 @@ class Product extends Connection {
 class Order extends Connection{
 
     public function selectOrdersByUsername($username,$start,$limit) {
-        $query = "SELECT * FROM tb_order WHERE username = '$username' LIMIT $start, $limit";
+        $query = "SELECT * FROM tb_order WHERE username = '$username' ORDER BY dateorder DESC LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }

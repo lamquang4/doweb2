@@ -195,7 +195,13 @@ $totalPages = ceil($totalUsers / $limit);
         <td><?php echo $user['username']; ?></td>
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
-        <td><?php echo $user['birthday']; ?></td>
+        <td>  <?php 
+        if ($user['birthday'] == '0000-00-00') {
+            echo 'Unknown';
+        } else {
+            echo date('d/m/Y', strtotime($user['birthday']));
+        }
+    ?></td>
         <td><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></td>
         <td>
         <?php 
@@ -307,7 +313,7 @@ if (isset($_GET['status'])) {
         </div>
 
         <div class="user-input">
-                <label>Birthday:</label>
+                <label>Birthday (m/d/y):</label>
                 <input type="date" value="<?php echo $row['birthday']?>" name="birthday" id="birthday"> 
         </div>
     

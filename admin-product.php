@@ -93,7 +93,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
       echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
  
   } else {
-      echo "<script>alert('Delete Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
   }
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
@@ -309,7 +309,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </td>
 <td>$<?php echo $product['price']; ?>.00</td>
 <td><?php echo $product['soluong']; ?></td>
-<td><?php echo $product['date_add']; ?></td>
+<td><?php echo date('d/m/Y', strtotime($product['date_add'])); ?></td>
 <td>
 <?php 
         if ($product['status'] == 1) {

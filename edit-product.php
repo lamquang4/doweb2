@@ -221,7 +221,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </td>
 <td>$<?php echo $product['price']; ?>.00</td>
 <td><?php echo $product['soluong']; ?></td>
-<td><?php echo $product['date_add']; ?></td>
+<td><?php echo date('d/m/Y', strtotime($product['date_add'])); ?></td>
 <td>
 <?php 
         if ($product['status'] == 1) {

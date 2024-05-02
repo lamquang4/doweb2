@@ -99,7 +99,7 @@ exit();
                                         <div class="row" style="margin-bottom: 14px;">
                                             <div class="col-lg-4">
                                                 <div class="mb-4 mb-lg-0">
-                                                    <label class="form-label">Birthday</label>
+                                                    <label class="form-label">Birthday (mm/dd/yy)</label>
                                                     <input type="date" name="birthday" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput" >
                                                 </div>
                                             </div>

@@ -238,7 +238,7 @@ $totalPages = ceil($totalOrders / $limit);
     <tr>
         <td><?php echo $order['idorder']; ?></td>
         <td><?php echo $order['username']; ?></td>
-        <td><?php echo $order['dateorder']; ?></td>
+        <td><?php echo date('d/m/Y', strtotime($order['dateorder'])); ?></td>
         <td><?php echo $order['sonha']; ?> <?php echo $order['duong']; ?> <?php echo $order['city']; ?> <?php echo $order['district']; ?> <?php echo $order['ward']; ?></td>
                               <td>
                               <select id="select-status-order" class="select-status-order" onchange="checkStatus(this)" name="status">

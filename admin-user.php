@@ -269,7 +269,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
         <td><?php echo $user['username']; ?></td>
         <td><?php echo $user['fullname']; ?></td>
         <td><?php echo $user['email']; ?></td>
-        <td><?php echo $user['birthday']; ?></td>
+        <td>  <?php 
+        if ($user['birthday'] == '0000-00-00') {
+            echo 'Unknown';
+        } else {
+            echo date('d/m/Y', strtotime($user['birthday']));
+        }
+    ?></td>
         <td><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></td>
         <td>
         <?php 

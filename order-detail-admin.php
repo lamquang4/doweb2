@@ -102,7 +102,7 @@ echo "<script>alert('Order id not found!'); window.location.href='admin-order.ph
                                             echo 'Credit card';
                                         } ?>
                                         </span></h5>
-                          <h3 class="h6">Date Order:<span style="font-weight: 400;"> <?php echo $dateorder; ?></span></h5>
+                          <h3 class="h6">Date Order:<span style="font-weight: 400;"> <?php echo date('d/m/Y', strtotime($dateorder)); ?></span></h5>
                     
                       </div>
                       <div>

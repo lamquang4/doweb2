@@ -79,7 +79,7 @@ if(isset($_GET['idorder'])) {
                 <div class="card-body col">
                 <div class="row" style="display: flex; justify-content: flex-start;"> 
                 
-                <span style="margin-right: 25px; margin-left: 10px;"><strong>Date Order:</strong> <?php echo $dateorder; ?>   </span> 
+                <span style="margin-right: 25px; margin-left: 10px;"><strong>Date Order:</strong> <?php echo date('d/m/Y', strtotime($dateorder)); ?>   </span> 
                 <span> <strong>Payment method:</strong>  
                                         <?php  if($order['paymethod']=='cod'){
                                             echo 'COD';
