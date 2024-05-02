@@ -44,18 +44,17 @@ $brand = $_POST['brand'];
 $status = $_POST['status'];
 $id = $_POST['pid'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
-   
+  $statuscur = $_GET['status'];
+  $text = $_GET['text'];
     $updatequery = "UPDATE product SET name='$name', brand='$brand', type='$type', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
-        if(isset($_GET['status'])) {
-            echo "<script> alert('Success'); window.location.href='admin-product.php?page={$page}&status={$_GET['status']}'; </script>";
-        } else {
-            echo "<script> alert('Success'); window.location.href='admin-product.php?page={$page}'; </script>";
-        }
+ 
+            echo "<script> alert('Success'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+        
        
     } else {
-        echo "<script> alert('Fail'); window.location.href='admin-product.php?page={$page}';</script>";
+        echo "<script> alert('Fail'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
     }
 
 

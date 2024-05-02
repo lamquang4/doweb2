@@ -6,18 +6,18 @@ if (!isset($_GET['pid'])) {
 }
 $connection = new Connection();
 $productObj = new Product();
+$searchText = isset($_GET['text']) ? $_GET['text'] : null;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$minPrice = isset($_GET['min_price']) ? $_GET['min_price'] : null;
+$maxPrice = isset($_GET['max_price']) ? $_GET['max_price'] : null;
+$searchType = isset($_GET['type']) ? $_GET['type'] : null;
+$searchBrand = isset($_GET['brand']) ? $_GET['brand'] : null;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 12;
 $start = ($page - 1) * $limit;
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2')) {
-    $status = $_GET['status'];
-    $products = $productObj->selectProductsByStatus($status, $start, $limit); 
-    $totalProducts = $productObj->getProductCountByStatus($status); 
-  } else {
-    $products = $productObj->selectProducts($start, $limit);
-    $totalProducts = $productObj ->getProductCount();
-  
-  }
+
+$products = $productObj->selectProducts($start, $limit,$searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
+$totalProducts = $productObj ->getProductCount($searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
   $totalPages = ceil($totalProducts / $limit);
 
 $id = $_GET['pid'];
@@ -157,7 +157,7 @@ $row = mysqli_fetch_assoc($result);
 
 
 <div class="browse">
-<input type="search" placeholder="Search (#ID)" class="record-search">
+<input type="search" placeholder="Search (name)" class="record-search" name="text">
 
 </div>
 
@@ -185,6 +185,7 @@ $row = mysqli_fetch_assoc($result);
     <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
+                <input type="hidden" name="status">
                 <a href="admin-product.php">All</a>
 <a href="admin-product.php?status=1">On Sale</a>
 <a href="admin-product.php?status=0">Not yet released</a>
@@ -316,7 +317,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php?<?php if(isset($status)) echo '&status=' . $status; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
+<form method="post" action="update-product.php?<?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
@@ -355,7 +356,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
   <div class="user-tab">
     <h1>EDIT PRODUCT</h1>
-    <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
+    <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-product.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>';"></i>
   
 <input type="hidden" name="pid" value="<?php echo $row['id']?>">
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">

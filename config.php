@@ -231,7 +231,7 @@ class Select extends Connection{
 
 class Product extends Connection {
     
-    public function selectProducts($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
+    public function selectProducts($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null, $searchStatus = null) {
         $query = "SELECT * FROM product WHERE 1=1";
     
         if (!empty($searchText)) {
@@ -249,6 +249,10 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
+        
+        if (!empty($searchStatus) || $searchStatus === '0') {
+            $query .= " AND status = $searchStatus";
+        }
      $query .= " ORDER BY date_add";
         $query .= " LIMIT $start, $limit";
     
@@ -256,7 +260,7 @@ class Product extends Connection {
         return $result;
     }
 
-    public function getProductCount($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
+    public function getProductCount($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null, $searchStatus = null) {
         $query = "SELECT COUNT(*) as total FROM product WHERE 1=1";
     
         if (!empty($searchText)) {
@@ -274,22 +278,10 @@ class Product extends Connection {
         if (!empty($searchBrand)) {
             $query .= " AND brand = '$searchBrand'";
         }
+        if (!empty($searchStatus) || $searchStatus === '0') {
+            $query .= " AND status = $searchStatus";
+        }
 
-
-        $result = mysqli_query($this->conn, $query);
-        $data = mysqli_fetch_assoc($result);
-        return $data['total'];
-    }
-
-    // tim kiem status
-    public function selectProductsByStatus($status, $start, $limit) {
-        $query = "SELECT * FROM product WHERE status = '$status' ORDER BY date_add LIMIT $start, $limit";
-        $result2 = mysqli_query($this->conn, $query);
-        return $result2;
-    }
-
-    public function getProductCountByStatus($status) {
-        $query = "SELECT COUNT(*) as total FROM product WHERE status = '$status'";
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_assoc($result);
         return $data['total'];

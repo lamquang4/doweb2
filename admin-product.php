@@ -10,18 +10,17 @@ $connection = new Connection();
 $productObj = new Product();
 $searchText = isset($_GET['text']) ? $_GET['text'] : null;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$minPrice = isset($_GET['min_price']) ? $_GET['min_price'] : null;
+$maxPrice = isset($_GET['max_price']) ? $_GET['max_price'] : null;
+$searchType = isset($_GET['type']) ? $_GET['type'] : null;
+$searchBrand = isset($_GET['brand']) ? $_GET['brand'] : null;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 12;
 $start = ($page - 1) * $limit;
 
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1' || $_GET['status'] === '2')) {
-  $status = $_GET['status'];
-  $products = $productObj->selectProductsByStatus($status, $start, $limit); 
-  $totalProducts = $productObj->getProductCountByStatus($status); 
-} else {
-  $products = $productObj->selectProducts($start, $limit,$searchText);
-  $totalProducts = $productObj ->getProductCount($searchText);
 
-}
+  $products = $productObj->selectProducts($start, $limit,$searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
+  $totalProducts = $productObj ->getProductCount($searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
 $totalPages = ceil($totalProducts / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
@@ -74,50 +73,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
     $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', NOW(), '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
     $status = $_GET['status'];
+    $text = $_GET['text'];
     if (mysqli_query($connection->conn, $query)) {
-      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status'; </script>";
+      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text'; </script>";
        
     
         exit;
     } else {
-        echo "<script> alert('Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+        echo "<script> alert('Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $status = $_GET['status'];
+  $text = $_GET['text'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
-      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
  
   } else {
-      echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
   }
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $status = $_GET['status'];
+  $text = $_GET['text'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 2  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
 
   } else {
-      echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
   }
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $status = $_GET['status'];
+  $text = $_GET['text'];
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 1  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
     
   } else {
-      echo "<script>alert('Show Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status';</script>";
+      echo "<script>alert('Show Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
   }
 }
 ?>
@@ -273,10 +276,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
-                <a href="admin-product.php">All</a>
-<a href="admin-product.php?status=1">On Sale</a>
-<a href="admin-product.php?status=0">Not yet released</a>
-<a href="admin-product.php?status=2">Hidden</a>
+                  <input type="hidden" name="status">
+                <a href="admin-product.php?status=<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">All</a>
+<a href="admin-product.php?status=1<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">On Sale</a>
+<a href="admin-product.php?status=0<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Not yet released</a>
+<a href="admin-product.php?status=2<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Hidden</a>
 </div>
             </th>    
     <th>ACTION</th>
@@ -325,20 +329,20 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <td>
   <div class="actions">
 
-  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
 
   <?php if ($product['status'] == 1): ?>
-    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+    <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>">
         <span class="las la-eye"></span>
     </a>
 <?php elseif($product['status'] == 0): ?>
-    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+    <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>">
         <span class="las la-trash" style="color: #d9534f;"></span>
     </a>
 <?php else: ?>
 
-    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+    <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>">
         <span class="las la-eye-slash"></span>
     </a>
 <?php endif; ?>
