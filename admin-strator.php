@@ -9,18 +9,13 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 $connection = new Connection();
 $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
 
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
-    $status = $_GET['status'];
-    $ads = $adinad->selectAdsByStatus($status, $start, $limit); 
-    $totalAds = $adinad->getAdCountByStatus($status); 
-  } else {
-    $ads = $adinad->selectAds($start,$limit);
-    $totalAds = $adinad ->getAdCount();
-  
-  }
+
+    $ads = $adinad->selectAds($start,$limit,$searchStatus);
+    $totalAds = $adinad ->getAdCount($searchStatus);
 $totalPages = ceil($totalAds / $limit);
 
 $registerad  = new Registerad();
@@ -34,6 +29,7 @@ if (isset($_POST["submit"])) {
   $role = isset($_POST["role"]) ? $_POST["role"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+  $status1 = $_GET['status'];
   $result = $registerad->registration(
     $username,
       $email,
@@ -47,45 +43,45 @@ if (isset($_POST["submit"])) {
 
   if ($result == 1) {
     
- echo "<script>alert('Registration Successful'); window.location.href='admin-strator.php?page={$currentPage}". (isset($status) ? "&status={$status}" : "") . "';</script>";     
+ echo "<script>alert('Registration Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";     
   } elseif ($result == 10) {
-    echo "<script>alert('Username or Email or Phone Number has already taken'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+    echo "<script>alert('Username or Email or Phone Number has already taken'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
      
   } elseif ($result == 100) {
-      echo "<script>alert('Password does not match'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+      echo "<script>alert('Password does not match'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
   }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager'])) {
     $username = $_GET['manager']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    
+    $status1 = $_GET['status'];
     if ($_SESSION["username"] !== $username) {
         $query = "UPDATE tb_manager SET status = 0 WHERE username = '$username'";
         
         if (mysqli_query($connection->conn, $query)) {
-            echo "<script>alert('Block Successful'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+            echo "<script>alert('Block Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
         
         } else {
-            echo "<script>alert('Block Customer Fail'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+            echo "<script>alert('Block Customer Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
         }
     } else {
-        echo "<script>alert('You cannot block your own account.'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('You cannot block your own account.'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manager'])) {
     $username = $_GET['manager']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-
+    $status1 = $_GET['status'];
     $query = "UPDATE tb_manager SET status = 1 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
      
-        echo "<script>alert('Unblock Successful'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Unblock Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
       
     } else {
-        echo "<script>alert('Unblock Manager Fail'); window.location.href='admin-strator.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Unblock Manager Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
     }
 }
 ?>
@@ -236,6 +232,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                                 <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
+                    <input type="hidden" name="status">
                 <a href="admin-strator.php">All</a>
 <a href="admin-strator.php?status=1">Normal</a>
 <a href="admin-strator.php?status=0">Blocked</a>
@@ -277,13 +274,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                                 </td>
                                 <td>
                                 <div class="actions">
-                                <a href="edit-strator.php?manager=<?php echo $ad['username'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+                                <a href="edit-strator.php?manager=<?php echo $ad['username'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
                                 <?php if ($ad['status'] == 1) { ?>
-        <a onclick="return confirm('Are you sure you want to block this manager?');" href="admin-strator.php?action=block&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+        <a onclick="return confirm('Are you sure you want to block this manager?');" href="admin-strator.php?action=block&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>">
             <span class="las la-lock" style="color: #FFAD27;"></span>
         </a>
     <?php } else { ?>
-        <a onclick="return confirm('Are you sure you want to unblock this manager?');" href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+        <a onclick="return confirm('Are you sure you want to unblock this manager?');" href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>">
             <span class="las la-unlock" style="color: #FFAD27;"></span>
         </a>
     <?php } ?>

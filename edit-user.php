@@ -14,17 +14,12 @@ $row = mysqli_fetch_assoc($result);
 
 $userinad = new Userinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
-    $status = $_GET['status'];
-    $users = $userinad->selectUsersByStatus($status, $start, $limit); 
-    $totalUsers = $userinad->getUserCountByStatus($status); 
-  } else {
-    $users = $userinad->selectUsers($start,$limit);
-    $totalUsers = $userinad->getUserCount();
-  
-  }
+
+    $users = $userinad->selectUsers($start,$limit,$searchStatus);
+    $totalUsers = $userinad->getUserCount($searchStatus);
 $totalPages = ceil($totalUsers / $limit);
 
 
@@ -178,6 +173,7 @@ $totalPages = ceil($totalUsers / $limit);
                                 <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
+                <input type="hidden" name="status">
                 <a href="admin-user.php">All</a>
 <a href="admin-user.php?status=1">Normal</a>
 <a href="admin-user.php?status=0">Blocked</a>
@@ -286,7 +282,7 @@ if (isset($_GET['status'])) {
 
   <div class="user-tab">
     <h1>Edit Customer</h1>
-  <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
+  <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>';"></i>
 
 <form method="post" action="update-user.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
 

@@ -14,18 +14,16 @@ $phone = $_POST['phone'];
 $birthday = $_POST['birthday'];
 $username = $_POST['customer'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
-
+$statuscur = $_GET['status'];
     $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone', birthday='$birthday' WHERE username='$username'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
-        if(isset($_GET['status'])) {
-            echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}&status={$_GET['status']}'; </script>";
-        } else {
-            echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}'; </script>";
-        }
+  
+            echo "<script> alert('Success'); window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+           
   
     } else {
-        echo "<script> alert('Fail'); </script>";
+        echo "<script> alert('Fail'); window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
     }
 
 

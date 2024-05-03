@@ -9,18 +9,13 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 $connection = new Connection();
 $userinad = new Userinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
 
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
-    $status = $_GET['status'];
-    $users = $userinad->selectUsersByStatus($status, $start, $limit); 
-    $totalUsers = $userinad->getUserCountByStatus($status); 
-  } else {
-    $users = $userinad->selectUsers($start,$limit);
-    $totalUsers = $userinad->getUserCount();
-  
-  }
+
+    $users = $userinad->selectUsers($start,$limit,$searchStatus);
+    $totalUsers = $userinad->getUserCount($searchStatus);
 $totalPages = ceil($totalUsers / $limit);
 
 $register  = new Register();
@@ -42,6 +37,7 @@ if (isset($_POST["submit"])) {
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
+  $status1 = $_GET['status'];
   $result = $register->registration(
       $username,
       $email,
@@ -61,10 +57,10 @@ if (isset($_POST["submit"])) {
   );
 
   if ($result == 1) {
-      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php?page=$currentPage';</script>";
+      echo "<script> alert('Registration Successful'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
   
   } elseif ($result == 10) {
-      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php?page=$currentPage'; </script>";
+      echo "<script> alert('Username or Email has already taken'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}'; </script>";
    
   } elseif ($result == 100) {
       echo "<script> alert('Password does not match'); window.location.href='admin-user.php?page=$currentPage'; </script>";
@@ -75,30 +71,30 @@ if (isset($_POST["submit"])) {
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['customer'])) {
     $username = $_GET['customer']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-
+    $status1 = $_GET['status'];
     $query = "UPDATE tb_customer SET status = 0 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
    
-        echo "<script>alert('Block Successful'); window.location.href='admin-user.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Block Successful'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
     } else {
        
-        echo "<script>alert('Block Customer Fail'); window.location.href='admin-user.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Block Customer Fail'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['customer'])) {
     $username = $_GET['customer']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-
+    $status1 = $_GET['status'];
     $query = "UPDATE tb_customer SET status = 1 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
-        echo "<script>alert('Unblock Successful'); window.location.href='admin-user.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Unblock Successful'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
       
     } else {
      
-        echo "<script>alert('Unblock Customer Fail'); window.location.href='admin-user.php?page={$currentPage}" . (isset($status) ? "&status={$status}" : "") . "';</script>";
+        echo "<script>alert('Unblock Customer Fail'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
     }
 }
 ?>
@@ -252,7 +248,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
                                 <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
-                <a href="admin-user.php">All</a>
+                <input type="hidden" name="status">
+                <a href="admin-user.php?status=">All</a>
 <a href="admin-user.php?status=1">Normal</a>
 <a href="admin-user.php?status=0">Blocked</a>
 
@@ -288,14 +285,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
         </td>
         <td>
             <div class="actions">
-            <a href="edit-user.php?customer=<?php echo $user['username'];?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+            <a href="edit-user.php?customer=<?php echo $user['username'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
             
             <?php if ($user['status'] == 1) { ?>
-        <a onclick="return confirm('Are you sure you want to block this customer?');" href="admin-user.php?action=block&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+        <a onclick="return confirm('Are you sure you want to block this customer?');" href="admin-user.php?action=block&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>">
             <span class="las la-lock" style="color: #FFAD27;"></span>
         </a>
     <?php } else { ?>
-        <a onclick="return confirm('Are you sure you want to unblock this customer?');" href="admin-user.php?action=unblock&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
+        <a onclick="return confirm('Are you sure you want to unblock this customer?');" href="admin-user.php?action=unblock&customer=<?php echo $user['username']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>">
             <span class="las la-unlock" style="color: #FFAD27;"></span>
         </a>
     <?php } ?>

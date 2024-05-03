@@ -15,17 +15,13 @@ $row = mysqli_fetch_assoc($result);
 
 $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+$searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
-if (isset($_GET['status']) && ($_GET['status'] === '0' || $_GET['status'] === '1')) {
-    $status = $_GET['status'];
-    $ads = $adinad->selectAdsByStatus($status, $start, $limit); 
-    $totalAds = $adinad->getAdCountByStatus($status); 
-  } else {
-    $ads = $adinad->selectAds($start,$limit);
-    $totalAds = $adinad ->getAdCount();
-  
-  }
+
+
+$ads = $adinad->selectAds($start,$limit,$searchStatus);
+$totalAds = $adinad ->getAdCount($searchStatus);
 $totalPages = ceil($totalAds / $limit);
 
 ?>
@@ -175,6 +171,7 @@ $totalPages = ceil($totalAds / $limit);
                                 <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
+                    <input type="hidden" name="status">
                 <a href="admin-strator.php">All</a>
 <a href="admin-strator.php?status=1">Normal</a>
 <a href="admin-strator.php?status=0">Blocked</a>
@@ -295,7 +292,7 @@ if (isset($_GET['status'])) {
 
   <div class="user-tab">
     <h1>Edit Manager</h1>
-  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';"></i>
+  <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>';"></i>
 
     <form method="post" action="update-strator.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
 
