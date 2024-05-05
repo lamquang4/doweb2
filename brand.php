@@ -32,7 +32,7 @@ include_once 'header.php'
 
     <div class="pro-container">
         <div class="pro">
-          <a >
+          <a href="shop.php?brand=cocacola#product11">
             
       <img  src="assets/images/pic/coca.png" id="img1" alt="">
       
@@ -40,37 +40,37 @@ include_once 'header.php'
      
       </div> 
       <div class="pro">
-        <a >
+        <a href="shop.php?brand=fanta#product11">
         <img src="assets/images/pic/fanta.png" alt=""></a>
      
   </div> 
   <div class="pro">
-    <a>
+    <a href="shop.php?brand=nutri#product11">
     <img src="assets/images/pic/tea.png" alt=""></a>
  
 </div> 
 <div class="pro">
-    <a >
+    <a href="shop.php?brand=sprite#product11">
     <img src="assets/images/pic/sprite.png" alt=""></a>
  
 </div> 
 <div class="pro">
-    <a >
+    <a href="shop.php?brand=thumbsup#product11">
     <img src="assets/images/pic/thumb.png" alt=""></a>
  
 </div> 
 <div class="pro">
-    <a >
+    <a href="shop.php?brand=pepsi#product11">
     <img src="assets/images/pic/pepsilogo.png" alt=""></a>
  
 </div> 
 <div class="pro">
-    <a >
+    <a href="shop.php?brand=dasani#product11">
     <img src="assets/images/pic/dasani.png" alt=""></a>
  
 </div> 
 <div class="pro">
-    <a >
+    <a href="shop.php?brand=aquarius#product11">
     <img src="assets/images/pic/aquarius.png" alt=""></a>
  
 </div> 
