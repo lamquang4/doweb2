@@ -214,7 +214,7 @@ if (isset($_GET['brand'])) {
 
 
 if ($page > 1) {
-    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . 'product11"><i class="fa fa-chevron-left"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '#product11"><i class="fa fa-chevron-left"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-left"></i></li>';
 }
@@ -224,7 +224,7 @@ for ($i = 1; $i <= $totalPages; $i++) {
 }
 
 if ($page < $totalPages) {
-    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) . 'product11"><i class="fa fa-chevron-right"></i></a></li>';
+    echo '<li style="border:none;"><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) . '#product11"><i class="fa fa-chevron-right"></i></a></li>';
 } else {
     echo '<li style="border:none;" class="disabled"><i class="fa fa-chevron-right"></i></li>';
 }
