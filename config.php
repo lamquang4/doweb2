@@ -283,7 +283,7 @@ class Product extends Connection {
     }
 
     public function selectProducts1($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
-        $query = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE status=1 OR status=0";
+        $query = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE (status=1 OR status=0)";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
@@ -313,7 +313,7 @@ class Product extends Connection {
     }
 
     public function getProductCount1($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
-        $query = "SELECT COUNT(*) as total  FROM product INNER JOIN category ON product.idloai = category.idloai  WHERE status=1 OR status=0";
+        $query = "SELECT COUNT(*) as total FROM product INNER JOIN category ON product.idloai = category.idloai  WHERE (status=1 OR status=0)";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
