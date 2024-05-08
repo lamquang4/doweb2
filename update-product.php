@@ -27,16 +27,12 @@ $connection = new Connection();
 $name = $_POST['name'];
 $price = $_POST['price'];
 $image = $_POST['image'];
-$soluong = $_POST['soluong'];
 $date_add = $_POST['date_add'];
 $ml = $_POST['ml'];
 $calo = $_POST['calo'];
 $fatg = $_POST['fatg'];
-$fat = $_POST['fat'];
 $sodiummg = $_POST['sodiummg'];
-$sodium = $_POST['sodium'];
 $carbong = $_POST['carbong'];
-$carbon = $_POST['carbon'];
 $sugarg = $_POST['sugarg'];
 $proteing = $_POST['proteing'];
 $type = $_POST['type'];
@@ -46,15 +42,27 @@ $id = $_POST['pid'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
   $statuscur = $_GET['status'];
   $text = $_GET['text'];
-    $updatequery = "UPDATE product SET name='$name', brand='$brand', type='$type', price='$price', image='$image', soluong='$soluong', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', fat='$fat', sodiummg='$sodiummg', sodium='$sodium', carbong='$carbong', carbon='$carbon', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
+  $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
+  $categoryResult = mysqli_query($connection->conn, $categoryQuery);
+  
+  if($categoryResult) {
+  
+      if(mysqli_num_rows($categoryResult) > 0) {
+          $categoryRow = mysqli_fetch_assoc($categoryResult);
+          $idloai = $categoryRow['idloai'];
+      }else{
+        echo '<script>alert("Wrong category.");</script>';
+      }
+  }
+    $updatequery = "UPDATE product SET idloai='$idloai',name='$name', price='$price', image='$image', date_add='$date_add', ml='$ml', calo='$calo', fatg='$fatg', sodiummg='$sodiummg', carbong='$carbong', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
  
-            echo "<script> alert('Success'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+            echo "<script>alert('Update Successful'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
         
        
-    } else {
-        echo "<script> alert('Fail'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+    } else{
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
     }
 
 

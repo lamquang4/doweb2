@@ -221,7 +221,7 @@ class Select extends Connection{
 class Product extends Connection {
     
     public function selectProducts($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null, $searchStatus = null) {
-        $query = "SELECT * FROM product WHERE 1=1";
+        $query = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE 1=1";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
@@ -250,7 +250,7 @@ class Product extends Connection {
     }
 
     public function getProductCount($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null, $searchStatus = null) {
-        $query = "SELECT COUNT(*) as total FROM product WHERE 1=1";
+        $query = "SELECT COUNT(*) as total FROM product INNER JOIN category ON product.idloai = category.idloai WHERE 1=1";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
@@ -283,7 +283,7 @@ class Product extends Connection {
     }
 
     public function selectProducts1($start, $limit, $searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
-        $query = "SELECT * FROM product WHERE status=1";
+        $query = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE status=1 OR status=0";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
@@ -313,7 +313,7 @@ class Product extends Connection {
     }
 
     public function getProductCount1($searchText = null, $searchType = null, $minPrice = null, $maxPrice = null, $searchBrand = null) {
-        $query = "SELECT COUNT(*) as total FROM product WHERE status=1";
+        $query = "SELECT COUNT(*) as total  FROM product INNER JOIN category ON product.idloai = category.idloai  WHERE status=1 OR status=0";
     
         if (!empty($searchText)) {
             $query .= " AND name LIKE '%$searchText%'";
@@ -500,5 +500,13 @@ class Orderdetail extends Connection{
     }
 
     
+}
+
+class Category extends Connection{
+    public function selectCategory(){
+        $query = "SELECT * FROM category";
+        $result3 = mysqli_query($this->conn, $query);
+        return $result3;  
+    }
 }
 ?>

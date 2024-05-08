@@ -635,22 +635,20 @@
       }
     
     #table-product td:nth-child(4){
-        width: 10%;
+        width: 15%;
       
     }
     #table-product td:nth-child(5){
-        width: 11%;
+        width: 14%;
     }
 
       #table-product td:nth-child(6){
-    width: 13%;
+    width: 16%;
       }
       #table-product td:nth-child(7){
         width: 13%;
           }
-          #table-product td:nth-child(8){
-            width: 11%;
-              }
+        
       
     
       #table-order th:nth-child(1){
@@ -776,9 +774,7 @@ border: 1.5px solid black;
     
    
 }
-#price,#soluong{
-    width: 26%;
-}
+
  .user-input{
     margin-bottom: 20px;
     display: flex;

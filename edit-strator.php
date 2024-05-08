@@ -320,7 +320,7 @@ if (isset($_GET['status'])) {
          </div>
 
          <div style="text-align: center;" id="button-submit">
-  <button type="submit" name="submit">Submit</button>
+  <button type="submit" name="submit">Update</button>
 </div>  
 
     </form>

@@ -8,6 +8,9 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
 
 $connection = new Connection();
 $productObj = new Product();
+$categoryObj = new Category();
+$categorys = $categoryObj->selectCategory();
+
 $searchText = isset($_GET['text']) ? $_GET['text'] : null;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $minPrice = isset($_GET['min_price']) ? $_GET['min_price'] : null;
@@ -21,28 +24,35 @@ $start = ($page - 1) * $limit;
 
   $products = $productObj->selectProducts($start, $limit,$searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
   $totalProducts = $productObj ->getProductCount($searchText,$searchType,$minPrice,$maxPrice,$searchBrand,$searchStatus);
+
 $totalPages = ceil($totalProducts / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $name = trim($_POST['name']);
   $price = trim($_POST['price']);
   $image = $_POST['image'];
-  $soluong = $_POST['soluong'];
   $date_add =$_POST['date_add'];
   $ml = trim($_POST['ml']);
   $calo = trim($_POST['calo']);
   $fatg = trim($_POST['fatg']);
-  $fat = trim($_POST['fat']);
   $sodiummg = trim($_POST['sodiummg']);
-  $sodium = trim($_POST['sodium']);
   $carbong = trim($_POST['carbong']);
-  $carbon = trim($_POST['carbon']);
   $sugarg = trim($_POST['sugarg']);
   $proteing = trim($_POST['proteing']);
-  $type = $_POST['type'];
  $brand = $_POST['brand'];
- $status = $_POST['status'];
- 
+ $type = $_POST['type'];
+ $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
+$categoryResult = mysqli_query($connection->conn, $categoryQuery);
+
+if($categoryResult) {
+
+    if(mysqli_num_rows($categoryResult) > 0) {
+        $categoryRow = mysqli_fetch_assoc($categoryResult);
+        $idloai = $categoryRow['idloai'];
+    }else{
+      echo '<script>alert("Wrong category.");</script>';
+    }
+}
  do {
   $random_id = 'SP' . sprintf("%04d", rand(0, 9999));
   $check_query = "SELECT COUNT(*) AS count FROM product WHERE id='$random_id'";
@@ -70,28 +80,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   }
 
 
-    $query = "INSERT INTO product (id,name, price, brand, image, soluong, date_add, ml, calo, fatg, fat, sodiummg, sodium, carbong, carbon, sugarg, proteing, type, status) VALUES ('$random_id','$name', '$price', '$brand', 'assets/images/sp/$image', '$soluong', NOW(), '$ml', '$calo', '$fatg', '$fat', '$sodiummg', '$sodium', '$carbong', '$carbon', '$sugarg', '$proteing', '$type', '$status')";
+    $query = "INSERT INTO product (id,idloai,name, price, image, date_add, ml, calo, fatg, sodiummg, carbong, sugarg, proteing, status) VALUES ('$random_id','$idloai','$name', '$price', 'assets/images/sp/$image', NOW(), '$ml', '$calo', '$fatg', '$sodiummg', '$carbong', '$sugarg', '$proteing', '0')";
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    $status = $_GET['status'];
-    $text = $_GET['text'];
+    $text = isset($_GET['text']) ? $_GET['text'] : ''; 
+    $status = isset($_GET['status']) ? $_GET['status'] : '';
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text'; </script>";
        
     
         exit;
-    } else {
-        echo "<script> alert('Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
-    }
+    } 
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
-  $status = $_GET['status'];
-  $text = $_GET['text'];
+  $text = isset($_GET['text']) ? $_GET['text'] : ''; 
+  $status = isset($_GET['status']) ? $_GET['status'] : '';
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
-      echo "<script>alert('Delete Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
  
   } else {
       echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
@@ -99,12 +107,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
-  $status = $_GET['status'];
-  $text = $_GET['text'];
+  $text = isset($_GET['text']) ? $_GET['text'] : ''; 
+  $status = isset($_GET['status']) ? $_GET['status'] : '';
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 2  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Hide Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
 
   } else {
       echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
@@ -112,12 +120,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pi
 }
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
-  $status = $_GET['status'];
-  $text = $_GET['text'];
+  $text = isset($_GET['text']) ? $_GET['text'] : ''; 
+  $status = isset($_GET['status']) ? $_GET['status'] : '';
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 1  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script>alert('Show Product Successful'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
     
   } else {
       echo "<script>alert('Show Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
@@ -271,7 +279,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     <th> IMAGE </th>
     <th> NAME </th>
     <th>PRICE </th>
-    <th> QUANTITY </th>
     <th> DATE ADD </th>
     <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
                 
@@ -279,7 +286,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
                   <input type="hidden" name="status">
                 <a href="admin-product.php?status=<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">All</a>
 <a href="admin-product.php?status=1<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">On Sale</a>
-<a href="admin-product.php?status=0<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Not yet released</a>
+<a href="admin-product.php?status=0<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Not yet sale</a>
 <a href="admin-product.php?status=2<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Hidden</a>
 </div>
             </th>    
@@ -312,14 +319,14 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 </td>
 <td>$<?php echo $product['price']; ?>.00</td>
-<td><?php echo $product['soluong']; ?></td>
+
 <td><?php echo date('d/m/Y', strtotime($product['date_add'])); ?></td>
 <td>
 <?php 
         if ($product['status'] == 1) {
             echo 'On sale';
         } else if($product['status'] == 0) {
-            echo 'Not yet released';
+            echo 'Not yet sale';
         }else{
           echo 'Hidden';
         }
@@ -329,7 +336,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <td>
   <div class="actions">
 
-  <a href="edit-product.php?pid=<?php echo $product['id'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
+  <a href="edit-product.php?pid=<?php echo $product['id'];?>&idloai=<?php echo $product['idloai'];?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>"><span class="las la-edit" style="color:#076FFE;"></span></a>
 
 
   <?php if ($product['status'] == 1): ?>
@@ -410,7 +417,9 @@ if (isset($_GET['text'])) {
 <div id="nutrifact">
 
     <h1 class="bold">Nutrition Facts</h1> 
-    <i class="fa-solid fa-xmark" id="close-ic" onclick="hidePopup()"></i>
+   
+    <span class="las la-reply" id="close-ic" onclick="hidePopup()"></span>
+
   
 </div>
      
@@ -431,9 +440,9 @@ if (isset($_GET['text'])) {
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?" maxlength="3">g</span> <span ><input name="fat" id="fat" min="0" placeholder="?" maxlength="3">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?" maxlength="3">mg</span> <span ><input name="sodium" id="sodium" min="0" min="0" placeholder="?" maxlength="3">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?" maxlength="3">g</span> <span ><input id="carbon" name="carbon" min="0" placeholder="?" maxlength="3">%</span></p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" id="fatg" min="0" placeholder="?" maxlength="3">g</span></p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" placeholder="?" maxlength="3">mg</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" placeholder="?" maxlength="3">g</span> </p>
       <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" placeholder="?" maxlength="3">g</span> </p>
       <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" placeholder="?" maxlength="3">g</span> </p>
     
@@ -443,7 +452,6 @@ if (isset($_GET['text'])) {
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
 
-<i  class="fa-solid fa-check" id="submit-ic" onclick="backPopup()"></i>
 
 
   </div>
@@ -457,9 +465,18 @@ if (isset($_GET['text'])) {
   <i class="fa-solid fa-xmark" id="closeadd" onclick="hideadd()"></i>
   
 
-<div class="user-input" style="margin-top: 30px;">
+  <div class="user-input" style="margin-top: 30px;">
   <label>Name:</label>
 <input type="text" name="name" id="name" maxlength="30">
+    
+
+</div>
+
+<div class="user-input">
+
+  <label>Price:</label>
+<input type="number" name="price" id="price" maxlength="20">     
+
 </div>
 
 <div class="user-input" style="margin-bottom: 10px;">
@@ -481,54 +498,51 @@ if (isset($_GET['text'])) {
 
         </div>
 
-         <div class="user-input">
-          <label> Type:</label>
-         <select name="type" id="type">
-            <option value="0" selected>Select Type</option>
-            <option value="carbonated">Carbonated</option>
-            <option value="nogas">Non-carbonated</option>
-          </select>
-          <label> Brand:</label>
-         <select name="brand" id="brand">
-            <option value="0" selected>Select Brand</option>
-            <option value="cocacola">Coca-cola</option>
-            <option value="pepsi">Pepsi</option>
-            <option value="fanta">Fanta</option>
-            <option value="sprite">Sprite</option>
-            <option value="aquarius">Aquarius</option>
-            <option value="thumbsup">Thumbs Up</option>
-            <option value="nutri">Nutriboost</option>
-            <option value="fuzetea">Fuzetea</option>
-            <option value="dasani">Dasani</option>
-          </select>
-               </div>
+        <div class="user-input">
+    <label> Brand:</label>
+    <select name="brand" id="brand">
+        <option value="0" selected>Select Brand</option>
+        <?php
+ 
+        $query = "SELECT brand FROM category";
+        $result = mysqli_query($connection->conn, $query);
+ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<option value='".$row['brand']."'>".$row['brand']."</option>";
+        }
+        ?>
+    </select>
+
+    <label> Type:</label>
+    <select name="type" id="type">
+        <option value="0" selected>Select Type</option>
+        <?php
+ 
+        $query = "SELECT DISTINCT type FROM category";
+        $result = mysqli_query($connection->conn, $query);
+ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<option value='".$row['type']."'>".$row['type']."</option>";
+        }
+        ?>
+    </select>
+</div>    
 
 
-               <div class="user-input">
-  <label>Price:</label>
-<input type="number" name="price" id="price" maxlength="20">     
-<label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="0">
-</div>
 
 <div class="user-input" style="display:none;">
   <label>Date Add:</label>
 <input type="date" name="date_add" id="date_add" >
 </div>
 <div class="user-input">
-<label>Status:</label>
-         <select name="status" id="status">
-            <option value="no" selected>Select Status</option>
-            <option value="0">Not yet released</option>
-            <option value="1">On sale</option>
-          </select>
+
   <label>Description:</label>
 <input style="width:80px; font-size:17px; text-align:center; cursor:pointer;" value="Show" type="button" id="showpopup" onclick="showPopup()">
 </div>
 
 
 <div style="text-align: center;" id="button-submit">
-  <button type="submit" id="btn-submit" >Submit</button>
+  <button type="submit" id="btn-submit" >Add Now</button>
 
 </div>
 </form>
@@ -544,7 +558,6 @@ if (isset($_GET['text'])) {
   <script>
   const popup = document.querySelector('.popup');
   const overlay = document.querySelector('.container-popup');
-  const submitic = document.querySelector('#submit-ic');
   const htmlElement = document.querySelector('html');
   const inputFields = document.querySelectorAll('.popup input');
 
@@ -557,30 +570,14 @@ if (isset($_GET['text'])) {
   }
 
   function hidePopup() {
-    submitic.style.visibility = "hidden";
+
     containerinputs.style.display="block";
     popup.style.display = 'none';
     overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
 
   }
-  function backPopup() {
-    submitic.style.visibility = "hidden";
-    containerinputs.style.display="block";
-    popup.style.display = 'none';
-    overlay.style.display = 'none'; 
-    htmlElement.style.overflow = 'auto';
-    
-  }
 
-   function checkInputsNotEmpty() {
- 
-   const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
- 
-   submitic.style.visibility = allFilled ? 'visible' : 'hidden';
- }
- inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
- checkInputsNotEmpty();
 
  </script>
 
@@ -620,13 +617,11 @@ function hideadd(){
    function ktrong() {
     var typeSelect = document.getElementById("type");
     var brandSelect = document.getElementById("brand");
-    var statusSelect = document.getElementById("status");
     var name = document.getElementById("name").value;
     var selectedTypeValue = typeSelect.value;
     var selectedBrandValue = brandSelect.value;
-    var selectedStatusValue = statusSelect.value;
-    var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
- var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
+    var inputsToCheck = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing", "name", "image", "price"];
+ var inputsToCheckNumbers = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing"];
  var nameRegex = /^[a-zA-Z\s]+$/;
  if (!nameRegex.test(name)) {
         alert("Product name must contain only letters.");
@@ -636,10 +631,7 @@ function hideadd(){
     alert("Please choose brand or type");
     return false;
 }
-  if(selectedStatusValue === "no"){
-    alert("Please choose status");
-        return false;
-  }
+ 
  for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();
@@ -711,11 +703,7 @@ document.querySelector('.record-search').addEventListener('keyup', function(even
     }
 });
 
+
+
     </script>
-
-
-
-
-
-
 

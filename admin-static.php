@@ -135,7 +135,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                 <input type="date" name="dateStart" style="margin-right: 10px;">
                 <label style="margin-right: 4px;">Date to</label>
                 <input type="date" name="dateEnd" style="margin-right: 10px;">
-                <button type="submit">Statistics</button>
+                <button type="submit">Statistic</button>
                 </form>
             </div>
         

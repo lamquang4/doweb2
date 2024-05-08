@@ -169,7 +169,7 @@ $totalPages = ceil($totalOrders / $limit);
                         </div>
                      
                         <div id="button-content">
-    <button type="submit">Submit</button>
+    <button type="submit">Filter</button>
    </div>
    </form>
                        </div>
@@ -207,7 +207,7 @@ $totalPages = ceil($totalOrders / $limit);
     </select>
    </div>
    <div id="button-content">
-    <button type="submit">Submit</button>
+    <button type="submit">Filter</button>
    </div>
         </form>
    
@@ -339,28 +339,24 @@ if (isset($_GET['username'])) {
 <script>
 $(document).ready(function(){
     $('.select-status-order').on('change', function(){ 
-        var status = $(this).val();
-        var orderId = $(this).find('option:selected').data('order-id');
+        var confirmation = confirm('Are you sure you want to change the status of this order?');
+        if (confirmation) {
+            var status = $(this).val();
+            var orderId = $(this).find('option:selected').data('order-id');
 
-        $.ajax({
-            url: 'update-status-order.php',
-            type: 'POST',
-            data: {status: status, orderId: orderId},
-            success: function(response){
-                if (response === "shortage") {
-                    alert("This order doesn't have enough items in stock.");
+            $.ajax({
+                url: 'update-status-order.php',
+                type: 'POST',
+                data: {status: status, orderId: orderId},
+                success: function(response){
                     window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
-                } else {
-                    console.log(response);
                 }
-                window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
-            }
-        });
+            });
+        } else {
+            window.location.reload();
+        }
     });
 });
-
-
-
 </script>
 
 

@@ -29,7 +29,7 @@ if (isset($_POST["submit"])) {
   $role = isset($_POST["role"]) ? $_POST["role"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-  $status1 = $_GET['status'];
+  $status1 = isset($_GET['status']) ? $_GET['status'] : '';
   $result = $registerad->registration(
     $username,
       $email,
@@ -55,30 +55,31 @@ if (isset($_POST["submit"])) {
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager'])) {
     $username = $_GET['manager']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    $status1 = $_GET['status'];
+    $status1 = isset($_GET['status']) ? $_GET['status'] : '';
     if ($_SESSION["username"] !== $username) {
         $query = "UPDATE tb_manager SET status = 0 WHERE username = '$username'";
         
         if (mysqli_query($connection->conn, $query)) {
-            echo "<script>alert('Block Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+            echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
         
         } else {
-            echo "<script>alert('Block Customer Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+            echo "<script>alert('Block Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
         }
     } else {
-        echo "<script>alert('You cannot block your own account.'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+        // không cho block chính mình
+        echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manager'])) {
     $username = $_GET['manager']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    $status1 = $_GET['status'];
+  $status1 = isset($_GET['status']) ? $_GET['status'] : '';
     $query = "UPDATE tb_manager SET status = 1 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
      
-        echo "<script>alert('Unblock Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+        echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
       
     } else {
         echo "<script>alert('Unblock Manager Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
@@ -391,7 +392,7 @@ if (isset($_GET['status'])) {
          </div> 
 
          <div style="text-align: center;" id="button-submit">
-  <button type="submit" name="submit">Submit</button>
+  <button type="submit" name="submit">Add Now</button>
 </div>  
 
     </form>

@@ -85,7 +85,7 @@ include_once 'header.php'
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=cocacola#product11'"><img  src="assets/images/pic/coca-circle.png"></button>
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=pepsi#product11'"><img src="assets/images/pic/pepsilogo.png"></button>
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=sprite#product11'"><img src="assets/images/pic/sprite-circle.png"></button>
-    <button class="btn" id="btnfil" style="border-radius: 50%; border: 2px solid black;" onclick="window.location.href='shop.php?type=carbonated#product11'"><img src="assets/images/pic/soft-drinks.png"></button>
+   
  <div>
   <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
  </div>
@@ -159,12 +159,6 @@ include_once 'header.php'
           
                     </a>
 
-                    <?php if ($product['soluong'] <= 0) { ?> 
-                      <div id="sold-out-container">
-                       <span class="sold-out-text">Sold Out</span>  
-                      </div>
-           
-        <?php } ?>
                     <h5 class="product-title" style="display: none;"><?php echo $product['type']; ?></h5>
                     <h5 class="product-title"><?php echo $product['name']; ?></h5>
                     <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
@@ -344,30 +338,3 @@ window.onresize = function(event) {
 
 </script>
 
-
-
-<style>
-
-#sold-out-container {
-    position: absolute;
-   top:110px;
-   left:91px;
-   background-color: #EF3847;
-    color: white; 
-    padding: 9px 12px;
-pointer-events: none;
-    z-index: 1;
-  
-    
-}
-.sold-out-text{
-  display: inline-block;
-text-transform: uppercase;
-letter-spacing: 1.3px;
-font-weight: bold;
-}
-
-.product-box {
-    position: relative; 
-}
-</style>

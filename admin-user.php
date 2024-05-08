@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
   $imguser = isset($_POST["imguser"]) ? $_POST["imguser"] : "";
   $status = isset($_POST["status"]) ? $_POST["status"] : "";
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-  $status1 = $_GET['status'];
+  $status1 = isset($_GET['status']) ? $_GET['status'] : '';
   $result = $register->registration(
       $username,
       $email,
@@ -71,12 +71,12 @@ if (isset($_POST["submit"])) {
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['customer'])) {
     $username = $_GET['customer']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    $status1 = $_GET['status'];
+    $status1 = isset($_GET['status']) ? $_GET['status'] : '';
     $query = "UPDATE tb_customer SET status = 0 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
    
-        echo "<script>alert('Block Successful'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
+        echo "<script> window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
     } else {
        
         echo "<script>alert('Block Customer Fail'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
@@ -86,11 +86,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['custome
 if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['customer'])) {
     $username = $_GET['customer']; 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
-    $status1 = $_GET['status'];
+    $status1 = isset($_GET['status']) ? $_GET['status'] : '';
     $query = "UPDATE tb_customer SET status = 1 WHERE username = '$username'";
     
     if (mysqli_query($connection->conn, $query)) {
-        echo "<script>alert('Unblock Successful'); window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
+        echo "<script> window.location.href='admin-user.php?page={$currentPage}&status={$status1}';</script>";
       
     } else {
      
@@ -383,7 +383,7 @@ if (isset($_GET['status'])) {
         </div>
     
 <div style="text-align: center;" id="button-submit">
-  <button type="submit" name="submit" onclick="return validateForm1();">Submit</button>
+  <button type="submit" name="submit" onclick="return validateForm1();">Add Now</button>
 </div>
 
 </form>

@@ -34,7 +34,7 @@ font-size: 22px;
 position: absolute;
 right:2%;
 top:2%;
-font-size: 30px;
+font-size: 34px;
 cursor: pointer;
 
 
@@ -58,9 +58,8 @@ visibility: hidden;
 }
 }
 .popup input{
-width: 31px;
+width: 50px;
 height: 25px;
-border: none;
 font-size: 18px;
 font-family: 'Open Sans', sans-serif;
 text-align: center;

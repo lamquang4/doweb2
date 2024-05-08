@@ -15,7 +15,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
 }
 
 if(empty($_SESSION["shopping_cart"])){
-    header("Location: shop.php");
+    header("Location: shop.php#product11");
     exit();
 }
 if (empty($user['fullname']) || empty($user['phone']) || empty($user['sonha']) || empty($user['duong']) || empty($user['city']) || empty($user['district']) || empty($user['ward'])) {
@@ -72,11 +72,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $query1 = "INSERT INTO order_detail (idorder,id,sl_mua,subtotal) VALUES ('$random_id','$id','$sl_mua','$subtotal')";
             mysqli_query($connection->conn, $query1);
         }
+        $update_query = "UPDATE product SET status = 1 WHERE status = 0 AND id='$id'";
+        mysqli_query($connection->conn, $update_query);
   unset($_SESSION['shopping_cart']);
-        echo "<script>alert('Success'); window.location.href='shop.php'; </script>";
+        echo "<script> window.location.href='shop.php#product11'; </script>";
      exit;
     } else {
-        echo "<script> alert('Fail'); </script>";
+        echo "<script> alert('Fail'); window.location.href='shop.php#product11';</script>";
     }
 }
 
@@ -316,31 +318,38 @@ include_once 'header.php'
                                       </div>
 
                                       <div class="row" style="margin-top: 10px;" id="pay-date-cvv1">
-                                      <div class="col-lg-5" style="margin-top: 10px; display: none;" id="pay-card-number" >
-                                        <div class="mb-2">
+                                      <div class="col-lg-5" id="credit-form1" style="display: none;">
+                                          <div class="mb-2">
+                                              <label class="form-label" for="zip-code">Cardholder Name</label>
+                                              <input type="text" class="form-control" id="cardname" placeholder="Enter Full name" >
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-5">
+                                        <div class="mb-2" id="credit-form2" style="display: none;">
                                             <label class="form-label" for="card-number">Card Number</label>
-                                            <input type="number" inputmode="numeric" class="form-control" style="display: none;" id="card-number" placeholder="Enter Card Number">
+                                            <input type="number" inputmode="numeric" class="form-control"  id="card-number" placeholder="Enter Card Number">
                                         </div>
                                         
                                     </div>
+                                  
 
         </div>
-
+     
                                     
 
-                                    <div class="row" style="margin-top: 10px; display: none;" id="pay-date-cvv">
+                                    <div class="row" style="margin-top: 10px;" id="pay-date-cvv">
             
                                       <div class="col-lg-5">
-                                          <div class="mb-2">
+                                          <div class="mb-2" id="credit-form3" style="display: none;">
                                               <label class="form-label" for="billing-city">Expiry Date</label>
-                                              <input type="date" style="display: none;" class="form-control" id="expiry-date" placeholder="Enter Expiry Date" >
+                                              <input type="date" class="form-control" id="expiry-date" placeholder="Enter Expiry Date" >
                                           </div>
                                       </div>
 
                                       <div class="col-lg-5">
-                                          <div class="mb-2">
+                                          <div class="mb-2" id="credit-form4" style="display: none;">
                                               <label class="form-label" for="zip-code">CVV</label>
-                                              <input type="number"  style="display: none;" class="form-control" id="cvv" placeholder="Enter CVV" >
+                                              <input type="number"  class="form-control" id="cvv" placeholder="Enter CVV" >
                                           </div>
                                       </div>
                                       
@@ -459,25 +468,23 @@ include_once 'footer.php'
 
   const cod=document.getElementById("pay-methodoption3");
   const visa=document.getElementById("pay-methodoption2");
-  const mastercard=document.getElementById("pay-methodoption1");
-  const expiry=document.getElementById("pay-card-number");
-  const cvv=document.getElementById("pay-date-cvv");
-  const cardnumber=document.getElementById("card-number");
-  const expirydate=document.getElementById("expiry-date");
-  const cvvs=document.getElementById("cvv");
+  const cardname=document.getElementById("credit-form1");
+  const cardnumber=document.getElementById("credit-form2");
+  const expiry=document.getElementById("credit-form3");
+  const cvv=document.getElementById("credit-form4");
+
 cod.addEventListener('click',()=>{
-  expiry.style.display='none';
-    cvv.style.display='none';
+    cardname.style.display='none';
     cardnumber.style.display='none';
-    cvvs.style.display='none';
-    expirydate.style.display='none';
+    expiry.style.display='none';
+    cvv.style.display='none';
 });
   visa.addEventListener('click',()=>{
-    expiry.style.display='block';
-    cvv.style.display='flex';
+    cardname.style.display='block';
     cardnumber.style.display='block';
-    cvvs.style.display='block';
-    expirydate.style.display='block';
+    expiry.style.display='block';
+    cvv.style.display='block';
+  
   });
 
 </script>
@@ -488,10 +495,12 @@ cod.addEventListener('click',()=>{
         var payOption = document.querySelector('input[name="pay-method"]:checked').value;
         
   if(payOption==='cc'){
+    var cardNumber = document.getElementById("card-number").value.trim();
+    var cardName = document.getElementById("cardname").value.trim();
         var cardNumber = document.getElementById("card-number").value.trim();
     var expiryDate = document.getElementById("expiry-date").value.trim();
     var cvv = document.getElementById("cvv").value.trim();
-    if (cardNumber === "" || expiryDate === "" || cvv === "") {
+    if (cardNumber === "" || expiryDate === "" || cvv === "" || cardName === "") {
         alert("Please fill in all credit card fields.");
         return false;
     }

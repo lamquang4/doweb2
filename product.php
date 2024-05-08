@@ -11,25 +11,21 @@ if(isset($_GET['id'])) {
         $productName = $productDetails['name'];
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
-        $productSoluong = $productDetails['soluong'];
         $productDec1 = $productDetails['ml'];
         $productDec2 = $productDetails['calo'];
         $productDec3 = $productDetails['fatg'];
-        $productDec4 = $productDetails['fat'];
         $productDec5 = $productDetails['sodiummg'];
-        $productDec6 = $productDetails['sodium'];
         $productDec7 = $productDetails['carbong'];
-        $productDec8 = $productDetails['carbon'];
         $productDec9 = $productDetails['sugarg'];
         $productDec10 = $productDetails['proteing'];
     } else {
        
-        echo "<script>alert('Product id not found!'); window.location.href='shop.php';</script>";
+        echo "<script> window.location.href='shop.php#product11';</script>";
      
         exit;
     }
 } else {
-  echo "<script>alert('Product id not found!'); window.location.href='shop.php';</script>";
+  echo "<script>window.location.href='shop.php#product11';</script>";
  
     exit;
 }
@@ -121,7 +117,7 @@ include_once 'header.php'
   </div>
   
   <div class="single-pro-details">
-<form method="post" action="" onsubmit="return validateQuantity()">
+<form method="post" action="">
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
   <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">
@@ -162,9 +158,9 @@ include_once 'header.php'
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <?php echo $productDec3; ?>g</span> <span ><?php echo $productDec4; ?>%</span></p>
-      <p><span><span class="bold">Sodium</span> <?php echo $productDec5; ?>mg</span> <span ><?php echo $productDec6; ?>%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <?php echo $productDec7; ?>g</span> <span ><?php echo $productDec8; ?>%</span></p>
+      <p><span><span class="bold">Total Fat</span> <?php echo $productDec3; ?>g</span></p>
+      <p><span><span class="bold">Sodium</span> <?php echo $productDec5; ?>mg</span></p>
+      <p><span><span class="bold">Total Carbohydrate</span> <?php echo $productDec7; ?>g</span></p>
       <p><span><span class="bold">Sugars</span> <?php echo $productDec9; ?>g</span> </p>
       <p style="border: none;"><span><span class="bold">Protein</span> <?php echo $productDec10; ?>g</span> </p>
     
@@ -302,17 +298,7 @@ MainImg.src = small[3].src;
 
    </script>
 
-<script>
-  function validateQuantity() {
-    var selectedQuantity = parseInt(document.querySelector("input[name='quantity']").value);
-    var availableQuantity = <?php echo $productSoluong; ?>;
-    if (availableQuantity === 0) {
-      alert("The current stock has <?php echo $productSoluong; ?> of these products remaining.");
-      return false; 
-    }
-    return true; 
-  }
-</script>
+
 
 
 

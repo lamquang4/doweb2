@@ -21,15 +21,16 @@ $totalProducts = $productObj ->getProductCount($searchText,$searchType,$minPrice
   $totalPages = ceil($totalProducts / $limit);
 
 $id = $_GET['pid'];
-
- $edit_sql = "SELECT * FROM product WHERE id='$id'";
+$idloai = $_GET['idloai'];
+ $edit_sql = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE id='$id'";
 $result = mysqli_query($connection->conn, $edit_sql);
 $row = mysqli_fetch_assoc($result); 
 
-
-
-
-
+$category_sql = "SELECT brand, type FROM category WHERE idloai = '$idloai'";
+$category_result = mysqli_query($connection->conn, $category_sql);
+$category_row = mysqli_fetch_assoc($category_result);
+$selected_brand = $category_row['brand'];
+$selected_type = $category_row['type'];
 ?>
 
 
@@ -180,7 +181,6 @@ $row = mysqli_fetch_assoc($result);
     <th> IMAGE </th>
     <th> NAME </th>
     <th> PRICE </th>
-    <th > QUANTITY </th>
     <th> DATE ADD </th>
     <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
                 
@@ -188,7 +188,7 @@ $row = mysqli_fetch_assoc($result);
                 <input type="hidden" name="status">
                 <a href="admin-product.php">All</a>
 <a href="admin-product.php?status=1">On Sale</a>
-<a href="admin-product.php?status=0">Not yet released</a>
+<a href="admin-product.php?status=0">Not yet sale</a>
 <a href="admin-product.php?status=2">Hidden</a>
 </div>
             </th>    
@@ -221,14 +221,13 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 </td>
 <td>$<?php echo $product['price']; ?>.00</td>
-<td><?php echo $product['soluong']; ?></td>
 <td><?php echo date('d/m/Y', strtotime($product['date_add'])); ?></td>
 <td>
 <?php 
         if ($product['status'] == 1) {
             echo 'On sale';
         } else if($product['status'] == 0) {
-            echo 'Not yet released';
+            echo 'Not yet sale';
         }else{
           echo 'Hidden';
         }
@@ -312,7 +311,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <div id="nutrifact">
 
     <h1 class="bold">Nutrition Facts</h1> 
-    <i class="fa-solid fa-xmark" id="close-ic" onclick="hidePopup()"></i>
+    <span class="las la-reply" id="close-ic" onclick="hidePopup()"></span>
   
 </div>
      
@@ -333,9 +332,9 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
     <div class="daily-value small-text">
       <p class="bold right no-divider">% Daily Value *</p>
       <div class="divider"></div>
-      <p><span><span class="bold">Total Fat</span> <input name="fatg" maxlength="3" id="fatg" min="0" value="<?php echo $row['fatg']?>">g</span> <span ><input name="fat" id="fat" maxlength="3" min="0" value="<?php echo $row['fat']?>">%</span></p>
-      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" value="<?php echo $row['sodiummg']?>">mg</span> <span ><input name="sodium" id="sodium" maxlength="3" min="0" min="0" value="<?php echo $row['sodium']?>">%</span></p>
-      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" maxlength="3" value="<?php echo $row['carbong']?>">g</span> <span ><input id="carbon" maxlength="3" name="carbon" min="0" value="<?php echo $row['carbon']?>">%</span></p>
+      <p><span><span class="bold">Total Fat</span> <input name="fatg" maxlength="3" id="fatg" min="0" value="<?php echo $row['fatg']?>">g</span> </p>
+      <p><span><span class="bold">Sodium</span> <input name="sodiummg" id="sodiummg" min="0" value="<?php echo $row['sodiummg']?>">mg</span> </p>
+      <p><span><span class="bold">Total Carbohydrate</span> <input min="0" name="carbong" id="carbong" maxlength="3" value="<?php echo $row['carbong']?>">g</span> </p>
       <p><span><span class="bold">Sugars</span> <input name="sugarg" id="sugarg" min="0" maxlength="3" value="<?php echo $row['sugarg']?>">g</span> </p>
       <p style="border: none;"><span><span class="bold">Protein</span> <input id="proteing" name="proteing" min="0" maxlength="3" value="<?php echo $row['proteing']?>">g</span> </p>
     
@@ -344,8 +343,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
-
-<i  class="fa-solid fa-check" id="submit-ic" onclick="backPopup()"></i>
 
 
   </div>
@@ -360,9 +357,14 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
   
 <input type="hidden" name="pid" value="<?php echo $row['id']?>">
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
-<div class="user-input" style="margin-top: 32px;">
+<div class="user-input" style="margin-top: 30px;">
   <label>Name:</label>
 <input type="text" name="name" id="name" value="<?php echo $row['name']?>">
+</div>
+<div class="user-input">
+  <label>Price:</label>
+<input type="number" name="price" id="price" value="<?php echo $row['price']?>">     
+
 </div>
 
 <div class="user-input" style="margin-bottom: 10px;">
@@ -386,35 +388,39 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
  <input type="text" id="image" name="image" value="<?php echo $row['image']?>" >
         </div>
 
-         <div class="user-input">
-          <label> Type:</label>
-         <select name="type" id="type">
-     
-            <option value="carbonated" <?php echo ($row['type'] == 'carbonated') ? 'selected' : ''; ?> >Carbonated</option>
-            <option value="nogas" <?php echo ($row['type'] == 'nogas') ? 'selected' : ''; ?>>Non-carbonated</option>
-          </select>
-          <label> Brand:</label>
-         <select name="brand" id="brand">
-        
-            <option value="cocacola" <?php echo ($row['brand'] == 'cocacola') ? 'selected' : ''; ?>>Coca-cola</option>
-            <option value="pepsi" <?php echo ($row['brand'] == 'pepsi') ? 'selected' : ''; ?>>Pepsi</option>
-            <option value="fanta" <?php echo ($row['brand'] == 'fanta') ? 'selected' : ''; ?>>Fanta</option>
-            <option value="sprite" <?php echo ($row['brand'] == 'sprite') ? 'selected' : ''; ?>>Sprite</option>
-            <option value="aquarius" <?php echo ($row['brand'] == 'aquarius') ? 'selected' : ''; ?>>Aquarius</option>
-            <option value="thumbsup" <?php echo ($row['brand'] == 'thumbsup') ? 'selected' : ''; ?>>Thumbs Up</option>
-            <option value="nutri" <?php echo ($row['brand'] == 'nutri') ? 'selected' : ''; ?>>Nutriboost</option>
-            <option value="fuzetea" <?php echo ($row['brand'] == 'fuzetea') ? 'selected' : ''; ?>>Fuzetea</option>
-            <option value="dasani" <?php echo ($row['brand'] == 'dasani') ? 'selected' : ''; ?>>Dasani</option>
-          </select>
-               </div>
+        <div class="user-input">
+        <label> Brand:</label>
+    <select name="brand" id="brand">
+        <?php
+    
+        $query = "SELECT DISTINCT brand FROM category";
+        $result = mysqli_query($connection->conn, $query);
 
+        while ($row1 = mysqli_fetch_assoc($result)) {
+           
+            $selected = ($row1['brand'] == $selected_brand) ? 'selected' : '';
+            echo "<option value='".$row1['brand']."' $selected>".$row1['brand']."</option>";
+        }
+        ?>
+    </select>
+    <label> Type:</label>
+    <select name="type" id="type">
+        <?php
 
-               <div class="user-input">
-  <label>Price:</label>
-<input type="number" name="price" id="price" value="<?php echo $row['price']?>">     
-<label>Quantity:</label>
-<input type="number" name="soluong" id="soluong" min="0" value="<?php echo $row['soluong']?>">
+        $query = "SELECT DISTINCT type FROM category";
+        $result = mysqli_query($connection->conn, $query);
+
+        while ($row1 = mysqli_fetch_assoc($result)) {
+           
+            $selected = ($row1['type'] == $selected_type) ? 'selected' : '';
+            echo "<option value='".$row1['type']."' $selected>".$row1['type']."</option>";
+        }
+        ?>
+    </select>
+
 </div>
+
+               
 
 <div class="user-input" style="display: none;">
   <label>Date Add:</label>
@@ -424,7 +430,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <label>Status:</label>
          <select name="status" onchange="checkStatus()">
         
-            <option value="0" <?php echo ($row['status'] == 0) ? 'selected' : ''; ?>>Not yet released</option>
+            <option value="0" <?php echo ($row['status'] == 0) ? 'selected' : ''; ?>>Not yet sale</option>
             <option value="1" <?php echo ($row['status'] == 1) ? 'selected' : ''; ?>>On sale</option>
             <option value="2" <?php echo ($row['status'] == 2) ? 'selected' : ''; ?>>Hidden</option>
           </select>
@@ -434,7 +440,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 
 <div style="text-align: center;" id="button-submit">
-  <button type="submit" id="btn-submit" >Submit</button>
+  <button type="submit" id="btn-submit" >Update</button>
 
 </div>
 </form>
@@ -446,7 +452,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
   <script>
   const popup = document.querySelector('.popup');
   const overlay = document.querySelector('.container-popup');
-  const submitic = document.querySelector('#submit-ic');
   const htmlElement = document.querySelector('html');
   const inputFields = document.querySelectorAll('.popup input');
 
@@ -459,36 +464,21 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
   }
 
   function hidePopup() {
-    submitic.style.visibility = "hidden";
     containerinputs.style.display="block";
     popup.style.display = 'none';
     overlay.style.display = 'none'; 
     htmlElement.style.overflow = 'auto';
 
   }
-  function backPopup() {
-    submitic.style.visibility = "hidden";
-    containerinputs.style.display="block";
-    popup.style.display = 'none';
-    overlay.style.display = 'none'; 
-    htmlElement.style.overflow = 'auto';
-    
-  }
 
-   function checkInputsNotEmpty() {
+
  
-   const allFilled = Array.from(inputFields).every(input => input.value.trim() !== '');
- 
-   submitic.style.visibility = allFilled ? 'visible' : 'hidden';
- }
- inputFields.forEach(input => input.addEventListener('input', checkInputsNotEmpty));
- checkInputsNotEmpty();
 
 
  function ktrong() {
   var name = document.getElementById("name").value;
-  var inputsToCheck = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing", "name", "image", "price", "soluong"];
-  var inputsToCheckNumbers = ["ml", "calo", "fatg", "fat", "sodiummg", "sodium", "carbong", "carbon", "sugarg", "proteing"];
+  var inputsToCheck = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing", "name", "image", "price"];
+  var inputsToCheckNumbers = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing"];
     for (var i = 0; i < inputsToCheck.length; i++) {
         var inputId = inputsToCheck[i];
         var inputValue = document.getElementById(inputId).value.trim();

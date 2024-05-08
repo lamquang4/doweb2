@@ -18,7 +18,7 @@ $statuscur = $_GET['status'];
 
     if (mysqli_query($connection->conn, $updatequery)) {
     
-echo "<script> alert('Success'); window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+echo "<script>  window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
            
     } else {
         echo "<script> alert('Fail'); window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
