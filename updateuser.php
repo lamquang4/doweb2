@@ -60,11 +60,11 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
 
     $updateQuery = "UPDATE tb_customer SET email='$email', fullname='$fullname', phone='$phone', birthday='$birthday', gender='$gender', city='$city', ward='$ward', district='$district', sonha='$sonha', duong='$duong' WHERE username='$username'";
     if (mysqli_query($connection->conn, $updateQuery)) {
-        echo "<script> alert('Success'); window.location.href='user.php'; </script>";
+        echo "<script> window.location.href='user.php'; </script>";
        
         exit;
     } else {
-        echo "<script> alert('Fail'); window.location.href='user.php'; </script>";
+        echo "<script> window.location.href='user.php'; </script>";
     }
 
 ?>
