@@ -18,7 +18,7 @@ if(isset($_POST["submit"])){
         } else {
             $_SESSION["login"] = true;
             $_SESSION["username"] = $login->idUser();
-            echo "<script> alert('Login Successful'); window.location.href='index.php'; </script>";
+            echo "<script> window.location.href='index.php'; </script>";
             exit;
         }
   
