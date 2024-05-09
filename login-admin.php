@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
             $_SESSION["loginad"] = true;
             $_SESSION["idad"] = $loginad->idUserad();
             $_SESSION["username"] = $_POST["username"]; 
-            echo "<script> alert('Login Successful'); window.location.href='admin-strator.php'; </script>";
+            echo "<script> window.location.href='admin-strator.php'; </script>";
             exit;
         }
      

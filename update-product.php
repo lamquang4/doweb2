@@ -40,8 +40,9 @@ $brand = $_POST['brand'];
 $status = $_POST['status'];
 $id = $_POST['pid'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
-  $statuscur = $_GET['status'];
-  $text = $_GET['text'];
+
+  $text = isset($_GET['text']) ? $_GET['text'] : '';
+  $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
   $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
   $categoryResult = mysqli_query($connection->conn, $categoryQuery);
   
@@ -58,7 +59,7 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
 
     if (mysqli_query($connection->conn, $updatequery)) {
  
-            echo "<script>alert('Update Successful'); window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";    
         
        
     } else{

@@ -316,7 +316,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php?<?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
+<form method="post" action="update-product.php?<?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?><?php if(isset($id)) echo '&pid=' . $id; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>

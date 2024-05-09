@@ -14,7 +14,7 @@ $phone = $_POST['phone'];
 $birthday = $_POST['birthday'];
 $username = $_POST['customer'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
-$statuscur = $_GET['status'];
+$statuscur = isset($_GET['status']) ? $_GET['status'] : '';
     $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone', birthday='$birthday' WHERE username='$username'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
