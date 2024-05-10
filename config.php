@@ -242,7 +242,7 @@ class Product extends Connection {
         if (!empty($searchStatus) || $searchStatus === '0') {
             $query .= " AND status = $searchStatus";
         }
-     $query .= " ORDER BY date_add";
+        $query .= " ORDER BY date_add DESC";
         $query .= " LIMIT $start, $limit";
     
         $result = mysqli_query($this->conn, $query);
@@ -305,7 +305,7 @@ class Product extends Connection {
             $query .= " AND brand = '$searchBrand'";
         }
 
-        $query .= " ORDER BY date_add";
+        $query .= " ORDER BY date_add DESC";
         $query .= " LIMIT $start, $limit";
     
         $result = mysqli_query($this->conn, $query);
@@ -387,7 +387,7 @@ class Order extends Connection{
         if (!empty($searchStatus) || $searchStatus === '0') {
             $query .= " AND status = $searchStatus";
         }
-        $query .= " ORDER BY username";
+        $query .= " ORDER BY dateorder DESC";
         $query .= " LIMIT $start, $limit";
         $result2 = mysqli_query($this->conn, $query);
         return $result2;

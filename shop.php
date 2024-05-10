@@ -80,7 +80,7 @@ include_once 'header.php'
   <h2>FEATURED PRODUCTS</h2> 
 
   <div  id="filter-buttons" style="margin-top: 12px;">
-       
+ 
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php#product11'"><img src="assets/images/pic/all.png"></button>
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=cocacola#product11'"><img  src="assets/images/pic/coca-circle.png"></button>
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=pepsi#product11'"><img src="assets/images/pic/pepsilogo.png"></button>

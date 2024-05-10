@@ -56,7 +56,7 @@ if(isset($_POST["add_to_cart"])) {
   foreach ($_SESSION["shopping_cart"] as $key => $item) {
       if($item["item_id"] == $productId) {
           if(($item["item_quantity"] + $quantity) > 10) {
-            $quantity = 10 - $item["item_quantity"]; // Giới hạn số lượng mới
+            $quantity = 10 - $item["item_quantity"]; 
           }
           $_SESSION["shopping_cart"][$key]["item_quantity"] += $quantity;
           $found = true;
@@ -75,7 +75,7 @@ if(isset($_POST["add_to_cart"])) {
       $_SESSION["shopping_cart"][] = $item_array;
   }
 
-  echo "<script>alert('Item has been added to cart'); window.location.href='product.php?id=$productId';</script>";
+  echo "<script> window.location.href='product.php?id=$productId';</script>";
   exit;
 }
 

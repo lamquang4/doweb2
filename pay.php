@@ -71,8 +71,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $subtotal = $price * $sl_mua;
             $query1 = "INSERT INTO order_detail (idorder,id,sl_mua,subtotal) VALUES ('$random_id','$id','$sl_mua','$subtotal')";
             mysqli_query($connection->conn, $query1);
+            $update_query = "UPDATE product SET status = 1 WHERE id = '$id' AND status = 0";
+            mysqli_query($connection->conn, $update_query);
         }
-        $update_query = "UPDATE product SET status = 1 WHERE status = 0 AND id='$id'";
+    
         mysqli_query($connection->conn, $update_query);
   unset($_SESSION['shopping_cart']);
         echo "<script> window.location.href='shop.php#product11'; </script>";

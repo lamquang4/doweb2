@@ -182,7 +182,7 @@ $selected_type = $category_row['type'];
     <th> NAME </th>
     <th> PRICE </th>
     <th> DATE ADD </th>
-    <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+    <th onclick="toggleDropdown()" style="position: relative;">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
                 <input type="hidden" name="status">

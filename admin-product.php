@@ -105,6 +105,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
       echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
   }
 }
+//hidden
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $text = isset($_GET['text']) ? $_GET['text'] : ''; 
@@ -118,6 +119,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pi
       echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
   }
 }
+//on sale
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $text = isset($_GET['text']) ? $_GET['text'] : ''; 

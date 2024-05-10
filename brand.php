@@ -45,7 +45,7 @@ include_once 'header.php'
      
   </div> 
   <div class="pro">
-    <a href="shop.php?brand=nutri#product11">
+    <a href="shop.php?brand=fuzetea#product11">
     <img src="assets/images/pic/tea.png" alt=""></a>
  
 </div> 

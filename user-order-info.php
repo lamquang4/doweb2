@@ -196,7 +196,7 @@ if(isset($_GET['idorder'])) {
           <h6>Delivery Address</h6>
           <article class="card">
             <div class="card-body row"  style="padding-bottom: 0;">
-            <div class="col"> <strong>Fullname:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
+            <div class="col"> <strong>Full name:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
               <div class="col"> <strong>Address:</strong> <?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></div>
              
          

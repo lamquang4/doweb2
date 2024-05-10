@@ -168,7 +168,7 @@ $totalPages = ceil($totalAds / $limit);
                             <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
-                                <th onclick="toggleDropdown()" style="cursor: pointer; position: relative;">STATUS <i class="fa-solid fa-sort"></i>
+                                <th onclick="toggleDropdown()" style="position: relative;">STATUS <i class="fa-solid fa-sort-down" style="cursor: pointer; font-size:18px;"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
                     <input type="hidden" name="status">
