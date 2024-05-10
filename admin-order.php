@@ -152,7 +152,7 @@ $totalPages = ceil($totalOrders / $limit);
                         <tr id="select-filter">
                             <th>ID ORDER</th>                                          
                             <th>USERNAME</th>
-                            <th style="position: relative;"> ORDER DATE <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown2()"></i>
+                            <th style="position: relative;"> ORDER DATE <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown2()"></i>
                        <div id="datedropdown" class="hide1">
                         <form method="GET" action="admin-order.php">
                         <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
@@ -175,7 +175,7 @@ $totalPages = ceil($totalOrders / $limit);
                        </div>
                         
                         </th>
-                            <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown1()"></i>
+                            <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown1()"></i>
                             <div id="addressdropdown" class="hidden">
                             <form method="GET" action="admin-order.php">
                             <div id="dropdowninside">
@@ -213,7 +213,7 @@ $totalPages = ceil($totalOrders / $limit);
    
 </div>
                             </th>
-                            <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
+                            <th  style="position: relative;">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown()"></i>
                 
                             <div id="statusDropdown" class="dropdown-content show">
                             <a href="admin-order.php?status=<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">All</a>

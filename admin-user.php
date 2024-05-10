@@ -245,7 +245,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
                                 <th> BIRTHDAY</th>
                                 <th> ADDRESS</th>
                                
-                                <th  style="position: relative;">STATUS <i style="cursor: pointer;" class="fa-solid fa-sort" onclick="toggleDropdown()"></i>
+                                <th  style="position: relative;">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown()"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
                 <input type="hidden" name="status">
