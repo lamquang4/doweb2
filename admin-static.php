@@ -169,7 +169,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                             <th>EMAIL</th>
                             <th>PHONE</th>
                             <th>ADDRESS</th>
-                  <th> TOTAL ALL ORDERS</th>
+                  <th> TOTAL ORDER AMOUNT</th>
                       
                           <th>ACTION</th>
                         </tr>
@@ -278,7 +278,7 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
     const data = {
         labels: <?php echo json_encode($usernames); ?>,
         datasets: [{
-            label: 'Total Orders',
+            label: 'Total Order Amount',
             data: <?php echo json_encode($totals); ?>,
             backgroundColor: [
                 <?php 

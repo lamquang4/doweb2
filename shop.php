@@ -133,7 +133,7 @@ include_once 'header.php'
   <option value="aquarius">Aquarius</option>
   <option value="dasani">Dasani</option>
   <option value="thumbsup">ThumbsUp</option>
-  <option value="nutri">Nutriboost</option>
+  <option value="nutriboost">Nutriboost</option>
   <option value="fuzetea">Fuzetea</option>
 </select>
 </div>
