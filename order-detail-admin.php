@@ -2,6 +2,12 @@
 require 'config.php';
 
 $connection = new Connection();
+
+if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+  header("Location: login-admin.php");
+  exit();
+}
+
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 if(isset($_GET['username'])) {
   $username = $_GET['username'];
@@ -45,12 +51,12 @@ $orderdetailObj = new Orderdetail();
       $dateorder = $order['dateorder'];
   } else {
      
-      echo "<script>alert('Order id not found!'); window.location.href='admin-order.php';</script>";
+      echo "<script> window.location.href='admin-order.php';</script>";
    
       exit;
   }
 } else {
-echo "<script>alert('Order id not found!'); window.location.href='admin-order.php';</script>";
+echo "<script> window.location.href='admin-order.php';</script>";
 
   exit;
 }
