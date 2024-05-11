@@ -187,8 +187,8 @@ $selected_type = $category_row['type'];
                 <div id="statusDropdown" class="dropdown-content show">
                 <input type="hidden" name="status">
                 <a href="admin-product.php">All</a>
-<a href="admin-product.php?status=1">On Sale</a>
 <a href="admin-product.php?status=0">Not yet sale</a>
+<a href="admin-product.php?status=1">On Sale</a>
 <a href="admin-product.php?status=2">Hidden</a>
 </div>
             </th>    
@@ -241,7 +241,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
   <?php if ($product['status'] == 1): ?>
     <a onclick="return confirm('Are you sure you want to hide this product?');" href="admin-product.php?action=setstatus2&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
-        <span class="las la-eye"></span>
+<span class="las la-eye-slash"></span>
     </a>
 <?php elseif($product['status'] == 0): ?>
     <a onclick="return confirm('Are you sure you want to delete this product?');" href="admin-product.php?action=delete&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
@@ -250,7 +250,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <?php else: ?>
 
     <a onclick="return confirm('Are you sure you want to show this product?');" href="admin-product.php?action=setstatus1&pid=<?php echo $product['id'];?>&page=<?php echo $page; ?>">
-        <span class="las la-eye-slash"></span>
+    <span class="las la-eye"></span>
     </a>
 <?php endif; ?>
 
