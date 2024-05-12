@@ -405,6 +405,7 @@ margin-top: 40px;
 .textBox-index{
   flex: 0.5;
 margin-bottom: 55px;
+padding: 0 0 0 50px;
 }
 .textBox-index h2{
 font-size: 58px;
@@ -468,6 +469,9 @@ font-size: 17px;
 width: 435px;
 height: 500px;
 }
+.textBox-index {
+  padding: 0;
+  }
 }
 @media(max-width:1000px){
   
@@ -489,6 +493,7 @@ font-size: 17px;
 width: 400px;
 height: 480px;
 }
+
 }
 @media(max-width:900px){
   .commercial-index{

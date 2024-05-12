@@ -49,7 +49,7 @@ if (isset($_POST["submit"])) {
   } elseif ($result == 10) {
       echo "<script> alert('Username or Email has already taken'); </script>";
   } elseif ($result == 100) {
-      echo "<script> alert('Password does not match'); </script>";
+      echo "<script> alert('Password and Confirm Password does not match'); </script>";
   }
 }
 
