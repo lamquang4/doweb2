@@ -62,7 +62,7 @@ font-size: 19px;
 .input-field {
 border:2px solid #e5e5e5;
 }
-#section-login form a{
+#section-login  #forget{
   text-decoration: none;
   font-size:13px;
   color: #8d8d8d;
@@ -76,11 +76,11 @@ font-weight: 300;
 .b-field{
 width: 100%;
 display: flex;
-justify-content: space-between;
+justify-content: center;
 }
 .b-field button{
 
-flex-basis: 48%;
+flex-basis: 100%;
 height: 40px;
 
 border:1.8px solid black;
@@ -99,7 +99,7 @@ background: white;
 color: black;
 }
 .input-group{
-height: 200px;
+height: 186px;
 
 }
 #eye{

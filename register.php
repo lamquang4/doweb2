@@ -103,15 +103,23 @@ include_once 'header.php'
              <input type="password" placeholder="Confirm password" id="password2" maxlength="20" required name="password2"> 
  
                 </div>
-      
+          
+            
              <div class="b-field">
-                 <button onclick="window.location.href='login.php'"  id="subtn">Sign in</button>
+                
             <button type="submit" name="submit"  id="sibtn">Sign up</button>
             
          </div>
+          
+         <div style="margin-top:20px; text-align:center;" >
+  <span style="font-size:17px">Already have an account?   <a href="login.php" style="color: #0093f5;">Sign in</a></span>
+
+</div>
+ 
+      
          
           </form>
-    
+
      
      </div>
 

@@ -78,10 +78,13 @@ include_once 'header.php'
              </div>
              <div class="b-field">
                  <button type="submit" name="submit"  id="subtn">Sign in</button>
-            <button type="button" onclick="window.location.href='register.php'" id="sibtn">Sign up</button>
+      
             
          </div>
-         
+         <div style="margin-top:20px; text-align:center;" >
+  <span style="font-size:17px">Don't have an account?   <a href="register.php" style="color: #0093f5;">Sign up</a></span>
+
+</div>
           </form>
     
      

@@ -56,20 +56,24 @@ if(isset($_GET['idorder'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/user-order.css">
-   
+    <link rel="stylesheet" href="assets/css/main.css"/>
     <meta name="viewport" content="width=device-width,  initial-scale=0.9,maximum-scale=1">
     <title>Order Detail</title>
 </head>
 <body>
-  <div class="container">
+<?php
+include_once 'header.php'
+  ?>
+
+  <div class="container" style="margin-top: 160px; margin-bottom:50px;">
     <article class="card">
     <header class="card-header" style="display: flex; justify-content:space-between; align-items:center;"> 
-    <div>
+    <div style="margin: 4px 0;">
        <h3 style="font-size: 17px; font-weight: 600; margin-right: 15px;">My Orders <span style="font-weight: 400;">| ID: <?php echo $orderId; ?> </span></h3>
       
     </div>
     <div>
-                                    <img src="assets/images/pic/logo.png"  id="order-info-logo" onclick="window.location.href='index.php';">
+                                    <img src="assets/images/pic/logo.png" style="display:  none;"  id="order-info-logo" onclick="window.location.href='index.php';">
                                 </div>
                              
         </header>
@@ -120,7 +124,7 @@ if(isset($_GET['idorder'])) {
                                        ?>
                 
             </div>
-            <hr>
+            <hr style="border: 0.2px solid rgba(0, 0, 0, .1) !important; margin:1.2rem 0;">
             <div class="osahan-account-page-right  bg-white p-2 h-100">
               <div class="tab-content" id="myTabContent">
                   <div class="tab-pane  fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -143,7 +147,7 @@ if(isset($_GET['idorder'])) {
                                   
                                   <div class="media-body">
                                      
-                                      <h6 class="mb-2" style="font-size: 18px;">
+                                      <h6 class="mb-3" style="font-size: 18px;">
                                        
                                       <?php echo $orderdetail['name']; ?>
                                       </h6>
@@ -155,7 +159,7 @@ if(isset($_GET['idorder'])) {
                                       
                                     
                                   
-                                      <hr>
+                                        <hr style="border: 0.2px solid rgba(0, 0, 0, .1) !important; margin:1.2rem 0;">
                                     
                                   </div>
                               </div>
@@ -212,12 +216,57 @@ if(isset($_GET['idorder'])) {
             </div>
         
         </article>
-            <hr>
+            <hr style="border: 0.2px solid rgba(0, 0, 0, .1) !important; margin:1.2rem 0;">
             <a href="history.php?page=<?php echo $page; ?>" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
         </div>
     </article>
 </div>
+
+<?php
+include_once 'footer.php'
+  ?>
 </body>
 </html>
 
+
+<style>
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        color: #878a99;
+        text-decoration: none;
+    }
+    ul{
+        padding-left: 0;
+    }
+    img{
+        vertical-align:0;
+    }
+    hr{
+        opacity: 1;
+        border: 0.2px solid white !important;
+color: white;
+        margin: 0;
+    }
+    h1,h2,p,ul{
+        margin-bottom: 0;
+        line-height: normal;
+    }
+    a{
+        margin: 0;
+    }
+    input{
+        font-size: 16px;
+        line-height: normal;
+        font-size:small;
+    }
+    svg{
+        vertical-align:unset;
+    }
+    h2{
+        font-weight: 550;
+    }
+
+ </style>
 

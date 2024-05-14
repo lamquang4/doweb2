@@ -68,11 +68,11 @@ GET HELP
   </div>
 
     
-    <div id="long">
-      <div id="seprator">
-        <hr class="ruler">
-      </div>
+  <div id="long1" style="margin-top:0px; margin-bottom:10px;">
+    <div id="seprator1">
+      <hr class="ruler1" style="margin-top:10px;">
     </div>
+  </div>
 
    <div class="copyright">
     <p>© 2023 - Vietnam Company</p>

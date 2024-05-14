@@ -26,13 +26,16 @@ exit();
     <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="assets/css/user.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+<?php
+include_once 'header.php'
+  ?>
 
-
-<div class="containerz" >
+<div class="containerz" style="margin-top: 150px; margin-bottom:40px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
                    <div class="osahan-account-page-left bg-white h-100" >
@@ -60,7 +63,7 @@ exit();
                        <div class="tab-content" id="myTabContent">
                         <div class="col-md-11" style="padding-left: 0; padding-right: 0;">
                             <div class="card-body pb-2">
-                                <div class="tab-pane fade active show" id="account-general">
+                                <div class="tab-pane fade show" id="account-general">
                                     <form method="post" action="updateuser.php" enctype="multipart/form-data" onsubmit="return kttrong()"> 
                                     <div class="card-body media align-items-center">
                                     <img src="<?php echo $user['imguser']; ?>" alt class="d-block ui-w-80" id="userImage">
@@ -118,7 +121,7 @@ exit();
 
                                         <label class="form-label">Adress</label>
 
-                                        <div class="input-group">
+                                        <div class="input-group" style="height: auto;">
   <input type="text" name="sonha" id="sonha"  class="form-control" placeholder="House number" value="<?php echo $user['sonha']; ?>" required>
 
   <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
@@ -134,7 +137,7 @@ exit();
 
                                         <div class="form-group">
                                    
-                                        <div class="input-group">
+                                        <div class="input-group" style="height: auto;">
                                       
                                         <select class="form-control" id="district" name="district" aria-label=".form-select-sm" >
                                   <option value="0">Select District</option>
@@ -179,7 +182,12 @@ exit();
            </div>
            
        </div>
+       </div>
+
 </body>
+<?php
+include_once 'footer.php'
+  ?>
 
 </html>
 
@@ -262,4 +270,44 @@ function previewImage() {
     }
 </script>
 
+<style>
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        color: #878a99;
+        text-decoration: none;
+    }
+    ul{
+        padding-left: 0;
+    }
+    img{
+        vertical-align:0;
+    }
+    hr{
+        opacity: 1;
+        border: 0.2px solid white !important;
+color: white;
+        margin: 0;
+    }
+    h1,h2,p,ul{
+        margin-bottom: 0;
+        line-height: normal;
+    }
+    a{
+        margin: 0;
+    }
+    input{
+        font-size: 16px;
+        line-height: normal;
+        font-size:small;
+    }
+    svg{
+        vertical-align:unset;
+    }
+    h2{
+        font-weight: 550;
+    }
+ 
+ </style>
 

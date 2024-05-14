@@ -204,7 +204,7 @@ if(isset($_GET['action']) && isset($_GET['id'])){
    
     if(bar){
       bar.addEventListener('click',() =>{
-    icon.classList.add('active');
+    icon.classList.add('actives');
       })}
    
     const icons = document.getElementById("icons");
@@ -235,7 +235,7 @@ window.addEventListener("resize", function() {
         searchbars.style.opacity="0";
         searchbars.style.pointerEvents = 'none';
     
-      icons.classList.remove('active');
+      icons.classList.remove('actives');
       htmlElement.style.overflowY = "scroll";
     }
    else{

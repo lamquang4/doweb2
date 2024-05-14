@@ -274,7 +274,7 @@ align-items: center;
 
 
 }
-.active{
+.actives{
 
 width:300px;
 
@@ -1163,6 +1163,7 @@ display: inline-table;
 }
 #long1 hr{
 margin-top: 30px;
+border: 0.2px solid white;
 }
 /*-----------*/
 
@@ -2425,7 +2426,7 @@ width: 76px;
   width:200px;
 }
 
-.active{
+.actives{
   z-index:100;
   width:280px;
   overflow: hidden;
