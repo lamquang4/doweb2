@@ -87,7 +87,7 @@ include_once 'header.php'
     <button class="btn" id="btnfil" onclick="window.location.href='shop.php?brand=sprite#product11'"><img src="assets/images/pic/sprite-circle.png"></button>
    
  <div>
-  <button id="btn-ad-search">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+  <button id="btn-ad-search">Advanced Search <i class="fa-solid fa-magnifying-glass"></i></button>
  </div>
   
 
