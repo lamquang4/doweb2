@@ -17,8 +17,8 @@ if (isset($_POST["submit"])) {
             echo "<script> alert('Your account is blocked.'); window.location.href='login-admin.php';</script>";
         }else{
             $_SESSION["loginad"] = true;
-            $_SESSION["idad"] = $loginad->idUserad();
-            $_SESSION["username"] = $_POST["username"]; 
+            $_SESSION["username"] = $loginad->idUserad();
+          
             echo "<script> window.location.href='admin-strator.php'; </script>";
             exit;
         }
