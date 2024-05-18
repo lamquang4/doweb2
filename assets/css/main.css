@@ -2859,11 +2859,7 @@ padding:30px 24px 0px 58px;
   pointer-events: none;
 }
 #prodetails .single-pro-details .normal {
-  background: #088178;
-  color: white;
-  height: 46px;
   font-size: 15px;
-  width: 126px;
   border: 1.5px solid black;
   } 
   #prodetails .single-pro-details select{
