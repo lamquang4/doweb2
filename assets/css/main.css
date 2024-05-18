@@ -1774,6 +1774,9 @@ background-color: #fff;
 
 
 /*Product*/
+#container-quantity{
+  margin-bottom: 20px;
+}
 .button-de-increase{
   height: 48px;
 width: 112px;
@@ -1781,8 +1784,8 @@ width: 112px;
   align-items: center;
   justify-content: center;
   background: #FFF;
-margin-bottom: 20px;
   border: 0.8px solid black;
+
 }
 .button-de-increase div{
   width: 100%;
@@ -1862,9 +1865,9 @@ text-align: center;
   #prodetails .single-pro-details .normal{
   background: #088178;
   color:white;
-  height: 45px;
+  height: 55px;
   font-size: 17px;
-  width: 150px;
+  width: 200px;
   cursor: pointer;
   border: 1.5px solid black;
   }
@@ -2178,7 +2181,33 @@ margin-top: 120px;
     padding-top: 10px;
     }
     
-
+    #container-quantity{
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    #text1,#text2{
+    display: inline;
+    align-items: center;
+    
+    }
+    #text2{
+      margin-left: 10px;
+    }
+    #prodetails .single-pro-details .normal {
+      height: 50px;
+      font-size: 15px;
+      width: 200px;
+      border: 1.5px solid black;
+    
+    }  
+    #container-buttonaddcart{
+      display: flex;
+      justify-content: center;
+    }
+    #form-addtocart{
+      text-align: center;
+    }
 }
 
 
@@ -2335,12 +2364,12 @@ margin-top: 135px;
 }
 #prodetails .single-pro-details h2 {
 
-  font-size: 25px;
+  font-size: 26px;
 
 }
 #prodetails .single-pro-details h6 {
 margin-bottom: 0px;
-font-size: 25px;
+font-size: 26px;
 
 
 }
@@ -2351,15 +2380,7 @@ font-size: 25px;
 
 }
 
-
-#prodetails .single-pro-details .normal {
-  background: #088178;
-  color: white;
-  height: 46px;
-  font-size: 15px;
-  width: 143px;
-  border: 1.5px solid black;
-}   
+ 
 #MainImg{
   display: flex;
   margin: 0 auto;
@@ -2714,14 +2735,7 @@ border-radius: 15px;
    
   }
 
-  #prodetails .single-pro-details .normal {
-      background: #088178;
-      color: white;
-      height: 46px;
-      font-size: 15px;
-      width: 143px;
-      border: 1.5px solid black;
-  }   
+ 
 
   #nutri-open{
     pointer-events: none;
@@ -2762,7 +2776,6 @@ margin-top: 8px;
 margin-bottom: 8px;
 
 }
-
 
 }
 

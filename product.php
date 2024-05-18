@@ -117,21 +117,26 @@ include_once 'header.php'
   </div>
   
   <div class="single-pro-details">
-<form method="post" action="">
+<form method="post" action="" id="form-addtocart">
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
   <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">
   <input type="hidden"  name="namesp" value="<?php echo $productName; ?>">
   <input type="hidden"  name="pricesp" value="<?php echo $productPrice; ?>">
   <input type="hidden"  name="imgsp" value="<?php echo $productImage; ?>">
-  <div class="button-de-increase">
+  <div id="container-quantity">
+    <div class="button-de-increase">
     <div class="minus"><i class="fa-solid fa-minus" style="font-size: 18px;"></i></div>
     <div><input readonly type="text" maxlength="2" name="quantity" class="numbers" value="1"></div>
     <div class="plus"><i class="fa-solid fa-plus" style="font-size: 18px;"></i></div>
+  </div> 
   </div>
+ 
 
+<div id="container-buttonaddcart">
+     <button class="normal" type="submit" name="add_to_cart" >ADD TO CART</button>
+</div>
 
-   <button class="normal" type="submit" name="add_to_cart" >Add to Cart</button>
  
 </form>
  <div id="infor-nutri">
@@ -181,7 +186,7 @@ include_once 'header.php'
     <h2>YOU MAY ALSO LIKE</h2>
   <div class="pro-container2">
     <div class="pro2">
-      <a href="product.php?id=SP5440">
+      <a href="product.php?id=SP1176">
   <img src="assets/images/sp/pepsizero.png" alt="">
 </a>
  
@@ -191,12 +196,12 @@ include_once 'header.php'
     <h4>$10.00</h4>
 
   <div id="buttoncart">
-    <button onclick="window.location.href='product.php?id=SP5440'"><i class="fa-solid fa-cart-shopping"></i></button>
+    <button onclick="window.location.href='product.php?id=SP1176'"><i class="fa-solid fa-cart-shopping"></i></button>
   </div>
   </div> 
 
   <div class="pro2">
-    <a href="product.php?id=SP1186">
+    <a href="product.php?id=SP6026">
     <img src="assets/images/sp/coca1.png" alt="">
   </a>
    
@@ -206,12 +211,12 @@ include_once 'header.php'
       <h4>$10.00</h4>
  
     <div id="buttoncart">
-      <button onclick="window.location.href='product.php?id=SP1186'"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button onclick="window.location.href='product.php?id=SP6026'"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
     </div> 
 
     <div class="pro2">
-      <a href="product.php?id=SP3946">
+      <a href="product.php?id=SP6698">
       <img src="assets/images/sp/coca2.png" alt="">
       </a>
    
@@ -221,19 +226,19 @@ include_once 'header.php'
         <h4>$10.00</h4>
    
       <div id="buttoncart">
-        <button onclick="window.location.href='product.php?id=SP3946'"><i class="fa-solid fa-cart-shopping"></i></button>
+        <button onclick="window.location.href='product.php?id=SP6698'"><i class="fa-solid fa-cart-shopping"></i></button>
       </div>
       </div> 
 
       <div class="pro2">
-        <a href="product.php?id=SP7049">
+        <a href="product.php?id=SP9341">
         <img src="assets/images/sp/cocaori.png" alt="">
       </a>
       
           <h5>Coca Original</h5>
      <h4>$13.00</h4>
         <div id="buttoncart">
-          <button onclick="window.location.href='product.php?id=SP7049'"><i class="fa-solid fa-cart-shopping"></i></button>
+          <button onclick="window.location.href='product.php?id=SP9341'"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
         </div> 
               
