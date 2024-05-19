@@ -77,7 +77,9 @@ include_once 'header.php'
                                         </div>
                                     </div>
                                     <hr class="border-light m-0">
+                              
                                     <div class="card-body">
+                             
                                         <div class="form-group">
                                             <label class="form-label">Username</label>
                                             <input type="text" id="username" name="username" maxlength="9" readonly class="form-control mb-1" value="<?php echo $user['username']; ?>">
@@ -99,16 +101,16 @@ include_once 'header.php'
     <input id="female" style="margin-left: 10px;" type="radio" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>> Female
                                         </div>
                                         
-                                        <div class="row" style="margin-bottom: 14px;">
+                                        <div class="row" style="margin-bottom: 12px;">
                                             <div class="col-lg-4">
-                                                <div class="mb-4 mb-lg-0">
+                                                <div class="mb-3 mb-lg-0">
                                                     <label class="form-label">Birthday (mm/dd/yy)</label>
                                                     <input type="date" name="birthday" class="form-control" value="<?php echo $user['birthday']; ?>" id="dateInput" >
                                                 </div>
                                             </div>
                 
                                             <div class="col-lg-4">
-                                                <div class="mb-4 mb-lg-0">
+                                                <div class="mb-3 mb-lg-0">
                                                     <label class="form-label">Phone</label>
                                                     <input type="text" name="phone" maxlength="11" class="form-control" value="<?php echo $user['phone']; ?>" id="phone" required>
                                                 </div>
@@ -117,29 +119,48 @@ include_once 'header.php'
                                             
                                         </div>
                                       
-                                        <div class="form-group" style="margin-bottom: 25px;">
 
-                                        <label class="form-label">Adress</label>
-
-                                        <div class="input-group" style="height: auto;">
-  <input type="text" name="sonha" id="sonha"  class="form-control" placeholder="House number" value="<?php echo $user['sonha']; ?>" required>
-
-  <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
-
-  <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
+<div>   <label style="font-size: 22px; font-weight:bold;">Address:</label></div>
+                                        <div class="row" style="margin-bottom: 10px;">
+                                     
+                                            <div class="col-lg">
+                                                <div class="mb-3 mb-lg-0">
+                                                <label class="form-label">House Number</label>
+                                                    <input type="text" name="sonha" id="sonha"  class="form-control" placeholder="House number" value="<?php echo $user['sonha']; ?>" required>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-lg">
+                                                <div class="mb-3 mb-lg-0">
+                                                    <label class="form-label">Street</label>
+                                                    <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
+                                                </div>
+                                            </div>
+                
+                                            
+                                        </div>
+                                       
+                                        <div class="row" style="margin-bottom: 10px;">
+                                     
+                                     <div class="col-lg">
+                                         <div class="mb-3 mb-lg-0">
+                                         <label class="form-label">City</label>
+                                         <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
 <option value="0" selected>Select City</option> 
 <option value="Ho Chi Minh City" <?php echo ($user['city'] == 'Ho Chi Minh City') ? 'selected' : ''; ?>>Ho Chi Minh City</option> 
 <option value="Ha Noi City" <?php echo ($user['city'] == 'Ha Noi City') ? 'selected' : ''; ?>>Ha Noi City</option> 
    </select>
-
-                                        </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                   
-                                        <div class="input-group" style="height: auto;">
-                                      
-                                        <select class="form-control" id="district" name="district" aria-label=".form-select-sm" >
+                                         </div>
+                                     </div>
+   
+                                 </div>
+                                        
+                                 <div class="row" style="margin-bottom: 5px;">
+                                     
+                                     <div class="col-lg">
+                                         <div class="mb-3 mb-lg-0">
+                                         <label class="form-label">District</label>
+                                         <select class="form-control" id="district" name="district" aria-label=".form-select-sm" >
                                   <option value="0">Select District</option>
                                   <option value="District 1" <?php echo ($user['district'] == 'District 1') ? 'selected' : ''; ?>>District 1</option> 
                                   <option value="District 2" <?php echo ($user['district'] == 'District 2') ? 'selected' : ''; ?>>District 2</option> 
@@ -148,8 +169,13 @@ include_once 'header.php'
                                   <option value="District 5" <?php echo ($user['district'] == 'District 5') ? 'selected' : ''; ?>>District 5</option> 
                                   <option value="District 6" <?php echo ($user['district'] == 'District 6') ? 'selected' : ''; ?>>District 6</option> 
                                      </select>
- 
-                                     <select  class="form-control" id="ward" name="ward" aria-label=".form-select-sm" >
+                                         </div>
+                                     </div>
+   
+                                     <div class="col-lg">
+                                         <div class="mb-3 mb-lg-0">
+                                         <label class="form-label">Ward</label>
+                                         <select  class="form-control" id="ward" name="ward" aria-label=".form-select-sm" >
                     <option value="0" selected>Select Ward</option>
                     <option value="Ward 1" <?php echo ($user['ward'] == 'Ward 1') ? 'selected' : ''; ?>>Ward 1</option> 
                                   <option value="Ward 2" <?php echo ($user['ward'] == 'Ward 2') ? 'selected' : ''; ?>>Ward 2</option> 
@@ -158,9 +184,11 @@ include_once 'header.php'
                                   <option value="Ward 5" <?php echo ($user['ward'] == 'Ward 5') ? 'selected' : ''; ?>>Ward 5</option> 
                                   <option value="Ward 6" <?php echo ($user['ward'] == 'Ward 6') ? 'selected' : ''; ?>>Ward 6</option> 
                                        </select>
-
-                                        </div>
                                          </div>
+                                     </div>
+                                 </div>
+
+                                        
                                        
                                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
