@@ -54,9 +54,8 @@ include_once 'header.php'
 
     <hr style="border: 1px solid black;margin:12px 0;">
     <div style="margin: 0 20px;text-align:center">
+    
     <hr style="border: 1px dashed black;margin:15px 0;">
-
-  
       <p style="font-size:24px;"><?php echo htmlspecialchars($idorder); ?></p>
       <hr style="border: 1px dashed black;margin:15px 0;">
  
