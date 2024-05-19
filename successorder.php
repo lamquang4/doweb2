@@ -51,7 +51,7 @@ include_once 'header.php'
 
 <h1 style="text-align: center;margin-bottom:15px;color:#6FD649;font-size:24px;">Order Successfully!</h1>
 </div>
-<div style=" margin:0 auto; background:#FAFAFA;"> 
+<div style=" margin:0 auto;"> 
     <h1 style="text-align: center;margin-bottom:15px;font-size:20px">Thank you. Your order has been received.</h1>
     <div style="margin: 0 20px;text-align:center">
     <p style="margin-bottom:10px;font-size:18px;"><?php echo htmlspecialchars($dateorder); ?></p>
