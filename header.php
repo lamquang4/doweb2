@@ -11,7 +11,7 @@ if(isset($_GET['action']) && isset($_GET['id'])){
           if($values["item_id"] == $_GET['id']){
               unset($_SESSION['shopping_cart'][$keys]);
           }
-          header('Location: shop.php');
+          echo "<script> window.location.href='shop.php'; </script>";
       }
   }
 }
