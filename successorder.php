@@ -12,16 +12,14 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
     header("Location: login.php");
     exit();
 }
-if (!isset($_SESSION['order_id']) || !isset($_SESSION['dateorder'])) {
+if (!isset($_SESSION['order_id'])) {
     header("Location: shop.php");
     exit();
 }
 $idorder = isset($_SESSION['order_id']) ? $_SESSION['order_id'] : '';
-$dateorder = isset($_SESSION['dateorder']) ? $_SESSION['dateorder'] : '';
 
 
 unset($_SESSION['order_id']);
-unset($_SESSION['dateorder']);
 
 ?>
 
@@ -35,7 +33,7 @@ unset($_SESSION['dateorder']);
  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
  <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
 <link rel="stylesheet" href="assets/css/main.css">
-    <title>Document</title>
+    <title>Order Successfully</title>
 </head>
 <body>
 <?php
@@ -46,20 +44,25 @@ include_once 'header.php'
 <div style=" margin:0 auto;">
   <div >
     <div style="display: flex; justify-content:center; align-items:center;margin-bottom:10px;">
-     <img src="assets/images/pic/404-tick.png" width="100">    
+     <img src="assets/images/pic/404-tick.png" width="90">    
     </div>
 
 <h1 style="text-align: center;margin-bottom:15px;color:#6FD649;font-size:24px;">Order Successfully!</h1>
 </div>
 <div style=" margin:0 auto;"> 
-    <h1 style="text-align: center;margin-bottom:15px;font-size:20px">Thank you. Your order has been received.</h1>
+
+
+    <hr style="border: 1px solid black;margin:12px 0;">
     <div style="margin: 0 20px;text-align:center">
-    <p style="margin-bottom:10px;font-size:18px;"><?php echo htmlspecialchars($dateorder); ?></p>
-      <p style="font-size:22px;"><?php echo htmlspecialchars($idorder); ?></p>
- 
+    <hr style="border: 1px dashed black;margin:15px 0;">
+
+  
+      <p style="font-size:24px;"><?php echo htmlspecialchars($idorder); ?></p>
+      <hr style="border: 1px dashed black;margin:15px 0;">
  
     </div>
-   
+    <hr style="border: 1px solid black;margin:12px 0;">
+    <h1 style="text-align: center;margin-bottom:15px;font-size:20px">Thank you! Your order has been received.</h1>
 </div>  
 </div>
 

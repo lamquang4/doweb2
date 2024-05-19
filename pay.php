@@ -79,8 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         mysqli_query($connection->conn, $update_query);
         unset($_SESSION['shopping_cart']);
         $_SESSION['order_id'] = $random_id;
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $_SESSION['dateorder'] = date("d-m-Y");
+    
    
   echo "<script> window.location.href='successorder.php'; </script>";
      exit;
