@@ -33,7 +33,6 @@ if(isset($_GET['idorder'])) {
         $district = $order['district'];
         $ward = $order['ward'];
         $city = $order['city'];
-        $total = $order['total'];
         $paymethod = $order['paymethod'];
         $dateorder = $order['dateorder'];
     } else {
@@ -182,7 +181,7 @@ include_once 'header.php'
                                     
                                        ?>
 
-                                      <p  class="mb-0 text-black pt-2" id="total-money"><span style="color: black;" class="text-black font-weight-bold"> Total:</span> $<?php echo $total; ?>.00</p>
+                                      <p  class="mb-0 text-black pt-2" id="total-money"><span style="color: black;" class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00</p>
                                      
                               
                                   </div>
