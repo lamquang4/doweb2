@@ -83,7 +83,7 @@ include_once 'header.php'
                 <div class="row" style="display: flex; justify-content: flex-start;"> 
                 
                 <span style="margin-right: 25px; margin-left: 10px;"><strong>Date Order:</strong> <?php echo date('d/m/Y', strtotime($dateorder)); ?>   </span> 
-                <span> <strong>Payment method:</strong>  
+                <span style="margin-left: 10px;"> <strong>Payment method:</strong>  
                                         <?php  if($order['paymethod']=='cod'){
                                             echo 'COD';
                                         }else{
@@ -198,16 +198,17 @@ include_once 'header.php'
           </div>
           <h6>Delivery Address</h6>
           <article class="card">
-            <div class="card-body row"  style="padding-bottom: 0;">
-            <div class="col"> <strong>Full name:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
-              <div class="col"> <strong>Address:</strong> <?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></div>
+            <div class="card-body row"  style="padding-bottom: 0; display:flex;justify-content:space-between;margin:0 8px;">
+            
+            <div> <strong>Full name:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
+              <div> <strong>Address:</strong> <?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></div>
              
          
   
             </div>
          
-            <div class="card-body row" style="visibility:hidden;">
-              <div class="col"> <strong>Your note:</strong> I love your web!!</div>
+            <div class="card-body row" style="margin:0 10px;visibility:hidden;">
+              <div> <strong>Your note:</strong> I love your web!!</div>
         
          
                
