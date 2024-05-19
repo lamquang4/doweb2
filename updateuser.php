@@ -32,17 +32,17 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
         $fileName = $username . '.' . $fileExtension;
         $filePath = 'imguser/' . $fileName;
 
-        $allowedExtensions = array('png', 'jpeg', 'jpg');
+        $allowedExtensions = array('png');
         if (!in_array($fileExtension, $allowedExtensions)) {
-            echo "<script>alert('Invalid file type. Please upload a PNG, JPEG, or JPG file.'); window.location.href='user.php';</script>";
+            echo "<script>alert('Invalid file type. Please upload a PNG file.'); window.location.href='user.php';</script>";
             exit;
         }
     
-        $maxWidth = 500;
-        $maxHeight = 500;
+        $maxWidth = 700;
+        $maxHeight = 700;
         list($width, $height) = getimagesize($file['tmp_name']);
         if ($width > $maxWidth || $height > $maxHeight) {
-            echo "<script>alert('Image dimensions exceed the maximum allowed size of 500x500.'); window.location.href='user.php';</script>";
+            echo "<script>alert('Image dimensions exceed the maximum allowed size of 700x700.'); window.location.href='user.php';</script>";
             exit;
         }
 
