@@ -64,7 +64,7 @@ if(isset($_GET['idorder'])) {
 include_once 'header.php'
   ?>
 
-  <div class="container" style="margin-top: 160px; margin-bottom:50px;">
+  <div class="container" style="margin-top: 150px; margin-bottom:50px;">
     <article class="card">
     <header class="card-header" style="display: flex; justify-content:space-between; align-items:center;"> 
     <div style="margin: 4px 0;">
