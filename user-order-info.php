@@ -207,11 +207,9 @@ include_once 'header.php'
   
             </div>
          
-            <div class="card-body row" style="margin:0 10px;visibility:hidden;">
+            <div class="card-body row" style="margin:0 8px;visibility:hidden;">
               <div> <strong>Your note:</strong> I love your web!!</div>
-        
          
-               
                
             </div>
         
