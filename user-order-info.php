@@ -56,7 +56,7 @@ if(isset($_GET['idorder'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/user-order.css">
     <link rel="stylesheet" href="assets/css/main.css"/>
-    <meta name="viewport" content="width=device-width,  initial-scale=0.9,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,  initial-scale=1,maximum-scale=1">
     <title>Order Detail</title>
 </head>
 <body>
