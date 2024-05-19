@@ -65,6 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if (mysqli_query($connection->conn, $query)) {
         foreach($_SESSION["shopping_cart"] as $key => $value)
         {
+            $total = $connection->conn->real_escape_string($_POST['total']);
             $id = $value["item_id"];
             $sl_mua = $value["item_quantity"];
             $price = $value["item_price"];
@@ -76,8 +77,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     
         mysqli_query($connection->conn, $update_query);
-  unset($_SESSION['shopping_cart']);
-        echo "<script> window.location.href='shop.php#product11'; </script>";
+        unset($_SESSION['shopping_cart']);
+        $_SESSION['order_id'] = $random_id;
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $_SESSION['dateorder'] = date("d-m-Y");
+   
+  echo "<script> window.location.href='successorder.php'; </script>";
      exit;
     } else {
         echo "<script> alert('Fail'); window.location.href='shop.php#product11';</script>";
