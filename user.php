@@ -131,7 +131,7 @@ include_once 'header.php'
                                             </div>
                 
                                             <div class="col-lg">
-                                                <div class="mb-3 mb-lg-0">
+                                                <div class="mb-2 mb-lg-0">
                                                     <label class="form-label">Street</label>
                                                     <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
                                                 </div>
@@ -143,7 +143,7 @@ include_once 'header.php'
                                         <div class="row" style="margin-bottom: 10px;">
                                      
                                      <div class="col-lg">
-                                         <div class="mb-3 mb-lg-0">
+                                         <div class="mb-2 mb-lg-0">
                                          <label class="form-label">City</label>
                                          <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
 <option value="0" selected>Select City</option> 
@@ -191,7 +191,7 @@ include_once 'header.php'
                                         
                                        
                                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
-                                        <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"><i class="fa-solid fa-chevron-left"></i> Back To Shop</button>
+                                        <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"> Back to shop</button>
                                         <button class="btn btn-primary" id="saveChangesBtn" name="submit" type="submit">Save changes</button>&nbsp;
                                        
                                     </div>
