@@ -11,6 +11,8 @@ if(isset($_GET['id'])) {
         $productName = $productDetails['name'];
         $productPrice = $productDetails['price'];
         $productImage = $productDetails['image'];
+        $productType = $productDetails['type'];
+        $productBrand = $productDetails['brand'];
         $productDec1 = $productDetails['ml'];
         $productDec2 = $productDetails['calo'];
         $productDec3 = $productDetails['fatg'];
@@ -118,6 +120,10 @@ include_once 'header.php'
   
   <div class="single-pro-details">
 <form method="post" action="" id="form-addtocart">
+<p id="typeandbrand"><?php echo $productBrand; ?> / <?php if($productType === 'nogas'){ echo'Non-carbonated';
+}else if($productType === 'carbonated'){
+  echo 'Carbonated';
+} ?></p>
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
   <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">

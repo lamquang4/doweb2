@@ -277,7 +277,7 @@ class Product extends Connection {
     }
 
     public function selectProductsById($id) {
-        $query = "SELECT * FROM product WHERE id = '$id'";
+        $query = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE id = '$id'";
         $result = mysqli_query($this->conn, $query);
         return mysqli_fetch_assoc($result);
     }

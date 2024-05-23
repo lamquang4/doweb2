@@ -1,7 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
 
 :root{
 
@@ -29,7 +25,7 @@ html{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-font-family: 'Spartan', sans-serif;
+font-family: "Poppins", sans-serif;
 scroll-behavior: smooth;
 }
 button{
@@ -1814,7 +1810,6 @@ text-align: center;
   }
   #prodetails .single-pro-details{
 
-  
   padding-top: 30px;
   }
   
@@ -1825,14 +1820,20 @@ text-align: center;
   
   }
   #prodetails .single-pro-details h6{
-  font-weight: 700;
-  padding-bottom: 18px;
+  font-weight: bold;
   font-size:30px;
+margin-bottom: 10px;
   }
   #prodetails .single-pro-details h2{
   font-size:32px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: green;
+  }
+  #typeandbrand{
+    margin-bottom: 10px;
+  }
+  #typeandbrand::first-letter{
+    text-transform: uppercase;
   }
   #prodetails #nutri{
   display: block;
