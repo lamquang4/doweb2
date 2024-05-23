@@ -1831,10 +1831,9 @@ margin-bottom: 10px;
   }
   #typeandbrand{
     margin-bottom: 10px;
+    text-transform: capitalize;
   }
-  #typeandbrand::first-letter{
-    text-transform: uppercase;
-  }
+ 
   #prodetails #nutri{
   display: block;
   height:480px;
