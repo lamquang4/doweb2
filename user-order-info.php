@@ -37,12 +37,12 @@ if(isset($_GET['idorder'])) {
         $dateorder = $order['dateorder'];
     } else {
        
-        echo "<script>alert('Order id not found!'); window.location.href='history.php';</script>";
+        echo "<script> window.location.href='history.php';</script>";
      
         exit;
     }
   } else {
-  echo "<script>alert('Order id not found!'); window.location.href='history.php';</script>";
+  echo "<script>window.location.href='history.php';</script>";
   
     exit;
   }
@@ -82,8 +82,8 @@ include_once 'header.php'
                 <div class="card-body col">
                 <div class="row" style="display: flex; justify-content: flex-start;"> 
                 
-                <span style="margin-right: 25px; margin-left: 10px;"><strong>Date Order:</strong> <?php echo date('d/m/Y', strtotime($dateorder)); ?>   </span> 
-                <span style="margin-left: 10px;"> <strong>Payment method:</strong>  
+                <span style="margin-right: 25px; margin-left: 25px;"><strong>Date Order:</strong> <?php echo date('d/m/Y', strtotime($dateorder)); ?>   </span> 
+                <span style="margin-left: 25px;"> <strong>Payment method:</strong>  
                                         <?php  if($order['paymethod']=='cod'){
                                             echo 'COD';
                                         }else{
