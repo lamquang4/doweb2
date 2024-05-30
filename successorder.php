@@ -40,14 +40,14 @@ unset($_SESSION['order_id']);
 include_once 'header.php'
   ?>
 
-<section style="margin-top: 160px; margin-bottom:60px;display:flex;justify-content:center;">
+<section style="margin-top: 162px; margin-bottom:60px;display:flex;justify-content:center;">
 <div style=" margin:0 auto;">
   <div >
     <div style="display: flex; justify-content:center; align-items:center;margin-bottom:10px;">
-     <img src="assets/images/pic/404-tick.png" width="90">    
+     <img src="assets/images/pic/404-tick.png" width="85">    
     </div>
 
-<h1 style="text-align: center;margin-bottom:15px;color:#6FD649;font-size:24px;">Order Successfully!</h1>
+<h1 style="text-align: center;margin-bottom:15px;color:#6FD649;font-size:22px;">Order Successfully!</h1>
 </div>
 <div style=" margin:0 auto;"> 
 
@@ -55,13 +55,13 @@ include_once 'header.php'
     <hr style="border: 1px solid black;margin:12px 0;">
     <div style="margin: 0 20px;text-align:center">
     
-    <hr style="border: 1px dashed black;margin:15px 0;">
+    <hr style="margin:15px 0;">
       <p style="font-size:24px;"><?php echo htmlspecialchars($idorder); ?></p>
-      <hr style="border: 1px dashed black;margin:15px 0;">
+      <hr style="margin:15px 0;">
  
     </div>
     <hr style="border: 1px solid black;margin:12px 0;">
-    <h1 style="text-align: center;margin-bottom:15px;font-size:20px">Thank you! Your order has been received.</h1>
+    <h1 style="text-align: center;margin-bottom:15px;font-size:18px">Thank you! Your order has been received.</h1>
 </div>  
 </div>
 

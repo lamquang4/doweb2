@@ -16,7 +16,7 @@ exit();
 }
 $username = $_SESSION["username"];
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 5;
+$limit = 6;
 $start = ($page - 1) * $limit;
 $orders = $order->selectOrdersByUsername($username,$start,$limit);
 $totalOrders = $order->getOrderCount1($username);
@@ -41,7 +41,7 @@ $totalPages = ceil($totalOrders / $limit);
 include_once 'header.php'
   ?>
   
-<div class="containerz" style="margin-top: 140px; margin-bottom:40px">
+<div class="containerz" style="margin-top: 120px; margin-bottom:30px">
     <div class="row">
         <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;" >
             <div class="osahan-account-page-left  bg-white h-100">
@@ -216,7 +216,7 @@ color: white;
     input{
         font-size: 16px;
         line-height: normal;
-        font-size:small;
+        font-size: small;
     }
     svg{
         vertical-align:unset;

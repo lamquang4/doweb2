@@ -35,7 +35,7 @@ exit();
 include_once 'header.php'
   ?>
 
-<div class="containerz" style="margin-top: 150px; margin-bottom:40px;">
+<div class="containerz" style="margin-top: 130px; margin-bottom:30px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
                    <div class="osahan-account-page-left bg-white h-100" >
@@ -328,7 +328,7 @@ color: white;
     input{
         font-size: 16px;
         line-height: normal;
-        font-size:small;
+     font-size: small;
     }
     svg{
         vertical-align:unset;
@@ -336,6 +336,8 @@ color: white;
     h2{
         font-weight: 550;
     }
- 
+    svg{
+        vertical-align:unset;
+    }
  </style>
 

@@ -617,8 +617,11 @@ color: white;
     input{
         font-size: 16px;
         line-height: normal;
+        font-size: small;
     }
- 
+    svg{
+        vertical-align:unset;
+    }
  </style>
 
 
