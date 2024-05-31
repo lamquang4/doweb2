@@ -39,11 +39,7 @@ include_once 'header.php'
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
                    <div class="osahan-account-page-left bg-white h-100" >
-                       <div class="border-bottom p-4" >
-                            <div style="display: flex; justify-content: center;" id="logo-history">
-        <img src="assets/images/pic/logo.png" class="logo-user" style="cursor: pointer;" onclick="window.location.href='index.php' " >
-    </div>
-                       </div>
+                  
                      
                   
                            <a class="list-group-item list-group-item-action active" data-toggle="list"
@@ -336,8 +332,6 @@ color: white;
     h2{
         font-weight: 550;
     }
-    svg{
-        vertical-align:unset;
-    }
+
  </style>
 
