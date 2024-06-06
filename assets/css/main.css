@@ -113,7 +113,7 @@ border: 1px solid #DDDDDD;
   border: 2px solid rgba( 30, 85, 250, .7);
   background-color: white;
 }
-@media (max-width:850px){
+@media (max-width:940px){
   #contact-box{
     grid-template-columns: 1fr;
   }
