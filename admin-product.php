@@ -86,8 +86,6 @@ if($categoryResult) {
     $status = isset($_GET['status']) ? $_GET['status'] : '';
     if (mysqli_query($connection->conn, $query)) {
       echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text'; </script>";
-       
-    
         exit;
     } 
 }

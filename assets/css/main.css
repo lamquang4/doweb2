@@ -32,6 +32,125 @@ button{
   cursor: pointer;
 }
 
+/* contact */
+#container-contact{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 160px;
+  margin-bottom: 60px;
+}
+#contact-box{
+  max-width: 860px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(2,1fr);
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+border: 1px solid #DDDDDD;
+}
+
+.left-contactbox iframe{
+  padding: 10px;
+  width: 100%;
+  height: 470px;
+}
+.right-contactbox{
+  padding: 25px 40px;
+}
+.right-contactbox h2{
+  position: relative;
+  padding: 0 0 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 28px;
+}
+.right-contactbox h2:after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  height: 4px;
+  width: 50px;
+  border-radius: 2px;
+  background-color: orange;
+}
+.field-contact{
+  width: 100%;
+  border: 1px solid #DDDDDD;
+  padding: 12px 12px;
+  margin-bottom: 22px;
+  transition: .3s;
+  margin-top: 6px;
+}
+.field-contact:focus{
+  border: 1px solid black;
+}
+
+.btn-contactbox{
+  width: 100%;
+  padding: 14px 20px;
+  background-color: black;
+  color: white;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .3s;
+  margin-bottom: 22px;
+
+}
+.btn-contactbox:hover{
+  background-color: gray;
+}
+.field-contact:focus{
+  border: 2px solid rgba( 30, 85, 250, .7);
+  background-color: white;
+}
+@media (max-width:850px){
+  #contact-box{
+    grid-template-columns: 1fr;
+  }
+  .left-contactbox iframe{
+    padding: 0;
+    height: 400px;
+  }
+
+  #container-contact{
+    margin-bottom: 0;
+    margin-top: 102px;
+  }
+  #contact-box{
+      border: none;
+  }
+  .right-contactbox{
+    padding: 25px 60px;
+  }
+}
+@media (max-width:600px){
+  .right-contactbox{
+    padding: 25px 25px;
+  }
+  .left-contactbox iframe {
+    height: 380px;
+}
+}
+@media (max-width:480px){
+  .left-contactbox iframe {
+    height: 360px;
+}
+#container-contact {
+        margin-top: 92px;
+    }
+}
+
+/*-------*/
 .simply-cart{
   display: flex;
   flex-direction: column;
@@ -1638,136 +1757,8 @@ transform: translate(0,-10px);
 
 }
 
- 
-  
   /*---------*/
   
-  /*contact*/
-  #contact-all{
-    min-height: 80vh;
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  padding: 0 35px;
-  }
-  .contact-wrapper {
-    max-width: 1100px;
-    width: 100%;
-   
-    
-  }
-  .contact-icon{
-   display: flex;
-  justify-content: center;
-
-
-  }
-  .contact-icon i{
-font-size: 32px;
-margin: 0 10px;
-
-   }
-
- 
-
-  .contact-wrapper .contact-carousel{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% / 3) - 12px);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 16px;
-    border-radius: 8px;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    
-  }
- 
-  .contact-carousel::-webkit-scrollbar {
-    display: none;
-  }
-  .contact-carousel.no-transition {
-    scroll-behavior: auto;
-  }
-  .contact-carousel.dragging {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
-  .contact-carousel.dragging .card {
-    cursor: grab;
-    user-select: none;
-  }
-  .contact-carousel :where(.contact-card, .contact-img) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .contact-carousel .contact-card {
-    scroll-snap-align: start;
-    height: 400px;
-    list-style: none;
-background-color: #fff;
-    cursor: pointer;
-    padding-bottom: 15px;
-    flex-direction: column;
-    border-radius: 8px;
-    
-
-    
-  }
-  .contact-carousel .contact-card .contact-img {
-    background: black;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-  }
-  .contact-card .contact-img img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 6px solid black;
-
-  }
-  .contact-carousel .contact-card h2 {
-   
-    font-size: 1.56rem;
-    margin: 30px 0 8px;
-  
-  
-  }
-  .contact-carousel .contact-card span {
- 
-    font-size: 1.31rem;
-    margin-bottom: 25px;
-  }
-  @media screen and (max-width: 900px) {
-    .contact-wrapper .contact-carousel {
-      grid-auto-columns: calc((100% / 2) - 9px);
-    }
-  }
-  @media screen and (max-width: 600px) {
-    .contact-wrapper .contact-carousel {
-      grid-auto-columns: 100%;
-    }
-    .contact-carousel .contact-card h2 {
-   
-      font-size: 1.2rem;
-    }
-    .contact-carousel .contact-card span {
-      font-size: 1.2rem;
-    
-    }
-  }
-  @media(width>=901px){
-  
-  }
-
-  /*----------*/
-
-
 /*Product*/
 #container-quantity{
   margin-bottom: 20px;
