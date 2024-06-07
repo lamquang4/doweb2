@@ -36,10 +36,13 @@ include_once 'header.php'
 <form action="">
   <label>Full name</label>
   <input type="text" class="field-contact" placeholder="Enter full name">
+
 <label>Email</label>
   <input type="email" class="field-contact" placeholder="Enter email">
+
 <label>Message</label>
   <textarea type="text" class="field-contact" placeholder="Write your message" style="min-height: 110px;"></textarea>
+  
 <button class="btn-contactbox" type="submit">Send</button>
 </form>
 </div>

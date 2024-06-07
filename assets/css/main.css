@@ -90,7 +90,7 @@ border: 1px solid #DDDDDD;
   margin-top: 6px;
 }
 .field-contact:focus{
-  border: 1px solid black;
+  border: 1px solid  black;
 }
 
 .btn-contactbox{
@@ -109,10 +109,7 @@ border: 1px solid #DDDDDD;
 .btn-contactbox:hover{
   background-color: gray;
 }
-.field-contact:focus{
-  border: 2px solid rgba( 30, 85, 250, .7);
-  background-color: white;
-}
+
 @media (max-width:940px){
   #contact-box{
     grid-template-columns: 1fr;
