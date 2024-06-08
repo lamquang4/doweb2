@@ -78,10 +78,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
         mysqli_query($connection->conn, $update_query);
         unset($_SESSION['shopping_cart']);
-        $_SESSION['order_id'] = $random_id;
+     
     
    
-  echo "<script> window.location.href='successorder.php'; </script>";
+  echo "<script> window.location.href='successorder.php?orderid=$random_id'; </script>";
      exit;
     } else {
         echo "<script> alert('Fail'); window.location.href='shop.php#product11';</script>";

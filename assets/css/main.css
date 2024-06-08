@@ -31,7 +31,20 @@ scroll-behavior: smooth;
 button{
   cursor: pointer;
 }
+/* successorder*/
+#ordersuccessty{
+  text-align: center;
+  margin-bottom:15px;
+  font-size:18px;
+}
+#ordersuccesstn{
+  text-align: center;
+  margin-bottom:15px;
+  color:#6FD649;
+  font-size:22px;
+}
 
+/*-------------*/
 /* contact */
 #container-contact{
   position: relative;
@@ -1819,6 +1832,7 @@ margin-bottom: 10px;
   #typeandbrand{
     margin-bottom: 10px;
     text-transform: capitalize;
+    font-size: 18px;
   }
  
   #prodetails #nutri{
@@ -2383,9 +2397,13 @@ padding-top: 10px;
 
 
 
-
 @media (max-width: 480px){
-
+  #ordersuccesstn{
+    font-size: 20px;
+  }
+#ordersuccessty{
+  font-size: 16px;
+}
   #product1 {
   
     margin-top: 145px;

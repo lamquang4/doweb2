@@ -12,14 +12,15 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
     header("Location: login.php");
     exit();
 }
-if (!isset($_SESSION['order_id'])) {
+if (!isset($_GET['orderid'])) {
     header("Location: shop.php");
     exit();
 }
-$idorder = isset($_SESSION['order_id']) ? $_SESSION['order_id'] : '';
 
+if(isset($_GET['orderid'])) {
+  $orderid = $_GET['orderid'];
+}
 
-unset($_SESSION['order_id']);
 
 ?>
 
@@ -47,7 +48,7 @@ include_once 'header.php'
      <img src="assets/images/pic/404-tick.png" width="85">    
     </div>
 
-<h1 style="text-align: center;margin-bottom:15px;color:#6FD649;font-size:22px;">Order Successfully!</h1>
+<h1 id="ordersuccesstn">Order Successfully!</h1>
 </div>
 <div style=" margin:0 auto;"> 
 
@@ -56,12 +57,12 @@ include_once 'header.php'
     <div style="margin: 0 20px;text-align:center">
     
     <hr style="margin:15px 0;">
-      <p style="font-size:24px;"><?php echo htmlspecialchars($idorder); ?></p>
+      <p style="font-size:24px;"><?php echo htmlspecialchars($orderid); ?></p>
       <hr style="margin:15px 0;">
  
     </div>
     <hr style="border: 1px solid black;margin:12px 0;">
-    <h1 style="text-align: center;margin-bottom:15px;font-size:18px">Thank you! Your order has been received.</h1>
+    <h1 id="ordersuccessty">Thank you! Your order has been received.</h1>
 </div>  
 </div>
 
