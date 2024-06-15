@@ -29,7 +29,7 @@ if(isset($_GET['action']) && isset($_GET['id'])){
    <ul id="icons">
     
   <li id="menu"><a href="index.php"  class="choose" ><span>Home</span></a></li>
-          <li id="menu"><a href="brand.php" class="choose"><span>Brands</span></a></li>
+          <li id="menu"><a href="brand.php" class="choose"><span>Brand</span></a></li>
           <li id="menu" ><a href="shop.php" class="choose"><span>Shop</span></a></li>
          
           <li id="menu"><a href="contact.php" class="choose"><span>Contact</span></a></li>

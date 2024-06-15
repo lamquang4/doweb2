@@ -131,8 +131,7 @@ include_once 'header.php'
 
                       <div class="bg-white card mb-4 order-list shadow-sm">
                           <div class="gold-members p-4">
-                              <a href="#">
-                              </a>
+                          
                               <?php
                                 $count = 0;
                                 while ($orderdetail = mysqli_fetch_assoc($orderdetails)) { 
@@ -140,9 +139,9 @@ include_once 'header.php'
                                   ?>
                               <div class="media">
                                 
-                                  <a href="#">
+                           
                                       <img class="mr-4" src="<?php echo $orderdetail['image']; ?>" alt="Generic placeholder image">
-                                  </a>
+                               
                                   
                                   <div class="media-body">
                                      
@@ -196,7 +195,7 @@ include_once 'header.php'
                   </div>
               </div>
           </div>
-          <h6>Delivery Address</h6>
+          <h6>Delivery Information:</h6>
           <article class="card">
             <div class="card-body row"  style="padding-bottom: 0; display:flex;justify-content:space-between;margin:0 8px;">
             
