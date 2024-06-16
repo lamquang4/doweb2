@@ -548,7 +548,7 @@ if (isset($_GET['text'])) {
 </form>
 
 </div>
-
+</div>
 
 
 
