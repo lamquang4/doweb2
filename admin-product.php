@@ -280,7 +280,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
     <th> NAME </th>
     <th>PRICE </th>
     <th> DATE ADD </th>
-    <th  style="position: relative;">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown()"></i>
+    <th  style="position: relative;"><span style="cursor: pointer; padding:11px 0;"  onmouseover="toggleDropdown()" onmouseout="toggleDropdown()">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
                   <input type="hidden" name="status">
@@ -289,6 +289,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 <a href="admin-product.php?status=1<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">On Sale</a>
 <a href="admin-product.php?status=2<?php if(isset($searchText)) echo '&text=' . $searchText; ?>">Hidden</a>
 </div>
+</span>
             </th>    
     <th>ACTION</th>
    

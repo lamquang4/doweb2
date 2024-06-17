@@ -230,15 +230,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
                             <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
-                                <th  style="position: relative;">STATUS <i style="cursor: pointer;font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown()"></i>
+                                <th  style="position: relative;"><span style="cursor: pointer; padding:11px 0;"  onmouseover="toggleDropdown()" onmouseout="toggleDropdown()">STATUS <i style="cursor: pointer;font-size:18px;" class="fa-solid fa-sort-down"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
                     <input type="hidden" name="status">
                 <a href="admin-strator.php">All</a>
 <a href="admin-strator.php?status=1">Normal</a>
 <a href="admin-strator.php?status=0">Blocked</a>
-
 </div>
+</span>
             </th>  
                                 <th> ACTION</th>
                             </tr>

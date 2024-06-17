@@ -152,7 +152,7 @@ $totalPages = ceil($totalOrders / $limit);
                         <tr id="select-filter">
                             <th>ID ORDER</th>                                          
                             <th>USERNAME</th>
-                            <th style="position: relative;"> ORDER DATE <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown2()"></i>
+                            <th style="position: relative;"> <span style="cursor: pointer; padding:11px 0;" onmouseover="toggleDropdown2()" onmouseout="toggleDropdown2()"> ORDER DATE <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                        <div id="datedropdown" class="hide1">
                         <form method="GET" action="admin-order.php">
                         <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
@@ -173,9 +173,9 @@ $totalPages = ceil($totalOrders / $limit);
    </div>
    </form>
                        </div>
-                        
+                        </span>
                         </th>
-                            <th style="position: relative;"> DELIVERY ADDRESS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown1()"></i>
+                            <th style="position: relative;"> <span style="cursor: pointer; padding:11px 0;" onmouseover="toggleDropdown1()" onmouseout="toggleDropdown1()">DELIVERY ADDRESS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                             <div id="addressdropdown" class="hidden">
                             <form method="GET" action="admin-order.php">
                             <div id="dropdowninside">
@@ -212,8 +212,9 @@ $totalPages = ceil($totalOrders / $limit);
         </form>
    
 </div>
+</span>
                             </th>
-                            <th  style="position: relative;">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down" onclick="toggleDropdown()"></i>
+                            <th  style="position: relative;"><span style="cursor:pointer; padding:11px 0;" onmouseover="toggleDropdown()" onmouseout="toggleDropdown()">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                 
                             <div id="statusDropdown" class="dropdown-content show">
                             <a href="admin-order.php?status=<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">All</a>
@@ -223,6 +224,7 @@ $totalPages = ceil($totalOrders / $limit);
     <a href="admin-order.php?status=2<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Cancel</a>
     <a href="admin-order.php?status=3<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Waiting</a>
 </div>
+</span>
                         </th>    
                     
                             <th> ACTION</th>
