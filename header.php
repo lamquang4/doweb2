@@ -79,8 +79,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
    </ul>
   </div>
 
- 
-    <div class="sub-menu-wrap" id="subMenu">
+<?php if(isset($_SESSION["login"])){ 
+?>
+ <div class="sub-menu-wrap" id="subMenu">
   <div class="sub-menu">
 <div class="user-info">
 
@@ -107,6 +108,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
 
   </div>
 </div>
+
+<?php }?>
+  
 
   <div id="mobile"> 
     <a id="cart-icon1">
@@ -368,6 +372,6 @@ searchbars.classList.remove("active25");
 searchbars.style.opacity="0";
       searchbars.style.pointerEvents = 'none';
   }
-  
+
     </script>
   

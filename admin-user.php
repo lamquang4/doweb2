@@ -241,7 +241,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
                                 <th>USERNAME</th>
                                 <th> FULL NAME</th>
                                 <th> EMAIL</th>
-                           
                                 <th> BIRTHDAY</th>
                                 <th> ADDRESS</th>
                                
