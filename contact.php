@@ -41,7 +41,7 @@ include_once 'header.php'
   <input type="email" class="field-contact" placeholder="Enter email">
 
 <label>Message</label>
-  <textarea type="text" class="field-contact" placeholder="Write your message" style="min-height: 110px;max-width: 362px;min-width: 362px;"></textarea>
+  <textarea type="text" class="field-contact" placeholder="Write your message" style="min-height: 110px;max-width: 362px; resize: vertical;"></textarea>
   
 <button class="btn-contactbox" type="submit">Send</button>
 </form>
