@@ -68,10 +68,14 @@ if($categoryResult) {
   $allowTypes = array('png');
   if(in_array($fileType, $allowTypes)){
 
+    $maxFileSize = 300 * 1024; // 300 KB
+    if ($_FILES["fimage1"]["size"] > $maxFileSize) {
+        echo "<script>alert('File size exceeds the maximum allowed size of 300 KB.'); window.location.href='admin-product.php';</script>";
+        exit;
+    }
+
       if(move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)){
-       
-          $name = $_POST['name'];
-        
+          $name = $_POST['name'];   
           $image = $fileName; 
       
       } else{
@@ -90,6 +94,7 @@ if($categoryResult) {
     } 
 }
 
+//delete
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])) {
   $pid = $_GET['pid'];
   $text = isset($_GET['text']) ? $_GET['text'] : ''; 

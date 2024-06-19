@@ -22,7 +22,25 @@ $start = ($page - 1) * $limit;
     $totalUsers = $userinad->getUserCount($searchStatus);
 $totalPages = ceil($totalUsers / $limit);
 
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $birthday = $_POST['birthday'];
+    $username = $_POST['customer'];
+    $page = isset($_POST['page']) ? $_POST['page'] : 1;
+    $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+        $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone', birthday='$birthday' WHERE username='$username'";
+    
+        if (mysqli_query($connection->conn, $updatequery)) {
+      
+                echo "<script> window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+               
+      
+        } else {
+            echo "<script> alert('Fail'); window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+        }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -284,7 +302,7 @@ if (isset($_GET['status'])) {
     <h1>Edit Customer</h1>
   <i class="fa-solid fa-xmark" id="closeadd"  onclick="window.location.href='admin-user.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>';"></i>
 
-<form method="post" action="update-user.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
+<form method="post" action=""  onsubmit="return kttrong()">
 
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 

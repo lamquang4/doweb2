@@ -12,17 +12,33 @@ $username = $_GET['manager'];
 $result = mysqli_query($connection->conn, $edit_sql);
 $row = mysqli_fetch_assoc($result); 
 
-
 $adinad = new Adinad();
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit;
 
-
 $ads = $adinad->selectAds($start,$limit,$searchStatus);
 $totalAds = $adinad ->getAdCount($searchStatus);
 $totalPages = ceil($totalAds / $limit);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+   $fullname = $_POST['fullname'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$username = $_POST['manager'];
+$page = isset($_POST['page']) ? $_POST['page'] : 1;
+$statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+    $updatequery = "UPDATE tb_manager SET fullname='$fullname', email='$email', phone='$phone' WHERE username='$username'";
+
+    if (mysqli_query($connection->conn, $updatequery)) {
+    
+        echo "<script>window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+           
+    } else {
+        echo "<script> alert('Fail'); window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+    } 
+}
 
 ?>
 <!DOCTYPE html>
@@ -294,7 +310,7 @@ if (isset($_GET['status'])) {
     <h1>Edit Manager</h1>
   <i class="fa-solid fa-xmark" id="closeadd" onclick="window.location.href='admin-strator.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?>';"></i>
 
-    <form method="post" action="update-strator.php<?php if(isset($_GET['status'])) echo '?status=' . $_GET['status']; ?>"  onsubmit="return kttrong()">
+    <form method="post" action=""  onsubmit="return kttrong()">
 
     <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 

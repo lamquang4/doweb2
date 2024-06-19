@@ -31,6 +31,72 @@ $category_result = mysqli_query($connection->conn, $category_sql);
 $category_row = mysqli_fetch_assoc($category_result);
 $selected_brand = $category_row['brand'];
 $selected_type = $category_row['type'];
+
+//cap nhat
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
+    $targetDir = "assets/images/sp/";
+    $fileName = basename($_FILES["fimage1"]["name"]);
+    $targetFilePath = $targetDir . $fileName;
+    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+    $allowTypes = array('png');
+
+    if (in_array($fileType, $allowTypes)) {
+
+        $maxFileSize = 300 * 1024; // 300 KB
+        if ($_FILES["fimage1"]["size"] > $maxFileSize) {
+            echo "<script>alert('File size exceeds the maximum allowed size of 300 KB.'); window.location.href='admin-product.php';</script>";
+            exit;
+        }
+
+        if (move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)) {
+           
+            $image = $fileName;
+        } else {
+            echo "<script> alert('Sorry, there was an error uploading your file.'); window.location.href='admin-product.php';</script>";
+        }
+    } 
+
+$name = $_POST['name'];
+$price = $_POST['price'];
+$image = $_POST['image'];
+$ml = $_POST['ml'];
+$calo = $_POST['calo'];
+$fatg = $_POST['fatg'];
+$sodiummg = $_POST['sodiummg'];
+$carbong = $_POST['carbong'];
+$sugarg = $_POST['sugarg'];
+$proteing = $_POST['proteing'];
+$type = $_POST['type'];
+$brand = $_POST['brand'];
+$status = $_POST['status'];
+$id = $_POST['pid'];
+$page = isset($_POST['page']) ? $_POST['page'] : 1;
+
+  $text = isset($_GET['text']) ? $_GET['text'] : '';
+  $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+  $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
+  $categoryResult = mysqli_query($connection->conn, $categoryQuery);
+  
+  if($categoryResult) {
+  
+      if(mysqli_num_rows($categoryResult) > 0) {
+          $categoryRow = mysqli_fetch_assoc($categoryResult);
+          $idloai = $categoryRow['idloai'];
+      }else{
+        echo '<script>alert("Wrong category.");</script>';
+      }
+  }
+    $updatequery = "UPDATE product SET idloai='$idloai',name='$name', price='$price', image='$image' , ml='$ml', calo='$calo', fatg='$fatg', sodiummg='$sodiummg', carbong='$carbong', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
+
+    if (mysqli_query($connection->conn, $updatequery)) {
+ 
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";    
+        
+       
+    } else{
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+    }
+}
 ?>
 
 
@@ -316,7 +382,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
      
 <div class="divider medium"></div>
-<form method="post" action="update-product.php?<?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchText)) echo '&text=' . $searchText; ?><?php if(isset($id)) echo '&pid=' . $id; ?>" onsubmit="return ktrong()" enctype="multipart/form-data">
+<form method="post" action="" onsubmit="return ktrong()" enctype="multipart/form-data">
   <div class="daily-value small-text">
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
@@ -440,7 +506,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 
 <div style="text-align: center;" id="button-submit">
-  <button type="submit" id="btn-submit" >Update</button>
+  <button type="submit" id="btn-submit" name="submit">Update</button>
 
 </div>
 </form>
