@@ -308,15 +308,3 @@ MainImg.src = small[3].src;
 }
 
    </script>
-
-
-
-
-
-
-
-
-
-
-
-

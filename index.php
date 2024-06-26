@@ -44,7 +44,6 @@ include_once 'header.php'
 </section>
 
 
-
  <div id="bet"><h5>Explore Our Products</h5></div>
  <section id="all">
   <div class="wrapper">
@@ -166,8 +165,3 @@ carousel.addEventListener("touchend", dragStop);
 
 
 </script>
-
-
-
-
-

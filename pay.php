@@ -623,7 +623,3 @@ color: white;
         vertical-align:unset;
     }
  </style>
-
-
-
-

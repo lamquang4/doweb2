@@ -423,5 +423,3 @@ document.querySelector('.record-search').addEventListener('keyup', function(even
 });
 
     </script>
-
-

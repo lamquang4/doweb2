@@ -21,7 +21,6 @@ if(isset($_GET['orderid'])) {
   $orderid = $_GET['orderid'];
 }
 
-
 ?>
 
 <!DOCTYPE html>

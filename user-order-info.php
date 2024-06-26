@@ -118,8 +118,7 @@ include_once 'header.php'
                                             <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
                                             <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>';
                                          }
-                                       
-                                    
+                                        
                                        ?>
                 
             </div>
@@ -139,10 +138,8 @@ include_once 'header.php'
                                   ?>
                               <div class="media">
                                 
-                           
                                       <img class="mr-4" src="<?php echo $orderdetail['image']; ?>" alt="Generic placeholder image">
-                               
-                                  
+                                                              
                                   <div class="media-body">
                                      
                                       <h6 class="mb-3" style="font-size: 18px;">
@@ -154,9 +151,7 @@ include_once 'header.php'
                                           <p class="text-gray mb-1">x<?php echo $orderdetail['sl_mua']; ?></p>
                                           
                                         </div>
-                                      
-                                    
-                                  
+   
                                         <hr style="border: 0.2px solid rgba(0, 0, 0, .1) !important; margin:1.2rem 0;">
                                     
                                   </div>
@@ -176,21 +171,16 @@ include_once 'header.php'
                                          }else{
                                             echo '';
                                          }
-                                       
-                                    
+       
                                        ?>
 
                                       <p  class="mb-0 text-black pt-2" id="total-money"><span style="color: black;" class="text-black font-weight-bold"> Total:</span> $<?php echo $order['total']; ?>.00</p>
                                      
-                              
                                   </div>
                               </div>
-                            
-                          
+                                
                           </div>
                       </div>
-                   
-                 
 
                   </div>
               </div>
@@ -201,15 +191,12 @@ include_once 'header.php'
             
             <div> <strong>Full name:</strong> <?php echo $fullname; ?> <br> <strong> Phone: </strong><?php echo $phone; ?></div>
               <div> <strong>Address:</strong> <?php echo $sonha; ?> <?php echo $duong; ?> <?php echo $city; ?> <?php echo $district; ?> <?php echo $ward; ?></div>
-             
-         
-  
+
             </div>
          
             <div class="card-body row" style="margin:0 8px;visibility:hidden;">
               <div> <strong>Your note:</strong> I love your web!!</div>
-         
-               
+          
             </div>
         
         </article>
@@ -224,7 +211,6 @@ include_once 'footer.php'
   ?>
 </body>
 </html>
-
 
 <style>
     a{
@@ -266,4 +252,3 @@ color: white;
     }
 
  </style>
-

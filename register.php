@@ -224,10 +224,3 @@ include_once 'header.php'
     return true;
 }
 </script>
-
-
-
-
-
-
-

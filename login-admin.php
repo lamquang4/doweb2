@@ -70,7 +70,6 @@ if (isset($_POST["submit"])) {
                             <label for="logCheck" class="text">Remember me</label>
                         </div>
                         
-                    
                     </div>
 
                     <div class="input-field button">
@@ -88,7 +87,6 @@ if (isset($_POST["submit"])) {
   
 </body>
 </html>
-
 
 
 <script>
@@ -136,4 +134,3 @@ if (isset($_POST["submit"])) {
     return true
     }
 </script>
-

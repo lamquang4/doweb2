@@ -473,5 +473,3 @@ function toggleDropdown() {
     
 }
 </script>
-
-

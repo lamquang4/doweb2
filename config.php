@@ -214,7 +214,7 @@ class Select extends Connection{
         $result = mysqli_query($this->conn,"SELECT * FROM tb_customer WHERE username='$username'");
         return mysqli_fetch_assoc($result);
     }
- 
+
 }
 
 

@@ -125,5 +125,3 @@ include_once 'footer.php'
     }
 
 </script>
-
-

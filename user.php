@@ -77,10 +77,6 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
 }
 
 
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,20 +102,15 @@ include_once 'header.php'
 <div class="containerz" style="margin-top: 130px; margin-bottom:30px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
-                   <div class="osahan-account-page-left bg-white h-100" >
-                  
-                     
-                  
+                   <div class="osahan-account-page-left bg-white h-100" >    
+
                            <a class="list-group-item list-group-item-action active" data-toggle="list"
                            href="user.php">Profile</a>
                            <a class="list-group-item list-group-item-action" data-toggle="list"
                            href="history.php">Purchase order</a>
-       
                        <a class="list-group-item list-group-item-action" data-toggle="list"
                            href="changepass.php">Change password</a>
-                    
-                 
-                      
+      
                    </div>
                </div>
                <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 0px; padding-right: 0px;z-index:50">
@@ -136,8 +127,7 @@ include_once 'header.php'
                                                 Select photo
                                                 <input type="file" class="account-settings-fileinput" onchange="previewImage()" id="imageInput" accept="image/png" name="userImage">
                                     </label> &nbsp;       
-                                            
-                                           
+ 
                                         </div>
                                     </div>
                                     <hr class="border-light m-0">
@@ -179,8 +169,7 @@ include_once 'header.php'
                                                     <input type="text" name="phone" maxlength="11" class="form-control" value="<?php echo $user['phone']; ?>" id="phone" required>
                                                 </div>
                                             </div>
-                
-                                            
+                  
                                         </div>
                                       
 
@@ -200,8 +189,6 @@ include_once 'header.php'
                                                     <input type="text" name="duong" id="duong" class="form-control" placeholder="Street" value="<?php echo $user['duong']; ?>" required>
                                                 </div>
                                             </div>
-                
-                                            
                                         </div>
                                        
                                         <div class="row" style="margin-bottom: 10px;">
@@ -250,18 +237,13 @@ include_once 'header.php'
                                        </select>
                                          </div>
                                      </div>
-                                 </div>
-
-                                        
-                                       
+                                 </div>    
                                         <div  id="profile-button" style="display: flex; justify-content: center;margin-top: 50px;margin-bottom: 20px;">
                                         <button type="button" class="btn btn-default" id="button-go-back" onclick="window.location.href='shop.php'"> Back to shop</button>
-                                        <button class="btn btn-primary" id="saveChangesBtn" name="submit" type="submit">Save changes</button>&nbsp;
-                                       
+                                        <button class="btn btn-primary" id="saveChangesBtn" name="submit" type="submit">Save changes</button>&nbsp;          
                                     </div>
                                     </form>
                                     </div>
-                                  
                              
                             </div>
                         </div>
@@ -275,16 +257,11 @@ include_once 'header.php'
            
        </div>
        </div>
-
 </body>
 <?php
 include_once 'footer.php'
   ?>
-
 </html>
-
-
-
 
 <script>
 function previewImage() {
@@ -316,44 +293,36 @@ function previewImage() {
   var addressRegex = /^[a-zA-Z0-9\s\/]+$/;
   if (!fullnameRegex.test(fullname)) {
         alert("Full name must contain only letters.");
-       
         return false;
     } 
     if (!emailRegex.test(email)) {
         alert("Invalid Email.");
-   
         return false;
     }
     if(!phoneRegex.test(phone)){
         alert("Invalid Phone Number.");
-
         return false;
     }
     if(!addressRegex.test(sonha) || !addressRegex.test(duong)){
         alert("Invalid Address.");
-   
         return false;
     }
-
         var city = document.getElementById('city').value;
         if (city === "0") {
             alert("Please select a city");
-          
             return false;
         }
 
 
         var district = document.getElementById('district').value;
         if (district === "0") {
-            alert("Please select a district");
-         
+            alert("Please select a district"); 
             return false;
         }
 
         var ward = document.getElementById('ward').value;
         if (ward === "0") {
-            alert("Please select a ward");
-           
+            alert("Please select a ward");  
             return false;
         }
 
@@ -402,4 +371,3 @@ color: white;
     }
 
  </style>
-

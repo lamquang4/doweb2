@@ -93,8 +93,7 @@ echo "<script> window.location.href='admin-order.php';</script>";
                                          }else{
                                             echo ' <span style="font-weight: 400;margin-left: 4px;"> <?php echo $orderId; ?></span> <span class="badge font-size-11 ms-2" style="color: white;font-size: 16px; padding: 6px 10px;margin-left: 4px; background-color:gray;">Awaiting processing</span>';
                                          }
-                                       
-                                    
+                                           
                                        ?></h4>
                       
                             <hr>
@@ -223,4 +222,3 @@ echo "<script> window.location.href='admin-order.php';</script>";
     </div>
 </body>
 </html>
-

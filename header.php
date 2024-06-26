@@ -374,4 +374,3 @@ searchbars.style.opacity="0";
   }
 
     </script>
-  

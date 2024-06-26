@@ -207,15 +207,9 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
 <div>
 <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add Product</button>
 </div>
-        
-        
-                
-
+         
 </div>
    
-
-
-
 
 
 <div class="records table-responsive" >
@@ -537,10 +531,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
   }
 
-
- 
-
-
  function ktrong() {
   var name = document.getElementById("name").value;
   var inputsToCheck = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing", "name", "image", "price"];
@@ -583,17 +573,12 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-
-
 <script>
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
 
 </script>
-
-
-
 
 <script>
     function previewImage() {
@@ -630,6 +615,3 @@ const usertab = document.querySelector('.usertab');
         }
     }
 </script>
-
-
-

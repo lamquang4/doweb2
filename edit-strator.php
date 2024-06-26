@@ -350,13 +350,10 @@ if (isset($_GET['status'])) {
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 
-
-
 <script>
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
-
 
 function kttrong() {
     var email = document.getElementById("email").value.trim();
@@ -381,5 +378,3 @@ function kttrong() {
     return true;
 }
 </script>
-
-
