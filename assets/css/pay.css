@@ -4,7 +4,7 @@ body{
     .containerx{
         padding: 0 15px;
         margin-bottom: 30px;
-        margin-top: 160px;
+ margin-top: 30px;
      }
     .card {
         margin-bottom: 24px;
@@ -243,15 +243,14 @@ body{
     .logo-img{
         width: 105px;
        }
-    @media(max-width:768px) {
-  
-    }
+
     @media(max-width:480px) {
         .logo-img{
             width: 95px;
         }
-        .containerx{
-            margin-top: 125px;
+        .row>*{
+            padding-left: 0 !important;
+            padding-right: 0 !important;
         }
     }
     @media(max-width:400px){
@@ -260,8 +259,5 @@ body{
         }
         .logo-img{
             width: 90px;
-        }
-        .containerx{
-            margin-top: 120px;
         }
     }

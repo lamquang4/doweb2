@@ -200,35 +200,35 @@ include_once 'header.php'
                                                   <h5 class="font-size-16" style="margin-bottom: 12px;">Receiver Info </h5>
                                               
                                                   <div class="col-lg-6">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label" for="fullname">Full name</label>
                                                             <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Enter full name" maxlength="30">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label" for="street">Phone number</label>
                                                             <input type="text" class="form-control" inputmode="numeric" id="phone" name="phone"  placeholder="Enter phone number" maxlength="11">
                                                         </div>
                                                     </div>
 
                                                   <div class="col-lg-4">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label" for="hnumber">House number</label>
                                                             <input type="text" class="form-control" name="sonha" id="sonha" placeholder="Enter house number">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label" for="street">Street</label>
                                                             <input type="text" class="form-control" name="duong" id="duong" placeholder="Enter street">
                                                         </div>
                                                     </div>
 
                                                       <div class="col-lg-4">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label">City</label>
                                                             <select class="form-select" id="city" name="city" aria-label=".form-select-sm">
                                                                 <option value="0" selected>Select City</option> 
@@ -239,7 +239,7 @@ include_once 'header.php'
                                                     </div>
   
                                                       <div class="col-lg-4">
-                                                          <div class="mb-2">
+                                                          <div class="mb-3">
                                                             <label class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" aria-label=".form-select-sm">
                                                                 <option value="0" selected>Select District</option>
@@ -254,7 +254,7 @@ include_once 'header.php'
                                                       </div>
   
                                                       <div class="col-lg-4">
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label class="form-label">Ward</label>
                                                             <select class="form-select" name="ward" id="ward" aria-label=".form-select-sm">
                                                                 <option value="0" selected>Select Ward</option>
@@ -325,13 +325,13 @@ include_once 'header.php'
 
                                       <div class="row" style="margin-top: 10px;" id="pay-date-cvv1">
                                       <div class="col-lg-5" id="credit-form1" style="display: none;">
-                                          <div class="mb-2">
+                                          <div class="mb-3">
                                               <label class="form-label" for="zip-code">Cardholder Name</label>
                                               <input type="text" class="form-control" id="cardname" placeholder="Enter Full name" >
                                           </div>
                                       </div>
                                       <div class="col-lg-5">
-                                        <div class="mb-2" id="credit-form2" style="display: none;">
+                                        <div class="mb-3" id="credit-form2" style="display: none;">
                                             <label class="form-label" for="card-number">Card Number</label>
                                             <input type="number" inputmode="numeric" class="form-control"  id="card-number" placeholder="Enter Card Number">
                                         </div>
@@ -340,30 +340,25 @@ include_once 'header.php'
                                   
 
         </div>
-     
-                                    
 
                                     <div class="row" style="margin-top: 10px;" id="pay-date-cvv">
             
                                       <div class="col-lg-5">
-                                          <div class="mb-2" id="credit-form3" style="display: none;">
+                                          <div class="mb-3" id="credit-form3" style="display: none;">
                                               <label class="form-label" for="billing-city">Expiry Date</label>
                                               <input type="date" class="form-control" id="expiry-date" placeholder="Enter Expiry Date" >
                                           </div>
                                       </div>
 
                                       <div class="col-lg-5">
-                                          <div class="mb-2" id="credit-form4" style="display: none;">
+                                          <div class="mb-3" id="credit-form4" style="display: none;">
                                               <label class="form-label" for="zip-code">CVV</label>
                                               <input type="number"  class="form-control" id="cvv" placeholder="Enter CVV" >
                                           </div>
                                       </div>
                                       
                                   </div>
-                                
-                                    
-                                 
-                             
+                               
                                   
                               </div>
                           </li>
@@ -371,12 +366,12 @@ include_once 'header.php'
                       </ol>
 
 
-                      <div class="row my-4">
-                        <div class="float-start">
+                      <div class="row my-4" style="padding:0 10px;">
+                        <div style="display: flex; justify-content:space-between;align-items:center; flex-wrap:wrap;">
                     
-                     <a href="shop.php" class="btn btn-link text-muted" id="continue-shopping-btn" style="margin-right: 10px;"><i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>                
+                     <a href="shop.php" class="btn btn-link text-muted" id="continue-shopping-btn" style="padding: 0;"><i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>                
              
-                     <button type="submit" name="submit" class="btn btn-success" id="success-pay-btn"><i class="mdi mdi-cart-outline me-1"></i> Procced </button>                       
+                     <button style="padding: 8px 12px;" type="submit" name="submit" class="btn btn-success" id="success-pay-btn"><i class="mdi mdi-cart-outline me-1"></i> Procced </button>                       
                         
                     </div>
                     

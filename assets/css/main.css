@@ -54,8 +54,7 @@ button{
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 160px;
-  margin-bottom: 60px;
+margin: 70px 0;
 }
 #contact-box{
   max-width: 860px;
@@ -74,7 +73,7 @@ border: 1px solid #DDDDDD;
   height: 470px;
 }
 .right-contactbox{
-  padding: 25px 40px;
+  padding: 25px 26px;
 }
 .right-contactbox h2{
   position: relative;
@@ -134,7 +133,7 @@ border: 1px solid #DDDDDD;
 
   #container-contact{
     margin-bottom: 0;
-    margin-top: 102px;
+    margin-top: 0;
   }
   #contact-box{
       border: none;
@@ -155,9 +154,7 @@ border: 1px solid #DDDDDD;
   .left-contactbox iframe {
     height: 360px;
 }
-#container-contact {
-        margin-top: 92px;
-    }
+
 }
 @media (max-width:400px){
   .left-contactbox iframe {
@@ -226,8 +223,7 @@ padding: 0px 35px;
 width: 100%;
 font-size: 18px;
 height: 90px;
-letter-spacing: .2em;
-
+letter-spacing: 1.4px;
 outline: none;
 color: #000000;
 background-color: #fff;
@@ -363,7 +359,7 @@ justify-content: space-between;
 padding: 24px 80px 24px 80px;
 background-color: white;
 box-shadow: 0.5px 5px 15px rgba(0,0,0,0.09);
-position: fixed;
+position: sticky;
 top:0;
 z-index: 99;
 
@@ -482,15 +478,13 @@ position: relative;
 }
 
 .input {
-
 width: 150px;
-padding: 6px 12px 6px 9px;
+padding: 6px 37px 6px 12px;
 border-radius: 18px;
 border: 1.2px solid black;
-
 outline: none;
 opacity: 1;
-
+letter-spacing: 1.2px;
 }
 
 .group button {
@@ -506,7 +500,6 @@ opacity: 1;
 /*index.html*/
 
 .commercial-index{
-  margin-top: 100px;
   width: 100%;
 background-color: #FDF2E9;
   padding: 28px 120px 0px 120px;
@@ -675,7 +668,6 @@ height: 380px;
 @media (max-width:600px){
  
   .commercial-index{
-    margin-top: 85px;
     padding: 40px 0px 0px 0px;
     
     }
@@ -722,7 +714,6 @@ height: 455px;
 }
 @media(max-width:480px){
 .commercial-index{
-margin-top: 90px;
 padding: 38px 0px 0px 0px;
 
 }
@@ -1186,7 +1177,6 @@ width: calc(100% / 2);
 #product1{
 margin-bottom: 55px;
 align-items: center;
-margin-top: 175px;
 }
 #product1 h6{
 margin-top: 4%;
@@ -1255,7 +1245,7 @@ align-items: center;
 }
 #fo-text #col h2{
 color:white;
-font-size: 20px;
+font-size: 16px;
 display: inline;
 
 }
@@ -1273,7 +1263,7 @@ list-style: none;
 #col i{
 display: flex;
 justify-content: center;
-font-size: 26px;
+font-size: 25px;
 }
 #col a:hover{
 color:white;
@@ -1420,6 +1410,7 @@ padding: 0 10px;
 }
 .listPage li a{
   color: black;
+  font-weight: 500;
 }
 .listPage .activi {
 
@@ -1802,15 +1793,11 @@ font-weight: 400;
 border: none;
 width: 30px;
 text-align: center;
-
-
 }
 #prodetails{
-
   display: flex;
+margin-top: 25px;
 
-  margin-top: 150px;
-  margin-bottom: 25px;
   }
   #prodetails .single-pro-details{
 
@@ -1836,7 +1823,7 @@ margin-bottom: 10px;
   #typeandbrand{
     margin-bottom: 10px;
     text-transform: capitalize;
-    font-size: 18px;
+    font-size: 16px;
   }
  
   #prodetails #nutri{
@@ -2145,10 +2132,7 @@ margin-top: 120px;
     
     
     }
-    #prodetails{
-    margin-bottom: 0px;
-    margin-top: 135px;
-    }
+  
     #prodetails .single-pro-details h2 {
     
       font-size: 25px;
@@ -2363,10 +2347,7 @@ margin-top: 0px;
 
 
 }
-#prodetails{
-margin-bottom: 0px;
-margin-top: 135px;
-}
+
 #prodetails .single-pro-details h2 {
 
   font-size: 26px;
@@ -2400,7 +2381,6 @@ padding-top: 10px;
 } 
 
 
-
 @media (max-width: 480px){
   #ordersuccesstn{
     font-size: 20px;
@@ -2410,10 +2390,9 @@ padding-top: 10px;
 }
   #product1 {
   
-    margin-top: 145px;
+    margin-top: 55px;
 }
 #b-banner1 {
-
   margin-top: 147px;
 }
 #contact-all {
@@ -2610,72 +2589,17 @@ padding-top: 15px;
 #long{
 margin-top: 10px;
 }
+footer #col-container{
+  padding: 15px;
+
+}
 footer #col{
-
-padding-bottom: 0px;
-display: inline-table;
-padding:30px 24px 0px 77px;
+padding: 35px 35px 12px 35px;
 }
-
-#section-login {
-background-color: rgba(255, 255, 255, 0.649);
-width:100%;
-height:455px;
-
-}
-#section-login   .container{
-
-width: 98%;
-padding-bottom: 20px;
-display: flex;
-justify-content: center;
-
-}
-
-.f-box{
-width:90%;
-padding: 0px 30px 0px;
-
-}
-
-.input-group{
-  height: 225px;
-  
-  }
-
-
-.f-box1 h1{
-
-font-size: 44px;
-margin-bottom: 15px;
-margin-top: 5px;
-font-weight: 800;
-
-
-}
-#section-login1 {
-background-color: rgba(255, 255, 255, 0.649);
-width:100%;
-
-
-} 
-  .f-box1{
-      width:90%;
-      max-width:405px;
-    
-    text-align: center;
-background-color: white;
-padding: 30px 30px 0px;
-border-radius: 15px;
-
-  }
 
   #prodetails{
-
     display: flex;
     flex-direction: column;
-  
-  
   }
   #MainImg {
     margin: 0;
@@ -2718,14 +2642,9 @@ border-radius: 15px;
       display: inline-block;
       word-spacing: 5px;
       font-weight: 500;
-      color:#7e7e7e;
-    
-    
+      color:#7e7e7e;  
   }
-  #prodetails{
-  margin-bottom: 0px;
-  margin-top: 115px;
-  }
+
   #prodetails .single-pro-details h2 {
   
       font-size: 26px;
@@ -2733,7 +2652,7 @@ border-radius: 15px;
   }
   #prodetails .single-pro-details h6 {
   margin-bottom: 0px;
-   font-size: 26px;
+   font-size: 24px;
 
   
   }
@@ -2791,10 +2710,7 @@ margin-bottom: 8px;
 
 
 @media(max-width:400px){
-  .input-group{
-    height: 220px;
-    
-    }
+ 
   .pro1 button{
     width:100px;
     height:35px; 
@@ -2850,19 +2766,16 @@ padding-bottom: 5px;
 color: green;
 }
 
-
-
 #product11 h2 {
-
 font-size: 20px;
+}
+footer #col-container{
+  padding: 12px;
 
 }
-
 footer #col{
 
-padding-bottom: 0px;
-display: inline-table;
-padding:30px 24px 0px 58px;
+padding: 30px 30px 10px 30px;
 }
 #nutri-open{
   pointer-events: none;
@@ -2886,10 +2799,10 @@ padding:30px 24px 0px 58px;
   
   #prodetails .single-pro-details h6 {
   margin-bottom: 0px;
-  font-size: 24px;
+  font-size: 22px;
   }
   #prodetails .single-pro-details h2 {
-  font-size: 24px;
+  font-size: 22px;
   }
   #MainImg{
     margin: 0;
@@ -3016,9 +2929,7 @@ display: none;
   font-weight: 600;
 }
 }
-#slidersss-section{
-  margin-top: 120px;
-}
+
 .slidersss{
  
   width: 1300px;
@@ -3232,14 +3143,10 @@ display: none;
   left: 4%;
   width: 90%;
 
-
 }
 
 }
 @media (max-width:480px){
-  #slidersss-section{
-    margin-top: 105px;
-  }
   .slidersss{
    
     height: 210px;
@@ -3254,8 +3161,6 @@ display: none;
   top: 42%;
   left: 4%;
   width: 90%;
-
-
 }
 
 }
@@ -3273,8 +3178,6 @@ display: none;
   top: 42%;
   left: 4%;
   width: 90%;
-
-
 }
 
 }

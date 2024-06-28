@@ -99,7 +99,7 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
 include_once 'header.php'
   ?>
 
-<div class="containerz" style="margin-top: 130px; margin-bottom:30px;">
+<div class="containerz" style="margin-top: 50px; margin-bottom:50px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
                    <div class="osahan-account-page-left bg-white h-100" >    
@@ -116,7 +116,7 @@ include_once 'header.php'
                <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 0px; padding-right: 0px;z-index:50">
                    <div class="osahan-account-page-right bg-white p-2 h-100">
                        <div class="tab-content" id="myTabContent">
-                        <div class="col-md-11" style="padding-left: 0; padding-right: 0;">
+                        <div class="col-md-11" style="padding-left: 0; padding-right: 0; margin:0 auto;">
                             <div class="card-body pb-2">
                                 <div class="tab-pane fade show" id="account-general">
                                     <form method="post" action="" enctype="multipart/form-data" onsubmit="return kttrong()"> 

@@ -40,11 +40,11 @@ if(isset($_GET['orderid'])) {
 include_once 'header.php'
   ?>
 
-<section style="margin-top: 162px; margin-bottom:60px;display:flex;justify-content:center;">
+<section style="margin-top: 60px; margin-bottom:60px;display:flex;justify-content:center;">
 <div style=" margin:0 auto;">
   <div >
     <div style="display: flex; justify-content:center; align-items:center;margin-bottom:10px;">
-     <img src="assets/images/pic/404-tick.png" width="85">    
+     <img src="assets/images/pic/404-tick.png" width="80">    
     </div>
 
 <h1 id="ordersuccesstn">Order Successfully!</h1>

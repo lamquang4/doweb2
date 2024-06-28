@@ -123,7 +123,7 @@ include_once 'header.php'
 } ?></p>
   <h6 id="text1"><?php echo $productName; ?></h6>
   <h2 id="text2">$<?php echo $productPrice; ?>.00</h2>
-  <p style="font-size:16px; font-style: italic; margin-bottom:20px; margin-top:15px;">LIMIT: 10 PER PERSON</p>
+  <p style="font-size:15px; font-style: italic; margin-bottom:15px; margin-top:15px;">LIMIT: 10 PER PERSON</p>
   <input type="hidden"  name="idsp" value="<?php echo $productId; ?>">
   <input type="hidden"  name="namesp" value="<?php echo $productName; ?>">
   <input type="hidden"  name="pricesp" value="<?php echo $productPrice; ?>">

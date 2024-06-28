@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
 include_once 'header.php'
   ?>
    
-<div class="containerz" style="margin-top: 145px; margin-bottom:30px;">
+<div class="containerz" style="margin-top: 50px; margin-bottom:50px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
                    <div class="osahan-account-page-left  bg-white h-100">
@@ -75,10 +75,12 @@ include_once 'header.php'
                <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 0px; padding-right: 0px;">
                    <div class="osahan-account-page-right bg-white p-2 h-100">
                        <div class="tab-content" id="myTabContent">
-                        <div class="col-md-9" style="padding-left: 0px; padding-right: 0px;">
+                        <div class="col-md-9" style="padding-left: 0px; padding-right: 0px; margin:0 auto;">
                             <div class="card-body pb-2">
                                 <form action="" method="post" onsubmit="return kttrong()">
-
+<div style="margin-top:10px; margin-bottom:25px;">
+    <h4 class="font-weight-bold">Change Password</h4>
+</div>
                                 <div class="form-group">
                                     <label class="form-label">Current password</label>
                                     <input type="password" name="currentpass" class="form-control" required>

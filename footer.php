@@ -8,17 +8,15 @@ if (basename($_SERVER['PHP_SELF']) === 'footer.php') {
 ?>
 <footer>
 <div id="all-footer">
-<div id="fo-text">
-  <div class="alldrinklogo">
-<img src="">
-
-  </div>
+<div id="fo-text" style="margin-top: 20px;">
+ 
   <div id="long1">
     <div id="seprator1">
       <hr class="ruler1">
     </div>
   </div>
 
+  <div id="col-container">
   <div id="col">
     <h2>
 ABOUT US
@@ -43,8 +41,6 @@ GET HELP
       </ul>
     </div>
 
-  
-
     <div id="col">
       <h2>
   JURIDICAL
@@ -56,8 +52,8 @@ GET HELP
        
       </ul>
     </div>
+
     <div id="col">
-   
       <ul>
         <li><a href="" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
         <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i>
@@ -66,7 +62,8 @@ GET HELP
         <li><a href="" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
       </ul>
   </div>
-
+</div>
+  
     
   <div id="long1" style="margin-top:0px; margin-bottom:10px;">
     <div id="seprator1">

@@ -41,7 +41,7 @@ $totalPages = ceil($totalOrders / $limit);
 include_once 'header.php'
   ?>
   
-<div class="containerz" style="margin-top: 120px; margin-bottom:30px">
+<div class="containerz" style="margin-top: 50px; margin-bottom:50px;">
     <div class="row">
         <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;" >
             <div class="osahan-account-page-left  bg-white h-100">
@@ -58,11 +58,11 @@ include_once 'header.php'
                
             </div>
         </div>
-        <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 6px; padding-right: 6px ;" class="right-containers">
+        <div class="col-md-9" style="border: 1px solid #DFDFDF;padding-left: 10px; padding-right: 10px ;" class="right-containers">
             <div class="osahan-account-page-right  bg-white p-2 h-100">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane  fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                        <h4 class="font-weight-bold mt-0 mb-4">Purchase Order</h4>
+                        <h4 class="font-weight-bold mt-3 mb-4">Purchase Order</h4>
                        
                         <?php
                         $orderdetailObj = new Orderdetail();
