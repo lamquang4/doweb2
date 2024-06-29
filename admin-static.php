@@ -129,17 +129,25 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
             
             <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="order">Statistics </h1>
           
-            <div>
+            <div style="margin-bottom: 10px;">
                 <form method="GET" id="form-searchdate">
-                <label style="margin-right: 4px;">Date from</label>
-                <input type="date" name="dateStart" style="margin-right: 10px;">
-                <label style="margin-right: 4px;">Date to</label>
-                <input type="date" name="dateEnd" style="margin-right: 10px;">
-                <button type="submit">Statistic</button>
+                    <div style="display: flex; justify-content:flex-start; flex-wrap:wrap; align-items:center; gap:15px;">
+                        <div style="display: flex; justify-content:space-between;gap:5px;">
+                           <label style="margin-right: 4px;">Date from</label>
+                <input type="date" name="dateStart">  
+                        </div>
+                         <div style="display: flex; justify-content:space-between;gap:5px;">
+                                     <label style="margin-right: 4px;">Date to</label>
+                <input type="date" name="dateEnd">
+                         </div>
+       
+                <button type="submit">Statistic</button> 
+                    </div>
+             
                 </form>
             </div>
         
-            <canvas id="myChart" width="300" height="120" ></canvas>
+            <canvas id="myChart"  style="min-height: 120px;" ></canvas>
            
         </div>
  
@@ -305,7 +313,9 @@ while ($row = mysqli_fetch_assoc($orders_result)) {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+        barPercentage: 0.7, 
+        categoryPercentage: 0.7
     };
 
     const ctx = document.getElementById('myChart').getContext('2d');
