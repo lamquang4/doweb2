@@ -40,7 +40,6 @@ if (isset($_POST["send"])) {
 
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
 unset($_SESSION['message']); 
-
 ?>
 
 <!DOCTYPE html>
