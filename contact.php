@@ -7,6 +7,40 @@ if(isset($_SESSION["username"])){
     
   }
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+require 'vendor/autoload.php';
+
+if (isset($_POST["send"])) {
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = 'alldrinkshop668@gmail.com';
+  $mail->Password = 'yvpu zcyb xfyq nico'; //gmail app password
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+  $mail->Port = 465;
+  $mail->setFrom('alldrinkshop668@gmail.com');
+  $mail->addAddress($_POST['userEmail']);
+
+  $mail->isHTML(true);
+  $mail->Subject = $_POST["userFullname"];
+  $mail->Body = $_POST["userMessage"];
+
+  if ($mail->send()) {
+      $_SESSION['message'] = "Success";
+  } else {
+      $_SESSION['message'] = "Fail";
+  }
+
+  header('Location: contact.php');
+  exit();
+}
+
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+unset($_SESSION['message']); 
+
 ?>
 
 <!DOCTYPE html>
@@ -25,26 +59,39 @@ if(isset($_SESSION["username"])){
 include_once 'header.php'
   ?>
 
-  
    <section id="container-contact">
    <div id="contact-box">
 <div class="left-contactbox">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6697268382204!2d106.68225830000002!3d10.7599171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1717673427330!5m2!1svi!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 <div class="right-contactbox">
-<h2>Contact Us</h2>
-<form action="">
+
+<?php if(empty($message)){ ?>
+  <h2>Contact Us</h2>
+<form action="contact.php" method="post">
   <label>Full name</label>
-  <input type="text" class="field-contact" placeholder="Enter full name">
+  <input type="text" name="userFullname" class="field-contact" placeholder="Enter full name" required>
 
 <label>Email</label>
-  <input type="email" class="field-contact" placeholder="Enter email">
+  <input type="email" name="userEmail" class="field-contact" placeholder="Enter email" required>
 
 <label>Message</label>
-  <textarea type="text" class="field-contact" placeholder="Write your message" style="min-height: 110px;max-width: 100%; resize: vertical;"></textarea>
+  <textarea type="text" name="userMessage" class="field-contact" placeholder="Write your message" style="min-height: 110px;max-width: 100%; resize: vertical;" required></textarea>
   
-<button class="btn-contactbox" type="submit">Send</button>
+<button class="btn-contactbox" type="submit" name="send">Send</button>
 </form>
+<?php }else{ ?>
+<div class="container-send-mail">
+  <div class="success-send-mail">
+<img src="assets/images/pic/404-tick.png" alt="" width="60px">
+<div class="text-send-mail">
+  <h3>Your request was sent!</h3>
+  <p>We will reach out to you via email soon.</p>
+</div>
+  </div>
+</div>
+
+  <?php } ?>
 </div>
    </div>
 
