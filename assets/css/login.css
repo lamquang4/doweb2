@@ -21,13 +21,13 @@ border-radius: 15px;
 
 }
 .f-box h1{
-font-size: 48px;
+font-size: 40px;
 margin-bottom: 20px;
 font-weight: 600;
 display: flex;
 justify-content: center;
 color:#000000;
-
+letter-spacing: 1.1px;
 }
 
 .input-field{
@@ -61,12 +61,11 @@ border:2px solid #e5e5e5;
   text-decoration: none;
   font-size:13px;
   color: #8d8d8d;
-display: flex;
-justify-content: left;
 font-weight: 300;
 }
 #fpass{
-  font-weight: 610;
+  display: flex; 
+  justify-content:left;
 }
 .b-field{
 width: 100%;
@@ -119,7 +118,7 @@ box-shadow: 0.35em 0.32em;
     margin: 60px 0;
     }
     .f-box h1{
-      font-size: 40px;
+      font-size: 35px;
     }
 }
 @media(max-width:400px){

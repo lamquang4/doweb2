@@ -21,12 +21,21 @@ if (isset($_POST["send"])) {
   $mail->Password = 'yvpu zcyb xfyq nico'; //gmail app password
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
   $mail->Port = 465;
-  $mail->setFrom('alldrinkshop668@gmail.com');
+
+  $mail->setFrom('alldrinkshop668@gmail.com', 'H2O');
   $mail->addAddress($_POST['userEmail']);
 
+  $mail->addEmbeddedImage('assets/images/pic/logo.png', 'logo_cid');
   $mail->isHTML(true);
-  $mail->Subject = $_POST["userFullname"];
-  $mail->Body = $_POST["userMessage"];
+  $mail->Subject = 'Contact Us';
+  $mail->Body = '
+  <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+                <img src="cid:logo_cid" alt="Logo" style="width: 130px; height: auto; margin-bottom: 20px;">
+                <h1 style="color: black;">Hello '. $_POST["userFullname"] . '</h1>
+                <p style="color: #000;">' . $_POST["userMessage"] . '</p>
+               
+            </div>
+      ';
 
   if ($mail->send()) {
       $_SESSION['message'] = "Success";

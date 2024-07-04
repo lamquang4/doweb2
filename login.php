@@ -6,7 +6,11 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
   exit;
 
 }
-
+if (isset($_GET['action']) && $_GET['action'] == 'goback'){
+  unset($_SESSION['otp']);
+header('Location: forgot.php');
+exit;
+}
 $login = new Login();
 if(isset($_POST["submit"])){
   $result = $login->login($_POST["usernamelogin"], $_POST["password"]);
@@ -24,10 +28,10 @@ if(isset($_POST["submit"])){
   
   }elseif($result==10){
     echo
-    "<script> alert('Wrong password'); </script>";
+    "<script> alert('Wrong password'); window.location.href='login.php'; </script>";
   }elseif($result==100){
     echo
-    "<script> alert('Wrong username or password!'); </script>";
+    "<script> alert('Wrong username or password!'); window.location.href='login.php'; </script>";
   }
 }
 
@@ -74,7 +78,7 @@ include_once 'header.php'
        
     
            <div id="fpass">
-     <a href="#" id="forget">Forgotten your password?</a></div>
+     <a href="login.php?action=goback" id="forget">Forgotten your password?</a></div>
              </div>
              <div class="b-field">
                  <button type="submit" name="submit"  id="subtn">Sign in</button>
