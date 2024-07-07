@@ -47,9 +47,9 @@ if (isset($_POST["submit"])) {
       echo "<script> alert('Registration Successful'); window.location.href='login.php'; </script>";
   
   } elseif ($result == 10) {
-      echo "<script> alert('Username or Email has already taken'); </script>";
+      echo "<script> alert('Username or Email has already taken'); window.location.href='register.php'; </script>";
   } elseif ($result == 100) {
-      echo "<script> alert('Password and Confirm Password does not match'); </script>";
+      echo "<script> alert('Password and Confirm Password does not match'); window.location.href='register.php'; </script>";
   }
 }
 
@@ -195,7 +195,6 @@ include_once 'header.php'
      
      </footer>
 
- 
 
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>

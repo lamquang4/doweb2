@@ -19,23 +19,38 @@ if (isset($_POST["submit"])) {
     $username = $user['username'];
     $password = $user['password'];
     $currentpass = md5($_POST['currentpass']);
-    $newpass = $_POST['newpass'];
-    $connewpass = $_POST['connewpass'];
+    $newpass = trim($_POST['newpass']);
+    $connewpass = trim($_POST['connewpass']);
 
-    if ($password == $currentpass && $newpass == $connewpass) {
-        $hashed_newpass = md5($newpass); 
-        $stmt = $connection->conn->prepare("UPDATE tb_customer SET password = ? WHERE username = ?");
-        $stmt->bind_param("ss", $hashed_newpass, $username);
-        $result = $stmt->execute();
+    if ($password === $currentpass) {
+        if ($newpass === $connewpass) {
+        if (strlen($newpass) >= 6) {
+                $hashed_newpass = md5($newpass); 
+                $stmt = $connection->conn->prepare("UPDATE tb_customer SET password = ? WHERE username = ?");
+                $stmt->bind_param("ss", $hashed_newpass, $username);
+                $result = $stmt->execute();
 
-        if ($result) {
-           
-        } 
+                if ($result) {
+                    $_SESSION['success'] = 'Password change successful';
+                    echo "<script> window.location.href='changepass.php';</script>";
+                    exit;
+                }
+            } else {
+              $_SESSION['error1'] = 'New password must be over 6 characters';
+            echo "<script> window.location.href='changepass.php';</script>";
+            exit;
+            }
+        } else {
+            $_SESSION['error1'] = 'New password do not match';
+            echo "<script> window.location.href='changepass.php';</script>";
+            exit;
+        }
     } else {
-        echo "<script>alert('Current password is incorrect or new passwords do not match.'); window.location.href='changepass.php';</script>";
+        $_SESSION['error1'] = 'Current password incorrect';
+        echo "<script> window.location.href='changepass.php';</script>";
+        exit;
     }
 }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +72,8 @@ if (isset($_POST["submit"])) {
 include_once 'header.php'
   ?>
    
+   <div id="toast-container"></div>
+
 <div class="containerz" style="margin-top: 50px; margin-bottom:50px;">
            <div class="row">
                <div class="col-md-3" style="border: 1px solid #DFDFDF;padding-left: 0;padding-right: 0;">
@@ -77,7 +94,7 @@ include_once 'header.php'
                        <div class="tab-content" id="myTabContent">
                         <div class="col-md-9" style="padding-left: 0px; padding-right: 0px; margin:0 auto;">
                             <div class="card-body pb-2">
-                                <form action="" method="post" onsubmit="return kttrong()">
+                                <form action="" method="post">
 <div style="margin-top:10px; margin-bottom:25px;">
     <h4 class="font-weight-bold">Change Password</h4>
 </div>
@@ -160,15 +177,59 @@ color: white;
 
  </style>
 
- <script>
-    function kttrong(){
-const newpass = document.getElementById('newpass').value;
-const connewpass = document.getElementById('connewpass').value;
-if(newpass !== connewpass){
-alert("New password and Confirm New password don't match ");
-return false;
-}
-return true;
+<script>
+       document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        showToast('<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['error1'])): ?>
+        showToast('<?php echo $_SESSION['error1']; ?>', 'error');
+        <?php unset($_SESSION['error1']); ?>
+    <?php endif; ?>
+});
+
+function showToast(message, type) {
+    const toastContainer = document.getElementById('toast-container');
+
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+
+    const icon = document.createElement('div');
+    icon.className = 'icon';
+    if (type === 'success') {
+        icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    } else if (type === 'error') {
+        icon.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color:red;"></i>';
     }
- </script>
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message';
+    messageDiv.innerText = message;
+
+    const closeButton = document.createElement('div');
+    closeButton.className = 'close';
+    closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeButton.addEventListener('click', function() {
+        toastContainer.removeChild(toast);
+    });
+
+    toast.appendChild(icon);
+    toast.appendChild(messageDiv);
+    toast.appendChild(closeButton);
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.5s forwards';
+        setTimeout(() => {
+            if (toastContainer.contains(toast)) {
+                toastContainer.removeChild(toast);
+            }
+        }, 500);
+    }, 3500);
+}
+
+    </script>
  

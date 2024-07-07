@@ -76,7 +76,7 @@ if(isset($_POST["add_to_cart"])) {
       );
       $_SESSION["shopping_cart"][] = $item_array;
   }
-
+  $_SESSION['success'] = 'Item added to cart';
   echo "<script> window.location.href='product.php?id=$productId';</script>";
   exit;
 }
@@ -101,6 +101,8 @@ if(isset($_POST["add_to_cart"])) {
 <?php
 include_once 'header.php'
   ?>
+
+<div id="toast-container"></div>
 
  <section id="prodetails" class="section-p1">
   
@@ -306,3 +308,55 @@ MainImg.src = small[3].src;
 }
 
    </script>
+
+<script>
+       document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        showToast('<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+});
+
+function showToast(message, type) {
+    const toastContainer = document.getElementById('toast-container');
+
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+
+    const icon = document.createElement('div');
+    icon.className = 'icon';
+    if (type === 'success') {
+        icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    } else if (type === 'error') {
+        icon.innerHTML = '<i class="fa-regular fa-circle-xmark" style="color:red;"></i>';
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message';
+    messageDiv.innerText = message;
+
+    const closeButton = document.createElement('div');
+    closeButton.className = 'close';
+    closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeButton.addEventListener('click', function() {
+        toastContainer.removeChild(toast);
+    });
+
+    toast.appendChild(icon);
+    toast.appendChild(messageDiv);
+    toast.appendChild(closeButton);
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.5s forwards';
+        setTimeout(() => {
+            if (toastContainer.contains(toast)) {
+                toastContainer.removeChild(toast);
+            }
+        }, 500);
+    }, 3500);
+}
+
+    </script>
