@@ -16,7 +16,12 @@ if(isset($_GET['action']) && isset($_GET['id'])){
   }
 }
 
-
+if (!empty($_SESSION["shopping_cart"])) {
+  $soluong_total=0;
+  foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+      $soluong_total += $values["item_quantity"];
+  }
+}
 ?>
  
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -51,9 +56,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
       <div class="cart-follow-icon">
     <i class="fa-solid fa-cart-shopping add-cart"></i>
     <?php if(isset($_SESSION["shopping_cart"]) && !empty($_SESSION["shopping_cart"])): ?>
-        <span id="count-cart-add" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">!</span>
+        <span id="count-cart-add" style="font-size: 13px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;"><?php echo $soluong_total; ?></span>
         <?php else: ?>
-        <span id="count-cart-add" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
+        <span id="count-cart-add" style="font-size: 13px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
     <?php endif; ?>
       
 </div>
@@ -117,9 +122,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
     <div class="cart-follow-icon">
     <i class="fa-solid fa-cart-shopping add-cart"></i>
     <?php if(isset($_SESSION["shopping_cart"]) && !empty($_SESSION["shopping_cart"])): ?>
-        <span id="count-cart-add1" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">!</span>
+        <span id="count-cart-add1" style="font-size: 13px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;"><?php echo $soluong_total; ?></span>
         <?php else: ?>
-        <span id="count-cart-add1" style="font-size: 14px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
+        <span id="count-cart-add1" style="font-size: 13px; color:white; font-weight: 500; margin: 0; letter-spacing: 1px;">0</span>
     <?php endif; ?>
 </div>
     </a>
@@ -196,8 +201,6 @@ if(isset($_GET['action']) && isset($_GET['id'])){
 
 
 <div id="overlay"></div>
-
-
 
 <script>
     const bar = document.getElementById('bar');
@@ -288,7 +291,6 @@ cartIcon1.addEventListener('click',()=>{
         htmlElement.style.overflowY = 'scroll';
   overlay.style.display = 'block';
   overlay.style.zIndex = '100';
-  icons.style.right = "-300px";
   subMenu.classList.remove("open-menu");
 });
 closeCart.addEventListener('click',()=>{

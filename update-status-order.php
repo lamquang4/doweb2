@@ -14,4 +14,7 @@ if(isset($_POST['status']) && isset($_POST['orderId'])) {
     $result = mysqli_query($connection->conn, $query);
 
 }
+
+header("Location: admin-order.php");
+exit;
 ?>
