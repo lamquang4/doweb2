@@ -18,7 +18,9 @@ if(isset($_POST["submit"])){
   if($result ==1){
      $userStatus = $login->getUserStatus($login->idUser());
         if ($userStatus == 0) {
-            echo "<script> alert('Your account is blocked.'); window.location.href='login.php';</script>";
+          $_SESSION['fail'] = 'Your account is blocked';   
+          echo "<script> window.location.href='login.php';</script>";
+          exit;
         } else {
             $_SESSION["login"] = true;
             $_SESSION["username"] = $login->idUser();
@@ -27,11 +29,13 @@ if(isset($_POST["submit"])){
         }
   
   }elseif($result==10){
-    echo
-    "<script> alert('Wrong password'); window.location.href='login.php'; </script>";
+    $_SESSION['fail'] = 'Wrong username or password';   
+    echo "<script> window.location.href='login.php'; </script>";
+    exit;
   }elseif($result==100){
-    echo
-    "<script> alert('Wrong username or password!'); window.location.href='login.php'; </script>";
+    $_SESSION['fail'] = 'Wrong username or password';   
+    echo "<script> window.location.href='login.php'; </script>";
+    exit;
   }
 }
 
@@ -102,8 +106,10 @@ include_once 'header.php'
 include_once 'footer.php'
   ?>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script>
     $(document).ready(function(){
       $('#eye').click(function(){
@@ -128,4 +134,18 @@ include_once 'footer.php'
     return true
     }
 
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>

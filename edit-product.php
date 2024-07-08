@@ -39,12 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
     $targetFilePath = $targetDir . $fileName;
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
     $allowTypes = array('png');
-
+    $page = isset($_POST['page']) ? $_POST['page'] : 1;
+    $text = isset($_GET['text']) ? $_GET['text'] : '';
+    $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
     if (in_array($fileType, $allowTypes)) {
 
         $maxFileSize = 300 * 1024; // 300 KB
         if ($_FILES["fimage1"]["size"] > $maxFileSize) {
-            echo "<script>alert('File size exceeds the maximum allowed size of 300 KB.'); window.location.href='admin-product.php';</script>";
+            $_SESSION['fail'] = 'File size exceeds the maximum allowed size of 300 KB';
+            echo "<script> window.location.href='admin-product.php?page=$page&status=$statuscur&text=$text';</script>";
             exit;
         }
 
@@ -52,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
            
             $image = $fileName;
         } else {
-            echo "<script> alert('Sorry, there was an error uploading your file.'); window.location.href='admin-product.php';</script>";
+            echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+            exit;
         }
     } 
 
@@ -70,10 +74,11 @@ $type = $_POST['type'];
 $brand = $_POST['brand'];
 $status = $_POST['status'];
 $id = $_POST['pid'];
-$page = isset($_POST['page']) ? $_POST['page'] : 1;
 
+$page = isset($_POST['page']) ? $_POST['page'] : 1;
   $text = isset($_GET['text']) ? $_GET['text'] : '';
   $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+  
   $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
   $categoryResult = mysqli_query($connection->conn, $categoryQuery);
   
@@ -83,18 +88,22 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
           $categoryRow = mysqli_fetch_assoc($categoryResult);
           $idloai = $categoryRow['idloai'];
       }else{
-        echo '<script>alert("Wrong category.");</script>';
+        $_SESSION['fail'] = 'Wrong category';
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+     exit;
       }
   }
     $updatequery = "UPDATE product SET idloai='$idloai',name='$name', price='$price', image='$image' , ml='$ml', calo='$calo', fatg='$fatg', sodiummg='$sodiummg', carbong='$carbong', sugarg='$sugarg', proteing='$proteing', status='$status' WHERE id='$id'";
 
     if (mysqli_query($connection->conn, $updatequery)) {
  
-        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";    
-        
+        $_SESSION['success'] = 'Update Successful';  
+        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";  
+        exit;      
        
     } else{
         echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+        exit;
     }
 }
 ?>
@@ -508,6 +517,9 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 </div>
 
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
   const popup = document.querySelector('.popup');

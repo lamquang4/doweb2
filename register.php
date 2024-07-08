@@ -44,12 +44,18 @@ if (isset($_POST["submit"])) {
   );
 
   if ($result == 1) {
-      echo "<script> alert('Registration Successful'); window.location.href='login.php'; </script>";
+    $_SESSION['success'] = 'Registration Successful';  
+      echo "<script> window.location.href='login.php'; </script>";
+      exit;
   
   } elseif ($result == 10) {
-      echo "<script> alert('Username or Email has already taken'); window.location.href='register.php'; </script>";
+    $_SESSION['fail'] = 'Username or Email or Phone Number has already taken';   
+      echo "<script>window.location.href='register.php'; </script>";
+      exit;
   } elseif ($result == 100) {
-      echo "<script> alert('Password and Confirm Password does not match'); window.location.href='register.php'; </script>";
+    $_SESSION['fail'] = 'Password and Confirm Password does not match';   
+      echo "<script> window.location.href='register.php'; </script>";
+      exit;
   }
 }
 
@@ -195,8 +201,10 @@ include_once 'header.php'
      
      </footer>
 
+     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
   function kttrong() {
     var email = document.getElementById("email").value.trim();
@@ -222,4 +230,14 @@ include_once 'header.php'
     }
     return true;
 }
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>

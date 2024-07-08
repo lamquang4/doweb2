@@ -30,16 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['customer'];
     $page = isset($_POST['page']) ? $_POST['page'] : 1;
     $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
-        $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone', birthday='$birthday' WHERE username='$username'";
     
+    $checkquery = "SELECT * FROM tb_customer WHERE (email='$email' OR phone='$phone') AND username!='$username'";
+    $result = mysqli_query($connection->conn, $checkquery);
+
+if (mysqli_num_rows($result) > 0) {
+    
+    $_SESSION['fail'] = 'Email or Phone Number has already taken';
+        echo "<script> window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+        exit;
+    } else {
+        $updatequery = "UPDATE tb_customer SET fullname='$fullname', email='$email', phone='$phone' WHERE username='$username'";
         if (mysqli_query($connection->conn, $updatequery)) {
-      
-                echo "<script> window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
-               
-      
+            $_SESSION['success'] = 'Update Successful';
+            echo "<script>window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+            exit;
         } else {
-            echo "<script> alert('Fail'); window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+        
+            echo "<script>  window.location.href='admin-user.php?page={$page}&status={$statuscur}'; </script>";
+            exit;
         }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -338,9 +349,10 @@ if (isset($_GET['status'])) {
 </div>
 </div>
 
-
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 const showadd= document.getElementById('showadd');

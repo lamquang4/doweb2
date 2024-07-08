@@ -41,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
   $proteing = trim($_POST['proteing']);
  $brand = $_POST['brand'];
  $type = $_POST['type'];
+
+ $page = isset($_POST['page']) ? $_POST['page'] : 1;
+ $text = isset($_GET['text']) ? $_GET['text'] : '';
+ $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+
  $categoryQuery = "SELECT idloai FROM category WHERE brand = '$brand' AND type = '$type'";
 $categoryResult = mysqli_query($connection->conn, $categoryQuery);
 
@@ -50,7 +55,9 @@ if($categoryResult) {
         $categoryRow = mysqli_fetch_assoc($categoryResult);
         $idloai = $categoryRow['idloai'];
     }else{
-      echo '<script>alert("Wrong category.");</script>';
+      $_SESSION['fail'] = 'Wrong category';
+      echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+      exit;
     }
 }
  do {
@@ -66,12 +73,18 @@ if($categoryResult) {
   $targetFilePath = $targetDir . $fileName;
   $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
   $allowTypes = array('png');
-  if(in_array($fileType, $allowTypes)){
 
+  $page = isset($_POST['page']) ? $_POST['page'] : 1;
+  $text = isset($_GET['text']) ? $_GET['text'] : '';
+  $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
+ 
+
+  if(in_array($fileType, $allowTypes)){
     $maxFileSize = 300 * 1024; // 300 KB
     if ($_FILES["fimage1"]["size"] > $maxFileSize) {
-        echo "<script>alert('File size exceeds the maximum allowed size of 300 KB.'); window.location.href='admin-product.php';</script>";
-        exit;
+      $_SESSION['fail'] = 'File size exceeds the maximum allowed size of 300 KB';
+      echo "<script> window.location.href='admin-product.php?page=$page&status=$statuscur&text=$text';</script>";
+      exit;
     }
 
       if(move_uploaded_file($_FILES["fimage1"]["tmp_name"], $targetFilePath)){
@@ -79,7 +92,8 @@ if($categoryResult) {
           $image = $fileName; 
       
       } else{
-          $error_msg = "Sorry, there was an error uploading your file.";
+        echo "<script> window.location.href='admin-product.php?page=$page&status=$statuscur&text=$text';</script>";
+        exit;
       }
   }
 
@@ -89,7 +103,8 @@ if($categoryResult) {
     $text = isset($_GET['text']) ? $_GET['text'] : ''; 
     $status = isset($_GET['status']) ? $_GET['status'] : '';
     if (mysqli_query($connection->conn, $query)) {
-      echo "<script> alert('Success'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text'; </script>";
+      $_SESSION['success'] = 'Add Successful';  
+      echo "<script>window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text'; </script>";
         exit;
     } 
 }
@@ -102,11 +117,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['pid'])
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $delete_sql = "DELETE FROM product WHERE id='$pid'";
   if (mysqli_query($connection->conn, $delete_sql)) {
-      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+   
  
   } else {
-      echo "<script>alert('Delete Fail because this product has been purchased by someone. You can only hide it. '); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+    $_SESSION['fail'] = 'This product has been purchased by someone. You can only hide it';
   }
+  echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+  exit; 
 }
 //hidden
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pid'])) {
@@ -116,11 +133,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus2' && isset($_GET['pi
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 2  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
 
   } else {
-      echo "<script>alert('Hide Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+    $_SESSION['fail'] = 'Hide fail';
   }
+  echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+  exit;
 }
 //on sale
 if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pid'])) {
@@ -130,11 +148,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
   $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; 
   $sql = "UPDATE product SET status = 1  WHERE id='$pid'";
   if (mysqli_query($connection->conn, $sql)) {
-      echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+   
     
   } else {
-      echo "<script>alert('Show Product Fail'); window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+     
   }
+  echo "<script> window.location.href='admin-product.php?page=$currentPage&status=$status&text=$text';</script>";
+  exit;
 }
 ?>
 <!DOCTYPE html>
@@ -245,14 +265,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'setstatus1' && isset($_GET['pi
 <div>
 <button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add Product</button>
 </div>
-        
-        
-                
+                       
 
 </div>
    
-
-
 
 
 
@@ -589,7 +605,8 @@ if (isset($_GET['text'])) {
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <script>
@@ -705,8 +722,21 @@ function hideadd(){
 document.querySelector('.record-search').addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         var searchText = this.value.trim();
-        window.location.href = 'admin-product.php?text=' + encodeURIComponent(searchText) + '&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>';
+        window.location.href = 'admin-product.php?text=' + encodeURIComponent(searchText) + '&page=<?php echo $page; ?>' + '&status=<?php echo $searchStatus; ?>';
     }
 });
-
     </script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
+</script>

@@ -42,14 +42,15 @@ if (isset($_POST["submit"])) {
   );
 
   if ($result == 1) {
-    
- echo "<script>alert('Registration Successful'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";     
+    $_SESSION['success'] = 'Registration Successful';  
   } elseif ($result == 10) {
-    echo "<script>alert('Username or Email or Phone Number has already taken'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
-     
+    $_SESSION['fail'] = 'Username or Email or Phone Number has already taken';   
   } elseif ($result == 100) {
-      echo "<script>alert('Password does not match'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+    $_SESSION['fail'] = 'Password and Confirm Password does not match';
   }
+
+  echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+  exit;
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager'])) {
@@ -67,7 +68,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['manager
         }
     } else {
         // không cho block chính mình
+        $_SESSION['fail'] = 'Cannot block your own account';
         echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+        exit;
     }
 }
 
@@ -79,11 +82,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['manag
     
     if (mysqli_query($connection->conn, $query)) {
      
-        echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+        
       
     } else {
-        echo "<script>alert('Unblock Manager Fail'); window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+       
     }
+    echo "<script> window.location.href='admin-strator.php?page={$currentPage}&status={$status1}';</script>";
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -404,8 +409,8 @@ if (isset($_GET['status'])) {
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <script>
@@ -472,4 +477,18 @@ function toggleDropdown() {
     dropdown1.classList.toggle("show");
     
 }
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>
