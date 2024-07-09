@@ -278,7 +278,15 @@ if (mysqli_num_rows($result) > 0) {
                             
                         </tbody>
                     </table>
-                    <?php if (mysqli_num_rows($ads) > 0): ?>
+                   
+                 
+                </div>
+
+            </div>
+    
+        </main>
+        
+        <?php if (mysqli_num_rows($ads) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
       $searchParams = array();
@@ -303,16 +311,7 @@ if (isset($_GET['status'])) {
         ?>
 </ul>
 <?php endif; ?>
-                 
-                </div>
 
-            </div>
-           
-        
-            
-        </main>
-        
-    </div>
 </body>
 </html>
 

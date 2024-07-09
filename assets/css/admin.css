@@ -780,7 +780,7 @@ padding: 3px 0;
         list-style: none;
         padding: 0;
       margin-bottom: 20px;
-    
+      flex-wrap: wrap;
     }
   
     .pagination li {
@@ -788,7 +788,8 @@ padding: 3px 0;
         border: 1px solid #808080;
         margin: 0 5px;
         cursor: pointer;
-    
+        margin-bottom: 10px;;
+        background-color: white;
     }
 
     .pagination li.active a {

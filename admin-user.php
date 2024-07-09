@@ -321,7 +321,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['custo
        
                         </tbody>
                     </table>
-                    <?php if (mysqli_num_rows($users) > 0): ?>
+                 
+                        </div>
+            </div>
+
+</main>
+
+<?php if (mysqli_num_rows($users) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
       $searchParams = array();
@@ -346,12 +352,6 @@ if (isset($_GET['status'])) {
         ?>
 </ul>
 <?php endif; ?>
-                        </div>
-            </div>
-           
-    
-
-</main>
 
 <div id="container-inputs">
 

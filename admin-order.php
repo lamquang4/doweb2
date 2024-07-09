@@ -281,8 +281,14 @@ $totalPages = ceil($totalOrders / $limit);
        </tbody>         
                     </table>
 
-                    
-                    <?php if (mysqli_num_rows($orders) > 0): ?>
+
+            </div>
+        
+        </div> 
+
+</main>
+
+<?php if (mysqli_num_rows($orders) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
       $searchParams = array();
@@ -323,14 +329,6 @@ if (isset($_GET['username'])) {
         ?>
 </ul>
 <?php endif; ?>
-
-            </div>
-        
-        </div> 
-        
-    
-
-</main>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

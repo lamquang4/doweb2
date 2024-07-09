@@ -1479,7 +1479,8 @@ font-size: 22px;
 border: 1px solid #D8D8D8;
 line-height: 45px;
 cursor: pointer;
-font-weight: 545;
+font-weight: 550;
+margin-bottom: 10px;
 }
 .btn1,.btn2{
 display: inline-flex;

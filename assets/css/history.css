@@ -12,7 +12,12 @@ html{
     padding-left: 15px;
 margin: 0 auto;
 }
-
+.pagination{
+    flex-wrap: wrap !important;
+}
+.pagination li {
+    margin-bottom: 10px !important;
+}
 .payments-item img.mr-3 {
     width: 47px;
 }

@@ -348,6 +348,12 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 </tbody>
 </table>
+
+</div>
+
+</div>
+</main>
+
 <?php if (mysqli_num_rows($products) > 0): ?>
 <ul class="pagination" id="pagination">
 <?php
@@ -370,10 +376,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         ?>
 </ul>
 <?php endif; ?>
-</div>
-
-</div>
-</main>
 
 <div class="container-popup">
    <div class="popup"  >
