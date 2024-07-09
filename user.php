@@ -36,13 +36,15 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
 
         $allowedExtensions = array('png');
         if (!in_array($fileExtension, $allowedExtensions)) {
-            echo "<script>alert('Invalid file type. Please upload a PNG file.'); window.location.href='user.php';</script>";
+            $_SESSION['fail'] = 'Invalid file type. Please upload a PNG file';
+            echo "<script> window.location.href='user.php';</script>";
             exit;
         }
 
         $maxFileSize = 300 * 1024;
     if ($file['size'] > $maxFileSize) {
-        echo "<script>alert('File size exceeds the maximum allowed size of 300 KB.'); window.location.href='user.php';</script>";
+        $_SESSION['fail'] = 'File size exceeds the maximum allowed size of 300 KB';
+        echo "<script> window.location.href='user.php';</script>";
         exit;
     }
     
@@ -50,7 +52,8 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
         $maxHeight = 700;
         list($width, $height) = getimagesize($file['tmp_name']);
         if ($width > $maxWidth || $height > $maxHeight) {
-            echo "<script>alert('Image dimensions exceed the maximum allowed size of 700x700.'); window.location.href='user.php';</script>";
+            $_SESSION['fail'] = 'Image dimensions exceed the maximum allowed size of 700x700';
+            echo "<script> window.location.href='user.php';</script>";
             exit;
         }
 
@@ -61,19 +64,31 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
                 die('Error updating user image path: ' . mysqli_error($connection->conn));
             }
         } else {
-            echo "<script>alert('Failed to upload image. Please try again.'); window.location.href='user.php';</script>";
+            echo "<script> window.location.href='user.php';</script>";
             exit;
         }
     }
 
-    $updateQuery = "UPDATE tb_customer SET email='$email', fullname='$fullname', phone='$phone', birthday='$birthday', gender='$gender', city='$city', ward='$ward', district='$district', sonha='$sonha', duong='$duong' WHERE username='$username'";
-    if (mysqli_query($connection->conn, $updateQuery)) {
-        echo "<script> window.location.href='user.php'; </script>";
-       
-        exit;
-    } else {
-        echo "<script> window.location.href='user.php'; </script>";
-    }
+    $checkquery = "SELECT * FROM tb_customer WHERE (email='$email' OR phone='$phone') AND username!='$username'";
+    $result = mysqli_query($connection->conn, $checkquery);
+
+    if (mysqli_num_rows($result) > 0) {
+    
+        $_SESSION['fail'] = 'Email or Phone Number has already taken';
+        echo "<script> window.location.href='user.php';</script>";
+            exit;
+        } else {
+            $updatequery = "UPDATE tb_customer SET email='$email', fullname='$fullname', phone='$phone', birthday='$birthday', gender='$gender', city='$city', ward='$ward', district='$district', sonha='$sonha', duong='$duong' WHERE username='$username'";
+            if (mysqli_query($connection->conn, $updatequery)) {
+                $_SESSION['success'] = 'Update Successful';
+                echo "<script> window.location.href='user.php';</script>";
+                exit;
+            } else {
+            
+                echo "<script> window.location.href='user.php';</script>";
+                exit;
+            }
+        }
 }
 
 
@@ -263,6 +278,9 @@ include_once 'footer.php'
   ?>
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
 function previewImage() {
     var input = document.getElementById('imageInput');
@@ -371,3 +389,17 @@ color: white;
     }
 
  </style>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
+</script>
