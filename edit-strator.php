@@ -5,6 +5,10 @@ if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
     exit();
 }
 
+if (!isset($_GET['manager'])) {
+    header('Location: admin-strator.php');
+    exit(); 
+  }
 $connection = new Connection();
 $username = $_GET['manager'];
 

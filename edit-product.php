@@ -1,5 +1,10 @@
 <?php
 require 'config.php';
+if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+    header("Location: login-admin.php");
+    exit();
+}
+
 if (!isset($_GET['pid'])) {
   header('Location: admin-product.php');
   exit(); 

@@ -4,6 +4,10 @@ if (!isset($_GET['customer'])) {
     header('Location: admin-user.php');
     exit(); 
   }
+  if (!isset($_SESSION["loginad"]) || $_SESSION["loginad"] !== true) {
+    header("Location: login-admin.php");
+    exit();
+}
 
 $connection = new Connection();
 $username = $_GET['customer'];
