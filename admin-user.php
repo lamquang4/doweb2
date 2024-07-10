@@ -452,20 +452,6 @@ function kttrong() {
 </script>
 
 <script>
-    function validateForm1() {
-        var city = document.getElementById('city').value;
-        var district = document.getElementById('district').value;
-        var ward = document.getElementById('ward').value;
-        var sonha = document.getElementById('sonha').value;
-        var duong = document.getElementById('duong').value;
-
-        if (city === '0' || district === '0' || ward === '0' || sonha.trim() === '' || duong.trim() === '') {
-            alert('Please fill in all fields.');
-            return false; 
-        }
-        return true;
-    }
-
     
     function toggleDropdown() {
     var dropdown1 = document.getElementById("statusDropdown");
