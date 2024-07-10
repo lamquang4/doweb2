@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 17, 2024 lúc 05:49 PM
+-- Thời gian đã tạo: Th7 10, 2024 lúc 10:05 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -155,12 +155,12 @@ CREATE TABLE `tb_customer` (
 --
 
 INSERT INTO `tb_customer` (`username`, `email`, `password`, `fullname`, `phone`, `birthday`, `gender`, `sonha`, `duong`, `district`, `ward`, `city`, `imguser`, `status`) VALUES
-('cudat', 'datcu@gmail.com', '277511ec76c6a88ccc8394163c108adc', '', '', '0000-00-00', '', '', '', '', '', '', 'assets/images/pic/usernew.png', 1),
-('giahung', 'giahung45@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Ngo Gia Hung', '04848484848', '2004-04-05', 'male', 'JU/85A', 'KJLO', 'District 1', 'Ward 5', 'Ha Noi City', 'assets/images/pic/usernew.png', 1),
-('minhquan', 'quannguyen456@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Minh Quan', '09787982527', '2004-04-08', 'male', 'YUI/5', 'XYZ HU', 'District 3', 'Ward 5', 'Ho Chi Minh City', 'assets/images/pic/usernew.png', 1),
-('ngocson', 'ngocson@gamil.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Ngoc Son', '07878725421', '2004-02-10', '', 'KUIW/56', 'JKL IO', 'District 2', 'Ward 4', 'Ha Noi City', 'assets/images/pic/usernew.png', 1),
-('quanglam', 'lamdieuquang0105@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Lam Dieu Quang', '0967996016', '2004-05-01', 'male', '74/A', 'ABC', 'District 6', 'Ward 6', 'Ho Chi Minh City', 'imguser/quanglam.png', 1),
-('thanhtam', 'tamthanh456@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Thanh Tam', '09874848416', '2004-04-07', 'male', 'NUI', 'JK/5', 'District 6', 'Ward 2', 'Ha Noi City', 'assets/images/pic/usernew.png', 1);
+('cudat', 'datcu@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', '', '', '0000-00-00', '', '', '', '', '', '', 'assets/images/pic/usernew.png', 1),
+('giahung', 'giahung45@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Ngo Gia Hung', '04848484848', '2004-04-05', 'male', 'JU/85A', 'KJLO', 'District Bình Tân', 'Ward Bình Hưng Hòa', 'City Hồ Chí Minh', 'assets/images/pic/usernew.png', 1),
+('minhquan', 'quannguyen456@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Minh Quan', '09787982527', '2004-04-08', 'male', 'YUI/5', 'XYZ HU', 'District Tân Bình', 'Ward 10', 'City Hồ Chí Minh', 'assets/images/pic/usernew.png', 1),
+('ngocson', 'ngocson@gamil.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Ngoc Son', '07878725421', '2004-02-10', '', 'KUIW/56', 'JKL IO', 'District Châu Đức', 'Commune Bàu Chinh', 'Province Bà Rịa - Vũng Tàu', 'assets/images/pic/usernew.png', 1),
+('quanglam', 'lamdieuquang0105@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Lam Dieu Quang', '0967996016', '2004-05-01', 'male', '74/A', 'ABC', 'District 6', 'Ward 6', 'City Hồ Chí Minh', 'imguser/quanglam.png', 1),
+('thanhtam', 'tamthanh456@gmail.com', 'e35cf7b66449df565f93c607d5a81d09', 'Nguyen Thanh Tam', '09874848416', '2004-04-07', 'male', 'NUI', 'JK/5', 'District 6', 'Ward 9', 'City Hồ Chí Minh', 'assets/images/pic/usernew.png', 1);
 
 -- --------------------------------------------------------
 
