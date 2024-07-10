@@ -213,8 +213,7 @@ include_once 'header.php'
                                          <label class="form-label">City</label>
                                          <select class="form-control" name="city" id="city" aria-label=".form-select-sm">
 <option value="0" selected>Select City</option> 
-<option value="Ho Chi Minh City" <?php echo ($user['city'] == 'Ho Chi Minh City') ? 'selected' : ''; ?>>Ho Chi Minh City</option> 
-<option value="Ha Noi City" <?php echo ($user['city'] == 'Ha Noi City') ? 'selected' : ''; ?>>Ha Noi City</option> 
+
    </select>
                                          </div>
                                      </div>
@@ -228,12 +227,7 @@ include_once 'header.php'
                                          <label class="form-label">District</label>
                                          <select class="form-control" id="district" name="district" aria-label=".form-select-sm" >
                                   <option value="0">Select District</option>
-                                  <option value="District 1" <?php echo ($user['district'] == 'District 1') ? 'selected' : ''; ?>>District 1</option> 
-                                  <option value="District 2" <?php echo ($user['district'] == 'District 2') ? 'selected' : ''; ?>>District 2</option> 
-                                  <option value="District 3" <?php echo ($user['district'] == 'District 3') ? 'selected' : ''; ?>>District 3</option> 
-                                  <option value="District 4" <?php echo ($user['district'] == 'District 4') ? 'selected' : ''; ?>>District 4</option> 
-                                  <option value="District 5" <?php echo ($user['district'] == 'District 5') ? 'selected' : ''; ?>>District 5</option> 
-                                  <option value="District 6" <?php echo ($user['district'] == 'District 6') ? 'selected' : ''; ?>>District 6</option> 
+                                  
                                      </select>
                                          </div>
                                      </div>
@@ -243,12 +237,7 @@ include_once 'header.php'
                                          <label class="form-label">Ward</label>
                                          <select  class="form-control" id="ward" name="ward" aria-label=".form-select-sm" >
                     <option value="0" selected>Select Ward</option>
-                    <option value="Ward 1" <?php echo ($user['ward'] == 'Ward 1') ? 'selected' : ''; ?>>Ward 1</option> 
-                                  <option value="Ward 2" <?php echo ($user['ward'] == 'Ward 2') ? 'selected' : ''; ?>>Ward 2</option> 
-                                  <option value="Ward 3" <?php echo ($user['ward'] == 'Ward 3') ? 'selected' : ''; ?>>Ward 3</option> 
-                                  <option value="Ward 4" <?php echo ($user['ward'] == 'Ward 4') ? 'selected' : ''; ?>>Ward 4</option> 
-                                  <option value="Ward 5" <?php echo ($user['ward'] == 'Ward 5') ? 'selected' : ''; ?>>Ward 5</option> 
-                                  <option value="Ward 6" <?php echo ($user['ward'] == 'Ward 6') ? 'selected' : ''; ?>>Ward 6</option> 
+
                                        </select>
                                          </div>
                                      </div>
@@ -403,3 +392,57 @@ color: white;
     <?php endif; ?>
 });
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+
+        var selectedCity = "<?php echo $user['city']; ?>";
+        var selectedDistrict = "<?php echo $user['district']; ?>";
+        var selectedWard = "<?php echo $user['ward']; ?>";
+
+        var Parameter = {
+            url: "https://raw.githubusercontent.com/lamquang4/doweb2/main/data.json",
+            method: "GET",
+            responseType: "application/json",
+        };
+        var promise = axios(Parameter);
+        promise.then(function (result) {
+            renderCity(result.data);
+            citis.value = selectedCity;
+            citis.dispatchEvent(new Event('change'));
+            districts.value = selectedDistrict;
+            districts.dispatchEvent(new Event('change'));
+            wards.value = selectedWard;
+        });
+
+        function renderCity(data) {
+            for (const x of data) {
+                citis.options[citis.options.length] = new Option(x.Name, x.Name);
+            }
+            citis.onchange = function () {
+                districts.length = 1;
+                wards.length = 1;
+                if (this.value != "") {
+                    const result = data.filter(n => n.Name === this.value);
+
+                    for (const k of result[0].Districts) {
+                        districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                    }
+                }
+            };
+            districts.onchange = function () {
+                wards.length = 1;
+                const dataCity = data.filter((n) => n.Name === citis.value);
+                if (this.value != "") {
+                    const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+
+                    for (const w of dataWards) {
+                        wards.options[wards.options.length] = new Option(w.Name, w.Name);
+                    }
+                }
+            };
+        }
+    </script>
