@@ -1437,6 +1437,7 @@ width: 100%;
   font-size: 17px;
   margin-bottom: 20px;
   width: 200px;
+  text-transform: capitalize;
 }
 #advan-search-container span {
   margin: 0 5px;

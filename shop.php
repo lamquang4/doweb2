@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-
+$connection = new Connection();
 $productObj = new Product();
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -108,8 +108,15 @@ include_once 'header.php'
   <label>TYPE:</label>
 <select name="type" id="productType">
   <option value="0">Select Type</option>
-  <option value="carbonated">Carbonated</option>
-  <option value="nogas">Non-carbonated</option>
+  <?php
+ 
+ $query = "SELECT DISTINCT type FROM category";
+ $result = mysqli_query($connection->conn, $query);
+
+ while ($row = mysqli_fetch_assoc($result)) {
+     echo "<option value='".$row['type']."'>".$row['type']."</option>";
+ }
+ ?>
 </select>
 </div>
 
@@ -117,15 +124,15 @@ include_once 'header.php'
   <label>BRAND:</label>
 <select name="brand" id="productBrand">
   <option value="0">Select Brand</option>
-  <option value="cocacola">Coca-cola</option>
-  <option value="pepsi">Pepsi</option>
-  <option value="fanta">Fanta</option>
-  <option value="sprite">Sprite</option>
-  <option value="aquarius">Aquarius</option>
-  <option value="dasani">Dasani</option>
-  <option value="thumbsup">ThumbsUp</option>
-  <option value="nutriboost">Nutriboost</option>
-  <option value="fuzetea">Fuzetea</option>
+       <?php
+ 
+        $query = "SELECT brand FROM category";
+        $result = mysqli_query($connection->conn, $query);
+ 
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<option value='".$row['brand']."'>".$row['brand']."</option>";
+        }
+        ?>
 </select>
 </div>
 

@@ -858,6 +858,7 @@ border: 1.5px solid black;
     border: 0.5px solid black;
     width: 125px;
     padding: 3px 0;
+    text-transform: capitalize;
 }
 .user-tab button{
     padding: 12px 35px;
