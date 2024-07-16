@@ -14,7 +14,9 @@ if (isset($_POST["submit"])) {
     if ($result == 1) {
         $adStatus = $loginad->getAdStatus($loginad->idUserad());
         if($adStatus == 0){
-            echo "<script> alert('Your account is blocked.'); window.location.href='login-admin.php';</script>";
+            $_SESSION['fail'] = 'Your account is blocked';  
+            echo "<script> window.location.href='login-admin.php'; </script>";
+            exit;
         }else{
             $_SESSION["loginad"] = true;
             $_SESSION["username"] = $loginad->idUserad();
@@ -24,10 +26,13 @@ if (isset($_POST["submit"])) {
         }
      
     } elseif ($result == 10) {
-        echo "<script> alert('Wrong password'); </script>";
+        $_SESSION['fail'] = 'Wrong password';  
+        echo "<script> window.location.href='login-admin.php'; </script>";
+        exit;
     }elseif($result==100){
-        echo
-        "<script> alert('Wrong username or password!'); </script>";
+      $_SESSION['fail'] = 'Wrong password or username';  
+        echo "<script> window.location.href='login-admin.php'; </script>";
+        exit;
       }
 }
 ?>
@@ -88,6 +93,9 @@ if (isset($_POST["submit"])) {
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
   const container = document.querySelector(".container"),
@@ -133,4 +141,14 @@ if (isset($_POST["submit"])) {
     } 
     return true
     }
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>

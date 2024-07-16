@@ -390,6 +390,11 @@ color: white;
      swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
      <?php unset($_SESSION['fail']); ?> 
     <?php endif; ?>
+
+    <?php if(isset($_SESSION['error'])): ?>
+     swal('Warning!', '<?php echo $_SESSION['error']; ?>', 'warning');
+     <?php unset($_SESSION['error']); ?> 
+    <?php endif; ?>
 });
 </script>
 

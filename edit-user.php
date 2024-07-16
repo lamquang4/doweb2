@@ -27,9 +27,9 @@ $start = ($page - 1) * $limit;
 $totalPages = ceil($totalUsers / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $fullname = trim($_POST['fullname']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
     $birthday = $_POST['birthday'];
     $username = $_POST['customer'];
     $page = isset($_POST['page']) ? $_POST['page'] : 1;

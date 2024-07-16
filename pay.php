@@ -19,8 +19,8 @@ if(empty($_SESSION["shopping_cart"])){
     exit();
 }
 if (empty($user['fullname']) || empty($user['phone']) || empty($user['sonha']) || empty($user['duong']) || empty($user['city']) || empty($user['district']) || empty($user['ward'])) {
- echo '<script>alert("Please enter your complete information"); window.location.href="user.php"</script>';
-  
+    $_SESSION['error'] = 'Please enter all your information';
+    echo '<script>window.location.href="user.php"</script>';
     exit(); 
 }
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -464,6 +464,9 @@ include_once 'footer.php'
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 

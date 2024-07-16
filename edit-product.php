@@ -65,16 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
         }
     } 
 
-$name = $_POST['name'];
+$name = trim($_POST['name']);
 $price = $_POST['price'];
 $image = $_POST['image'];
-$ml = $_POST['ml'];
-$calo = $_POST['calo'];
-$fatg = $_POST['fatg'];
-$sodiummg = $_POST['sodiummg'];
-$carbong = $_POST['carbong'];
-$sugarg = $_POST['sugarg'];
-$proteing = $_POST['proteing'];
+$ml = trim($_POST['ml']);
+$calo = trim($_POST['calo']);
+$fatg = trim($_POST['fatg']);
+$sodiummg = trim($_POST['sodiummg']);
+$carbong = trim($_POST['carbong']);
+$sugarg = trim($_POST['sugarg']);
+$proteing = trim($_POST['proteing']);
 $type = $_POST['type'];
 $brand = $_POST['brand'];
 $status = $_POST['status'];
@@ -571,14 +571,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         }
     }
 
-    var typeSelect = document.getElementById("type");
-    var brandSelect = document.getElementById("brand");
-    var selectedValue = typeSelect.value;
-    var selectedValue = brandSelect.value;
-    if (selectedValue === "0") {
-        alert("Please choose product type or product brand");
-        return false;
-    }
     var nameRegex = /^[a-zA-Z\s]+$/;
  if (!nameRegex.test(name)) {
         alert("Product name must contain only letters.");

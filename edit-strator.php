@@ -27,9 +27,9 @@ $totalAds = $adinad ->getAdCount($searchStatus);
 $totalPages = ceil($totalAds / $limit);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-   $fullname = $_POST['fullname'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
+   $fullname = trim($_POST['fullname']);
+$email = trim($_POST['email']);
+$phone = trim($_POST['phone']);
 $username = $_POST['manager'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
 $statuscur = isset($_GET['status']) ? $_GET['status'] : '';

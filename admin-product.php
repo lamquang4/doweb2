@@ -640,11 +640,9 @@ function hideadd(){
 
 <script>
    function ktrong() {
-    var typeSelect = document.getElementById("type");
-    var brandSelect = document.getElementById("brand");
+    var type = document.getElementById("type").value;
+    var brand = document.getElementById("brand").value;
     var name = document.getElementById("name").value;
-    var selectedTypeValue = typeSelect.value;
-    var selectedBrandValue = brandSelect.value;
     var inputsToCheck = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing", "name", "image", "price"];
  var inputsToCheckNumbers = ["ml", "calo", "fatg", "sodiummg", "carbong", "sugarg", "proteing"];
  var nameRegex = /^[a-zA-Z\s]+$/;
@@ -652,7 +650,7 @@ function hideadd(){
         alert("Product name must contain only letters.");
         return false;
     } 
- if (selectedTypeValue === "0" || selectedBrandValue === "0") {
+ if (type === "0" || brand === "0") {
     alert("Please choose brand or type");
     return false;
 }
