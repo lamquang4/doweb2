@@ -147,7 +147,7 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
                   <li>
                     <a href="admin-strator.php">
                          <span class="las la-address-card"></span>
-                         <small>Administrator</small>
+                         <small>Managers</small>
                      </a>
                  </li>
                 <li >
