@@ -29,10 +29,10 @@ if (isset($_POST["send"])) {
   $mail->isHTML(true);
   $mail->Subject = 'Contact Us';
   $mail->Body = '
-  <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+  <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
                 <img src="cid:logo_cid" alt="Logo" style="width: 130px; height: auto; margin-bottom: 20px;">
                 <h1 style="color: black;">Hello '. $_POST["userFullname"] . '</h1>
-                <p style="color: #000;">' . $_POST["userMessage"] . '</p>
+                <p style="color: black; font-size:16px;">' . $_POST["userMessage"] . '</p>
                
             </div>
       ';

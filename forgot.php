@@ -57,7 +57,7 @@ if (isset($_POST["submit"])) {
        
       }
   } elseif (isset($_POST['userOTP']) && isset($_POST['otp_submit'])) {
-    if (time() - $_SESSION['otp_time'] > 60) {
+    if (time() - $_SESSION['otp_time'] > 120) {
      echo '<script>alert("OTP has expired."); window.location.href="forgot.php";</script>';
   } else{
        if ($_POST['userOTP'] == $_SESSION['otp']) {
@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
  
   } 
 
-  $remainingTime = isset($_SESSION['otp_time']) ? 60 - (time() - $_SESSION['otp_time']) : 60;
+  $remainingTime = isset($_SESSION['otp_time']) ? 120 - (time() - $_SESSION['otp_time']) : 120;
       if ($remainingTime < 0) {
         $remainingTime = 0;
     }
@@ -100,11 +100,11 @@ if (isset($_POST["submit"])) {
         $mail->isHTML(true);
         $mail->Subject = 'Your OTP Code';
         $mail->Body = '
-<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+<div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
               <img src="cid:logo_cid" alt="Logo" style="width: 130px; height: auto; margin-bottom: 20px;">
               <h1 style="color: black;">Reset your password</h1>
-              <p style="color: #000;">Your OTP code is: ' . $otp . '</p>
-              <p style="color: #000;">If you have any questions, reply to this email or contact us at <a href="mailto:alldrinkshop668@gmail.com" style="color: black; font-weight:550;">alldrinkshop668@gmail.com</a></p>
+              <p style="color: black; font-size:16px;">Your OTP code is: ' . $otp . '</p>
+              <p style="color: black; font-size:15px;">If you have any questions, reply to this email or contact us at <a href="mailto:alldrinkshop668@gmail.com" style="color: black; font-weight:550;">alldrinkshop668@gmail.com</a></p>
           </div>
     ';
 
@@ -118,9 +118,7 @@ if (isset($_POST["submit"])) {
   }
 ?>
 
-
 <!DOCTYPE html>
-
 <link rel="icon" type="image/png" href="assets/images/pic/logoicon.png">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/forgot.css">
@@ -128,7 +126,6 @@ if (isset($_POST["submit"])) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <html>
 <head>
-
   <meta name="viewport" content="width=device-width,  initial-scale=1,maximum-scale=1">
  <title>Reset Password</title>
 </head>
