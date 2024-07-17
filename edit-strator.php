@@ -155,8 +155,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
             </div>
         </header>
-        
-        
+          
         <main >
                
             <div class="page-content" >
@@ -168,8 +167,7 @@ if (mysqli_num_rows($result) > 0) {
                    
     </div>
     </div>
-             
-            
+     
             <div class="records table-responsive" >
                
                 <div class="record-header">  
@@ -186,8 +184,7 @@ if (mysqli_num_rows($result) > 0) {
                         <option value="">16</option>
                         <option value="">20</option>
                     </select>
-                   
-                        
+          
                     </div>
             
                 </div>
@@ -200,8 +197,7 @@ if (mysqli_num_rows($result) > 0) {
                             <th> FULLNAME</th>                   
                                 <th> EMAIL</th>
                                 <th> PHONE</th>
-                                <th onclick="toggleDropdown()" style="position: relative;">STATUS <i class="fa-solid fa-sort-down" style="cursor: pointer; font-size:18px;"></i>
-                
+                                <th onclick="toggleDropdown()" style="position: relative;">STATUS <i class="fa-solid fa-sort-down" style="cursor: pointer; font-size:18px;"></i> 
                 <div id="statusDropdown" class="dropdown-content show">
                     <input type="hidden" name="status">
                 <a href="admin-strator.php">All</a>
@@ -232,7 +228,6 @@ if (mysqli_num_rows($result) > 0) {
 <td>
 <?php echo $ad['phone']; ?>
 </td>
-
                              
                                 <td>
                                 <?php 
@@ -254,8 +249,7 @@ if (mysqli_num_rows($result) > 0) {
         <a onclick="return confirm('Are you sure you want to unblock this manager?');" href="admin-strator.php?action=unblock&manager=<?php echo $ad['username']; ?>&page=<?php echo $page; ?><?php if(isset($status)) echo '&status=' . $status; ?>">
             <span class="las la-unlock" style="color: #FFAD27;"></span>
         </a>
-    <?php } ?>
-                                                                        
+    <?php } ?>                                                                
                                     </div>
                                 </td>
                             </tr>
@@ -277,13 +271,10 @@ if (mysqli_num_rows($result) > 0) {
     ";   
 }
 ?>
-                           
                      
-                            
                         </tbody>
                     </table>
-                   
-                 
+                         
                 </div>
 
             </div>
@@ -355,7 +346,6 @@ if (isset($_GET['status'])) {
 </div>  
 
     </form>
-
 </div>
 </div>
 

@@ -224,8 +224,6 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
          
 </div>
    
-
-
 <div class="records table-responsive" >
 
 <div class="record-header">
@@ -284,10 +282,8 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
     <div>
    <img src="<?php echo $product['image']; ?>" id="productImage" alt="Product image">
     </div>
-    
-        
+     
    </div>
- 
 </td>
 <td>
 
@@ -340,8 +336,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
     <div style='margin-top: 15vh; height:58vh;'>
     <div style='display:flex; justify-content:center; align-items:center;'>
     <img src='assets/images/pic/noproduct.png' width='320px'>
-    </div> 
-   
+    </div>   
     </div>
     </td>
     </tr>
@@ -397,7 +392,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
    
     <p><span><span class="bold">Serving Size 12 fl oz (<input min="0" name="ml" id="ml" value="<?php echo $row['ml']?>" maxlength="3"> mL)</span> </p>
     <p ><span><span class="bold">Serving Per Container 1</span></p>
-  
     <p><span><span class="bold">Amount Per Serving</span> </span> </p>
 
     <p style="border: none;"><span><span class="bold">Calories</span> <input id="calo" name="calo" min="0" value="<?php echo $row['calo']?>" maxlength="3"></span> </p>
@@ -416,14 +410,12 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
     
     </div>
 
-
 <div class="divider medium"></div>
 <p class="note"> *The Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
 
 
   </div>
   </div>
-
 
 <div id="container-inputs" style="display: block;">
 
@@ -496,8 +488,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 </div>
 
-               
-
+            
 <div class="user-input" style="display: none;">
   <label>Date Add:</label>
   <input type="date" name="date_add" id="date_add" value="<?php echo $row['date_add']?>">

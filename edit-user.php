@@ -157,19 +157,13 @@ if (mysqli_num_rows($result) > 0) {
             </div>
         </header>
 
-
-
         <div class="page-content" style="margin-top: 50px;">
             <h1 style="padding: 1.3rem 0rem;color: #74767d;" id="customer">Customers <?php echo '(' . $totalUsers . ')'; ?></h1>
-
-       
-
+     
 <div >
-<button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>
-               
+<button style="margin-bottom: 8px;" id="showadd" onclick="showadd()"><i class="fa-solid fa-circle-plus" style="margin-right: 4px;"></i>  Add User</button>           
 </div>
 
-      
         </div>
 
             <div class="records table-responsive" >
@@ -198,11 +192,9 @@ if (mysqli_num_rows($result) > 0) {
                             <tr id="select-filter">
                                 <th>USERNAME</th>
                                 <th> FULL NAME</th>
-                                <th> EMAIL</th>
-                           
+                                <th> EMAIL</th>       
                                 <th> BIRTHDAY</th>
-                                <th> ADDRESS</th>
-                               
+                                <th> ADDRESS</th>  
                                 <th onclick="toggleDropdown()" style="position: relative;">STATUS <i class="fa-solid fa-sort-down" style="cursor: pointer; font-size:18px;"></i>
                 
                 <div id="statusDropdown" class="dropdown-content show">
@@ -344,8 +336,7 @@ if (isset($_GET['status'])) {
                 <label>Birthday (m/d/y):</label>
                 <input type="date" value="<?php echo $row['birthday']?>" name="birthday" id="birthday"> 
         </div>
-    
-    
+     
 <div style="text-align: center;" id="button-submit">
   <button type="submit" name="submit">Update</button>
 </div>
@@ -364,7 +355,6 @@ if (isset($_GET['status'])) {
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
 const usertab = document.querySelector('.usertab');
-
 
 function kttrong() {
     var email = document.getElementById("email").value.trim();
