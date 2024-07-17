@@ -38,15 +38,17 @@ if (isset($_POST["send"])) {
       ';
 
   if ($mail->send()) {
-    $_SESSION['success'] = 'Send Successful';
+      $_SESSION['message'] = "Success";
   } else {
-      $_SESSION['fail'] = "Send Fail";
+      $_SESSION['message'] = "Fail";
   }
 
   header('Location: contact.php');
   exit();
 }
 
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+unset($_SESSION['message']); 
 ?>
 
 <!DOCTYPE html>
@@ -106,20 +108,3 @@ include_once 'header.php'
    <?php
 include_once 'footer.php'
   ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-           document.addEventListener('DOMContentLoaded', function() {
-    <?php if(isset($_SESSION['success'])): ?>
-        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
-        <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
-
-    <?php if(isset($_SESSION['fail'])): ?>
-     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
-     <?php unset($_SESSION['fail']); ?> 
-    <?php endif; ?>
-
-});
-</script>
