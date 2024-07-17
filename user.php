@@ -409,7 +409,7 @@ color: white;
         var selectedWard = "<?php echo $user['ward']; ?>";
 
         var Parameter = {
-            url: "https://raw.githubusercontent.com/lamquang4/doweb2/main/data.json",
+            url: "https://raw.githubusercontent.com/lamquang4/car/main/data.json",
             method: "GET",
             responseType: "application/json",
         };
