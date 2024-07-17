@@ -12,15 +12,15 @@ $dateStart = isset($_GET['date_from']) ? $_GET['date_from'] : null;
 $dateEnd = isset($_GET['date_to']) ? $_GET['date_to'] : null;
 $searchDistrict = isset($_GET['district']) ? $_GET['district'] : null;
 $searchWard = isset($_GET['ward']) ? $_GET['ward'] : null;
+$searchCity = isset($_GET['city']) ? $_GET['city'] : null;
 $searchUsername = isset($_GET['username']) ? $_GET['username'] : null;
 $searchStatus = isset($_GET['status']) ? $_GET['status'] : null;
 $limit = 10;
 $start = ($page - 1) * $limit; 
-    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername,$searchStatus);
-    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard,$searchUsername,$searchStatus);
+    $orders = $order->selectOrders($start, $limit,$dateStart,$dateEnd,$searchDistrict,$searchWard,$searchCity,$searchUsername,$searchStatus);
+    $totalOrders = $order->getOrderCount($dateStart,$dateEnd,$searchDistrict,$searchWard,$searchCity,$searchUsername,$searchStatus);
 
 $totalPages = ceil($totalOrders / $limit);
-
 
 ?>
 <!DOCTYPE html>
@@ -158,6 +158,7 @@ $totalPages = ceil($totalOrders / $limit);
                         <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
                         <input type="hidden" name="district" value="<?php if(isset($searchDistrict)) echo $searchDistrict; ?>">
                         <input type="hidden" name="ward" value="<?php if(isset($searchWard)) echo $searchWard; ?>">
+                        <input type="hidden" name="city" value="<?php if(isset($searchCity)) echo $searchCity; ?>">
                         <input type="hidden" name="username" value="<?php if(isset($searchUsername)) echo $searchUsername; ?>">
                             <div id="dropdowninside1">
                             <label>From</label>
@@ -179,31 +180,28 @@ $totalPages = ceil($totalOrders / $limit);
                             <div id="addressdropdown" class="hidden">
                             <form method="GET" action="admin-order.php">
                             <div id="dropdowninside">
+    <label>City</label>
+    <select name="city" id="city">
+    <option value="0">Select City</option>
+
+    </select>
+   </div>
+                            <div id="dropdowninside">
                             <input type="hidden" name="status" value="<?php if(isset($searchStatus)) echo $searchStatus; ?>">
                             <input type="hidden" name="date_from" value="<?php if(isset($dateStart)) echo $dateStart; ?>">
                             <input type="hidden" name="date_to" value="<?php if(isset($dateEnd)) echo $dateEnd; ?>">
                             <input type="hidden" name="username" value="<?php if(isset($searchUsername)) echo $searchUsername; ?>">
     <label>Districs</label>
-    <select name="district">
+    <select name="district" id="district">
         <option value="0">Select District</option>
-        <option value="District 1">District 1</option>
-        <option value="District 2">District 2</option>
-        <option value="District 3">District 3</option>
-        <option value="District 4">District 4</option>
-        <option value="District 5">District 5</option>
-        <option value="District 6">District 6</option>
+
     </select>
    </div>
    <div id="dropdowninside">
     <label>Ward</label>
-    <select name="ward">
+    <select name="ward" id="ward">
     <option value="0">Select Ward</option>
-        <option value="Ward 1">Ward 1</option>
-        <option value="Ward 2">Ward 2</option>
-        <option value="Ward 3">Ward 3</option>
-        <option value="Ward 4">Ward 4</option>
-        <option value="Ward 5">Ward 5</option>
-        <option value="Ward 6">Ward 6</option>
+
     </select>
    </div>
    <div id="button-content">
@@ -217,12 +215,12 @@ $totalPages = ceil($totalOrders / $limit);
                             <th  style="position: relative;"><span style="cursor:pointer; padding:11px 0;" onmouseover="toggleDropdown()" onmouseout="toggleDropdown()">STATUS <i style="cursor: pointer; font-size:18px;" class="fa-solid fa-sort-down"></i>
                 
                             <div id="statusDropdown" class="dropdown-content show">
-                            <a href="admin-order.php?status=<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">All</a>
+                            <a href="admin-order.php?status=<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">All</a>
                             <input type="hidden" name="status">
-    <a href="admin-order.php?status=0<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Confirm</a>
-    <a href="admin-order.php?status=1<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Successful</a>
-    <a href="admin-order.php?status=2<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Cancel</a>
-    <a href="admin-order.php?status=3<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Waiting</a>
+    <a href="admin-order.php?status=0<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Confirm</a>
+    <a href="admin-order.php?status=1<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Successful</a>
+    <a href="admin-order.php?status=2<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Cancel</a>
+    <a href="admin-order.php?status=3<?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?>">Waiting</a>
 </div>
 </span>
                         </th>    
@@ -252,7 +250,7 @@ $totalPages = ceil($totalOrders / $limit);
                               </td>
                               <td>
                               <div class="actions">
-<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
+<a href="order-detail-admin.php?idorder=<?php echo $order['idorder']; ?>&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>"><span class="las la-external-link-alt" style="color:#076FFE;"></span></a>
                     </div>
                               </td>
      
@@ -308,6 +306,9 @@ if (isset($_GET['district'])) {
 if (isset($_GET['ward'])) {
     $searchParams['ward'] = $_GET['ward'];
 }
+if (isset($_GET['city'])) {
+    $searchParams['city'] = $_GET['city'];
+}
 if (isset($_GET['username'])) {
     $searchParams['username'] = $_GET['username'];
 }
@@ -349,7 +350,7 @@ $(document).ready(function(){
                 type: 'POST',
                 data: {status: status, orderId: orderId},
                 success: function(response){
-                    window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
+                    window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($searchUsername)) echo '&username=' . $searchUsername; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
                 }
             });
         } else {
@@ -416,8 +417,55 @@ function toggleDropdown() {
 document.querySelector('.record-search').addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         var searchUsername = this.value.trim();
-        window.location.href = 'admin-order.php?username=' + encodeURIComponent(searchUsername) + '&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
+        window.location.href = 'admin-order.php?username=' + encodeURIComponent(searchUsername) + '&page=<?php echo $page; ?><?php if(isset($searchStatus)) echo '&status=' . $searchStatus; ?><?php if(isset($searchDistrict)) echo '&district=' . $searchDistrict; ?><?php if(isset($searchWard)) echo '&ward=' . $searchWard; ?><?php if(isset($searchCity)) echo '&city=' . $searchCity; ?><?php if(isset($dateStart)) echo '&date_from=' . $dateStart; ?><?php if(isset($dateEnd)) echo '&date_to=' . $dateEnd; ?>';
     }
 });
+    </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+ 
+<script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+
+        var Parameter = {
+            url: "https://raw.githubusercontent.com/lamquang4/car/main/data.json",
+            method: "GET",
+            responseType: "application/json",
+        };
+        var promise = axios(Parameter);
+        promise.then(function (result) {
+            renderCity(result.data);
+            citis.dispatchEvent(new Event('change'));
+            districts.dispatchEvent(new Event('change'));
+        });
+
+        function renderCity(data) {
+            for (const x of data) {
+                citis.options[citis.options.length] = new Option(x.Name, x.Name);
+            }
+            citis.onchange = function () {
+                districts.length = 1;
+                wards.length = 1;
+                if (this.value != "") {
+                    const result = data.filter(n => n.Name === this.value);
+
+                    for (const k of result[0].Districts) {
+                        districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                    }
+                }
+            };
+            districts.onchange = function () {
+                wards.length = 1;
+                const dataCity = data.filter((n) => n.Name === citis.value);
+                if (this.value != "") {
+                    const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+
+                    for (const w of dataWards) {
+                        wards.options[wards.options.length] = new Option(w.Name, w.Name);
+                    }
+                }
+            };
+        }
     </script>

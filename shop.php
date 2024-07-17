@@ -157,7 +157,6 @@ include_once 'header.php'
           
                     </a>
 
-              
                     <h5 class="product-title"><?php echo $product['name']; ?></h5>
                     <h4 class="product-price">$<?php echo $product['price']; ?>.00</h4>
                     <button class="btn_shop add-cart" id="cart-plus" onclick="window.location.href='product.php?id=<?php echo $product['id']; ?>'">BUY NOW</button>

@@ -364,7 +364,7 @@ class Order extends Connection{
     }
 
 // hiện tất cả
-    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null, $searchStatus = null) {
+    public function selectOrders($start,$limit,$dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchCity = null,$searchUsername = null, $searchStatus = null) {
         $query = "SELECT * FROM tb_order WHERE 1=1";
 
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -381,6 +381,9 @@ class Order extends Connection{
         if (!empty($searchWard)) {
             $query .= " AND ward = '$searchWard'";
         }
+        if (!empty($searchCity)) {
+            $query .= " AND city = '$searchCity'";
+        }
         if (!empty($searchUsername)) {
             $query .= " AND username = '$searchUsername'";
         }
@@ -392,7 +395,7 @@ class Order extends Connection{
         $result2 = mysqli_query($this->conn, $query);
         return $result2;
     }
-    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchUsername = null, $searchStatus = null) {
+    public function getOrderCount($dateStart = null,$dateEnd = null,$searchDistrict = null,$searchWard = null,$searchCity = null,$searchUsername = null, $searchStatus = null) {
         $query = "SELECT COUNT(*) as total FROM tb_order WHERE 1=1";
         
         if (!empty($dateStart) && !empty($dateEnd)) {
@@ -408,6 +411,9 @@ class Order extends Connection{
         }
         if (!empty($searchWard)) {
             $query .= " AND ward = '$searchWard'";
+        }
+        if (!empty($searchCity)) {
+            $query .= " AND city = '$searchCity'";
         }
         if (!empty($searchUsername)) {
             $query .= " AND username = '$searchUsername'";

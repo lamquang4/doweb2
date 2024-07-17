@@ -21,6 +21,9 @@ if(isset($_GET['district'])) {
 if(isset($_GET['ward'])) {
   $wards = $_GET['ward'];
 }
+if(isset($_GET['city'])) {
+  $citis = $_GET['city'];
+}
 if(isset($_GET['date_from'])) {
   $date_from = $_GET['date_from'];
 }
@@ -208,9 +211,8 @@ echo "<script> window.location.href='admin-order.php';</script>";
                                 <div class="float-end">
                                     <a href="javascript:window.print()" id="print-order"><i class="fa fa-print"></i></a>
                             
-                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($username)) echo '&username=' . $username; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($districts)) echo '&district=' . $districts; ?><?php if(isset($wards)) echo '&ward=' . $wards; ?><?php if(isset($date_from)) echo '&date_from=' . $date_from; ?><?php if(isset($date_to)) echo '&date_to=' . $date_to; ?>'">Back To Order</a>
-
-                                  
+                                    <a id="back-to-admin-order" onclick="window.location.href='admin-order.php?page=<?php echo $page; ?><?php if(isset($username)) echo '&username=' . $username; ?><?php if(isset($status)) echo '&status=' . $status; ?><?php if(isset($districts)) echo '&district=' . $districts; ?><?php if(isset($wards)) echo '&ward=' . $wards; ?><?php if(isset($citis)) echo '&city=' . $citis; ?><?php if(isset($date_from)) echo '&date_from=' . $date_from; ?><?php if(isset($date_to)) echo '&date_to=' . $date_to; ?>'">Back To Order</a>
+                   
                                   </div>
                              
                             </div>

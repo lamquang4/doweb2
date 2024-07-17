@@ -151,8 +151,7 @@ include_once 'header.php'
                                                                    
                                                                        <span class="fs-14 mb-2 d-block"><?php echo $user['phone']; ?></span>
                                                                     <span class="text-muted fw-normal text-wrap mb-1 d-block"><?php echo $user['sonha']; ?> <?php echo $user['duong']; ?> <?php echo $user['city']; ?> <?php echo $user['district']; ?> <?php echo $user['ward']; ?></span>
-                                                           
-                                                                 
+
                                                                 </div>
                                                             </label>
                                                       
@@ -165,10 +164,8 @@ include_once 'header.php'
                                                                 <input type="radio" name="address" id="info-address2" class="card-radio-input" checked="" value="info-address2">
                                                                 <div class="card-radio text-truncate p-3" >
                                                                     <span class="fs-14 mb-4 d-block">Add Adress</span>
-                                                 
-                                                                  
+
                                                                     <span style=" display: flex; align-items: center; justify-content: center;margin: 48px 0px ; font-size: 35px;"><i class="fa-sharp fa-regular fa-plus"></i></span>
-                                                          
                                                                 </div>
                                                             </label>
                                                        
@@ -370,14 +367,11 @@ include_once 'header.php'
           <div class="col-xl-4">
               <div class="card checkout-order-summary">
                   <div class="card-body">
-                 
-                    
+        
                       <div class="p-3 bg-light mb-3">  
-                  
-                          
+             
                           <h5 class="font-size-30 mb-0" style="font-weight: 600;">Order Summary </h5>
-                 
-                       
+
                       </div>
                       <div class="table-responsive">
                           <table class="table table-centered mb-0 table-nowrap">
