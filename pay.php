@@ -231,9 +231,8 @@ include_once 'header.php'
                                                         <div class="mb-3">
                                                             <label class="form-label">City</label>
                                                             <select class="form-select" id="city" name="city" aria-label=".form-select-sm">
-                                                                <option value="0" selected>Select City</option> 
-                                                                <option value="Ho Chi Minh City">Ho Chi Minh City</option> 
-                                                                <option value="Ha Noi City">Ha Noi City</option> 
+                                                                <option value="0">Select City</option> 
+                                                         
                                                             </select>
                                                         </div>
                                                     </div>
@@ -242,13 +241,8 @@ include_once 'header.php'
                                                           <div class="mb-3">
                                                             <label class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" aria-label=".form-select-sm">
-                                                                <option value="0" selected>Select District</option>
-                                                                <option value="District 1">District 1</option> 
-                                  <option value="District 2">District 2</option> 
-                                  <option value="District 3">District 3</option> 
-                                  <option value="District 4">District 4</option> 
-                                  <option value="District 5">District 5</option> 
-                                  <option value="District 6">District 6</option> 
+                                                                <option value="0">Select District</option>
+                                                          
                                                                 </select>
                                                           </div>
                                                       </div>
@@ -257,18 +251,12 @@ include_once 'header.php'
                                                         <div class="mb-3">
                                                             <label class="form-label">Ward</label>
                                                             <select class="form-select" name="ward" id="ward" aria-label=".form-select-sm">
-                                                                <option value="0" selected>Select Ward</option>
-                                                                <option value="Ward 1">Ward 1</option> 
-                                  <option value="Ward 2">Ward 2</option> 
-                                  <option value="Ward 3">Ward 3</option> 
-                                  <option value="Ward 4">Ward 4</option> 
-                                  <option value="Ward 5">Ward 5</option> 
-                                  <option value="Ward 6">Ward 6</option> 
+                                                                <option value="0">Select Ward</option>
+                                                 
                                                                 </select>
                                                         </div>
                                                     </div>         
-  
-                                                    
+      
                                                   </div>
                                               </div>
                                   
@@ -312,15 +300,12 @@ include_once 'header.php'
                                                       <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="cc">
                                                       <span class="card-radio py-3 text-center text-truncate">
                                                         <i class="fa-solid fa-building-columns d-block h2 mb-3"></i>
-                                                          
                                                           Credit Card
                                                       </span>
                                                   </label>
                                               </div>
                                           </div>
   
-                                       
-                                          
                                       </div>
 
                                       <div class="row" style="margin-top: 10px;" id="pay-date-cvv1">
