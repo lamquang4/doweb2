@@ -84,7 +84,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   echo "<script> window.location.href='successorder.php?orderid=$random_id'; </script>";
      exit;
     } else {
-        echo "<script> alert('Fail'); window.location.href='shop.php#product11';</script>";
+        $_SESSION['error'] = 'Your Payment Fail';
+        echo '<script>window.location.href="shop.php#product11"</script>';
+        exit(); 
     }
 }
 
@@ -610,7 +612,16 @@ disappearaddress.style.display="none";
     }
 </script>
 
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
 
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+
+});
+</script>
 
 <style>
     a:hover{

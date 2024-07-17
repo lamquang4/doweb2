@@ -58,7 +58,9 @@ if (isset($_POST["submit"])) {
       }
   } elseif (isset($_POST['userOTP']) && isset($_POST['otp_submit'])) {
     if (time() - $_SESSION['otp_time'] > 120) {
-     echo '<script>alert("OTP has expired."); window.location.href="forgot.php";</script>';
+      $_SESSION['fail'] = 'OTP has expired';
+     echo '<script>window.location.href="forgot.php";</script>';
+     exit;
   } else{
        if ($_POST['userOTP'] == $_SESSION['otp']) {
           $_SESSION['verified'] = true;
@@ -103,8 +105,8 @@ if (isset($_POST["submit"])) {
 <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
               <img src="cid:logo_cid" alt="Logo" style="width: 130px; height: auto; margin-bottom: 20px;">
               <h1 style="color: black;">Reset your password</h1>
-              <p style="color: black; font-size:16px;">Your OTP code is: ' . $otp . '</p>
-              <p style="color: black; font-size:15px;">If you have any questions, reply to this email or contact us at <a href="mailto:alldrinkshop668@gmail.com" style="color: black; font-weight:550;">alldrinkshop668@gmail.com</a></p>
+              <p style="color: black;font-size:16px;">Your OTP code is: ' . $otp . '</p>
+              <p style="color: black;font-size:15px;">If you have any questions, reply to this email or contact us at <a href="mailto:alldrinkshop668@gmail.com" style="color: black; font-weight:550;">alldrinkshop668@gmail.com</a></p>
           </div>
     ';
 
@@ -189,6 +191,10 @@ include_once 'header.php'
    <?php
 include_once 'footer.php'
   ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <script>
  var countdown = <?php echo $remainingTime; ?>;
     var countdownElement = document.getElementById('countdown');
@@ -204,4 +210,15 @@ include_once 'footer.php'
             sendOtpAgainElement.style.display = 'inline';
         }
     }, 1000);
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+
+});
 </script>
