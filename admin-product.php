@@ -420,7 +420,7 @@ if (isset($_GET['text'])) {
         if ($page > 1) {
             echo '<li><a href="?page=' . ($page - 1) . '&' . http_build_query($searchParams) . '">Prev</a></li>';
         } else {
-            echo '<li class="disabled">Prev</li>';
+            echo '<li class="disabled"><a>Prev</a></li>';
         }
 
         for ($i = 1; $i <= $totalPages; $i++) {
@@ -430,7 +430,7 @@ if (isset($_GET['text'])) {
         if ($page < $totalPages) {
             echo '<li ><a href="?page=' . ($page + 1) . '&' . http_build_query($searchParams) .  '">Next</a></li>';
         } else {
-            echo '<li class="disabled">Next</li>';
+            echo '<li class="disabled"><a>Next</a></li>';
         }
         ?>
 </ul>

@@ -776,20 +776,30 @@ padding: 3px 0;
       .pagination {
         margin-top: 20px;
         display: flex;
-      justify-content: center;
+        justify-content: center;
         list-style: none;
         padding: 0;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+        margin-bottom: 20px;
     }
-  
+    
     .pagination li {
-        padding: 8px 12px;
+        padding: 0; 
         border: 1px solid #808080;
         margin: 0 5px;
         cursor: pointer;
-        margin-bottom: 10px;;
-        background-color: white;
+        height: 100%; 
+        display: flex;
+        align-items: center; 
+    }
+    
+    .pagination li a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 8px 13px; 
+        text-align: center;
+        text-decoration: none;
+        color: inherit; 
     }
 
     .pagination li.active a {

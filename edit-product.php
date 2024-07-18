@@ -361,7 +361,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         if ($page > 1) {
             echo '<li><a href="?page=' . ($page - 1) . '">Prev</a></li>';
         } else {
-            echo '<li class="disabled">Prev</li>';
+            echo '<li class="disabled"><a>Prev</a></li>';
         }
 
         for ($i = 1; $i <= $totalPages; $i++) {
@@ -371,7 +371,7 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         if ($page < $totalPages) {
             echo '<li ><a href="?page=' . ($page + 1) . '">Next</a></li>';
         } else {
-            echo '<li class="disabled">Next</li>';
+            echo '<li class="disabled"><a>Next</a></li>';
         }
         ?>
 </ul>

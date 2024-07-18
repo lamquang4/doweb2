@@ -1469,20 +1469,34 @@ border-radius: 6px;
 .pages ul{
 margin:20px 15px;
 }
-.pages ul li {
-display: inline-block;
-margin: 0 10px;
-width:44px;
-height: 44px;
-border-radius: 50%;
-text-align: center;
-font-size: 22px;
-border: 1px solid #D8D8D8;
-line-height: 45px;
-cursor: pointer;
-font-weight: 550;
-margin-bottom: 10px;
+.listPage li {
+  display: inline-block;
+  margin: 0 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 22px;
+  border: 1px solid #D8D8D8;
+  line-height: 45px;
+  cursor: pointer;
+  font-weight: 550;
+  margin-bottom: 10px;
+  position: relative;
 }
+
+.listPage li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 45px; 
+  color: black;
+  font-weight: 500;
+  text-decoration: none; 
+  border-radius: 50%; 
+  text-align: center; 
+}
+
 .btn1,.btn2{
 display: inline-flex;
 align-items: center;
@@ -1497,10 +1511,7 @@ cursor: pointer;
 .btn1 i,.btn2 i{
 padding: 0 10px;
 }
-.listPage li a{
-  color: black;
-  font-weight: 500;
-}
+
 .listPage .activi {
 
 background-color: #FF4568;
