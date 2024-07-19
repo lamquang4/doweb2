@@ -23,6 +23,9 @@ box-sizing: border-box;
 font-family: "Poppins", sans-serif;
 scroll-behavior: smooth;
 }
+html{
+  overflow-x: hidden;
+}
 button{
   cursor: pointer;
 }
