@@ -34,23 +34,23 @@ $username = $_POST['manager'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
 $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
     
-$checkquery = "SELECT * FROM tb_manager WHERE (email='$email' OR phone='$phone') AND username!='$username'";
+$checkquery = "SELECT * FROM tb_manager WHERE email='$email' AND username!='$username'";
     $result = mysqli_query($connection->conn, $checkquery);
 
 if (mysqli_num_rows($result) > 0) {
     
     $_SESSION['fail'] = 'Email or Phone Number has already taken';
-        echo "<script> window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+    echo "<script>window.location.href='admin-strator.php?manager=$username&page={$page}&status={$statuscur}'; </script>";
         exit;
     } else {
         $updatequery = "UPDATE tb_manager SET fullname='$fullname', email='$email', phone='$phone' WHERE username='$username'";
         if (mysqli_query($connection->conn, $updatequery)) {
             $_SESSION['success'] = 'Update Successful';
-            echo "<script>window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+            echo "<script>window.location.href='admin-strator.php?manager=$username&page={$page}&status={$statuscur}'; </script>";
             exit;
         } else {
         
-            echo "<script>  window.location.href='admin-strator.php?page={$page}&status={$statuscur}'; </script>";
+            echo "<script>window.location.href='admin-strator.php?manager=$username&page={$page}&status={$statuscur}'; </script>";
             exit;
         }
     }
@@ -384,4 +384,18 @@ function kttrong() {
  
     return true;
 }
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>

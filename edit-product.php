@@ -26,7 +26,8 @@ $totalProducts = $productObj ->getProductCount($searchText,$searchType,$minPrice
   $totalPages = ceil($totalProducts / $limit);
 
 $id = $_GET['pid'];
-$idloai = $_GET['idloai'];
+$idloai = isset($_GET['idloai']) ? $_GET['idloai'] : null;
+
  $edit_sql = "SELECT * FROM product INNER JOIN category ON product.idloai = category.idloai WHERE id='$id'";
 $result = mysqli_query($connection->conn, $edit_sql);
 $row = mysqli_fetch_assoc($result); 
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
         $maxFileSize = 300 * 1024; // 300 KB
         if ($_FILES["fimage1"]["size"] > $maxFileSize) {
             $_SESSION['fail'] = 'File size exceeds the maximum allowed size of 300 KB';
-            echo "<script> window.location.href='admin-product.php?page=$page&status=$statuscur&text=$text';</script>";
+            echo "<script> window.location.href='edit-product.php?pid=$id&idloai=$idloai&page=$page&status=$statuscur&text=$text';</script>";
             exit;
         }
 
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fimage1'])) {
            
             $image = $fileName;
         } else {
-            echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+            echo "<script> window.location.href='edit-product.php?pid=$id&idloai=$idloai&page={$page}&status={$statuscur}&text={$text}';</script>";
             exit;
         }
     } 
@@ -94,7 +95,7 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
           $idloai = $categoryRow['idloai'];
       }else{
         $_SESSION['fail'] = 'Wrong category';
-        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}';</script>";
+        echo "<script> window.location.href='edit-product.php?pid=$id&idloai=$idloai&page={$page}&status={$statuscur}&text={$text}';</script>";
      exit;
       }
   }
@@ -103,11 +104,11 @@ $page = isset($_POST['page']) ? $_POST['page'] : 1;
     if (mysqli_query($connection->conn, $updatequery)) {
  
         $_SESSION['success'] = 'Update Successful';  
-        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";  
+        echo "<script> window.location.href='edit-product.php?pid=$id&idloai=$idloai&page={$page}&status={$statuscur}&text={$text}'; </script>";  
         exit;      
        
     } else{
-        echo "<script> window.location.href='admin-product.php?page={$page}&status={$statuscur}&text={$text}'; </script>";
+        echo "<script> window.location.href='edit-product.php?pid=$id&idloai=$idloai&page={$page}&status={$statuscur}&text={$text}'; </script>";
         exit;
     }
 }
@@ -516,6 +517,8 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
 
 </html>
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -572,9 +575,6 @@ while ($product = mysqli_fetch_assoc($products)) { ?>
         }
  </script>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 <script>
 const showadd= document.getElementById('showadd');
 const containerinputs=document.querySelector('#container-inputs');
@@ -616,4 +616,18 @@ const usertab = document.querySelector('.usertab');
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+
+<script>
+           document.addEventListener('DOMContentLoaded', function() {
+    <?php if(isset($_SESSION['success'])): ?>
+        swal('Success!', '<?php echo $_SESSION['success']; ?>', 'success');
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['fail'])): ?>
+     swal('Fail!', '<?php echo $_SESSION['fail']; ?>', 'error');
+     <?php unset($_SESSION['fail']); ?> 
+    <?php endif; ?>
+});
 </script>
