@@ -27,9 +27,9 @@ if (isset($_POST["submit"])) {
   $password2 = md5(trim(isset($_POST["password2"]) ? $_POST["password2"] : ""));
   $sonha = isset($_POST["sonha"]) ? $_POST["sonha"] : "";
   $duong = isset($_POST["duong"]) ? $_POST["duong"] : "";
-  $quan = isset($_POST["quan"]) ? $_POST["quan"] : "";
-  $phuong = isset($_POST["phuong"]) ? $_POST["phuong"] : "";
-  $tp = isset($_POST["tp"]) ? $_POST["tp"] : "";
+  $district = isset($_POST["district"]) ? $_POST["district"] : "";
+  $ward = isset($_POST["ward"]) ? $_POST["ward"] : "";
+  $city = isset($_POST["city"]) ? $_POST["city"] : "";
   $fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : "";
   $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
   $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";

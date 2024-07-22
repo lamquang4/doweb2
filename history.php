@@ -16,7 +16,7 @@ exit();
 }
 $username = $_SESSION["username"];
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 6;
+$limit = 4;
 $start = ($page - 1) * $limit;
 $orders = $order->selectOrdersByUsername($username,$start,$limit);
 $totalOrders = $order->getOrderCount1($username);
