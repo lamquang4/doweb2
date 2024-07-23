@@ -34,7 +34,7 @@ $username = $_POST['manager'];
 $page = isset($_POST['page']) ? $_POST['page'] : 1;
 $statuscur = isset($_GET['status']) ? $_GET['status'] : '';
     
-$checkquery = "SELECT * FROM tb_manager WHERE email='$email' AND username!='$username'";
+$checkquery = "SELECT * FROM tb_manager WHERE (email='$email' OR phone='$phone') AND username!='$username'";
     $result = mysqli_query($connection->conn, $checkquery);
 
 if (mysqli_num_rows($result) > 0) {

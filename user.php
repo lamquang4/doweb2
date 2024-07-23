@@ -69,7 +69,7 @@ $city = $connection->conn->real_escape_string($_POST["city"]);
         }
     }
 
-    $checkquery = "SELECT * FROM tb_customer WHERE email='$email' AND username!='$username'";
+    $checkquery = "SELECT * FROM tb_customer WHERE (email='$email' OR phone='$phone') AND username!='$username'";
     $result = mysqli_query($connection->conn, $checkquery);
 
     if (mysqli_num_rows($result) > 0) {

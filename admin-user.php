@@ -60,7 +60,7 @@ if (isset($_POST["submit"])) {
     $_SESSION['success'] = 'Registration Successful';  
   
   } elseif ($result == 10) {
-    $_SESSION['fail'] = 'Username or Email or Phone Number has already taken';   
+    $_SESSION['fail'] = 'Username or Email has already taken';   
    
   } elseif ($result == 100) {
     $_SESSION['fail'] = 'Password and Confirm Password does not match'; 
